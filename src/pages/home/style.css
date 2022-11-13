@@ -8,9 +8,24 @@
     text-align: center;
     /* box-shadow: 5px 5px 15px #838383; */
 }
-.order_time{
+
+.order_time {
     background-color: white;
     border-radius: 15px;
     /* width: 100%; */
     padding: 5px;
+}
+
+.docters {
+    padding: 5px;
+    border-radius: 15px;
+    background-color: white;
+    
+}
+
+.table_button {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 3px 3px 10px #c3c0c0;
+    margin-left: 10px;
 }

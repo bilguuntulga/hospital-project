@@ -1,0 +1,4 @@
+import request from "../utils/request";
+
+export const login = (data) => request.post("/v1/api/auth/login", data);
+export const profile = () => request.get("/v1/api/auth/profile");

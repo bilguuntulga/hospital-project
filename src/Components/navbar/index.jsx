@@ -21,7 +21,7 @@ function Index() {
                                 <img src="dashboard.png" width="30px" height="30px" alt="" />
                             </div>
                         </Link>
-                        <Link to="/custommer">
+                        <Link to="/registration">
                             <div className={pathName.pathname == '/custommer' ? "action_custommer" : ""}>
                                 <img src="custommer.png" width="30px" height="30px" alt="" />
                             </div>
