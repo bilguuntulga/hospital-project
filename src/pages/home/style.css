@@ -1,0 +1,16 @@
+.columns {
+    background-color: rgb(243, 241, 241);
+    width: 290px;
+    height: 100px;
+    display: flex;
+    place-items: center;
+    border-radius: 40px;
+    text-align: center;
+    /* box-shadow: 5px 5px 15px #838383; */
+}
+.order_time{
+    background-color: white;
+    border-radius: 15px;
+    /* width: 100%; */
+    padding: 5px;
+}

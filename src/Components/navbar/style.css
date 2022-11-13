@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.main_container {
+    width: 100px;
+    height: 100vh;
+    background-color: rgb(243, 241, 241);
+    padding-top: 20px;
+}
+
+.profile {
+    background-color: white;
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    place-items: center;
+    border-radius: 550%;
+    display: flex;
+    margin-top: 30px;
+}
+
+.profile img {
+    margin: auto;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.profile_text {
+    /* margin: auto; */
+    display: flex;
+    flex-direction: column;
+}
+
+.profile_text p {
+    margin: auto;
+}
+
+.profile_name {
+    font-family: 'Kanit', sans-serif;
+    font-size: 12px;
+}
+
+.profile_type {
+    font-family: 'Kanit', sans-serif;
+    font-size: 15px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.menu img {
+    margin: auto;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+.action_home {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    border-radius: 15px;
+    place-items: center;
+}
+
+.action_custommer {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    border-radius: 15px;
+    place-items: center;
+}
+
+.action_advice {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    border-radius: 15px;
+    place-items: center;
+}
