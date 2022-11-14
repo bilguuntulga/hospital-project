@@ -1,0 +1,14 @@
+.save_button {
+    background-color: blueviolet;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.save_button:hover {
+    background-color: blueviolet;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+
+}

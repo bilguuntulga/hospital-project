@@ -1,0 +1,60 @@
+.search {
+    background-color: white;
+    width: 50%;
+    height: 100px;
+    position: relative;
+    display: flex;
+    place-items: center;
+    border-radius: 35px;
+}
+
+.custommer_news {
+    background-color: white;
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
+    border-radius: 47px;
+    margin-top: 50px;
+}
+
+.ant-input-affix-wrapper {
+    width: 250px;
+    height: 51px;
+    border: 1px solid rgba(39, 30, 74, 0.5);
+    border-radius: 23px;
+
+}
+
+.input {
+    border: none;
+    border-bottom: 1px solid;
+    border-color: rgb(199, 194, 194);
+    margin-top: 20px;
+}
+
+.input:focus {
+    border: none;
+    border-bottom: 1px solid;
+    border-color: black;
+}
+
+.save_button {
+    background-color: blueviolet;
+    border: none;
+    border-radius: 15px;
+}
+
+.save_button:hover {
+    background-color: blueviolet;
+    border: none;
+    border-radius: 15px;
+
+}
+
+.upload_button {
+    border: none;
+    border-radius: 15px;
+    background-color: #79CFA6;
+}

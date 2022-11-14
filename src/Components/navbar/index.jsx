@@ -1,3 +1,5 @@
+import { FormOutlined } from '@ant-design/icons';
+import { Col, Row } from 'antd';
 import React, { useState } from 'react'
 import { Link, Router, useLocation } from 'react-router-dom'
 import './style.css'
@@ -9,26 +11,61 @@ function Index() {
             <div className='main_container'>
                 <div className='content'>
                     <div className="profile">
-                        <img src="ninja.png" width="50px" height="50px" alt="" />
-                    </div>
-                    <div className='profile_text'>
-                        <p className='profile_name'><b>Beck</b></p>
-                        <p className='profile_type'><b>ADMIN</b></p>
+                        <Row style={{ width: "100%" }} align="middle">
+                            <Col >
+                                <img src="logo.png" width="50px" height="50px" alt="" />
+                            </Col>
+                            <Col >
+                                <b style={{marginTop:"5px"}}> Арьс дасгалжуулагч</b>
+                            </Col>
+                        </Row>
                     </div>
                     <div className='menu'>
                         <Link to="/" >
-                            <div className={pathName.pathname == '/' ? "action_home" : ""}>
-                                <img src="dashboard.png" width="30px" height="30px" alt="" />
+                            <div className={pathName.pathname == '/' ? "action_home" : "simple"}>
+                                <Row gutter={20} justify="center" style={{ width: "100%" }}>
+                                    <Col span={8}>
+                                        <img src="home.png" width="30px" height="30px" alt="" />
+                                    </Col>
+                                    <Col span={16}>
+                                        Нүүр хуудас
+                                    </Col>
+                                </Row>
                             </div>
                         </Link>
-                        <Link to="/registration">
-                            <div className={pathName.pathname == '/custommer' ? "action_custommer" : ""}>
-                                <img src="custommer.png" width="30px" height="30px" alt="" />
+                        <Link to="/calendar">
+                            <div className={pathName.pathname == '/calendar' ? "action_orde_time" : "simple"}>
+                                <Row gutter={20} justify="center" style={{ width: "100%" }}>
+                                    <Col span={8}>
+                                        <FormOutlined className='Icon' style={{ fontSize: "30px", color: "black" }} />
+                                    </Col>
+                                    <Col span={16}>
+                                        Календар
+                                    </Col>
+                                </Row>
                             </div>
                         </Link>
-                        <Link to="advice">
-                            <div className={pathName.pathname == '/advice' ? "action_advice" : ""}>
-                                <img src="advice.png" width="30px" height="30px" alt="" />
+                        <Link to="/custommer">
+                            <div className={pathName.pathname == '/custommer' ? "action_registration" : "simple"}>
+                                <Row gutter={20} justify="center" style={{ width: "100%" }}>
+                                    <Col span={8}>
+                                        <img src="custommer.png" width="30px" height="30px" alt="" />
+                                    </Col>
+                                    <Col span={16}>
+                                        Үйлчлүүлэгч
+                                    </Col>
+                                </Row>
+                            </div>
+                        </Link>
+                        <Link to="doctor">
+                            <div className={pathName.pathname == '/doctor' ? "action_advice" : "simple"}>
+                                <Row gutter={20} justify="center" style={{ width: "100%" }}>
+                                    <Col span={8}>
+                                        <img src="doctorMenu.png" width="30px" height="30px" alt="" />
+                                    </Col>
+                                    <Col span={16}>
+                                        Эмч                                    </Col>
+                                </Row>
                             </div>
                         </Link>
                     </div>
