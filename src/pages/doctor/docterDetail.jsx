@@ -21,13 +21,13 @@ const DocterDetail = () => {
             <div className='header' style={{ width: "100%", height: "115px" }}>
                 <p className='name'><b>{detaildata.name}</b></p>
             </div>
-            <div style={{ backgroundColor: "white", width: "100%", height: "772px", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px", margin: "0", padding: "0" }}>
+            <div className='content' style={{ backgroundColor: "white", width: "100%", height: "772px", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px", margin: "0", padding: "0" }}>
                 <div className='image_Container'>
                     <img src={detaildata?.profile_img} width="132px" height="120px" alt="" />
                 </div>
-                <p style={{ marginLeft: "220px", fontSize: "26px", padding: "0", margin: "0" }}>{detaildata?.role}</p>
+                <p className='' style={{ fontSize: "26px",marginLeft:"220px" }}>{detaildata?.role}</p>
                 <div style={{marginTop:"50px",width:"100%",display:"grid" ,placeItems:"center"}} >
-                    <Row>  n   
+                    <Row>
                         <Col>
                             <Button className='detailBUtton'>Эмчийн намтар</Button>
                         </Col>
