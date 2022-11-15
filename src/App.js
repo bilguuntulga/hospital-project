@@ -4,22 +4,17 @@ import Navbar from "./Components/navbar";
 import "antd/dist/antd.css";
 import "./style.css";
 import { authAPI } from "./apis";
-import { Button, Col, Dropdown, Row } from "antd";
-import {
-  ArrowDownOutlined,
-  BellOutlined,
-  DownOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-const Home = lazy(() => import("./pages/home"));
-const Login = lazy(() => import("./pages/login"));
-const Custommer = lazy(() => import("./pages/custommer"));
-const Doctor = lazy(() => import("./pages/doctor"));
-const Order_time = lazy(() => import("./pages/calendar"));
-const Custommer_News = lazy(() => import("./pages/custommer/custommerNews"));
-const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"));
-const Advice = lazy(() => import("./pages/custommer/advice"));
-const Test = lazy(() => import("./pages/test"));
+import { Button, Col, Dropdown, Layout, Row } from "antd";
+import { ArrowDownOutlined, BellOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
+const Home = lazy(() => import("./pages/home"))
+const Login = lazy(() => import("./pages/login"))
+const Custommer = lazy(() => import("./pages/custommer"))
+const Doctor = lazy(() => import("./pages/doctor"))
+const Order_time = lazy(() => import("./pages/calendar"))
+const Custommer_News = lazy(() => import("./pages/custommer/custommerNews"))
+const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"))
+const Advice = lazy(() => import("./pages/custommer/advice"))
+const DocterDetail = lazy(() => import("./pages/doctor/docterDetail"))
 
 function App() {
   const location = useLocation();

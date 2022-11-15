@@ -48,8 +48,8 @@ function Index() {
                                 </Row>
                             </div>
                         </Link>
-                        <Link to="/custommer">
-                            <div className={pathName.pathname == '/custommer' || pathName.pathname == "/custommer_news" || pathName.pathname == "/custommer_add " || pathName.pathname == "/advice" ? "action_registration" : "simple"}
+                        <Link to="/custommer_news">
+                            <div className={pathName.pathname == "/custommer_news" || pathName.pathname == "/custommer_add" || pathName.pathname == "/advice" ? "action_registration" : "simple"}
                                 onClick={() => setCustommer(!customer)}
                             >
                                 <Row gutter={20} justify="center" style={{ width: "100%" }}>
