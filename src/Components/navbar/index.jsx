@@ -1,4 +1,4 @@
-import { FormOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, DownOutlined, FormOutlined, RightOutlined } from '@ant-design/icons';
 import { Col, Row } from 'antd';
 import React, { useState } from 'react'
 import { Link, Router, useLocation } from 'react-router-dom'
@@ -6,6 +6,9 @@ import './style.css'
 
 function Index() {
     const pathName = useLocation();
+    const [customer, setCustommer] = useState(false)
+
+
     return (
         <>
             <div className='main_container'>
@@ -16,7 +19,7 @@ function Index() {
                                 <img src="logo.png" width="50px" height="50px" alt="" />
                             </Col>
                             <Col >
-                                <b style={{marginTop:"5px"}}> Арьс дасгалжуулагч</b>
+                                <b style={{ marginTop: "5px" }}> Арьс дасгалжуулагч</b>
                             </Col>
                         </Row>
                     </div>
@@ -46,18 +49,30 @@ function Index() {
                             </div>
                         </Link>
                         <Link to="/custommer">
-                            <div className={pathName.pathname == '/custommer' ? "action_registration" : "simple"}>
+                            <div className={pathName.pathname == '/custommer' || pathName.pathname == "/custommer_news" || pathName.pathname == "/custommer_add " || pathName.pathname == "/advice" ? "action_registration" : "simple"}
+                                onClick={() => setCustommer(!customer)}
+                            >
                                 <Row gutter={20} justify="center" style={{ width: "100%" }}>
                                     <Col span={8}>
                                         <img src="custommer.png" width="30px" height="30px" alt="" />
                                     </Col>
-                                    <Col span={16}>
+                                    <Col span={12}>
                                         Үйлчлүүлэгч
+                                    </Col>
+                                    <Col span={4}>
+                                        {customer ? <RightOutlined /> : <DownOutlined />}
                                     </Col>
                                 </Row>
                             </div>
+                            <div className={`customers_submenu ${customer ? "show_customer_submenu" : ""}`}>
+                                <Link to="/custommer_news"><p>Үйлчлүүлэгчдийн мэдээлэл</p></Link>
+                                <Link to="/custommer_add"><p>Үйлчлүүлэгч нэмэх</p></Link>
+                                <Link to="/advice"><p>Зөвөлгөө</p></Link>
+
+
+                            </div>
                         </Link>
-                        <Link to="doctor">
+                        <Link to="/doctor">
                             <div className={pathName.pathname == '/doctor' ? "action_advice" : "simple"}>
                                 <Row gutter={20} justify="center" style={{ width: "100%" }}>
                                     <Col span={8}>

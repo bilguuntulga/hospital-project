@@ -11,6 +11,9 @@ const Login = lazy(() => import("./pages/login"))
 const Custommer = lazy(() => import("./pages/custommer"))
 const Doctor = lazy(() => import("./pages/doctor"))
 const Order_time = lazy(() => import("./pages/calendar"))
+const Custommer_News = lazy(()=>import("./pages/custommer/custommerNews"))
+const Custommer_Add = lazy(()=>import("./pages/custommer/custommerAdd"))
+const Advice = lazy(()=>import("./pages/custommer/advice"))
 
 function App() {
   const location = useLocation();
@@ -93,6 +96,9 @@ function App() {
                     <Route exact path="/calendar" element={<Order_time />} />
                     <Route exact path="/custommer" element={<Custommer />} />
                     <Route exact path="/doctor" element={<Doctor />} />
+                    <Route exact path="/custommer_news" element={<Custommer_News />} />
+                    <Route exact path="/custommer_add" element={<Custommer_Add />} />
+                    <Route exact path="/advice" element={<Advice />} />
                   </Routes>
                 </div>
               </Suspense>

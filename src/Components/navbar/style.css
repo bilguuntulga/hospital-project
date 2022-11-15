@@ -8,6 +8,7 @@ body {
     height: 100vh;
     background-color: white;
     padding-top: 20px;
+    position: fixed;
 }
 
 .profile {
@@ -157,4 +158,33 @@ img:hover {
 
 .Icon {
     margin: auto;
+}
+
+.customers_submenu {
+    height: 0px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.show_customer_submenu {
+    height: 100px;
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.customers_submenu p {
+    color: black;
+    padding-left: 3rem;
+}
+
+.customers_submenu p::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 0.5rem;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: black;
 }

@@ -7,6 +7,8 @@ import { Formik } from 'formik';
 import * as yup from "yup"
 import { SubmitButton } from 'formik-antd';
 import "./style.css"
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar'
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -230,11 +232,14 @@ const CalendarApp = () => {
         setModalVisible(false)
     }
 
+    const localizer = momentLocalizer(moment)
+
+
     return (
         <>
             <p style={{ fontSize: "20px" }}><b>Registration</b></p>
             <Row gutter={20}>
-                <Col xs={24} sm={24} md={9} lg={6}>
+                {/* <Col xs={24} sm={24} md={9} lg={6}>
                     <Card className="calendar mb-0" style={{ borderRadius: "15px" }}>
                         <h2 className="mb-4">Захиалгатай цагууд</h2>
                         <AgendaList
@@ -242,8 +247,8 @@ const CalendarApp = () => {
                             onDelete={onDeleteEvent}
                         />
                     </Card>
-                </Col>
-                <Col xs={24} sm={24} md={15} lg={18}>
+                </Col> */}
+                <Col xs={24}>
                     <Card style={{ borderRadius: "15px" }}>
                         {/* <Alert message={`You selected date: ${moment(new Date).format("YYYY.MM.DD")}`} /> */}
                         <Calendar
@@ -257,6 +262,13 @@ const CalendarApp = () => {
                 visible={modalVisible}
                 addEvent={onAddEvent}
                 cancel={onAddEventCancel}
+            />
+            <BigCalendar 
+              localizer={localizer}
+              startAccessor="start"
+              endAccessor="end"
+              style={{ height: 500 }}
+              onSelecting={(e) => console.log(e)}
             />
         </>
     )
