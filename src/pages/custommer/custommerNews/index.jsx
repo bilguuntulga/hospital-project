@@ -51,15 +51,16 @@ function CustommerNewsPage() {
                     </Formik>
                 </div>
                 <div style={{ width: "100%", height: "69px", backgroundColor: "#D6ECFD", borderRadius: "15px", padding: "20px", display: "grid", placeItems: "center", marginTop: "40px" }}>
-                    <Row style={{ width: "100%" }} align="middle" justify="space-between">
+                    <Row style={{ width: "100%" }} align="middle" justify="center">
                         <Col span={4}>
                             Үйлчлүүлэгчийн нэр
                         </Col>
-                        <Col span={4}>Код</Col>
-                        <Col span={4}>Төрсөн он сар өдөр</Col>
-                        <Col span={4}>Хүйс</Col>
-                        <Col span={4}>Өвчний мэдээлэл</Col>
-                        <Col span={4}>Утасны дугаар</Col>
+                        <Col span={3}>Код</Col>
+                        <Col span={3}>Төрсөн он сар өдөр</Col>
+                        <Col span={3}>Хүйс</Col>
+                        <Col span={3}>Өвчний мэдээлэл</Col>
+                        <Col span={3}>Утасны дугаар</Col>
+                        <Col span={3}>Үйлдэл</Col>
                     </Row>
 
                 </div>

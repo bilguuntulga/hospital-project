@@ -4,16 +4,17 @@ import Navbar from "./Components/navbar"
 import 'antd/dist/antd.css';
 import './style.css'
 import { authAPI } from "./apis";
-import { Button, Col, Dropdown, Row } from "antd";
+import { Button, Col, Dropdown, Layout, Row } from "antd";
 import { ArrowDownOutlined, BellOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
 const Home = lazy(() => import("./pages/home"))
 const Login = lazy(() => import("./pages/login"))
 const Custommer = lazy(() => import("./pages/custommer"))
 const Doctor = lazy(() => import("./pages/doctor"))
 const Order_time = lazy(() => import("./pages/calendar"))
-const Custommer_News = lazy(()=>import("./pages/custommer/custommerNews"))
-const Custommer_Add = lazy(()=>import("./pages/custommer/custommerAdd"))
-const Advice = lazy(()=>import("./pages/custommer/advice"))
+const Custommer_News = lazy(() => import("./pages/custommer/custommerNews"))
+const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"))
+const Advice = lazy(() => import("./pages/custommer/advice"))
+const DocterDetail = lazy(() => import("./pages/doctor/docterDetail"))
 
 function App() {
   const location = useLocation();
@@ -94,11 +95,11 @@ function App() {
                   <Routes>
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/calendar" element={<Order_time />} />
-                    <Route exact path="/custommer" element={<Custommer />} />
                     <Route exact path="/doctor" element={<Doctor />} />
                     <Route exact path="/custommer_news" element={<Custommer_News />} />
                     <Route exact path="/custommer_add" element={<Custommer_Add />} />
                     <Route exact path="/advice" element={<Advice />} />
+                    <Route exact path="/doctor/detail/:id" element={<DocterDetail />} />
                   </Routes>
                 </div>
               </Suspense>

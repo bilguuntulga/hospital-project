@@ -1,0 +1,45 @@
+.header {
+    background: linear-gradient(112.04deg, #373FFF 35.59%, rgba(55, 63, 255, 0) 113.92%);
+    border-radius: 15px 15px 0px 0px;
+    width: 100%;
+    height: 115px;
+    position: relative;
+}
+
+.image_Container {
+    position: absolute;
+    width: 152px;
+    height: 153px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    top: 250px;
+    left: 450px;
+}
+
+.image_Container img {
+    border-radius: 50%;
+}
+
+.name {
+    position: absolute;
+    color: white;
+    font-size: 26px;
+    top: 70px;
+    left: 220px;
+}
+
+.detailBUtton {
+    width: 311px;
+    height: 64px;
+    background: #373EFF;
+    color: white;
+    border-radius: 6px 0px 0px 6px;
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 39px;
+}
