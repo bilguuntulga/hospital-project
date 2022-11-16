@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
 @import 'react-big-calendar/lib/addons/dragAndDrop/styles';
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
 
 body {
     background: #C7E3FC;
@@ -14,7 +16,7 @@ body {
 
 .main_Container {
     width: 100%;
-margin: 30px 30px 30px 400px;
+    margin: 30px 30px 30px 400px;
 }
 
 .order_time {
