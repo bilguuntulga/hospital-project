@@ -1,93 +1,94 @@
 .header {
-    background: linear-gradient(112.04deg, #373FFF 35.59%, rgba(55, 63, 255, 0) 113.92%);
-    border-radius: 15px 15px 0px 0px;
-    width: 100%;
-    height: 115px;
-    position: relative;
+  background: linear-gradient(
+    112.04deg,
+    #373fff 35.59%,
+    rgba(55, 63, 255, 0) 113.92%
+  );
+  border-radius: 15px 15px 0px 0px;
+  width: 100%;
+  height: 115px;
+  position: relative;
 }
 
 .image_Container {
-    position: absolute;
-    width: 152px;
-    height: 153px;
-    background: #FFFFFF;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    top: -80px;
-    left: 50px;
+  position: absolute;
+  width: 152px;
+  height: 153px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  top: -80px;
+  left: 50px;
 }
 
 .image_Container img {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .name {
-    position: absolute;
-    color: white;
-    font-size: 26px;
-    top: 70px;
-    left: 220px;
+  position: absolute;
+  color: white;
+  font-size: 26px;
+  top: 70px;
+  left: 220px;
 }
 
 .detailBUtton {
-    background: rgba(217, 217, 217, 0.6);
-    color: gray;
-    border: none;
-    width: 311px;
-    height: 64px;
-    border-radius: 6px 0px 0px 6px;
-    font-family: 'Kanit', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 39px;
-
+  background: rgba(217, 217, 217, 0.6);
+  color: gray;
+  border: none;
+  width: 311px;
+  height: 64px;
+  border-radius: 6px 0px 0px 6px;
+  font-family: "Kanit", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 39px;
 }
 
 .content {
-    position: relative;
+  position: relative;
 }
 
 .sub_content {
-    position: absolute;
-    top: 100px;
-    left: 350px;
-    /* top: ; */
-    width: 1250px;
-    font-family: 'Kanit';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: justify;
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  width: 100%;
+  font-family: "Kanit";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: justify;
 }
 
 .role {
-    font-family: 'Kanit', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 30px;
+  font-family: "Kanit", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
 }
 
 .ant-btn:hover,
 .ant-btn:focus {
-
-    background: #373EFF;
-    color: white;
-    border-radius: 6px 0px 0px 6px;
-    font-family: 'Kanit', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 39px;
+  background: #373eff;
+  color: white;
+  border-radius: 6px 0px 0px 6px;
+  font-family: "Kanit", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 39px;
 }
 
 .experiences_border {
-    width: 275px;
-    height: 141px;
-    border: 0.5px solid #7B80FF;
-    border-radius: 12px;
+  width: 275px;
+  height: 141px;
+  border: 0.5px solid #7b80ff;
+  border-radius: 12px;
 }
