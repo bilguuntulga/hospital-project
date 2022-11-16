@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import AWS from "aws-sdk";
 import { Image, message } from "antd";
-import { Form } from "formik-antd";
 import { Field } from "formik";
 import { DeleteOutlined } from "@ant-design/icons";
+import { toast, ToastContainer } from "react-toastify";
 
 AWS.config.update({
   accessKeyId: "AKIAQ6ZTXJPAL5SFEXEU",
@@ -20,7 +20,7 @@ function UploadImage({ name, mode = "single" }) {
   const [selectedFile, setSelectedFile] = useState();
   const fileInputRef = useRef();
 
-  const uploadFile = (file, setFieldValue) => {
+  const uploadFile = async (file, setFieldValue) => {
     const params = {
       ACL: "public-read",
       Body: file,
@@ -43,12 +43,15 @@ function UploadImage({ name, mode = "single" }) {
       });
   };
 
-  const handleSubmission = () => {
-    fileInputRef.current.click();
-  };
-
   const changeHandler = async (e, setFieldValue) => {
-    uploadFile(e.target.files[0], setFieldValue);
+    toast.promise(
+      async () => await uploadFile(e.target.files[0], setFieldValue),
+      {
+        pending: "Илгээж байна",
+        success: "Амжилттай",
+        error: "Амжилтгүй",
+      }
+    );
   };
 
   return (
@@ -65,11 +68,21 @@ function UploadImage({ name, mode = "single" }) {
             <Image
               height={100}
               src={value}
-              preview={{ mask: <DeleteOutlined /> }}
+              preview={{
+                mask: (
+                  <DeleteOutlined
+                    color="red"
+                    onClick={() => setFieldValue(name, "")}
+                  />
+                ),
+              }}
             />
           ) : null}
-          {!value ? <button onClick={handleSubmission}>Зураг</button> : null}
-          <p>{meta.error}</p>
+          {!value ? (
+            <button onClick={() => fileInputRef.current.click()}>Зураг</button>
+          ) : null}
+          <p style={{ color: "red" }}>{meta.error}</p>
+          <ToastContainer />
         </>
       )}
     </Field>

@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./Components/navbar";
+import 'react-toastify/dist/ReactToastify.css';
 import "antd/dist/antd.css";
 import "./style.css";
 import { authAPI } from "./apis";
@@ -14,7 +15,8 @@ const Order_time = lazy(() => import("./pages/calendar"))
 const Custommer_News = lazy(() => import("./pages/custommer/custommerNews"))
 const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"))
 const Advice = lazy(() => import("./pages/custommer/advice"))
-const DocterDetail = lazy(() => import("./pages/doctor/docterDetail"))
+const DocterDetail = lazy(() => import("./pages/doctor/docterDetail"));
+const Test = lazy(() => import("./pages/test"));
 
 function App() {
   const location = useLocation();
