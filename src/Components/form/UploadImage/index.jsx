@@ -71,9 +71,7 @@ function UploadImage({ name, mode = "single" }) {
           console.log(value);
         })
         .send((err) => {
-          if (err) {
-            toast("Амжилтгүй");
-          }
+          throw err;
         });
     }
   };
