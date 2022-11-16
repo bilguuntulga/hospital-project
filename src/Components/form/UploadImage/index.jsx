@@ -26,7 +26,6 @@ function UploadImage({ name, mode = "single" }) {
 
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 1,
     },
@@ -156,7 +155,7 @@ function UploadImage({ name, mode = "single" }) {
               className="upload-button"
               onClick={() => fileInputRef.current.click()}
             >
-              Зураг оруулах
+              {mode == "single" ? "Зураг оруулах" : "Зургууд оруулах"}
             </button>
           ) : null}
           <p style={{ color: "red" }}>{meta.error}</p>
