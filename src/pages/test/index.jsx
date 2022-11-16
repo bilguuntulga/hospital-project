@@ -16,7 +16,7 @@ function TestPage() {
             <Input name="name" />
           </Form.Item>
           <Form.Item name={"image"}>
-            <UploadImage name={"image"} />
+            <UploadImage name={"image"} mode="multi" />
           </Form.Item>
           <SubmitButton>Submit</SubmitButton>
         </Form>

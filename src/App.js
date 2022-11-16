@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./Components/navbar";
 import 'react-toastify/dist/ReactToastify.css';
 import "antd/dist/antd.css";
+import 'react-multi-carousel/lib/styles.css';
 import "./style.css";
 import { authAPI } from "./apis";
 import { Button, Col, Dropdown, Layout, Row } from "antd";
