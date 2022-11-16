@@ -8,8 +8,8 @@ import Carousel from "react-multi-carousel";
 import "./style.css";
 
 AWS.config.update({
-  accessKeyId: "AKIAQ6ZTXJPAL5SFEXEU",
-  secretAccessKey: "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",
+  accessKeyId: "AKIAQ6ZTXJPAFRJ7WB7O",
+  secretAccessKey: "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",
 });
 
 const bucket = new AWS.S3({
@@ -71,9 +71,7 @@ function UploadImage({ name, mode = "single" }) {
           console.log(value);
         })
         .send((err) => {
-          if (err) {
-            toast("Амжилтгүй");
-          }
+          throw err;
         });
     }
   };
