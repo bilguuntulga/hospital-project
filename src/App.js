@@ -129,14 +129,7 @@ function App() {
                               backgroundRepeat: "no-repeat",
                               backgroundSize: "cover",
                             }}
-                          >
-                            {/* <img
-                              src={user?.profile_img}
-                              width="29px"
-                              height="29px"
-                              style={{ margin: "auto" }}
-                            /> */}
-                          </div>
+                          ></div>
                         </Col>
                       </Link>
                       <Col>

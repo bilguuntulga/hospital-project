@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import { Form, Input } from "formik-antd";
 import React, { useEffect, useState } from "react";
 import { authAPI } from "../../apis";
+import UploadImage from "../../Components/form/UploadImage";
 
 function ProfilePage() {
   const [user, setUser] = useState();
@@ -20,6 +21,7 @@ function ProfilePage() {
     <div>
       <Formik initialValues={user} enableReinitialize>
         <Form layout="vertical">
+          <UploadImage name="profile_img" />
           <Row gutter={[20, 20]}>
             <Col>
               <Form.Item name="first_name" label="Овог">

@@ -2,14 +2,18 @@ import React, { memo, useRef } from "react";
 import AWS from "aws-sdk";
 import { Image, message, Space } from "antd";
 import { Field } from "formik";
-import { DeleteOutlined, FileAddOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  FileAddOutlined,
+} from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import Carousel from "react-multi-carousel";
 import "./style.css";
 
 AWS.config.update({
-  accessKeyId: "AKIAQ6ZTXJPAFRJ7WB7O",
-  secretAccessKey: "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",
+  accessKeyId: "AKIAQ6ZTXJPADGUT3RJE",
+  secretAccessKey: "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",
 });
 
 const bucket = new AWS.S3({
@@ -107,11 +111,17 @@ function UploadImage({ name, mode = "single" }) {
               height={100}
               src={value}
               preview={{
+                visible: false,
                 mask: (
-                  <DeleteOutlined
-                    color="red"
-                    onClick={() => setFieldValue(name, "")}
-                  />
+                  <Space>
+                    <EditOutlined
+                      onClick={() => fileInputRef.current.click()}
+                    />
+                    <DeleteOutlined
+                      color="red"
+                      onClick={() => setFieldValue(name, "")}
+                    />
+                  </Space>
                 ),
               }}
             />
