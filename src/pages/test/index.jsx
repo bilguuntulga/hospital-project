@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import { Formik } from "formik";
 import { Form, Input, SubmitButton } from "formik-antd";
 import React, { useState } from "react";
@@ -18,7 +19,7 @@ function TestPage() {
           <Form.Item name={"image"}>
             <UploadImage name={"image"} mode="multi" />
           </Form.Item>
-          <SubmitButton>Submit</SubmitButton>
+          <Button htmlType="submit">Submit</Button>
         </Form>
       </Formik>
     </div>
