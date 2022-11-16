@@ -10,6 +10,8 @@ import { Input, SubmitButton, Form } from 'formik-antd'
 import Doctor_Timer from '../../Components/doctor_time'
 import ImageUploud from "../../Components/form/UploadImage"
 import WorkingHoursTable from '../../Components/WorkingHoursTable'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 const DocterDetail = () => {
@@ -146,26 +148,26 @@ const DocterDetail = () => {
                                 <Form layout='vertical'>
                                     <Row gutter={5}>
                                         <Col>
-                                            <Card title="Хувийн мэдээлэл:" bordered style={{ height: "387px", width: "620px" }}>
+                                            <Card title="Хувийн мэдээлэл:" bordered style={{ height: "387px", width: "620px", borderColor: "black", borderRadius: "15px" }} extra={<Row gutter={10}>
+                                                <Col>
+                                                    <SubmitButton style={{ width: "100px", height: "29px", backgroundColor: "#434AFE", borderRadius: "5px", border: "none" }}>Хадгалах</SubmitButton>
+                                                </Col>
+                                                <Col>
+                                                    <SubmitButton style={{ width: "100px", height: "29px", backgroundColor: "#B4B6FF", borderRadius: "5px", border: "none" }}>Устгах</SubmitButton>
+                                                </Col>
+                                            </Row>}>
                                                 <Row justify="space-between">
                                                     <Col>
                                                         <Form.Item name="profile_img">
 
-                                                            <ImageUploud name="profile_img" />
                                                             <div style={{ borderRadius: "50%", width: "70px", height: "70px", backgroundColor: "#F5F5F5", display: "grid", placeItems: "center" }}>
                                                                 <img src={detaildata.profile_img} width="48px" height="48px" />
                                                             </div>
+                                                            <ImageUploud name="profile_img" />
                                                         </Form.Item>
                                                     </Col>
                                                     <Col>
-                                                        <Row gutter={10}>
-                                                            <Col>
-                                                                <SubmitButton>Хадгалах</SubmitButton>
-                                                            </Col>
-                                                            <Col>
-                                                                <SubmitButton>Устгах</SubmitButton>
-                                                            </Col>
-                                                        </Row>
+
                                                     </Col>
                                                 </Row>
                                                 <Row gutter={[30, 30]}>
@@ -194,14 +196,31 @@ const DocterDetail = () => {
                                                 </Row>
                                             </Card>
                                         </Col>
-                                        <Card title="Эмчийн намтар:" bordered style={{ height: "387px", width: "620px" }}>
-
+                                        <Card title="Эмчийн намтар:" bordered style={{ height: "387px", width: "620px", borderColor: "black", borderRadius: "15px" }}>
+                                            <CKEditor
+                                                editor={ClassicEditor}
+                                                data="<p></p>"
+                                                onReady={editor => {
+                                                    // You can store the "editor" and use when it is needed.
+                                                    console.log('Editor is ready to use!', editor);
+                                                }}
+                                                onChange={(event, editor) => {
+                                                    const data = editor.getData();
+                                                    console.log({ event, editor, data });
+                                                }}
+                                                onBlur={(event, editor) => {
+                                                    console.log('Blur.', editor);
+                                                }}
+                                                onFocus={(event, editor) => {
+                                                    console.log('Focus.', editor);
+                                                }}
+                                            />
                                         </Card>
                                     </Row>
                                     <br />
                                     <Row gutter={5}>
                                         <Col>
-                                            <Card title="Эмчийн туршлага:" bordered style={{ height: "387px", width: "620px" }}>
+                                            <Card title="Эмчийн туршлага:" bordered style={{ height: "387px", width: "620px", borderColor: "black", borderRadius: "15px" }}>
                                                 <Formik>
                                                     <Form initialValues={doctor_experienceModel} validationSchema={doctor_experienceValidationSchema}>
                                                         <Row gutter={10}>
@@ -219,7 +238,7 @@ const DocterDetail = () => {
                                                         </Row>
                                                         <Row justify="end">
                                                             <Col>
-                                                                <SubmitButton>НЭМЭХ</SubmitButton>
+                                                                <SubmitButton style={{ width: "126px", height: "39px", backgroundColor: "#434AFE", borderRadius: "5px", border: "none" }}>НЭМЭХ</SubmitButton>
                                                             </Col>
                                                         </Row>
                                                     </Form>
@@ -227,9 +246,9 @@ const DocterDetail = () => {
                                             </Card>
                                         </Col>
                                         <Col>
-                                            <Card title="Цагийн хуваарь:" bordered style={{ height: "387px", width: "620px" }}>
-                                                <WorkingHoursTable id={id} workingHours={detaildata.working_hours} />
-                                            </Card>
+                                            {/* <Card title="Цагийн хуваарь:" bordered style={{ height: "387px", width: "620px" }}> */}
+                                            <WorkingHoursTable id={id} workingHours={detaildata.working_hours} />
+                                            {/* </Card> */}
                                         </Col>
                                     </Row>
                                 </Form>
@@ -246,7 +265,7 @@ const DocterDetail = () => {
             <div className='header' style={{ width: "100%", height: "112px" }}>
                 <p className='name'><b>{detaildata.name}</b></p>
             </div>
-            <div className='content' style={{ backgroundColor: "white", width: "100%", height: "1052.25px", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px", margin: "0", padding: "0" }}>
+            <div className='content' style={{ backgroundColor: "white", width: "100%", height: "1102.25px", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px", margin: "0", padding: "0" }}>
                 <div className='image_Container'>
                     <img src={detaildata?.profile_img} width="132px" height="120px" alt="" />
                 </div>
