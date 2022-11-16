@@ -9,6 +9,7 @@ import { Formik } from 'formik'
 import { Input, SubmitButton, Form } from 'formik-antd'
 import Doctor_Timer from '../../Components/doctor_time'
 import ImageUploud from "../../Components/form/UploadImage"
+import WorkingHoursTable from '../../Components/WorkingHoursTable'
 
 
 const DocterDetail = () => {
@@ -101,8 +102,8 @@ const DocterDetail = () => {
                     </Timeline>
                 </>
             case "time_schedule":
-                return <Row gutter={60}>
-                    <Col span={12}>
+                return <Row >
+                    <Col span={11}>
                         <div style={{ borderRadius: "10px", width: "622px", height: "495px", border: "0.4px solid  #000000", padding: "35px" }}>
                             {detaildata.working_hours.map((e) => (
                                 <>
@@ -113,9 +114,9 @@ const DocterDetail = () => {
                         </div>
                     </Col>
                     <Col span={12}>
-                        <Row justify="center" >
+                        <Row >
                             <Col span={12}>
-                                <div style={{ marginTop: "60px", marginLeft: "100px", display: "grid", placeItems: "center", fontSize: "20px", fontFamily: "Kanit', sans-serif" }}>
+                                <div style={{ marginTop: "80px", display: "grid", placeItems: "center", fontSize: "20px", fontFamily: "Kanit', sans-serif" }}>
 
                                     <div style={{ backgroundColor: "#F2F2F2", borderRadius: "7px", width: "70px", height: "70px", display: "grid", placeItems: "center" }}>
                                         <PhoneOutlined style={{ fontSize: "35px", color: "#373FFF" }} />
@@ -124,8 +125,8 @@ const DocterDetail = () => {
                                     <p style={{ color: "#373FFF", fontSize: "20px" }}>+976 9999-9999</p>
                                 </div>
                             </Col>
-                            <Col span={12}>
-                                <div style={{ marginTop: "60px", marginLeft: "100px", display: "grid", placeItems: "center", fontSize: "20px", fontFamily: "Kanit', sans-serif" }}>
+                            <Col>
+                                <div style={{ marginTop: "80px", display: "grid", placeItems: "center", fontSize: "20px", fontFamily: "Kanit', sans-serif" }}>
 
                                     <div style={{ backgroundColor: "#F2F2F2", borderRadius: "7px", width: "70px", height: "70px", display: "grid", placeItems: "center" }}>
                                         <MailOutlined style={{ fontSize: "35px", color: "#373FFF" }} />
@@ -142,48 +143,93 @@ const DocterDetail = () => {
                     <Row>
                         <Col>
                             <Formik initialValues={personal_information_model} validationSchema={personal_information_validationSchema}>
-                                <Form>
-                                    <Card title="Хувийн мэдээлэл:" bordered >
-                                        <Row>
-                                            <Col>
-                                                <Form.Item name="profile_img">
+                                <Form layout='vertical'>
+                                    <Row gutter={5}>
+                                        <Col>
+                                            <Card title="Хувийн мэдээлэл:" bordered style={{ height: "387px", width: "620px" }}>
+                                                <Row justify="space-between">
+                                                    <Col>
+                                                        <Form.Item name="profile_img">
 
-                                                    <ImageUploud name="profile_img" />
-                                                    <div style={{ borderRadius: "50%", width: "70px", height: "70px", backgroundColor: "#F5F5F5", display: "grid", placeItems: "center" }}>
-                                                        <img src={detaildata.profile_img} width="48px" height="48px" />
-                                                    </div>
-                                                </Form.Item>
-                                            </Col>
-                                            <Col>
-                                                <SubmitButton>Хадгалах</SubmitButton>
-                                            </Col>
-                                            <Col>
-                                                <SubmitButton>Устгах</SubmitButton>
-                                            </Col>
-                                        </Row>
-                                    </Card>
-                                    <Row>
-                                        <Col span={12}>
-                                            <Form.Item name="surname">
-                                                <Input name="surname" />
-                                            </Form.Item>
+                                                            <ImageUploud name="profile_img" />
+                                                            <div style={{ borderRadius: "50%", width: "70px", height: "70px", backgroundColor: "#F5F5F5", display: "grid", placeItems: "center" }}>
+                                                                <img src={detaildata.profile_img} width="48px" height="48px" />
+                                                            </div>
+                                                        </Form.Item>
+                                                    </Col>
+                                                    <Col>
+                                                        <Row gutter={10}>
+                                                            <Col>
+                                                                <SubmitButton>Хадгалах</SubmitButton>
+                                                            </Col>
+                                                            <Col>
+                                                                <SubmitButton>Устгах</SubmitButton>
+                                                            </Col>
+                                                        </Row>
+                                                    </Col>
+                                                </Row>
+                                                <Row gutter={[30, 30]}>
+                                                    <Col span={12}>
+                                                        <Form.Item name="surname" label="Овог:">
+                                                            <Input name="surname" />
+                                                        </Form.Item>
+                                                    </Col>
+                                                    <Col span={12}>
+                                                        <Form.Item name="name" label="Нэр:">
+                                                            <Input name="name" />
+                                                        </Form.Item>
+                                                    </Col>
+                                                </Row>
+                                                <Row gutter={[30, 30]}>
+                                                    <Col span={12}>
+                                                        <Form.Item name="email" label="И-мэйл:">
+                                                            <Input name="email" />
+                                                        </Form.Item>
+                                                    </Col>
+                                                    <Col span={12}  >
+                                                        <Form.Item name="phone" label="Утасны дугаар:">
+                                                            <Input name="phone" />
+                                                        </Form.Item>
+                                                    </Col>
+                                                </Row>
+                                            </Card>
                                         </Col>
-                                        <Col span={12}>
-                                            <Form.Item name="name">
-                                                <Input name="name" />
-                                            </Form.Item>
-                                        </Col>
+                                        <Card title="Эмчийн намтар:" bordered style={{ height: "387px", width: "620px" }}>
+
+                                        </Card>
                                     </Row>
-                                    <Row >
-                                        <Col span={12}>
-                                            <Form.Item name="email">
-                                                <Input name="email" />
-                                            </Form.Item>
+                                    <br />
+                                    <Row gutter={5}>
+                                        <Col>
+                                            <Card title="Эмчийн туршлага:" bordered style={{ height: "387px", width: "620px" }}>
+                                                <Formik>
+                                                    <Form initialValues={doctor_experienceModel} validationSchema={doctor_experienceValidationSchema}>
+                                                        <Row gutter={10}>
+                                                            <Col span={12}>
+                                                                <Form.Item name="graduate_school" label="Төгссөн сургууль">
+                                                                    <Input name='graduate_school' />
+                                                                </Form.Item>
+                                                            </Col>
+                                                            <Col span={12}>
+                                                                <Form.Item name="year" label="Жил" >
+                                                                    <Input name='year' />
+                                                                </Form.Item>
+
+                                                            </Col>
+                                                        </Row>
+                                                        <Row justify="end">
+                                                            <Col>
+                                                                <SubmitButton>НЭМЭХ</SubmitButton>
+                                                            </Col>
+                                                        </Row>
+                                                    </Form>
+                                                </Formik>
+                                            </Card>
                                         </Col>
-                                        <Col span={12}  >
-                                            <Form.Item name="phone">
-                                                <Input name="phone" />
-                                            </Form.Item>
+                                        <Col>
+                                            <Card title="Цагийн хуваарь:" bordered style={{ height: "387px", width: "620px" }}>
+                                                <WorkingHoursTable id={id} workingHours={detaildata.working_hours} />
+                                            </Card>
                                         </Col>
                                     </Row>
                                 </Form>
@@ -197,10 +243,10 @@ const DocterDetail = () => {
 
     return (
         <>
-            <div className='header' style={{ width: "100%", height: "115px" }}>
+            <div className='header' style={{ width: "100%", height: "112px" }}>
                 <p className='name'><b>{detaildata.name}</b></p>
             </div>
-            <div className='content' style={{ backgroundColor: "white", width: "100%", height: "772px", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px", margin: "0", padding: "0" }}>
+            <div className='content' style={{ backgroundColor: "white", width: "100%", height: "1052.25px", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px", margin: "0", padding: "0" }}>
                 <div className='image_Container'>
                     <img src={detaildata?.profile_img} width="132px" height="120px" alt="" />
                 </div>
@@ -222,7 +268,6 @@ const DocterDetail = () => {
                     </Row>
                     <br />
                     <Converttext />
-                    hello world
                 </div>
             </div>
         </>
