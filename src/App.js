@@ -1,29 +1,51 @@
-import React, { lazy, Suspense, useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import React, {
+  createContext,
+  lazy,
+  Suspense,
+  useEffect,
+  useState,
+} from "react";
+import { Routes, Route, useLocation, Link } from "react-router-dom";
 import Navbar from "./Components/navbar";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
-import 'react-multi-carousel/lib/styles.css';
+import "react-multi-carousel/lib/styles.css";
 import "./style.css";
 import { authAPI } from "./apis";
 import { Button, Col, Dropdown, Layout, Row } from "antd";
-import { ArrowDownOutlined, BellOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
-const Home = lazy(() => import("./pages/home"))
-const Login = lazy(() => import("./pages/login"))
-const Custommer = lazy(() => import("./pages/custommer"))
-const Doctor = lazy(() => import("./pages/doctor"))
-const Order_time = lazy(() => import("./pages/calendar"))
-const Custommer_News = lazy(() => import("./pages/custommer/custommerNews"))
-const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"))
-const Advice = lazy(() => import("./pages/custommer/advice"))
+import {
+  ArrowDownOutlined,
+  BellOutlined,
+  DownOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+const Home = lazy(() => import("./pages/home"));
+const Login = lazy(() => import("./pages/login"));
+const Custommer = lazy(() => import("./pages/custommer"));
+const Doctor = lazy(() => import("./pages/doctor"));
+const Order_time = lazy(() => import("./pages/calendar"));
+const Custommer_News = lazy(() => import("./pages/custommer/custommerNews"));
+const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"));
+const Advice = lazy(() => import("./pages/custommer/advice"));
 const DocterDetail = lazy(() => import("./pages/doctor/docterDetail"));
 const Test = lazy(() => import("./pages/test"));
+const Profile = lazy(() => import("./pages/profile"));
+
+export const UserContext = createContext();
 
 function App() {
+  const [user, setUser] = useState({});
   const location = useLocation();
+
+  const fetchUser = async () => {
+    const result = await authAPI.profile();
+    setUser(result);
+  };
+
   if (location.pathname !== "/login") {
-    authAPI.profile();
+    fetchUser();
   }
+
   const items = [
     {
       key: "1",
@@ -62,6 +84,7 @@ function App() {
       ),
     },
   ];
+
   return (
     <div className="App">
       {location.pathname == "/login" ? (
@@ -90,29 +113,33 @@ function App() {
                   </Col>
                   <Col>
                     <Row gutter={20}>
+                      <Link to="/profile">
+                        <Col>
+                          <div
+                            style={{
+                              width: "50px",
+                              height: "50px",
+                              backgroundColor: "#D9D9D9",
+                              display: "flex",
+                              placeItems: "center",
+                              fontSize: "30px",
+                              borderRadius: "50%",
+                            }}
+                          >
+                            <img
+                              src={user?.profile_img}
+                              width="29px"
+                              height="29px"
+                              style={{ margin: "auto" }}
+                            />
+                          </div>
+                        </Col>
+                      </Link>
                       <Col>
-                        <div
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            backgroundColor: "#D9D9D9",
-                            display: "flex",
-                            placeItems: "center",
-                            fontSize: "30px",
-                            borderRadius: "50%",
-                          }}
-                        >
-                          <img
-                            src="ninja.png"
-                            width="29px"
-                            height="29px"
-                            style={{ margin: "auto" }}
-                          />
-                        </div>
-                      </Col>
-                      <Col>
-                        <b>Арьс дасгалжуулагч</b>
-                        <p>Захирал</p>
+                        <b>{`${user.first_name} ${user.last_name}`}</b>
+                        <p>{`${
+                          user.role === "ADMIN" ? "Админ" : "Ажилчин"
+                        }`}</p>
                       </Col>
                       <Col>
                         <Dropdown
@@ -132,7 +159,7 @@ function App() {
               <Col span={12}>
                 <b>
                   <p style={{ fontSize: "16px", margin: "0" }}>
-                    Сайн байна уу, *************
+                    Сайн байна уу, {user.first_name} {user.last_name}
                   </p>
                 </b>
                 <p style={{ fontSize: "17px" }}>
@@ -143,7 +170,7 @@ function App() {
             <Suspense fallback={<h1>LOADING</h1>}>
               <div style={{ marginTop: "50px" }}>
                 <Routes>
-                  <Route exact path="/" element={<Home />} />w
+                  <Route exact path="/" element={<Home />} />
                   <Route exact path="/calendar" element={<Order_time />} />
                   <Route exact path="/custommer" element={<Custommer />} />
                   <Route exact path="/doctor" element={<Doctor />} />
@@ -158,8 +185,13 @@ function App() {
                     element={<Custommer_Add />}
                   />
                   <Route exact path="/advice" element={<Advice />} />
-                  <Route exact path="/doctor/detail/:id" element={<DocterDetail />} />
+                  <Route
+                    exact
+                    path="/doctor/detail/:id"
+                    element={<DocterDetail />}
+                  />
                   <Route exact path="/test" element={<Test />} />
+                  <Route exact path="/profile" element={<Profile />} />
                 </Routes>
               </div>
             </Suspense>

@@ -8,9 +8,9 @@ class Donut extends Component {
 
     this.state = {
       options: {
-        labels: ["Apple", "Mango", "Orange"],
+        labels: ["Эрэгтэй", "Эмэгтэй", "Тодорхойгүй"],
       },
-      series: [44, 55, 41],
+      series: [33, 33, 34],
     };
   }
 
