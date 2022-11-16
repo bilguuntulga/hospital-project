@@ -124,14 +124,18 @@ function App() {
                               placeItems: "center",
                               fontSize: "30px",
                               borderRadius: "50%",
+                              backgroundImage: `url(${user?.profile_img})`,
+                              backgroundPosition: "center",
+                              backgroundRepeat: "no-repeat",
+                              backgroundSize: "cover",
                             }}
                           >
-                            <img
+                            {/* <img
                               src={user?.profile_img}
                               width="29px"
                               height="29px"
                               style={{ margin: "auto" }}
-                            />
+                            /> */}
                           </div>
                         </Col>
                       </Link>
@@ -163,7 +167,7 @@ function App() {
                   </p>
                 </b>
                 <p style={{ fontSize: "17px" }}>
-                  Өдрийг сайхан өнгөрүүлээрэй, Ажлын амжилт хүсэе{" "}
+                  Өдрийг сайхан өнгөрүүлээрэй, Ажлын амжилт хүсэе
                 </p>
               </Col>
             </Row>
