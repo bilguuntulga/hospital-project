@@ -143,7 +143,7 @@ function App() {
             <Suspense fallback={<h1>LOADING</h1>}>
               <div style={{ marginTop: "50px" }}>
                 <Routes>
-                  <Route exact path="/" element={<Home />} />
+                  <Route exact path="/" element={<Home />} />w
                   <Route exact path="/calendar" element={<Order_time />} />
                   <Route exact path="/custommer" element={<Custommer />} />
                   <Route exact path="/doctor" element={<Doctor />} />
@@ -158,6 +158,7 @@ function App() {
                     element={<Custommer_Add />}
                   />
                   <Route exact path="/advice" element={<Advice />} />
+                  <Route exact path="/doctor/detail/:id" element={<DocterDetail />} />
                   <Route exact path="/test" element={<Test />} />
                 </Routes>
               </div>

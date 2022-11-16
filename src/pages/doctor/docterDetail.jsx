@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { Formik } from 'formik'
 import { Input, SubmitButton, Form } from 'formik-antd'
 import Doctor_Timer from '../../Components/doctor_time'
+import ImageUploud from "../../Components/form/UploadImage"
 
 
 const DocterDetail = () => {
@@ -142,10 +143,16 @@ const DocterDetail = () => {
                         <Col>
                             <Formik initialValues={personal_information_model} validationSchema={personal_information_validationSchema}>
                                 <Form>
-                                    <Card title="Хувийн мэдээлэл:" bordered>
+                                    <Card title="Хувийн мэдээлэл:" bordered >
                                         <Row>
                                             <Col>
-                                                <img src={detaildata.profile_img} />
+                                                <Form.Item name="profile_img">
+
+                                                    <ImageUploud name="profile_img" />
+                                                    <div style={{ borderRadius: "50%", width: "70px", height: "70px", backgroundColor: "#F5F5F5", display: "grid", placeItems: "center" }}>
+                                                        <img src={detaildata.profile_img} width="48px" height="48px" />
+                                                    </div>
+                                                </Form.Item>
                                             </Col>
                                             <Col>
                                                 <SubmitButton>Хадгалах</SubmitButton>
@@ -157,25 +164,25 @@ const DocterDetail = () => {
                                     </Card>
                                     <Row>
                                         <Col span={12}>
-                                            <Form.Item>
-                                                <Input />
+                                            <Form.Item name="surname">
+                                                <Input name="surname" />
                                             </Form.Item>
                                         </Col>
                                         <Col span={12}>
-                                            <Form.Item>
-                                                <Input />
+                                            <Form.Item name="name">
+                                                <Input name="name" />
                                             </Form.Item>
                                         </Col>
                                     </Row>
                                     <Row >
                                         <Col span={12}>
-                                            <Form.Item>
-                                                <Input />
+                                            <Form.Item name="email">
+                                                <Input name="email" />
                                             </Form.Item>
                                         </Col>
-                                        <Col span={12}>
-                                            <Form.Item>
-                                                <Input />
+                                        <Col span={12}  >
+                                            <Form.Item name="phone">
+                                                <Input name="phone" />
                                             </Form.Item>
                                         </Col>
                                     </Row>
@@ -215,6 +222,7 @@ const DocterDetail = () => {
                     </Row>
                     <br />
                     <Converttext />
+                    hello world
                 </div>
             </div>
         </>
