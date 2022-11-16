@@ -1,11 +1,11 @@
 import React, { memo, useRef } from "react";
-import { useState } from "react";
 import AWS from "aws-sdk";
 import { Image, message, Space } from "antd";
 import { Field } from "formik";
 import { DeleteOutlined, FileAddOutlined } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import Carousel from "react-multi-carousel";
+import "./style.css";
 
 AWS.config.update({
   accessKeyId: "AKIAQ6ZTXJPAL5SFEXEU",
@@ -144,7 +144,12 @@ function UploadImage({ name, mode = "single" }) {
             </div>
           )}
           {value == "" || value == [] ? (
-            <button onClick={() => fileInputRef.current.click()}>Зураг</button>
+            <button
+              className="upload-button"
+              onClick={() => fileInputRef.current.click()}
+            >
+              Зураг оруулах
+            </button>
           ) : null}
           <p style={{ color: "red" }}>{meta.error}</p>
           <ToastContainer />
