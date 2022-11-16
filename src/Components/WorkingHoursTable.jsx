@@ -1,9 +1,11 @@
-import { Button, Descriptions, Form, Modal, Select, Switch, Table, TimePicker } from 'antd'
+import { Button, Card, Descriptions, Form, Modal, Select, Switch, Table, TimePicker } from 'antd'
 import { Field } from 'formik'
 import React, { useState } from 'react'
 import moment from 'moment';
 import { toast, ToastContainer } from 'react-toastify';
 import { doctorAPI } from '../apis';
+import Doctor_Timer from './doctor_time';
+
 
 function WorkingHoursTable({ id, workingHours }) {
     const [showModal, setShowModal] = useState(false);
@@ -16,11 +18,11 @@ function WorkingHoursTable({ id, workingHours }) {
         },
         {
             title: "Эхлэх цаг",
-            render: (_, record) => `${record?.start_time ?? "-"}`
+            render: (_, record) => `${record?.start_time ?? "close"}`
         },
         {
             title: "Дуусах цаг",
-            render: (_, record) => `${record?.end_time ?? "-"}`
+            render: (_, record) => `${record?.end_time ?? "close"}`
         }
     ];
 
@@ -46,7 +48,7 @@ function WorkingHoursTable({ id, workingHours }) {
         toast.promise(
             doctorAPI.update({
                 id,
-                working_hours: workingHours                                                                                                                                                                                                                                                         
+                working_hours: workingHours
             }),
             {
                 pending: "Илгээж байна",
@@ -58,32 +60,38 @@ function WorkingHoursTable({ id, workingHours }) {
 
     return (
         <>
-            <Button onClick={() => setShowModal(true)}>Засах</Button>
-            <Table columns={columns} dataSource={workingHours} pagination={false} />
-            <ToastContainer />
-            <Modal open={showModal} onCancel={() => setShowModal(false)} footer={null} title="Ажлын хувиар засах">
-                <Form onFinish={onFinish} layout="vertical">
-                    <Form.Item name="day" label="Өдөр сонгох" rules={[{ required: true, message: "Заавал бөглөнө үү!" }]}>
-                        <Select mode='multiple'>
-                            {
-                                workingHours?.map((e, i) => <Select.Option key={i} value={e.id}>
-                                    {dayTranslater(e.day)}
-                                </Select.Option>)
-                            }
-                        </Select>
-                    </Form.Item >
-                    <Form.Item name="rest" label="Амралтын өдөр">
-                        <Switch name="rest" onClick={() => setIsRest(!isRest)} />
-                    </Form.Item>
-                    {
-                        !isRest ?
-                            <Form.Item name={"time"} label="Цаг сонгох" rules={[{ required: true, message: "Заавал бөглөнө үү!" }]}>
-                                <TimePicker.RangePicker name={"time"} format="hh:mm" />
-                            </Form.Item> : null
-                    }
-                    <Button htmlType='submit'>Хадаглах</Button>
-                </Form>
-            </Modal>
+            <Card title="Цагийн хуваарь:" style={{ width: "620px", borderColor: "black", borderRadius: "15px" }} extra={<Button style={{ width: "100px", color: "white", height: "29px", backgroundColor: "#434AFE", borderRadius: "5px", border: "none" }} onClick={() => setShowModal(true)}>Засах</Button>}>
+
+                {workingHours.map((e) => (
+                    <>
+                        <Doctor_Timer day={e?.day} endDate={e?.end_time} startDate={e?.start_time} />
+                    </>
+                ))}
+                <ToastContainer />
+                <Modal open={showModal} onCancel={() => setShowModal(false)} footer={null} title="Ажлын хувиар засах">
+                    <Form onFinish={onFinish} layout="vertical">
+                        <Form.Item name="day" label="Өдөр сонгох" rules={[{ required: true, message: "Заавал бөглөнө үү!" }]}>
+                            <Select mode='multiple'>
+                                {
+                                    workingHours?.map((e, i) => <Select.Option key={i} value={e.id}>
+                                        {dayTranslater(e.day)}
+                                    </Select.Option>)
+                                }
+                            </Select>
+                        </Form.Item >
+                        <Form.Item name="rest" label="Амралтын өдөр">
+                            <Switch name="rest" onClick={() => setIsRest(!isRest)} />
+                        </Form.Item>
+                        {
+                            !isRest ?
+                                <Form.Item name={"time"} label="Цаг сонгох" rules={[{ required: true, message: "Заавал бөглөнө үү!" }]}>
+                                    <TimePicker.RangePicker name={"time"} format="hh:mm" />
+                                </Form.Item> : null
+                        }
+                        <Button htmlType='submit'>Хадаглах</Button>
+                    </Form>
+                </Modal>
+            </Card>
         </>
 
     )
