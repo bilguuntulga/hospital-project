@@ -30,7 +30,7 @@ const DoctorPage = () => {
       </Row>
       <br />
       <br />
-      <Row justify="space-between">
+      <Row justify="space-between" gutter={[10,30]}>
         {doctersdata.map((e) =>
           <Link to={`detail/${e.id}`}>
               <Col span={6}>
