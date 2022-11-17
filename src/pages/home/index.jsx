@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "antd";
 import "./style.css";
 import { UserOutlined } from "@ant-design/icons";
-import Order_time_custommer from "../../Components/order_time_custommer";
+import OrderTimeCustommer from "../../components/OrderTimeCustommer";
 import CLineChart from "./chart";
 import PieChart from "./PieCharts";
-import CunstommerNews from "../../Components/cunstommerNews";
+import CunstommerNews from "../../components/cunstommerNews";
 import CountUp from "react-countup";
 import { customerAPI, doctorAPI, treatmentTimesAPI } from "../../apis";
 
@@ -117,25 +117,25 @@ function HomePage() {
                 borderRadius: "15px",
               }}
             >
-              <Order_time_custommer
+              <OrderTimeCustommer
                 name="Ц.Оргил"
                 image="ninja.png"
                 other="Нас 25, Эрэгтэй 15 Nov 13;30"
                 bool={true}
               />
-              <Order_time_custommer
+              <OrderTimeCustommer
                 name="Ц.Оргил"
                 image="ninja.png"
                 other="Нас 25, Эрэгтэй 15 Nov 13;30"
                 bool={true}
               />
-              <Order_time_custommer
+              <OrderTimeCustommer
                 name="Ц.Оргил"
                 image="ninja.png"
                 other="Нас 25, Эрэгтэй 15 Nov 13;30"
                 bool={true}
               />
-              <Order_time_custommer
+              <OrderTimeCustommer
                 name="Ц.Оргил"
                 image="ninja.png"
                 other="Нас 25, Эрэгтэй 15 Nov 13;30"
@@ -270,28 +270,28 @@ function HomePage() {
                   height: "270px",
                 }}
               >
-                <Order_time_custommer
+                <OrderTimeCustommer
                   image="ninja.png"
                   name="Ц.Оргил"
                   bool={false}
                   time="10:30"
                   other="Арьсны эмч"
                 />
-                <Order_time_custommer
+                <OrderTimeCustommer
                   image="ninja.png"
                   name="Ц.Оргил"
                   bool={false}
                   time="Одоо"
                   other="Арьсны эмч"
                 />
-                <Order_time_custommer
+                <OrderTimeCustommer
                   image="ninja.png"
                   name="Ц.Оргил"
                   bool={false}
                   time="12:30"
                   other="Арьсны эмч"
                 />
-                <Order_time_custommer
+                <OrderTimeCustommer
                   image="ninja.png"
                   name="Ц.Оргил"
                   bool={false}

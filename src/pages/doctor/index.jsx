@@ -1,6 +1,6 @@
 import { Button, Col, Row } from "antd";
 import React, { useState, useEffect } from "react";
-import Doctors from "../../Components/doctors";
+import Doctors from "../../components/doctors";
 import { doctorAPI } from "../../apis";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";

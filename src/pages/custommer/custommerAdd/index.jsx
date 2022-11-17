@@ -5,7 +5,7 @@ import { Formik } from 'formik'
 import * as yup from "yup"
 import React, { useState } from 'react'
 import "./style.css"
-import Services from '../../../Components/services'
+import Services from '../../../components/services'
 
 const RegistrationPage = () => {
   const [servicebool, setServiceBool] = useState(false)

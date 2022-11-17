@@ -2,7 +2,7 @@ import { Button } from "antd";
 import { Formik } from "formik";
 import { Form, Input, SubmitButton } from "formik-antd";
 import React, { useState } from "react";
-import UploadImage from "../../Components/form/UploadImage";
+import UploadImage from "../../components/form/UploadImage";
 
 function TestPage() {
   const onSubmit = (values) => {
