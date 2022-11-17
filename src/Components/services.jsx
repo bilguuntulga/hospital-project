@@ -1,19 +1,16 @@
 import React from 'react'
 import { Image } from 'antd'
 
-const Services = ({ image, name, desc,price }) => {
+const Services = ({ images, name, price }) => {
     return (
         <div style={{ display: "grid", placeItems: "center" }}>
             <Image.PreviewGroup>
-                <Image src={image} alt="" width="50px" />
-                <Image style={{ display: "none" }} width="50px" src={image} alt="" />
-                <Image style={{ display: "none" }} width="50px" src={image} alt="" />
+                {images?.map((e, i) => <Image src={e} style={{ display: i == 0 ? "block" : "none" }} alt="" width="100px" />)}
             </Image.PreviewGroup>
             <hr />
-            <p>{price}</p>
             <p>{name}</p>
             <hr />
-            <p>{desc}</p>
+            <p>{price}</p>
         </div>
     )
 }
