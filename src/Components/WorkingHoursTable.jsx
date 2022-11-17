@@ -46,10 +46,13 @@ function WorkingHoursTable({ id, workingHours }) {
         }
 
         toast.promise(
-            doctorAPI.update({
-                id,
-                working_hours: workingHours
-            }),
+            async () => {
+                await doctorAPI.update({
+                    id,
+                    working_hours: workingHours
+                })
+                setShowModal(false)
+            },
             {
                 pending: "Илгээж байна",
                 success: "Амжилттай",
@@ -64,7 +67,7 @@ function WorkingHoursTable({ id, workingHours }) {
 
                 {workingHours.map((e) => (
                     <>
-                        <Doctor_Timer day={e?.day} endDate={e?.end_time} startDate={e?.start_time} />
+                        <Doctor_Timer day={dayTranslater(e?.day)} endDate={e?.end_time} startDate={e?.start_time} />
                     </>
                 ))}
                 <ToastContainer />

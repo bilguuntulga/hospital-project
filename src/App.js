@@ -31,6 +31,7 @@ const Advice = lazy(() => import("./pages/custommer/advice"));
 const DocterDetail = lazy(() => import("./pages/doctor/docterDetail"));
 const Test = lazy(() => import("./pages/test"));
 const Profile = lazy(() => import("./pages/profile"));
+const Custommer_detail = lazy(() => import("./pages/custommer/custommerNews/detail"))
 
 function App() {
   const location = useLocation();
@@ -69,6 +70,11 @@ function App() {
                     exact
                     path="/doctor/detail/:id"
                     element={<DocterDetail />}
+                  />
+                  <Route
+                    exact
+                    path="/custommer_news/custommer_detail/:id"
+                    element={<Custommer_detail />}
                   />
                   <Route exact path="/test" element={<Test />} />
                   <Route exact path="/profile" element={<Profile />} />

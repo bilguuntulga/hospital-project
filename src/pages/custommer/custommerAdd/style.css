@@ -12,13 +12,13 @@
 
 }
 
-.ant-input-affix-wrapper {
+/* .ant-input-affix-wrapper {
     width: 250px;
     height: 51px;
     border: 1px solid rgba(39, 30, 74, 0.5);
     border-radius: 23px;
 
-}
+} */
 
 .input {
     border: none;
@@ -38,11 +38,13 @@
     border: none;
     border-radius: 15px;
     width: 150.71px;
+    color: white;
     height: 37px;
 }
 
 .save_button:hover {
     background-color: blueviolet;
+    color: white;
     border: none;
     border-radius: 15px;
 
