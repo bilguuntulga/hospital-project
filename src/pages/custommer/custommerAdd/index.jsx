@@ -279,14 +279,15 @@ const RegistrationPage = () => {
         </Formik>
       </div>
       <br />
-      <div style={{ width: "100%", borderRadius: "15px", backgroundColor: "white", padding: "20px" }}>
+      <div style={{ width: "100%", borderRadius: "15px", backgroundColor: "white", padding: "40px" }}>
         <Row justify="end">
           <Col>
-            <Button onClick={() => setServiceBool(!servicebool)} className='save_button'>Үйлчилгээ авах</Button>
+            {servicebool ? <Button>Хадгалах</Button> : <Button onClick={() => setServiceBool(!servicebool)} className='save_button'>Үйлчилгээ авах</Button>}
+
           </Col>
         </Row>
         <br />
-        <Row gutter={[50,50]}>
+        <Row gutter={[50, 50]}>
           <Col span={4}>
             <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
               <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
