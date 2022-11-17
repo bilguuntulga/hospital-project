@@ -3,11 +3,13 @@ import { Button, Card, Col, Row } from "antd";
 import { Formik } from "formik";
 import { Form, Input, SubmitButton } from "formik-antd";
 import React, { useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { authAPI } from "../../apis";
-import UploadImage from "../../Components/form/UploadImage";
+import UploadImage from "../../components/form/UploadImage";
 
 function ProfilePage() {
+  const navigate = useNavigate();
   const [user, setUser] = useState();
 
   const fetchData = async () => {
@@ -16,11 +18,21 @@ function ProfilePage() {
   };
 
   useEffect(() => {
-    // fetchData();
+    fetchData();
   }, []);
 
   const changeGenericInfo = async (values) => {
-    console.log(values);
+    toast.promise(
+      async () => {
+        await authAPI.update(values);
+        navigate(0);
+      },
+      {
+        pending: "Илгээж байна",
+        success: "Амжилттай",
+        error: "Амжилтгүй",
+      }
+    );
   };
 
   return (

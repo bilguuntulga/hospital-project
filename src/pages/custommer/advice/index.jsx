@@ -5,7 +5,7 @@ import { Input, Form } from 'formik-antd'
 import React from 'react'
 import * as yup from "yup"
 import "./style.css"
-import Advice from '../../../Components/advice'
+import Advice from '../../../components/advice'
 
 
 function AdvicePage() {

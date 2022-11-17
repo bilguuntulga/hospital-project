@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { Routes, Route, useLocation, Link } from "react-router-dom";
-import Navbar from "./Components/navbar";
+import Navbar from "./components/navbar";
 import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
 import "react-multi-carousel/lib/styles.css";
@@ -19,7 +19,7 @@ import {
   DownOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import Header from "./Components/layout/Header";
+import Header from "./components/layout/Header";
 const Home = lazy(() => import("./pages/home"));
 const Login = lazy(() => import("./pages/login"));
 const Custommer = lazy(() => import("./pages/custommer"));

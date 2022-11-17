@@ -1,7 +1,7 @@
 import { Button, Col, Row } from 'antd'
 import React from 'react'
 
-const order_time_custommer = ({ image, name, other, bool, time }) => {
+const OrderTimeCustomer = ({ image, name, other, bool, time }) => {
     return (
         <div>
             <Row gutter={20} align="middle" style={{ marginTop: "10px" }}>
@@ -25,4 +25,4 @@ const order_time_custommer = ({ image, name, other, bool, time }) => {
     )
 }
 
-export default order_time_custommer
+export default OrderTimeCustomer

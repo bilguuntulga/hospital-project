@@ -5,6 +5,7 @@ import { Formik } from 'formik'
 import * as yup from "yup"
 import React, { useEffect, useState } from 'react'
 import "./style.css"
+import Services from '../../../components/services'
 import Services from '../../../Components/services'
 import { servicesAPI, ServicesAPI } from '../../../apis'
 

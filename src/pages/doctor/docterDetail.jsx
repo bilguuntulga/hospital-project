@@ -7,9 +7,9 @@ import { ArrowRightOutlined, MailOutlined, PhoneOutlined } from '@ant-design/ico
 import * as yup from "yup";
 import { Formik } from 'formik'
 import { Input, SubmitButton, Form } from 'formik-antd'
-import Doctor_Timer from '../../Components/doctor_time'
-import ImageUploud from "../../Components/form/UploadImage"
-import WorkingHoursTable from '../../Components/WorkingHoursTable'
+import Doctor_Timer from '../../components/doctor_time'
+import ImageUploud from "../../components/form/UploadImage"
+import WorkingHoursTable from '../../components/WorkingHoursTable'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 

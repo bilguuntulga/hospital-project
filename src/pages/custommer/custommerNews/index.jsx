@@ -3,7 +3,7 @@ import { Formik, validateYupSchema } from 'formik'
 import { Form, Input, SubmitButton } from 'formik-antd'
 import { Col, Row } from 'antd'
 import "./style.css"
-import CunstommerNews from '../../../Components/cunstommerNews'
+import CunstommerNews from '../../../components/cunstommerNews'
 import { SearchOutlined } from '@ant-design/icons'
 import * as yup from "yup"
 import { customerAPI } from '../../../apis'
