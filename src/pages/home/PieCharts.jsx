@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import Chart from "react-apexcharts";
 import { customerAPI } from "../../apis";
 
@@ -8,9 +8,9 @@ class Donut extends Component {
 
     this.state = {
       options: {
-        labels: ["Эрэгтэй", "Эмэгтэй", "Тодорхойгүй"],
+        labels: ["Эрэгтэй", "Эмэгтэй"],
       },
-      series: [33, 33, 34],
+      series: [50, 50],
     };
   }
 
@@ -43,4 +43,4 @@ class Donut extends Component {
   }
 }
 
-export default Donut;
+export default memo(Donut);
