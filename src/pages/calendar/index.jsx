@@ -263,13 +263,13 @@ const CalendarApp = () => {
                 addEvent={onAddEvent}
                 cancel={onAddEventCancel}
             />
-            <BigCalendar 
+            {/* <BigCalendar 
               localizer={localizer}
               startAccessor="start"
               endAccessor="end"
               style={{ height: 500 }}
               onSelecting={(e) => console.log(e)}
-            />
+            /> */}
         </>
     )
 }

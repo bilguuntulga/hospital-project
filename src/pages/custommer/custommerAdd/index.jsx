@@ -3,12 +3,23 @@ import { Button, Col, Row, Select, Upload, Checkbox } from 'antd'
 import { DatePicker, Form, Input, SubmitButton } from 'formik-antd'
 import { Formik } from 'formik'
 import * as yup from "yup"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.css"
 import Services from '../../../components/services'
+import Services from '../../../Components/services'
+import { servicesAPI, ServicesAPI } from '../../../apis'
 
 const RegistrationPage = () => {
   const [servicebool, setServiceBool] = useState(false)
+  const [servicesdata, setServicesDate] = useState([])
+
+  const fetchData = async () => {
+    const res = await servicesAPI.get();
+    setServicesDate(res)
+  }
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   const model = {
     name: "",
@@ -282,57 +293,23 @@ const RegistrationPage = () => {
       <div style={{ width: "100%", borderRadius: "15px", backgroundColor: "white", padding: "40px" }}>
         <Row justify="end">
           <Col>
-            {servicebool ? <Button>Хадгалах</Button> : <Button onClick={() => setServiceBool(!servicebool)} className='save_button'>Үйлчилгээ авах</Button>}
+            {servicebool ? <Button className='save_button'>Хадгалах</Button> : <Button onClick={() => setServiceBool(!servicebool)} className='save_button'>Үйлчилгээ авах</Button>}
 
           </Col>
         </Row>
         <br />
-        <Row gutter={[50, 50]}>
-          <Col span={4}>
+        {servicebool ? <Row gutter={[50, 50]}>
+          {servicesdata.map((e) => <Col span={4}>
             <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
-              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
-              <Checkbox />
+              <Services images={e?.images} name={e?.name} price={e?.price} />
+              {/* <Checkbox value={e.id} /> */}
+              <Checkbox.Group
 
+              />
             </div>
-          </Col>
-          <Col span={4}>
-            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
-              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
-              <Checkbox />
+          </Col>)}
 
-            </div>
-          </Col>
-          <Col span={4}>
-            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
-              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
-              <Checkbox />
-            </div>
-          </Col>
-          <Col span={4}>
-            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
-              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
-              <Checkbox />
-            </div>
-          </Col>
-          <Col span={4}>
-            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
-              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
-              <Checkbox />
-            </div>
-          </Col>
-          <Col span={4}>
-            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
-              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
-              <Checkbox />
-            </div>
-          </Col>
-          <Col span={4}>
-            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
-              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
-              <Checkbox />
-            </div>
-          </Col>
-        </Row>
+        </Row> : null}
       </div>
     </div>
   )
