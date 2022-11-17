@@ -1,12 +1,14 @@
 import { SearchOutlined, UploadOutlined } from '@ant-design/icons'
-import { Button, Col, Row, Select, Upload } from 'antd'
+import { Button, Col, Row, Select, Upload, Checkbox } from 'antd'
 import { DatePicker, Form, Input, SubmitButton } from 'formik-antd'
 import { Formik } from 'formik'
 import * as yup from "yup"
-import React from 'react'
+import React, { useState } from 'react'
 import "./style.css"
+import Services from '../../../Components/services'
 
 const RegistrationPage = () => {
+  const [servicebool, setServiceBool] = useState(false)
 
   const model = {
     name: "",
@@ -55,6 +57,9 @@ const RegistrationPage = () => {
     other: yup.string().required("Заавал бөглөнө үү"),
     desc: yup.string().required("Заавал бөглөнө үү"),
   })
+  const onChange = (checkedValues) => {
+    console.log('checked = ', checkedValues);
+  };
 
   return (
     <div>
@@ -236,7 +241,7 @@ const RegistrationPage = () => {
                     </Select.Option>
                   </Select>
                 </Form.Item>
-              </Col>1
+              </Col>
             </Row>
             <Row gutter={30}>
               <Col span={12}>
@@ -260,18 +265,73 @@ const RegistrationPage = () => {
                 </Form.Item>
               </Col>
             </Row>
-              <Row gutter={10} align='bottom'>
-                <Col span={20}>
-                  <Form.Item name="desc">
-                    <Input.TextArea style={{ height: "151px",borderRadius:"10px" }} name='desc' placeholder='Дэлгэрэнгүй*' />
-                  </Form.Item>
-                </Col>
-                <Col>
-                  <SubmitButton style={{marginTop:"110px"}} className='save_button'>Хадгалах</SubmitButton>
-                </Col>
-              </Row>
+            <Row gutter={10} align='bottom'>
+              <Col span={20}>
+                <Form.Item name="desc">
+                  <Input.TextArea style={{ height: "151px", borderRadius: "10px" }} name='desc' placeholder='Дэлгэрэнгүй*' />
+                </Form.Item>
+              </Col>
+              <Col>
+                <SubmitButton style={{ marginTop: "110px" }} className='save_button'>Хадгалах</SubmitButton>
+              </Col>
+            </Row>
           </Form>
         </Formik>
+      </div>
+      <br />
+      <div style={{ width: "100%", borderRadius: "15px", backgroundColor: "white", padding: "20px" }}>
+        <Row justify="end">
+          <Col>
+            <Button onClick={() => setServiceBool(!servicebool)} className='save_button'>Үйлчилгээ авах</Button>
+          </Col>
+        </Row>
+        <br />
+        <Row gutter={[50,50]}>
+          <Col span={4}>
+            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
+              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
+              <Checkbox />
+
+            </div>
+          </Col>
+          <Col span={4}>
+            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
+              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
+              <Checkbox />
+
+            </div>
+          </Col>
+          <Col span={4}>
+            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
+              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
+              <Checkbox />
+            </div>
+          </Col>
+          <Col span={4}>
+            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
+              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
+              <Checkbox />
+            </div>
+          </Col>
+          <Col span={4}>
+            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
+              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
+              <Checkbox />
+            </div>
+          </Col>
+          <Col span={4}>
+            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
+              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
+              <Checkbox />
+            </div>
+          </Col>
+          <Col span={4}>
+            <div style={{ borderRadius: "15px", border: "1px solid gray", padding: "10px", textAlign: "center" }}>
+              <Services image="ninja.png" name="Iphone" desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit, voluptas atque alias dolorum corrupti libero " />
+              <Checkbox />
+            </div>
+          </Col>
+        </Row>
       </div>
     </div>
   )
