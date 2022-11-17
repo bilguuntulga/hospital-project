@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row, Space, Table } from 'antd';
+import { Button, Card, Col, Row, Space, Table, Modal } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { customerAPI, treadmentsAPI } from '../../../apis';
@@ -7,10 +7,13 @@ import * as yup from "yup"
 import { Formik } from 'formik';
 import { Form, Input } from 'formik-antd';
 import moment from 'moment';
+import UploadImage from "../../../Components/form/UploadImage";
 
 const Detail = () => {
   const [customerdetail, setCustomerDetail] = useState({});
   const [treadment, setTreadMent] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const fetechData = async () => {
     const res = await customerAPI.get(id)
@@ -18,6 +21,15 @@ const Detail = () => {
     setCustomerDetail(res)
     setTreadMent(res2)
   }
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   useEffect(() => {
     fetechData()
   }, [])
@@ -30,7 +42,8 @@ const Detail = () => {
   const validationSchema = {
     email: yup.string().email().required("Заавал бөгдөнө үү"),
     phone: yup.number().required("Заавал бөгдөнө үү"),
-    address: yup.string().required("Заавал бөгдөнө үү")
+    address: yup.string().required("Заавал бөгдөнө үү"),
+    image: yup.string().required("Заавал бөгдөнө үү")
   }
 
   const columns = [
@@ -44,7 +57,7 @@ const Detail = () => {
     },
     {
       title: "Авсан үйлчилгээ",
-      render: (_, row) => row.service?.name,
+      render: (_, row) => row?.service?.map((ee)=>ee?.name),
     },
     {
       title: "Төлбөр",
@@ -62,7 +75,35 @@ const Detail = () => {
           <p style={{ fontSize: "24px", marginLeft: "50px", marginBottom: "0" }}>Үйлчлүүлэгчийн мэдээлэл</p>
           <Row justify="end">
             <Col style={{ marginRight: "30px" }}>
-              <Space><Button style={{ backgroundColor: "#FF706F", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Устгах</Button><Button style={{ backgroundColor: "#CA79C6", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Шинэчлэх</Button></Space>
+              <Space><Button style={{ backgroundColor: "#FF706F", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Устгах</Button><Button onClick={showModal} style={{ backgroundColor: "#CA79C6", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Шинэчлэх</Button></Space>
+              <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Formik initialValues={model} validationSchema={validationSchema}>
+                  <Form layout='vertical'>
+                    <Row gutter={30}>
+                      <Col>
+                        <Form.Item name="eamil" label="И-Мэйл">
+                          <Input className='input' name='email' />
+                        </Form.Item>
+                      </Col>
+                      <Col>
+                        <Form.Item name="phone" label="Утасны дугаар">
+                          <Input className='input' name='phone' />
+                        </Form.Item>
+                      </Col>
+                      <Col>
+                        <Form.Item name="address" label="Хаяг">
+                          <Input className='input' name='address' />
+                        </Form.Item>
+                      </Col>
+                      <Col>
+                        <Form.Item name="image" label="Хаяг">
+                          <UploadImage name="image" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Formik>
+              </Modal>
             </Col>
           </Row>
           <br />
@@ -102,7 +143,7 @@ const Detail = () => {
             </Col>
           </Row>
           <br />
-          <Row style={{ marginLeft: "30px" }} gutter={20} style={{width:"100"}}>
+          <Row style={{ marginLeft: "30px" }} gutter={20}>
             <Col span={14}>
               <div className='customer_detail_table'>
 

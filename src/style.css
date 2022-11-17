@@ -3,15 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
 
 
-body {
-    background: #C7E3FC;
-}
 
 .App {
     display: flex;
     /* background-color: rgb(163, 187, 202); */
     width: 100%;
-
+    background-color: #f3f3f3;
 }
 
 .main_Container {
