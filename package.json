@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "hospital",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://192.168.0.122:6093",
@@ -40,7 +40,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
-    "electron": "wait-on tcp:3000 && electron ."
+    "electron": "wait-on tcp:3000 && electron .",
+    "start:prod": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
