@@ -7,7 +7,7 @@ import * as yup from "yup"
 import { Formik } from 'formik';
 import { Form, Input } from 'formik-antd';
 import moment from 'moment';
-import UploadImage from "../../../Components/form/UploadImage";
+import UploadImage from "../../../components/form/UploadImage";
 
 const Detail = () => {
   const [customerdetail, setCustomerDetail] = useState({});
