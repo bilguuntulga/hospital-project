@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Col, Row } from "antd";
 import React, { useState } from "react";
-import { Link, Router, useLocation } from "react-router-dom";
+import { Link, NavLink, Router, useLocation } from "react-router-dom";
 import "./style.css";
 
 function Index() {
