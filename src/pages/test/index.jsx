@@ -2,6 +2,7 @@ import { Button } from "antd";
 import { Formik } from "formik";
 import { Form, Input } from "formik-antd";
 import React from "react";
+import ProfileImageUpload from "../../components/form/ProfileImageUpload";
 import UploadImage from "../../components/form/UploadImage";
 
 function TestPage() {
@@ -20,6 +21,7 @@ function TestPage() {
           <Form.Item name={"image"}>
             <UploadImage name={"image"} mode="multi" />
           </Form.Item>
+          <ProfileImageUpload />
           <Button htmlType="submit">Submit</Button>
         </Form>
       </Formik>

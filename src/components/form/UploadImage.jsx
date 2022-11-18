@@ -1,5 +1,5 @@
 import React, { memo, useRef } from "react";
-import AWS from "aws-sdk";
+// import AWS from "aws-sdk";
 import { Image, Space } from "antd";
 import { Field } from "formik";
 import {
@@ -9,16 +9,7 @@ import {
 } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import Carousel from "react-multi-carousel";
-
-AWS.config.update({
-  accessKeyId: "AKIAQ6ZTXJPADGUT3RJE",
-  secretAccessKey: "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",
-});
-
-const bucket = new AWS.S3({
-  params: { Bucket: "skin-hospital" },
-  region: "ap-northeast-3",
-});
+import bucket from "../../utils/bucket";
 
 function UploadImage({ name, mode = "single" }) {
   const fileInputRef = useRef();
@@ -154,13 +145,13 @@ function UploadImage({ name, mode = "single" }) {
             )}
             {value == "" || value == [] ? (
               <button
-                className="upload-button"
+                className="upload_button"
                 onClick={() => fileInputRef.current.click()}
               >
                 {mode == "single" ? "Зураг оруулах" : "Зургууд оруулах"}
               </button>
             ) : null}
-            <p style={{ color: "red" }}>{meta.error}</p>
+            <p className="error_message">{meta.error}</p>
             <ToastContainer />
           </>
         )}

@@ -1,14 +1,17 @@
-import { ArrowRightOutlined, DownOutlined, FormOutlined, RightOutlined } from '@ant-design/icons';
-import { Col, Row } from 'antd';
-import React, { useState } from 'react'
-import { Link, Router, useLocation } from 'react-router-dom'
-import NavLink from '../layout/NavLink';
-import './style.css'
+import {
+  ArrowRightOutlined,
+  DownOutlined,
+  FormOutlined,
+  RightOutlined,
+} from "@ant-design/icons";
+import { Col, Row } from "antd";
+import React, { useState } from "react";
+import { Link, Router, useLocation } from "react-router-dom";
+import "./style.css";
 
 function Index() {
-    const pathName = useLocation();
-    const [customer, setCustommer] = useState(false)
-
+  const pathName = useLocation();
+  const [customer, setCustommer] = useState(false);
 
     return (
         <>
@@ -42,4 +45,4 @@ function Index() {
     )
 }
 
-export default Index
+export default Index;
