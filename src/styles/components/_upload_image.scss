@@ -1,9 +1,15 @@
 .upload_image_wrapper {
-  button {
+  .upload_button {
     background-color: forestgreen;
     color: white;
     border: none;
     padding: 0.5rem;
     border-radius: 10rem;
+  }
+
+  .error_message {
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
   }
 }
