@@ -25,13 +25,16 @@ function Index() {
                     </div>
                     <div className='menu'>
                         <Link to="/" >
-                            <div className={pathName.pathname == '/' ? "action_home" : "simple"}>
+                            <div className={pathName.pathname == '/' ? "action__dashboard" : "simple"}>
                                 <Row gutter={20} justify="center" style={{ width: "100%" }}>
                                     <Col span={8}>
-                                        <img src="home.png" width="30px" height="30px" alt="" />
+                                        <img src="dashboard.png" width="30px" height="30px" alt="" />
                                     </Col>
                                     <Col span={16}>
                                         Нүүр хуудас
+                                    </Col>
+                                    <Col>
+                                    <div></div>
                                     </Col>
                                 </Row>
                             </div>
@@ -40,7 +43,7 @@ function Index() {
                             <div className={pathName.pathname == '/calendar' ? "action_orde_time" : "simple"}>
                                 <Row gutter={20} justify="center" style={{ width: "100%" }}>
                                     <Col span={8}>
-                                        <FormOutlined className='Icon' style={{ fontSize: "30px", color: "black" }} />
+                                        <img src='calendar.png' alt='calendar' className='Icon' style={{ fontSize: "30px", color: "black" }} />
                                     </Col>
                                     <Col span={16}>
                                         Календар
@@ -48,8 +51,33 @@ function Index() {
                                 </Row>
                             </div>
                         </Link>
-                        <Link to="/custommer_news">
-                            <div className={pathName.pathname == "/custommer_news" || pathName.pathname == "/custommer_add" || pathName.pathname == "/advice" ? "action_registration" : "simple"}
+                        <Link to="/report">
+                            <div className={pathName.pathname == '/report' ? "action_orde_time" : "simple"}>
+                                <Row gutter={20} justify="center" style={{ width: "100%" }}>
+                                    <Col span={8}>
+                                        <img src='report.png' alt='calendar' className='Icon' style={{ fontSize: "30px", color: "black" }} />
+                                    </Col>
+                                    <Col span={16}>
+                                        Тайлан
+
+                                    </Col>
+                                </Row>
+                            </div>
+                        </Link>
+                        <Link to="/employee">
+                            <div className={pathName.pathname == '/employee' ? "action_orde_time" : "simple"}>
+                                <Row gutter={20} justify="center" style={{ width: "100%" }}>
+                                    <Col span={8}>
+                                        <img src='employee.png' alt='calendar' className='Icon' style={{ fontSize: "30px", color: "black" }} />
+                                    </Col>
+                                    <Col span={16}>
+                                        Ажилтан
+                                    </Col>
+                                </Row>
+                            </div>
+                        </Link>
+                        <Link to="/customer">
+                            <div className={pathName.pathname == "/customer" || pathName.pathname == "/custommer_add" || pathName.pathname == "/advice" ? "action_registration" : "simple"}
                                 onClick={() => setCustommer(!customer)}
                             >
                                 <Row gutter={20} justify="center" style={{ width: "100%" }}>
@@ -72,11 +100,23 @@ function Index() {
 
                             </div>
                         </Link>
-                        <Link to="/doctor">
-                            <div className={pathName.pathname == '/doctor' ? "action_advice" : "simple"}>
+                        <Link to="/resource">
+                            <div className={pathName.pathname == '/resource' ? "action_advice" : "simple"}>
                                 <Row gutter={20} justify="center" style={{ width: "100%" }}>
                                     <Col span={8}>
-                                        <img src="doctorMenu.png" width="30px" height="30px" alt="" />
+                                        <img src="resource.png" width="30px" height="30px" alt="" />
+                                    </Col>
+                                    <Col span={16}>
+                                        Нөөц
+                                    </Col>
+                                </Row>
+                            </div>
+                        </Link>
+                        <Link to="/bonus">
+                            <div className={pathName.pathname == '/bonus' ? "action_advice" : "simple"}>
+                                <Row gutter={20} justify="center" style={{ width: "100%" }}>
+                                    <Col span={8}>
+                                        <img src="bonus.png" width="30px" height="30px" alt="" />
                                     </Col>
                                     <Col span={16}>
                                         Эмч                                    </Col>
