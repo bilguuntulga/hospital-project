@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { Formik } from "formik";
-import { Form, Input, SubmitButton } from "formik-antd";
-import React, { useState } from "react";
+import { Form, Input } from "formik-antd";
+import React from "react";
 import UploadImage from "../../components/form/UploadImage";
 
 function TestPage() {
@@ -10,7 +10,8 @@ function TestPage() {
   };
 
   return (
-    <div>
+    <div className="test_page">
+      <h1 className="hello_text">Hello World</h1>
       <Formik initialValues={{ name: "", image: "" }} onSubmit={onSubmit}>
         <Form>
           <Form.Item name="name">
