@@ -6,7 +6,8 @@ import {
 } from "@ant-design/icons";
 import { Col, Row } from "antd";
 import React, { useState } from "react";
-import { Link, NavLink, Router, useLocation } from "react-router-dom";
+import { Link, Router, useLocation } from "react-router-dom";
+import NavButton from "../layout/NavButton";
 import "./style.css";
 
 function Index() {
@@ -30,14 +31,14 @@ function Index() {
                         </Row>
                     </div>
                     <div className='menu'>
-                        <NavLink path={"/"} icon={"dashboard.png"} text={"Дашбоард"} />
-                        <NavLink path={"/calendar"} icon={'calendar.png'} text={"Календар"} />
-                        <NavLink path={"/report"} icon={'report.png'} text={"Тайлан"} />
-                        <NavLink path={"/employee"} icon={'employee.png'} text={"Ажилтан"} />
-                        <NavLink path={"/customer"} icon={'custommer.png'} text={"Үйлчлүүлэгч"} />
-                        <NavLink path={"/client"} icon={'client.png'} text={"Үйлчилгээ"} />
-                        <NavLink path={"/resource"} icon={'resource.png'} text={"Нөөц"} />
-                        <NavLink path={"/bonus"} icon={"bonus.png"} text={"Урамшуулал"} />
+                        <NavButton path={"/"} icon={"dashboard.png"} text={"Дашбоард"} />
+                        <NavButton path={"/calendar"} icon={'calendar.png'} text={"Календар"} />
+                        <NavButton path={"/report"} icon={'report.png'} text={"Тайлан"} />
+                        <NavButton path={"/employee"} icon={'employee.png'} text={"Ажилтан"} />
+                        <NavButton path={"/customer"} icon={'custommer.png'} text={"Үйлчлүүлэгч"} />
+                        <NavButton path={"/client"} icon={'client.png'} text={"Үйлчилгээ"} />
+                        <NavButton path={"/resource"} icon={'resource.png'} text={"Нөөц"} />
+                        <NavButton path={"/bonus"} icon={"bonus.png"} text={"Урамшуулал"} />
                     </div>
                 </div>
             </div>

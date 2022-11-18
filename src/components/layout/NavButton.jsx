@@ -2,7 +2,7 @@ import { Col, Row } from 'antd'
 import React, { memo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-function NavLink({ path, icon, text }) {
+function NavButton({ path, icon, text }) {
     const pathname = useLocation();
 
     return (
@@ -24,4 +24,4 @@ function NavLink({ path, icon, text }) {
     )
 }
 
-export default memo(NavLink)
+export default memo(NavButton)
