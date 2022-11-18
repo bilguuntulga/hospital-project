@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
 import "react-multi-carousel/lib/styles.css";
 import "./style.css";
-import "./styles/styles.scss";
+import "./styles/main.scss";
 import { authAPI } from "./apis";
 import Header from "./components/layout/Header";
 const Home = lazy(() => import("./pages/home"));
