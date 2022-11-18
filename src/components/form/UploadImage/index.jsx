@@ -1,6 +1,6 @@
 import React, { memo, useRef } from "react";
 import AWS from "aws-sdk";
-import { Image, message, Space } from "antd";
+import { Image, Space } from "antd";
 import { Field } from "formik";
 import {
   DeleteOutlined,
@@ -9,7 +9,6 @@ import {
 } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import Carousel from "react-multi-carousel";
-import "./style.css";
 
 AWS.config.update({
   accessKeyId: "AKIAQ6ZTXJPADGUT3RJE",
@@ -96,73 +95,77 @@ function UploadImage({ name, mode = "single" }) {
   };
 
   return (
-    <Field name={name}>
-      {({ field: { value }, meta, form: { setFieldValue } }) => (
-        <>
-          <input
-            ref={fileInputRef}
-            type="file"
-            onChange={(e) => changeHandler(e, setFieldValue, value)}
-            style={{ display: "none" }}
-          />
-          {mode == "single" && value ? (
-            <Image
-              height={100}
-              src={value}
-              preview={{
-                visible: false,
-                mask: (
-                  <Space>
-                    <EditOutlined
-                      onClick={() => fileInputRef.current.click()}
-                    />
-                    <DeleteOutlined
-                      color="red"
-                      onClick={() => setFieldValue(name, "")}
-                    />
-                  </Space>
-                ),
-              }}
+    <div className="upload_image_wrapper">
+      <Field name={name}>
+        {({ field: { value }, meta, form: { setFieldValue } }) => (
+          <>
+            <input
+              ref={fileInputRef}
+              type="file"
+              onChange={(e) => changeHandler(e, setFieldValue, value)}
+              style={{ display: "none" }}
             />
-          ) : (
-            <div style={{ maxWidth: "250px" }}>
-              <Carousel responsive={responsive} arrows={true}>
-                {(value || [])?.map((e, i) => (
-                  <Image
-                    key={i}
-                    src={e}
-                    width={250}
-                    preview={{
-                      visible: false,
-                      mask: (
-                        <Space>
-                          <FileAddOutlined
-                            onClick={() => fileInputRef.current.click()}
-                          />
-                          <DeleteOutlined
-                            onClick={() => deleteFile(e, setFieldValue, value)}
-                          />
-                        </Space>
-                      ),
-                    }}
-                  />
-                ))}
-              </Carousel>
-            </div>
-          )}
-          {value == "" || value == [] ? (
-            <button
-              className="upload-button"
-              onClick={() => fileInputRef.current.click()}
-            >
-              {mode == "single" ? "Зураг оруулах" : "Зургууд оруулах"}
-            </button>
-          ) : null}
-          <p style={{ color: "red" }}>{meta.error}</p>
-          <ToastContainer />
-        </>
-      )}
-    </Field>
+            {mode == "single" && value ? (
+              <Image
+                height={100}
+                src={value}
+                preview={{
+                  visible: false,
+                  mask: (
+                    <Space>
+                      <EditOutlined
+                        onClick={() => fileInputRef.current.click()}
+                      />
+                      <DeleteOutlined
+                        color="red"
+                        onClick={() => setFieldValue(name, "")}
+                      />
+                    </Space>
+                  ),
+                }}
+              />
+            ) : (
+              <div style={{ maxWidth: "250px" }}>
+                <Carousel responsive={responsive} arrows={true}>
+                  {(value || [])?.map((e, i) => (
+                    <Image
+                      key={i}
+                      src={e}
+                      width={250}
+                      preview={{
+                        visible: false,
+                        mask: (
+                          <Space>
+                            <FileAddOutlined
+                              onClick={() => fileInputRef.current.click()}
+                            />
+                            <DeleteOutlined
+                              onClick={() =>
+                                deleteFile(e, setFieldValue, value)
+                              }
+                            />
+                          </Space>
+                        ),
+                      }}
+                    />
+                  ))}
+                </Carousel>
+              </div>
+            )}
+            {value == "" || value == [] ? (
+              <button
+                className="upload-button"
+                onClick={() => fileInputRef.current.click()}
+              >
+                {mode == "single" ? "Зураг оруулах" : "Зургууд оруулах"}
+              </button>
+            ) : null}
+            <p style={{ color: "red" }}>{meta.error}</p>
+            <ToastContainer />
+          </>
+        )}
+      </Field>
+    </div>
   );
 }
 
