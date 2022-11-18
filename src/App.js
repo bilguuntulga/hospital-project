@@ -10,13 +10,13 @@ import { authAPI } from "./apis";
 import Header from "./components/layout/Header";
 const Home = lazy(() => import("./pages/home"));
 const Login = lazy(() => import("./pages/login"));
-const Custommer = lazy(() => import("./pages/custommer"));
-const Doctor = lazy(() => import("./pages/doctor"));
+const Customer = lazy(() => import("./pages/custommer"));
+const Employee = lazy(() => import("./pages/employee"));
 const Order_time = lazy(() => import("./pages/calendar"));
-const Custommer_News = lazy(() => import("./pages/custommer/custommerNews"));
+const Custommer_News = lazy(() => import("./pages/custommer"));
 const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"));
 const Advice = lazy(() => import("./pages/custommer/advice"));
-const DocterDetail = lazy(() => import("./pages/doctor/docterDetail"));
+const EmployeeDetail = lazy(() => import("./pages/employee/employeeDetail"));
 const Test = lazy(() => import("./pages/test"));
 const Profile = lazy(() => import("./pages/profile"));
 const Custommer_detail = lazy(() =>
@@ -43,23 +43,23 @@ function App() {
                 <Routes>
                   <Route exact path="/" element={<Home />} />
                   <Route exact path="/calendar" element={<Order_time />} />
-                  <Route exact path="/custommer" element={<Custommer />} />
-                  <Route exact path="/doctor" element={<Doctor />} />
+                  <Route exact path="/customer" element={<Custommer_Add />} />
+                  <Route exact path="/employee" element={<Employee />} />
                   <Route
                     exact
                     path="/custommer_news"
                     element={<Custommer_News />}
                   />
-                  <Route
+                  {/* <Route
                     exact
-                    path="/custommer_add"
+                    path="/cutomer"
                     element={<Custommer_Add />}
-                  />
+                  /> */}
                   <Route exact path="/advice" element={<Advice />} />
                   <Route
                     exact
-                    path="/doctor/detail/:id"
-                    element={<DocterDetail />}
+                    path="/employee/detail/:id"
+                    element={<EmployeeDetail />}
                   />
                   <Route
                     exact

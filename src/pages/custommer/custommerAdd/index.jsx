@@ -309,7 +309,7 @@ const RegistrationPage = () => {
               </Col>
             </Row>
             <Row gutter={10} align="bottom">
-              <Col span={20}>
+              <Col span={21}>
                 <Form.Item name="desc">
                   <Input.TextArea
                     style={{ height: "151px", borderRadius: "10px" }}
@@ -318,7 +318,7 @@ const RegistrationPage = () => {
                   />
                 </Form.Item>
               </Col>
-              <Col>
+              <Col span={3}>
                 <SubmitButton
                   style={{ marginTop: "110px" }}
                   className="save_button"

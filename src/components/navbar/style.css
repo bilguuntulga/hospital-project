@@ -13,12 +13,13 @@ body {
 
 .profile {
     background-color: white;
-    width: 200px;
+    width: 250px;
     height: 60px;
     margin: auto;
     place-items: center;
     border-radius: 550%;
-    display: flex;
+    display: grid;
+    place-items: center;
     margin-top: 10px;
 }
 
@@ -65,7 +66,6 @@ img:hover {
 .simple {
     border-radius: 20px;
     width: 265px;
-    height: 64px;
     display: flex;
     border-radius: 15px;
     place-items: center;
@@ -77,84 +77,19 @@ img:hover {
     line-height: 36px;
     color: black;
     font-size: 20px;
+    height:100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
-.action__dashboard {
-    /* background: #B3FFBA; */
+.dahsboard__navbar__effect {
+    background: #1255D0;
     box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
     border-radius: 20px;
-    border-right: 1px solid #1255D0;
-    width: 265px;
-    height: 64px;
-    display: flex;
-    border-radius: 15px;
-    place-items: center;
-    margin: auto;
-    padding-left: 35px;
-    font-family: 'Kanit', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 36px;
-    color: black;
-    font-size: 20px;
-}
-
-.action_registration {
-    background: #B3FFBA;
-    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
-    border-radius: 20px;
-    width: 265px;
-    height: 64px;
-    display: flex;
-    border-radius: 15px;
-    place-items: center;
-    margin: auto;
-    padding-left: 35px;
-    font-family: 'Kanit', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 36px;
-    color: black;
-    font-size: 20px;
-}
-
-.action_advice {
-    background: #B3FFBA;
-    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
-    border-radius: 20px;
-    width: 265px;
-    height: 64px;
-    display: flex;
-    border-radius: 15px;
-    place-items: center;
-    margin: auto;
-    padding-left: 35px;
-    font-family: 'Kanit', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 36px;
-    color: black;
-    font-size: 20px;
-}
-
-.action_orde_time {
-    background-color: white;
-    background: #B3FFBA;
-    box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
-    border-radius: 20px;
-    width: 265px;
-    height: 64px;
-    display: flex;
-    border-radius: 15px;
-    place-items: center;
-    margin: auto;
-    padding-left: 35px;
-    font-family: 'Kanit', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 36px;
-    color: black;
-    font-size: 20px;
+    width: 6px;
+    height: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .Icon {
@@ -188,4 +123,12 @@ img:hover {
     -webkit-border-radius: 7.5px;
     border-radius: 7.5px;
     background-color: black;
+}
+.navbar__logo{
+    border-radius: 50%;
+    border: 0.375px solid #64A2F8;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
 }

@@ -6,7 +6,7 @@ import * as yup from "yup"
 import React from 'react'
 import "./style.css"
 
-const RegistrationPage = () => {
+const Customer__Page = () => {
 
   const model = {
     name: "",
@@ -163,4 +163,4 @@ const RegistrationPage = () => {
   )
 }
 
-export default RegistrationPage
+export default Customer__Page
