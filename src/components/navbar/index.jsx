@@ -32,6 +32,7 @@ function Index() {
                         <NavLink path={"/report"} icon={'report.png'} text={"Тайлан"} />
                         <NavLink path={"/employee"} icon={'employee.png'} text={"Ажилтан"} />
                         <NavLink path={"/customer"} icon={'custommer.png'} text={"Үйлчлүүлэгч"} />
+                        <NavLink path={"/client"} icon={'client.png'} text={"Үйлчилгээ"} />
                         <NavLink path={"/resource"} icon={'resource.png'} text={"Нөөц"} />
                         <NavLink path={"/bonus"} icon={"bonus.png"} text={"Урамшуулал"} />
                     </div>

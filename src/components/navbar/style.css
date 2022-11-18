@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #f3f3f3;
 }
 
 .main_container {
@@ -122,7 +123,6 @@ img:hover {
     -moz-border-radius: 7.5px;
     -webkit-border-radius: 7.5px;
     border-radius: 7.5px;
-    background-color: black;
 }
 .navbar__logo{
     border-radius: 50%;

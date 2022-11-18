@@ -22,6 +22,10 @@ const Profile = lazy(() => import("./pages/profile"));
 const Custommer_detail = lazy(() =>
   import("./pages/custommer/custommerNews/detail")
 );
+const Report = lazy(() => import("./pages/report"));
+const Client = lazy(() => import("./pages/client"))
+const Resource = lazy(() => import("./pages/resource"))
+const Bonus = lazy(() => import("./pages/bonus"))
 
 function App() {
   const location = useLocation();
@@ -68,6 +72,10 @@ function App() {
                   />
                   <Route exact path="/test" element={<Test />} />
                   <Route exact path="/profile" element={<Profile />} />
+                  <Route exact path="/report" element={<Report />} />
+                  <Route exact path="/client" element={<Client />} />
+                  <Route exact path="/resource" element={<Resource />} />
+                  <Route exact path="/bonus" element={<Bonus />} />
                 </Routes>
               </div>
             </Suspense>
