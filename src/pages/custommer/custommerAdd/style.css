@@ -34,12 +34,12 @@
 }
 
 .save_button {
-    background-color: blueviolet;
-    border: none;
-    border-radius: 15px;
+    background: linear-gradient(180deg, #00FC0A 0%, #A600B5 177.03%, #E76FF1 177.03%);
+    box-shadow: 0px 4px 15px #ECB4E9;
+    border-radius: 16px;
     width: 150.71px;
-    color: white;
     height: 37px;
+    border: none;
 }
 
 .save_button:hover {
