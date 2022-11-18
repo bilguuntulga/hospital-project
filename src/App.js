@@ -1,24 +1,12 @@
-import React, {
-  createContext,
-  lazy,
-  Suspense,
-  useEffect,
-  useState,
-} from "react";
-import { Routes, Route, useLocation, Link } from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/navbar";
 import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
 import "react-multi-carousel/lib/styles.css";
 import "./style.css";
+import "./styles/styles.scss";
 import { authAPI } from "./apis";
-import { Button, Col, Dropdown, Layout, Row } from "antd";
-import {
-  ArrowDownOutlined,
-  BellOutlined,
-  DownOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 import Header from "./components/layout/Header";
 const Home = lazy(() => import("./pages/home"));
 const Login = lazy(() => import("./pages/login"));
@@ -31,7 +19,9 @@ const Advice = lazy(() => import("./pages/custommer/advice"));
 const DocterDetail = lazy(() => import("./pages/doctor/docterDetail"));
 const Test = lazy(() => import("./pages/test"));
 const Profile = lazy(() => import("./pages/profile"));
-const Custommer_detail = lazy(() => import("./pages/custommer/custommerNews/detail"))
+const Custommer_detail = lazy(() =>
+  import("./pages/custommer/custommerNews/detail")
+);
 
 function App() {
   const location = useLocation();

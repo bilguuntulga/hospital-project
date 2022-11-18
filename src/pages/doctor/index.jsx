@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 const DoctorPage = () => {
   const [doctersdata, setDoctersData] = useState([]);
-  const location = useLocation();
 
   const fetchData = async () => {
     const res = await doctorAPI.get();
