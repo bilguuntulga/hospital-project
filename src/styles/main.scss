@@ -1,10 +1,11 @@
 @import "./abstracts/functions", "./abstracts//mixins",
-"./abstracts/placeholders", "./abstracts//variables";
+  "./abstracts/placeholders", "./abstracts//variables";
 
 @import "./base/reset", "./base/typography";
 
-@import "./components/upload_image", "./components/profile_image_upload", "./components/experiences_field";
+@import "./components/upload_image", "./components/profile_image_upload",
+  "./components/experiences_field";
 
 @import "./layout/header";
 
-@import "./pages/test", "./pages/employee_detail_container", "./pages/profile";
+@import "./pages/test", "./pages/employee_detail", "./pages/profile";

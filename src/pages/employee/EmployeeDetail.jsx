@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./style.css";
 import { doctorAPI } from "../../apis";
 import { Button, Card, Col, message, Row, Timeline } from "antd";
 import {
@@ -11,7 +10,7 @@ import {
 import * as yup from "yup";
 import { Field, Formik } from "formik";
 import { Input, SubmitButton, Form } from "formik-antd";
-import Doctor_Timer from "../../components/doctor_time";
+import DoctorWorkingHours from "../../components/DoctorWorkingHours";
 import WorkingHoursTable from "../../components/WorkingHoursTable";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -19,17 +18,18 @@ import ProfileImageUpload from "../../components/form/ProfileImageUpload";
 import ExperiencesField from "../../components/doctors/ExperiencesField";
 import parse from "html-react-parser";
 
-const personal_information_model = {
+const personalInfoModel = {
   profile_img: "",
   first_name: "",
   last_name: "",
   email: "",
   phone: "",
 };
+
 const EmployeeDetail = () => {
   const { id } = useParams();
-  const [detaildata, setDetailData] = useState(personal_information_model);
-  const [buttonclick, setButtonClick] = useState("");
+  const [detailData, setDetailData] = useState(personalInfoModel);
+  const [clickedButton, setClickedButton] = useState("biography");
 
   const fetchData = async () => {
     const res = await doctorAPI.detail(id);
@@ -37,7 +37,6 @@ const EmployeeDetail = () => {
   };
   useEffect(() => {
     fetchData();
-    setButtonClick("biography_of_a_doctor");
   }, []);
 
   const biography_doctorModel = {
@@ -50,12 +49,12 @@ const EmployeeDetail = () => {
   const time_scheduleModel = {
     time_schedule: [],
   };
-  const personal_information_validationSchema = yup.object().shape({
-    profile_img: yup.string().optional(),
-    surname: yup.string().optional(),
-    name: yup.string().optional(),
-    email: yup.string().optional(),
-    phone: yup.string().optional(),
+  const personalInformationSchema = yup.object().shape({
+    profile_img: yup.string().required("Заавал бөглөнө үү."),
+    first_name: yup.string().required("Заавал бөглөнө үү."),
+    last_name: yup.string().required("Заавал бөглөнө үү."),
+    role: yup.string().required("Заавал бөглөнө үү."),
+    salary: yup.string().required("Заавал бөглөнө үү."),
   });
 
   const biography_doctorvalidationSchema = yup.object().shape({
@@ -81,13 +80,13 @@ const EmployeeDetail = () => {
   };
 
   const Converttext = () => {
-    switch (buttonclick) {
-      case "biography_of_a_doctor":
+    switch (clickedButton) {
+      case "biography":
         return (
-          <>
-            <p> {parse(detaildata?.desc ?? "")}</p>
+          <div>
+            <p> {parse(detailData?.desc ?? "")}</p>
             <b className="role">Мэргэжил:</b>
-            {detaildata?.experiences?.map((e) => (
+            {detailData?.experiences?.map((e) => (
               <Row gutter={20}>
                 <Col>
                   <ArrowRightOutlined
@@ -97,14 +96,14 @@ const EmployeeDetail = () => {
                 <Col>{e.desc}</Col>
               </Row>
             ))}
-          </>
+          </div>
         );
 
       case "experiences":
         return (
-          <>
+          <div>
             <Timeline>
-              {detaildata.experiences.map((e) => (
+              {detailData.experiences.map((e) => (
                 <Timeline.Item color="#7B80FF">
                   <div
                     className="experiences_border"
@@ -117,8 +116,9 @@ const EmployeeDetail = () => {
                 </Timeline.Item>
               ))}
             </Timeline>
-          </>
+          </div>
         );
+
       case "time_schedule":
         return (
           <Row>
@@ -132,9 +132,9 @@ const EmployeeDetail = () => {
                   padding: "35px",
                 }}
               >
-                {detaildata.working_hours.map((e) => (
+                {detailData.working_hours.map((e) => (
                   <>
-                    <Doctor_Timer
+                    <DoctorWorkingHours
                       day={e?.day}
                       endDate={e?.end_time}
                       startDate={e?.start_time}
@@ -172,7 +172,7 @@ const EmployeeDetail = () => {
                     </div>
                     <p>Утас</p>
                     <p style={{ color: "#373FFF", fontSize: "20px" }}>
-                      +976 9999-9999
+                      {detailData?.phone ?? "Байхгүй"}
                     </p>
                   </div>
                 </Col>
@@ -202,7 +202,7 @@ const EmployeeDetail = () => {
                     </div>
                     <p>И-мэйл</p>
                     <p style={{ color: "#373FFF", fontSize: "20px" }}>
-                      Test@gmail.com
+                      {detailData?.email ?? "Байхгүй"}
                     </p>
                   </div>
                 </Col>
@@ -210,14 +210,15 @@ const EmployeeDetail = () => {
             </Col>
           </Row>
         );
-      case "setings":
+
+      case "settings":
         return (
           <>
             <Row gutter={5}>
               <Col span={24}>
                 <Formik
-                  initialValues={detaildata}
-                  validationSchema={personal_information_validationSchema}
+                  initialValues={detailData}
+                  validationSchema={personalInformationSchema}
                   enableReinitialize
                   onSubmit={onSubmit}
                 >
@@ -308,23 +309,9 @@ const EmployeeDetail = () => {
                                 <CKEditor
                                   editor={ClassicEditor}
                                   data={value ?? "<p></p>"}
-                                  onReady={(editor) => {
-                                    // You can store the "editor" and use when it is needed.
-                                    console.log(
-                                      "Editor is ready to use!",
-                                      editor
-                                    );
-                                  }}
                                   onChange={(event, editor) => {
                                     const data = editor.getData();
                                     setFieldValue(name, data);
-                                    console.log({ event, editor, data });
-                                  }}
-                                  onBlur={(event, editor) => {
-                                    console.log("Blur.", editor);
-                                  }}
-                                  onFocus={(event, editor) => {
-                                    console.log("Focus.", editor);
                                   }}
                                 />
                               )}
@@ -337,9 +324,8 @@ const EmployeeDetail = () => {
                 </Formik>
               </Col>
             </Row>
-            <br />
             <Formik
-              initialValues={detaildata}
+              initialValues={detailData}
               enableReinitialize
               onSubmit={onSubmit}
               render={({ values }) => (
@@ -360,12 +346,10 @@ const EmployeeDetail = () => {
                 </Form>
               )}
             />
-            {/* <Card title="Цагийн хуваарь:" bordered style={{ height: "387px", width: "620px" }}> */}
             <WorkingHoursTable
               id={id}
-              workingHours={detaildata.working_hours}
+              workingHours={detailData.working_hours}
             />
-            {/* </Card> */}
           </>
         );
     }
@@ -376,7 +360,7 @@ const EmployeeDetail = () => {
       <div className="header" style={{ width: "100%", height: "112px" }}>
         <p className="name">
           <b>
-            {detaildata?.first_name} {detaildata?.last_name}
+            {detailData?.first_name} {detailData?.last_name}
           </b>
         </p>
       </div>
@@ -392,12 +376,10 @@ const EmployeeDetail = () => {
           padding: "0",
         }}
       >
-        <div className="image_Container">
+        <div className="image_container">
           <img
-            src={detaildata?.profile_img}
-            width="132px"
-            height="120px"
-            alt=""
+            src={detailData?.profile_img ?? "/images/profile_img.jpg"}
+            alt={detailData?.profile_img ?? "/images/profile_img.jpg"}
           />
         </div>
         <p
@@ -408,13 +390,13 @@ const EmployeeDetail = () => {
             marginLeft: "220px",
           }}
         >
-          {detaildata?.role}
+          {detailData?.role}
         </p>
         <div className="sub_content">
           <Row>
             <Col>
               <Button
-                onClick={() => setButtonClick("biography_of_a_doctor")}
+                onClick={() => setClickedButton("biography")}
                 className="detailBUtton"
               >
                 Эмчийн намтар
@@ -422,7 +404,7 @@ const EmployeeDetail = () => {
             </Col>
             <Col>
               <Button
-                onClick={() => setButtonClick("experiences")}
+                onClick={() => setClickedButton("experiences")}
                 className="detailBUtton"
               >
                 Туршлага
@@ -430,7 +412,7 @@ const EmployeeDetail = () => {
             </Col>
             <Col>
               <Button
-                onClick={() => setButtonClick("time_schedule")}
+                onClick={() => setClickedButton("time_schedule")}
                 className="detailBUtton"
               >
                 Цагийн хуваарь
@@ -438,14 +420,13 @@ const EmployeeDetail = () => {
             </Col>
             <Col>
               <Button
-                onClick={() => setButtonClick("setings")}
+                onClick={() => setClickedButton("settings")}
                 className="detailBUtton"
               >
                 Тохиргоо
               </Button>
             </Col>
           </Row>
-          <br />
           <Converttext />
         </div>
       </div>

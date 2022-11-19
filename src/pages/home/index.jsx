@@ -38,7 +38,7 @@ function HomePage() {
               <Row style={{ width: "100%", paddingTop: "10px" }}>
                 <Col span={10}>
                   <div className="img_container">
-                    <img src="homePageCol1.png" alt="" />
+                    <img src="/homePageCol1.png" alt="" />
                   </div>
                 </Col>
                 <Col span={14}>
@@ -55,7 +55,7 @@ function HomePage() {
               <Row style={{ width: "100%", paddingTop: "10px" }}>
                 <Col span={10}>
                   <div className="img_container">
-                    <img src="homePageCol2.png" alt="" />
+                    <img src="/homePageCol2.png" alt="" />
                   </div>
                 </Col>
                 <Col span={14}>
@@ -72,7 +72,7 @@ function HomePage() {
               <Row style={{ width: "100%", paddingTop: "10px" }}>
                 <Col span={10}>
                   <div className="img_container">
-                    <img src="homePageCol3.png" alt="" />
+                    <img src="/homePageCol3.png" alt="" />
                   </div>
                 </Col>
                 <Col span={14}>
@@ -89,7 +89,7 @@ function HomePage() {
               <Row style={{ width: "100%", paddingTop: "10px" }}>
                 <Col span={10}>
                   <div className="img_container">
-                    <img src="homePageCol4.png" alt="" />
+                    <img src="/homePageCol4.png" alt="" />
                   </div>
                 </Col>
                 <Col span={14}>
