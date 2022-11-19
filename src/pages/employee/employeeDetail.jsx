@@ -2,21 +2,32 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './style.css'
 import { doctorAPI } from '../../apis'
-import { Button, Card, Col, Row, Timeline } from 'antd'
+import { Button, Card, Col, message, Row, Timeline } from 'antd'
 import { ArrowRightOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons'
 import * as yup from "yup";
-import { Formik } from 'formik'
+import { Field, Formik } from 'formik'
 import { Input, SubmitButton, Form } from 'formik-antd'
 import Doctor_Timer from '../../components/doctor_time'
 import ImageUploud from "../../components/form/UploadImage"
 import WorkingHoursTable from '../../components/WorkingHoursTable'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ProfileImageUpload from "../../components/form/ProfileImageUpload";
+import ExperiencesField from '../../components/doctors/ExperiencesField';
+import parse from "html-react-parser"
 
 
+const personal_information_model = {
+    profile_img: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+
+}
 const DocterDetail = () => {
     const { id } = useParams();
-    const [detaildata, setDetailData] = useState({})
+    const [detaildata, setDetailData] = useState(personal_information_model)
     const [buttonclick, setButtonClick] = useState("")
 
     const fetchData = async () => {
@@ -27,14 +38,7 @@ const DocterDetail = () => {
         fetchData()
         setButtonClick("biography_of_a_doctor")
     }, [])
-    const personal_information_model = {
-        profile_img: "",
-        surname: "",
-        name: "",
-        email: "",
-        phone: "",
 
-    }
     const biography_doctorModel = {
         biography_doctor: "",
     }
@@ -65,15 +69,22 @@ const DocterDetail = () => {
         time_schedule: yup.string().optional()
     })
 
-
-
-
+    const onSubmit = async (values) => {
+        try {
+            delete values.created_by;
+            delete values.updated_by;
+            await doctorAPI.update(values);
+            message.success("Амжилттай")
+        } catch (error) {
+            message.error(error?.message);
+        }
+    };
 
     const Converttext = () => {
         switch (buttonclick) {
             case "biography_of_a_doctor":
                 return <>
-                    < p > {detaildata?.desc}</p>
+                    < p > {parse(detaildata?.desc ?? "")}</p>
                     <b className='role'>Мэргэжил:</b>
                     {detaildata?.experiences?.map((e) => (
 
@@ -142,128 +153,123 @@ const DocterDetail = () => {
                 </Row>
             case "setings":
                 return <>
-                    <Row>
-                        <Col>
-                            <Formik initialValues={personal_information_model} validationSchema={personal_information_validationSchema}>
+                    <Row gutter={5}>
+                        <Col span={24}>
+                            <Formik initialValues={detaildata} validationSchema={personal_information_validationSchema} enableReinitialize onSubmit={onSubmit}>
                                 <Form layout='vertical'>
-                                    <Row gutter={5}>
+                                    <Card title="Хувийн мэдээлэл:" bordered style={{ borderColor: "black", borderRadius: "15px" }} extra={<Row gutter={10}>
                                         <Col>
-                                            <Card title="Хувийн мэдээлэл:" bordered style={{ height: "387px", width: "620px", borderColor: "black", borderRadius: "15px" }} extra={<Row gutter={10}>
-                                                <Col>
-                                                    <SubmitButton style={{ width: "100px", height: "29px", backgroundColor: "#434AFE", borderRadius: "5px", border: "none" }}>Хадгалах</SubmitButton>
-                                                </Col>
-                                                <Col>
-                                                    <SubmitButton style={{ width: "100px", height: "29px", backgroundColor: "#B4B6FF", borderRadius: "5px", border: "none" }}>Устгах</SubmitButton>
-                                                </Col>
-                                            </Row>}>
-                                                <Row justify="space-between">
-                                                    <Col>
+                                            <SubmitButton style={{ width: "100px", height: "29px", backgroundColor: "#434AFE", borderRadius: "5px", border: "none" }}>Хадгалах</SubmitButton>
+                                        </Col>
+                                    </Row>}>
+                                        <Row>
+                                            <Col span={24}>
+                                                <Row justify="space-around" align="middle">
+                                                    <Col span={6}>
                                                         <Form.Item name="profile_img">
-
-                                                            <div style={{ borderRadius: "50%", width: "70px", height: "70px", backgroundColor: "#F5F5F5", display: "grid", placeItems: "center" }}>
-                                                                <img src={detaildata.profile_img} width="48px" height="48px" />
+                                                            <div className="profile_image_center_wrapper">
+                                                                <ProfileImageUpload name="profile_img" size='150px' />
                                                             </div>
-                                                            <ImageUploud name="profile_img" />
                                                         </Form.Item>
                                                     </Col>
-                                                    <Col>
-
-                                                    </Col>
-                                                </Row>
-                                                <Row gutter={[30, 30]}>
-                                                    <Col span={12}>
-                                                        <Form.Item name="surname" label="Овог:">
-                                                            <Input name="surname" />
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col span={12}>
-                                                        <Form.Item name="name" label="Нэр:">
-                                                            <Input name="name" />
-                                                        </Form.Item>
-                                                    </Col>
-                                                </Row>
-                                                <Row gutter={[30, 30]}>
-                                                    <Col span={12}>
-                                                        <Form.Item name="email" label="И-мэйл:">
-                                                            <Input name="email" />
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col span={12}  >
-                                                        <Form.Item name="phone" label="Утасны дугаар:">
-                                                            <Input name="phone" />
-                                                        </Form.Item>
-                                                    </Col>
-                                                </Row>
-                                            </Card>
-                                        </Col>
-                                        <Card title="Эмчийн намтар:" bordered style={{ height: "387px", width: "620px", borderColor: "black", borderRadius: "15px" }}>
-                                            <CKEditor
-                                                editor={ClassicEditor}
-                                                data="<p></p>"
-                                                onReady={editor => {
-                                                    // You can store the "editor" and use when it is needed.
-                                                    console.log('Editor is ready to use!', editor);
-                                                }}
-                                                onChange={(event, editor) => {
-                                                    const data = editor.getData();
-                                                    console.log({ event, editor, data });
-                                                }}
-                                                onBlur={(event, editor) => {
-                                                    console.log('Blur.', editor);
-                                                }}
-                                                onFocus={(event, editor) => {
-                                                    console.log('Focus.', editor);
-                                                }}
-                                            />
-                                        </Card>
-                                    </Row>
-                                    <br />
-                                    <Row gutter={5}>
-                                        <Col>
-                                            <Card title="Эмчийн туршлага:" bordered style={{ height: "387px", width: "620px", borderColor: "black", borderRadius: "15px" }}>
-                                                <Formik>
-                                                    <Form initialValues={doctor_experienceModel} validationSchema={doctor_experienceValidationSchema}>
-                                                        <Row gutter={10}>
+                                                    <Col span={18}>
+                                                        <Row gutter={[30, 30]}>
                                                             <Col span={12}>
-                                                                <Form.Item name="graduate_school" label="Төгссөн сургууль">
-                                                                    <Input name='graduate_school' />
+                                                                <Form.Item name="first_name" label="Овог:">
+                                                                    <Input name="first_name" />
                                                                 </Form.Item>
                                                             </Col>
                                                             <Col span={12}>
-                                                                <Form.Item name="year" label="Жил" >
-                                                                    <Input name='year' />
+                                                                <Form.Item name="last_name" label="Нэр:">
+                                                                    <Input name="last_name" />
                                                                 </Form.Item>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row gutter={[30, 30]}>
+                                                            <Col span={12}>
+                                                                <Form.Item name="email" label="И-мэйл:">
+                                                                    <Input name="email" />
+                                                                </Form.Item>
+                                                            </Col>
+                                                            <Col span={12}  >
+                                                                <Form.Item name="phone" label="Утасны дугаар:">
+                                                                    <Input name="phone" />
+                                                                </Form.Item>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row gutter={[30, 30]}>
+                                                            <Col span={12}>
+                                                                <Form.Item name="role" label="Мэргэжил">
+                                                                    <Input name="role" />
+                                                                </Form.Item>
+                                                            </Col>
+                                                            <Col span={12}>
+                                                                <Form.Item name="salary" label="Цалин">
+                                                                    <Input name="salary" type='number' />
+                                                                </Form.Item>
+                                                            </Col>
+                                                        </Row>
+                                                    </Col>
+                                                </Row>
+                                                <Form.Item name="desc" label="Намтар:">
+                                                    <Field name="desc">
+                                                        {({ field: { name, value }, form: { setFieldValue } }) =>
+                                                            <CKEditor
+                                                                editor={ClassicEditor}
+                                                                data={value ?? "<p></p>"}
+                                                                onReady={editor => {
+                                                                    // You can store the "editor" and use when it is needed.
+                                                                    console.log('Editor is ready to use!', editor);
+                                                                }}
+                                                                onChange={(event, editor) => {
+                                                                    const data = editor.getData();
+                                                                    setFieldValue(name, data);
+                                                                    console.log({ event, editor, data });
+                                                                }}
+                                                                onBlur={(event, editor) => {
+                                                                    console.log('Blur.', editor);
+                                                                }}
+                                                                onFocus={(event, editor) => {
+                                                                    console.log('Focus.', editor);
+                                                                }}
+                                                            />
+                                                        }
 
-                                                            </Col>
-                                                        </Row>
-                                                        <Row justify="end">
-                                                            <Col>
-                                                                <SubmitButton style={{ width: "126px", height: "39px", backgroundColor: "#434AFE", borderRadius: "5px", border: "none" }}>НЭМЭХ</SubmitButton>
-                                                            </Col>
-                                                        </Row>
-                                                    </Form>
-                                                </Formik>
-                                            </Card>
-                                        </Col>
-                                        <Col>
-                                            {/* <Card title="Цагийн хуваарь:" bordered style={{ height: "387px", width: "620px" }}> */}
-                                            <WorkingHoursTable id={id} workingHours={detaildata.working_hours} />
-                                            {/* </Card> */}
-                                        </Col>
-                                    </Row>
+                                                    </Field>
+                                                </Form.Item>
+                                            </Col>
+                                        </Row>
+                                    </Card>
                                 </Form>
                             </Formik>
                         </Col>
                     </Row>
+                    <br />
+                    <Formik
+                        initialValues={detaildata}
+                        enableReinitialize
+                        onSubmit={onSubmit}
+                        render={
+                            ({ values }) =>
+                                <Form>
+                                    <Card title="Эмчийн туршлага:" bordered style={{ height: "387px", width: "620px", borderColor: "black", borderRadius: "15px" }} extra={<Button htmlType='submit'>Хадаглах</Button>}>
+                                        <ExperiencesField name="experiences" values={values} />
+                                    </Card>
+                                </Form>
+                        }
+                    />
+                    {/* <Card title="Цагийн хуваарь:" bordered style={{ height: "387px", width: "620px" }}> */}
+                    <WorkingHoursTable id={id} workingHours={detaildata.working_hours} />
+                    {/* </Card> */}
                 </>
 
         }
     }
 
     return (
-        <>
+        <div className='employee_detail_container'>
             <div className='header' style={{ width: "100%", height: "112px" }}>
-                <p className='name'><b>{detaildata.name}</b></p>
+                <p className='name'><b>{detaildata?.first_name} {detaildata?.last_name}</b></p>
             </div>
             <div className='content' style={{ backgroundColor: "white", width: "100%", height: "1102.25px", borderBottomLeftRadius: "15px", borderBottomRightRadius: "15px", margin: "0", padding: "0" }}>
                 <div className='image_Container'>
@@ -289,7 +295,7 @@ const DocterDetail = () => {
                     <Converttext />
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
