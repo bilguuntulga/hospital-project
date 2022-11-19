@@ -16,16 +16,16 @@ const Order_time = lazy(() => import("./pages/calendar"));
 const Custommer_News = lazy(() => import("./pages/custommer"));
 const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"));
 const Advice = lazy(() => import("./pages/custommer/advice"));
-const EmployeeDetail = lazy(() => import("./pages/employee/employeeDetail"));
+const EmployeeDetail = lazy(() => import("./pages/employee/EmployeeDetail"));
 const Test = lazy(() => import("./pages/test"));
 const Profile = lazy(() => import("./pages/profile"));
 const Custommer_detail = lazy(() =>
   import("./pages/custommer/custommerNews/detail")
 );
 const Report = lazy(() => import("./pages/report"));
-const Client = lazy(() => import("./pages/client"))
-const Resource = lazy(() => import("./pages/resource"))
-const Bonus = lazy(() => import("./pages/bonus"))
+const Client = lazy(() => import("./pages/client"));
+const Resource = lazy(() => import("./pages/resource"));
+const Bonus = lazy(() => import("./pages/bonus"));
 
 function App() {
   const location = useLocation();
@@ -54,11 +54,6 @@ function App() {
                     path="/custommer_news"
                     element={<Custommer_News />}
                   />
-                  {/* <Route
-                    exact
-                    path="/cutomer"
-                    element={<Custommer_Add />}
-                  /> */}
                   <Route exact path="/advice" element={<Advice />} />
                   <Route
                     exact

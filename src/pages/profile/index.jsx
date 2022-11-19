@@ -1,4 +1,4 @@
-import { SaveOutlined } from "@ant-design/icons";
+import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Row } from "antd";
 import { Formik } from "formik";
 import { Form, Input, SubmitButton } from "formik-antd";
@@ -71,24 +71,31 @@ function ProfilePage() {
   };
 
   return (
-    <div>
+    <div className="profile_container">
       <Row gutter={[10, 10]}>
         <Col xs={24} xl={12}>
-          <Card title="Ерөнхий мэдээлэл">
-            <Formik
-              initialValues={user}
-              enableReinitialize
-              onSubmit={onChangeProfile}
-              validationSchema={genericInfoSchema}
-            >
-              <Form layout="vertical">
-                <Row justify="space-between">
-                  <Col>
+          <Formik
+            initialValues={user}
+            enableReinitialize
+            onSubmit={onChangeProfile}
+            validationSchema={genericInfoSchema}
+          >
+            <Form layout="vertical">
+              <Card
+                title="Ерөнхий мэдээлэл"
+                extra={
+                  <SubmitButton icon={<SaveOutlined />}>Хадаглах</SubmitButton>
+                }
+              >
+                <Row justify="space-between" align="middle">
+                  <Col span={6}>
                     <Form.Item name="profile_img" label="Зураг">
-                      <ProfileImageUpload name="profile_img" size="90px" />
+                      <div className="profile_image_center">
+                        <ProfileImageUpload name="profile_img" size="100px" />
+                      </div>
                     </Form.Item>
                   </Col>
-                  <Col style={{ width: "50%" }}>
+                  <Col span={18}>
                     <Form.Item name="first_name" label="Овог">
                       <Input name="first_name" />
                     </Form.Item>
@@ -97,10 +104,9 @@ function ProfilePage() {
                     </Form.Item>
                   </Col>
                 </Row>
-                <SubmitButton icon={<SaveOutlined />}>Хадаглах</SubmitButton>
-              </Form>
-            </Formik>
-          </Card>
+              </Card>
+            </Form>
+          </Formik>
         </Col>
         <Col xs={24} xl={12}>
           <Card title="Нэвтрэх мэдээлэл">
@@ -123,15 +129,14 @@ function ProfilePage() {
                     name="username"
                     autoComplete="off"
                     suffix={
-                      <SubmitButton type="primary">
-                        <SaveOutlined />
+                      <SubmitButton type="primary" icon={<EditOutlined />}>
+                        Солих
                       </SubmitButton>
                     }
                   />
                 </Form.Item>
               </Form>
             </Formik>
-
             <Formik
               initialValues={{
                 password: "",
@@ -156,7 +161,9 @@ function ProfilePage() {
                 >
                   <Input.Password name="confirm_password" autoComplete="off" />
                 </Form.Item>
-                <SubmitButton>Нууц үг солих</SubmitButton>
+                <SubmitButton block icon={<EditOutlined />}>
+                  Нууц үг солих
+                </SubmitButton>
               </Form>
             </Formik>
           </Card>

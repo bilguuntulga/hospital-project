@@ -1,0 +1,10 @@
+.profile_container {
+  min-height: 100vh;
+
+  .profile_image_center {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+  }
+}
