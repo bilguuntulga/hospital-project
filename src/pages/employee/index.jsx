@@ -2,14 +2,13 @@ import { Button, Col, Row } from "antd";
 import React, { useState, useEffect } from "react";
 import Doctors from "../../components/doctors";
 import { doctorAPI } from "../../apis";
-import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const DoctorPage = () => {
   const [doctersdata, setDoctersData] = useState([]);
 
   const fetchData = async () => {
-    const res = await doctorAPI.get();
+    const res = await doctorAPI.list();
     setDoctersData(res);
   };
 
