@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { authAPI } from "../../apis";
 import UploadImage from "../../components/form/UploadImage";
 import * as yup from "yup";
+import ProfileImageUpload from "../../components/form/ProfileImageUpload";
 
 const genericInfoSchema = yup.object().shape({
   profile_img: yup.string().required("Зураг оруулна уу"),
@@ -84,7 +85,7 @@ function ProfilePage() {
                 <Row justify="space-between">
                   <Col>
                     <Form.Item name="profile_img" label="Зураг">
-                      <UploadImage name="profile_img" />
+                      <ProfileImageUpload name="profile_img" size="90px" />
                     </Form.Item>
                   </Col>
                   <Col style={{ width: "50%" }}>

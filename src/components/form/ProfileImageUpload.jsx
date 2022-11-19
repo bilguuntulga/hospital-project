@@ -34,7 +34,6 @@ function ProfileImageUpload({ name, className, size = "100px" }) {
       <Field name={name}>
         {({ field: { value }, form: { setFieldValue }, meta }) => (
           <>
-            {value}
             <input
               ref={inputRef}
               type="file"
@@ -46,7 +45,11 @@ function ProfileImageUpload({ name, className, size = "100px" }) {
               style={{ width: size, height: size }}
               onClick={() => inputRef.current.click()}
             >
-              <img className="image" src={value} alt={value} />
+              <img
+                className="image"
+                src={value == "" ? "/images/profile_img.jpg" : value}
+                alt={value}
+              />
               <div className="tip_text">Солих</div>
             </div>
             <p className="error_message">{meta.error}</p>
