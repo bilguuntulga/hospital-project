@@ -1,20 +1,29 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { Formik } from "formik";
 import { Form, Input, SubmitButton } from "formik-antd";
-import { Link, useLocation } from "react-router-dom";
 import * as yup from "yup";
 import { authAPI } from "../../apis";
-import { Button, Col, Row, Input as Ant__input, Space } from "antd";
+import { toast, ToastContainer } from "react-toastify";
 
 function LoginPage() {
-  const modal = {
+  const [isForgot, setIsForgot] = useState(false);
+
+  const loginInitialValues = {
     username: "",
     password: "",
   };
 
-  const validationSchema = yup.object().shape({
-    username: yup.string().min(2).required(),
-    password: yup.string().min(8).required(),
+  const forgotInitialValues = {
+    phone: "",
+  };
+
+  const loginValidationSchema = yup.object().shape({
+    username: yup.string().min(2).required("Заавал бөглөнө үү"),
+    password: yup.string().min(8).required("Заавал бөглөнө үү"),
+  });
+
+  const forgotValidationSchema = yup.object().shape({
+    phone: yup.string().min(8).required("Заавал бөглөнө үү"),
   });
 
   const onLogin = async (values) => {
@@ -23,6 +32,20 @@ function LoginPage() {
 
     localStorage.setItem("token", res.access_token);
     window.location = "/";
+  };
+
+  const onResetPassword = async (values) => {
+    await toast.promise(
+      async () => {
+        await authAPI.resetPassword(values);
+      },
+      {
+        pending: "Илгээж байна",
+        error: "Амжилтгүй",
+        success: "Амжилттай",
+      }
+    );
+    setIsForgot(false);
   };
 
   return (
@@ -37,22 +60,49 @@ function LoginPage() {
           <div className="image_container">
             <img src="/LoginPageLogo.svg" width="100px" height="100px" alt="" />
           </div>
-          <Formik
-            initialValues={modal}
-            onSubmit={onLogin}
-            validationSchema={validationSchema}
-          >
-            <Form>
-              <Form.Item name="username">
-                <Input name="username" placeholder="Нэвтрэх нэр" />
-              </Form.Item>
-              <Form.Item name="password">
-                <Input.Password name="password" placeholder="Нууц үг" />
-              </Form.Item>
-              <SubmitButton style={{ width: "100%" }}>Нэвтрэх</SubmitButton>
-              <p className="forget_password_text">Нууц үгээ мартсан?</p>
-            </Form>
-          </Formik>
+          {!isForgot ? (
+            <Formik
+              initialValues={loginInitialValues}
+              onSubmit={onLogin}
+              validationSchema={loginValidationSchema}
+            >
+              <Form>
+                <Form.Item name="username">
+                  <Input name="username" placeholder="Нэвтрэх нэр" />
+                </Form.Item>
+                <Form.Item name="password">
+                  <Input.Password name="password" placeholder="Нууц үг" />
+                </Form.Item>
+                <SubmitButton block>Нэвтрэх</SubmitButton>
+                <p
+                  className="forget_password_text"
+                  onClick={() => setIsForgot(true)}
+                >
+                  Нууц үгээ мартсан?
+                </p>
+              </Form>
+            </Formik>
+          ) : (
+            <Formik
+              onSubmit={onResetPassword}
+              initialValues={forgotInitialValues}
+              validationSchema={forgotValidationSchema}
+            >
+              <Form layout="vertical">
+                <Form.Item name="phone">
+                  <Input name="phone" placeholder="Утас" />
+                </Form.Item>
+                <SubmitButton block>Илгээх</SubmitButton>
+                <p
+                  className="forget_password_text"
+                  onClick={() => setIsForgot(false)}
+                >
+                  Буцах
+                </p>
+              </Form>
+            </Formik>
+          )}
+          <ToastContainer />
         </div>
       </div>
     </div>

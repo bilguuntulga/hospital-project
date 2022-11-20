@@ -8,6 +8,7 @@ import "./style.css";
 import "./styles/main.scss";
 import { authAPI } from "./apis";
 import Header from "./components/layout/Header";
+import PageLoading from "./components/PageLoading";
 const Home = lazy(() => import("./pages/home"));
 const Login = lazy(() => import("./pages/login"));
 const Customer = lazy(() => import("./pages/custommer"));
@@ -35,14 +36,15 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname == "/login" || location.pathname == "/forget_passowrd" ? (
+      {location.pathname == "/login" ||
+      location.pathname == "/forget_passowrd" ? (
         <Login />
       ) : (
         <>
           <Navbar />
           <div className="main_Container">
             <Header />
-            <Suspense fallback={<h1>LOADING</h1>}>
+            <Suspense fallback={<PageLoading />}>
               <div style={{ marginTop: "50px" }}>
                 <Routes>
                   <Route exact path="/" element={<Home />} />

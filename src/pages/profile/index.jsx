@@ -9,6 +9,7 @@ import { authAPI } from "../../apis";
 import UploadImage from "../../components/form/UploadImage";
 import * as yup from "yup";
 import ProfileImageUpload from "../../components/form/ProfileImageUpload";
+import PageLoading from "../../components/PageLoading";
 
 const genericInfoSchema = yup.object().shape({
   profile_img: yup.string().required("Зураг оруулна уу"),
@@ -46,10 +47,13 @@ const passwordSchema = yup.object().shape({
 function ProfilePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await authAPI.profile();
     setUser(res);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -71,6 +75,8 @@ function ProfilePage() {
       }
     );
   };
+
+  if (loading) return <PageLoading />;
 
   return (
     <div className="profile_container">

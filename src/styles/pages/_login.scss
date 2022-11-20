@@ -21,10 +21,16 @@
     place-items: center;
     padding: 2rem;
   }
-  
-  .forget_password_text{
+
+  .forget_password_text {
     color: gray;
     padding: 1rem;
     text-align: center;
+    cursor: pointer;
+    user-select: none;
+
+    &:active {
+      color: black;
+    }
   }
 }

@@ -7,6 +7,11 @@ import { authAPI } from "../../apis";
 function Header() {
   const [user, setUser] = useState({});
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location = "/login";
+  };
+
   const items = [
     {
       key: "1",
@@ -34,15 +39,7 @@ function Header() {
     },
     {
       key: "3",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          3rd menu item
-        </a>
-      ),
+      label: <div onClick={logout}>Гарах</div>,
     },
   ];
 
