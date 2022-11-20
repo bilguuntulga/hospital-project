@@ -1,5 +1,5 @@
-import { BellOutlined, DownOutlined } from "@ant-design/icons";
-import { Col, Dropdown, Row } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { Dropdown } from "antd";
 import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { authAPI } from "../../apis";
@@ -53,67 +53,33 @@ function Header() {
   }, []);
 
   return (
-    <div>
-      <Row justify="end" style={{ width: "100%" }}>
-        <Col span={12}>
-          <Row justify="end" gutter={20}>
-            <Col>
-              <div
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  backgroundColor: "white",
-                  display: "flex",
-                  placeItems: "center",
-                  fontSize: "30px",
-                  borderRadius: "50%",
-                }}
-              >
-                <BellOutlined style={{ margin: "auto" }} />
-              </div>
-            </Col>
-            <Col>
-              <Row gutter={20}>
-                <Link to="/profile">
-                  <Col>
-                    <div
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        backgroundColor: "#D9D9D9",
-                        display: "flex",
-                        placeItems: "center",
-                        fontSize: "30px",
-                        borderRadius: "50%",
-                        backgroundImage: `url(${user?.profile_img})`,
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                      }}
-                    ></div>
-                  </Col>
-                </Link>
-                <Col>
-                  <b>{`${user.first_name ?? "Овог"} ${
-                    user.last_name ?? "Нэр"
-                  }`}</b>
-                  <p>{`${user.role === "ADMIN" ? "Админ" : "Ажилчин"}`}</p>
-                </Col>
-                <Col>
-                  <Dropdown
-                    menu={{ items }}
-                    placement="bottomRight"
-                    arrow={{ pointAtCenter: true }}
-                  >
-                    <DownOutlined />
-                  </Dropdown>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Row>
+    <div className="header_wrapper">
+      <div className="header_content">
+        <img className="notification_icon" src="/images/bell.png" alt="notification" />
+        <div className="profile_wrapper">
+          <Link to="/profile">
+            <div className="profile_image_wrapper">
+              <img src={user.profile_img ?? ""} alt="Profile" />
+            </div>
+          </Link>
+          <div className="name_role_wrapper">
+            <div className="username">{`${user.first_name ?? "Овог"} ${
+              user.last_name ?? "Нэр"
+            }`}</div>
+            <div className="user_role">{`${
+              user.role === "ADMIN" ? "Админ" : "Ажилчин"
+            }`}</div>
+          </div>
+          <Dropdown
+            menu={{ items }}
+            placement="bottomRight"
+            arrow={{ pointAtCenter: true }}
+          >
+            <DownOutlined />
+          </Dropdown>
+        </div>
+      </div>
+      {/* <Row>
         <Col span={12}>
           <b>
             <p style={{ fontSize: "16px", margin: "0" }}>
@@ -124,7 +90,7 @@ function Header() {
             Өдрийг сайхан өнгөрүүлээрэй, Ажлын амжилт хүсэе
           </p>
         </Col>
-      </Row>
+      </Row> */}
     </div>
   );
 }

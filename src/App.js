@@ -41,8 +41,8 @@ function App() {
       ) : (
         <>
           <Navbar />
-          <div className="main_Container">
-            <Header />
+          <Header />
+          <div className="container">
             <Suspense fallback={<PageLoading />}>
               <div style={{ marginTop: "50px" }}>
                 <Routes>

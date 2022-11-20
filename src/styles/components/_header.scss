@@ -1,0 +1,53 @@
+.header_wrapper {
+  display: flex;
+  justify-content: end;
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  padding: 0.5rem;
+  top: 0;
+  right: 0;
+  z-index: 5;
+
+  .header_content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .notification_icon{
+        width: auto;
+        height: 24px;
+    }
+
+    .profile_wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      .profile_image_wrapper {
+        width: 48px;
+        height: 48px;
+        overflow: hidden;
+        border-radius: 100rem;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .name_role_wrapper {
+          .username {
+            font-weight: bold;
+          }
+
+          .user_role {
+            color: gray;
+          }
+        }
+      }
+
+      .name_role_wrapper {
+        text-align: right;
+      }
+    }
+  }
+}
