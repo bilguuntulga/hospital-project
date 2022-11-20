@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { doctorAPI } from "../../apis";
-import { Button, Card, Col, message, Modal, Row, Timeline } from "antd";
+import { Button, Card, Col, Modal, Row, Timeline } from "antd";
 import {
   ArrowRightOutlined,
   DeleteOutlined,
@@ -46,6 +46,7 @@ const EmployeeDetail = () => {
     setDetailData(res);
     setLoading(false);
   };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -382,6 +383,9 @@ const EmployeeDetail = () => {
             </Button>
           </div>
         );
+
+      default:
+        return <h1>NOT FOUND ERROR</h1>;
     }
   };
 
@@ -417,7 +421,7 @@ const EmployeeDetail = () => {
           <div className="buttons_wrapper">
             <div
               className={`tab_button ${
-                clickedButton == "biography" ? "active_tab_button" : ""
+                clickedButton === "biography" ? "active_tab_button" : ""
               }`}
               onClick={() => setClickedButton("biography")}
             >
@@ -425,7 +429,7 @@ const EmployeeDetail = () => {
             </div>
             <div
               className={`tab_button ${
-                clickedButton == "experiences" ? "active_tab_button" : ""
+                clickedButton === "experiences" ? "active_tab_button" : ""
               }`}
               onClick={() => setClickedButton("experiences")}
             >
@@ -433,7 +437,7 @@ const EmployeeDetail = () => {
             </div>
             <div
               className={`tab_button ${
-                clickedButton == "time_schedule" ? "active_tab_button" : ""
+                clickedButton === "time_schedule" ? "active_tab_button" : ""
               }`}
               onClick={() => setClickedButton("time_schedule")}
             >
@@ -441,7 +445,7 @@ const EmployeeDetail = () => {
             </div>
             <div
               className={`tab_button ${
-                clickedButton == "settings" ? "active_tab_button" : ""
+                clickedButton === "settings" ? "active_tab_button" : ""
               }`}
               onClick={() => setClickedButton("settings")}
             >

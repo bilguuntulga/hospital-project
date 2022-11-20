@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Navbar from "./components/navbar";
+import Navbar from "./components/layout/SideMenu";
 import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
 import "react-multi-carousel/lib/styles.css";
@@ -36,8 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname == "/login" ||
-      location.pathname == "/forget_passowrd" ? (
+      {location.pathname == "/login" ? (
         <Login />
       ) : (
         <>
