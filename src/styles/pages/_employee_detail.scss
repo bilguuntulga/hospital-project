@@ -1,9 +1,10 @@
 .employee_detail_container {
   .header {
     background: linear-gradient(
-      100deg,
-      #373fff 35.59%,
-      rgba(55, 63, 255, 0) 113.92%
+      176.86deg,
+      #373fff 2.6%,
+      #0069cd 2.61%,
+      #6002e0 97.4%
     );
     border-radius: 15px 15px 0px 0px;
     width: 100%;
@@ -84,7 +85,6 @@
   }
 
   .role {
-    font-family: "Kanit", sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -104,7 +104,7 @@
     }
   }
 
-  .ant-timeline-item-head{
+  .ant-timeline-item-head {
     position: relative;
     top: 3rem;
   }

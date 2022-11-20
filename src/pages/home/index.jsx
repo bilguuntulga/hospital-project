@@ -14,15 +14,11 @@ function HomePage() {
   const [doctorsCount, setDoctorsCount] = useState(0);
   const [customersCount, setCustomersCount] = useState(0);
   const [adviceCount, setAdviceCount] = useState(0);
-  const fetchData = async () => {
-    const timesRes = await treatmentTimesAPI.todayTimesCount();
-    setTodayTimesCount(timesRes);
-    const doctorsRes = await doctorAPI.count();
-    setDoctorsCount(doctorsRes);
-    const customersRes = await customerAPI.registeredCount();
-    setCustomersCount(customersRes);
-    const adviceCountRes = await customerAPI.adviceCount();
-    setAdviceCount(adviceCountRes);
+  const fetchData = () => {
+    treatmentTimesAPI.todayTimesCount().then((res) => setTodayTimesCount(res));
+    doctorAPI.count().then((res) => setDoctorsCount(res));
+    customerAPI.registeredCount().then((res) => setCustomersCount(res));
+    customerAPI.adviceCount().then((res) => setAdviceCount(res));
   };
 
   useEffect(() => {
