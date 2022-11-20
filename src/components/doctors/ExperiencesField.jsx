@@ -1,3 +1,5 @@
+import { FolderAddOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import { Field, FieldArray } from "formik";
 import React, { memo } from "react";
 
@@ -72,8 +74,7 @@ function ExperiencesField({ name, values }) {
                 );
               })
             ) : (
-              <button
-                type="button"
+              <Button
                 onClick={() =>
                   arrayHelpers.push({
                     date: "",
@@ -81,9 +82,10 @@ function ExperiencesField({ name, values }) {
                     role: "",
                   })
                 }
+                icon={<FolderAddOutlined />}
               >
                 Туршлага нэмэх
-              </button>
+              </Button>
             )}
           </div>
         )}

@@ -94,7 +94,9 @@ function Header() {
                   </Col>
                 </Link>
                 <Col>
-                  <b>{`${user.first_name} ${user.last_name}`}</b>
+                  <b>{`${user.first_name ?? "Овог"} ${
+                    user.last_name ?? "Нэр"
+                  }`}</b>
                   <p>{`${user.role === "ADMIN" ? "Админ" : "Ажилчин"}`}</p>
                 </Col>
                 <Col>

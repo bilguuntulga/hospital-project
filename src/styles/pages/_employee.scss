@@ -1,0 +1,8 @@
+.employee_page_container {
+  min-height: 100vh;
+  .employee_list_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+}

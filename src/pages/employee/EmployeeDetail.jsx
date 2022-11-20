@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { memo, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { doctorAPI } from "../../apis";
-import { Button, Card, Col, message, Row, Timeline } from "antd";
+import { Button, Card, Col, message, Modal, Row, Timeline } from "antd";
 import {
   ArrowRightOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
   MailOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
@@ -19,6 +21,9 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ProfileImageUpload from "../../components/form/ProfileImageUpload";
 import ExperiencesField from "../../components/doctors/ExperiencesField";
 import parse from "html-react-parser";
+import PageLoading from "../../components/PageLoading";
+import { toast, ToastContainer } from "react-toastify";
+const { confirm } = Modal;
 
 const personalInfoModel = {
   profile_img: "",
@@ -29,13 +34,17 @@ const personalInfoModel = {
 };
 
 const EmployeeDetail = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [detailData, setDetailData] = useState(personalInfoModel);
   const [clickedButton, setClickedButton] = useState("biography");
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await doctorAPI.detail(id);
     setDetailData(res);
+    setLoading(false);
   };
   useEffect(() => {
     fetchData();
@@ -51,14 +60,42 @@ const EmployeeDetail = () => {
   });
 
   const onSubmit = async (values) => {
-    try {
-      delete values.created_by;
-      delete values.updated_by;
-      await doctorAPI.update(values);
-      message.success("Амжилттай");
-    } catch (error) {
-      message.error(error?.message);
-    }
+    delete values.created_by;
+    delete values.updated_by;
+    toast.promise(
+      async () => {
+        await doctorAPI.update(values);
+        await fetchData();
+      },
+      {
+        pending: "Хадаглаж байна",
+        error: "Амжилтгүй",
+        success: "Амжилттай",
+      }
+    );
+  };
+
+  const onDelete = async () => {
+    confirm({
+      title: `${detailData.first_name} ${detailData.last_name} устгах`,
+      icon: <ExclamationCircleOutlined />,
+      content: "Та устгах даа итгэлтэй байна уу?",
+      okText: "Устгах",
+      cancelText: "Цуцлах",
+      onOk: async () => {
+        await toast.promise(
+          async () => {
+            await doctorAPI.remove(id);
+          },
+          {
+            pending: "Устгаж байна",
+            error: "Амжилтгүй",
+            success: "Амжилттай",
+          }
+        );
+        navigate("/employee");
+      },
+    });
   };
 
   const Tabs = () => {
@@ -335,10 +372,20 @@ const EmployeeDetail = () => {
               id={id}
               workingHours={detailData.working_hours}
             />
+            <Button
+              className="delete_button"
+              block
+              icon={<DeleteOutlined />}
+              onClick={onDelete}
+            >
+              Ажилтан Устгах
+            </Button>
           </div>
         );
     }
   };
+
+  if (loading) return <PageLoading />;
 
   return (
     <div className="employee_detail_container">
@@ -405,9 +452,10 @@ const EmployeeDetail = () => {
             <Tabs />
           </div>
         </div>
+        <ToastContainer />
       </div>
     </div>
   );
 };
 
-export default EmployeeDetail;
+export default memo(EmployeeDetail);

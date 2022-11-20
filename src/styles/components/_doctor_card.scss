@@ -1,0 +1,28 @@
+.doctor_card_wrapper {
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+  width: 15rem;
+  aspect-ratio: 3 / 4;
+
+  &_image {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+  }
+
+  &_info_wrapper {
+    display: grid;
+    place-items: center;
+    padding: 0.5rem 2rem;
+
+    &_name {
+      color: black;
+    }
+
+    &_role {
+      color: gray;
+    }
+  }
+}

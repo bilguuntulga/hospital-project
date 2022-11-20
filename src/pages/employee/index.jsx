@@ -1,27 +1,32 @@
 import { Button, Col, Row } from "antd";
 import React, { useState, useEffect } from "react";
-import Doctors from "../../components/doctors";
 import { doctorAPI } from "../../apis";
-import { Link } from "react-router-dom";
+import PageLoading from "../../components/PageLoading";
+import DoctorCard from "../../components/doctors/DoctorCard";
 
 const DoctorPage = () => {
   const [doctersdata, setDoctersData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await doctorAPI.list();
     setDoctersData(res);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  if (loading) return <PageLoading />;
+
   return (
-    <>
+    <div className="employee_page_container">
       <Row justify="space-between">
         <Col>
           <b>
-            <p style={{ fontSize: "24px" }}>Эмч нар</p>
+            <p style={{ fontSize: "24px" }}>Ажилчид</p>
           </b>
         </Col>
         <Col>
@@ -39,18 +44,17 @@ const DoctorPage = () => {
           </Button>
         </Col>
       </Row>
-      <br />
-      <br />
-      <Row justify="space-between" gutter={[10, 20]}>
-        {doctersdata?.map((e, i) => (
-          <Link key={i} to={`detail/${e.id}`}>
-            <Col key={i}>
-              <Doctors image={e?.profile_img} name={e?.name} type={e?.role} />
-            </Col>
-          </Link>
+      <div className="employee_list_wrapper">
+        {doctersdata?.map((e) => (
+          <DoctorCard
+            image={e?.profile_img}
+            name={`${e?.first_name} ${e?.last_name}`}
+            role={e?.role}
+            url={`detail/${e?.id}`}
+          />
         ))}
-      </Row>
-    </>
+      </div>
+    </div>
   );
 };
 

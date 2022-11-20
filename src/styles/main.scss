@@ -4,11 +4,12 @@
 @import "./base/reset", "./base/typography";
 
 @import "./components/upload_image", "./components/profile_image_upload",
-  "./components/experiences_field", "./components/page_loading";
+  "./components/experiences_field", "./components/page_loading",
+  "./components/doctor_card";
 
 @import "./layout/header";
 
 @import "./pages/test", "./pages/employee_detail", "./pages/profile",
-  "./pages/login";
+  "./pages/login", "./pages/employee";
 
 @import "./themes/themes";
