@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname == "/login" ? (
+      {location.pathname == "/login" || location.pathname == "/forget_passowrd" ? (
         <Login />
       ) : (
         <>

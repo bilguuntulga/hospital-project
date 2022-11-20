@@ -1,9 +1,10 @@
 import React, { memo } from "react";
 import { Formik } from "formik";
 import { Form, Input, SubmitButton } from "formik-antd";
+import { Link, useLocation } from 'react-router-dom';
 import * as yup from "yup";
 import { authAPI } from "../../apis";
-import { Col, Row } from "antd";
+import { Button, Col, Row, Input as Ant__input, Space } from "antd";
 
 function LoginPage() {
   const modal = {
