@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Formik } from "formik";
 import { Form, Input, SubmitButton } from "formik-antd";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import * as yup from "yup";
 import { authAPI } from "../../apis";
 import { Button, Col, Row, Input as Ant__input, Space } from "antd";
@@ -19,18 +19,22 @@ function LoginPage() {
 
   const onLogin = async (values) => {
     const res = await authAPI.login(values);
+    if (!res) return;
+
     localStorage.setItem("token", res.access_token);
     window.location = "/";
   };
 
   return (
-    <div className="login__page">
-      <Row>
-        <Col span={12}>
-          <img src="/loginPageImage.svg" width="400px" height="400px" alt="" />
-        </Col>
-        <Col span={12}>
-          <div className="image__container">
+    <div className="login_page">
+      <div className="login_page_container">
+        <img
+          className="login_page_container_image"
+          src="/loginPageImage.svg"
+          alt=""
+        />
+        <div>
+          <div className="image_container">
             <img src="/LoginPageLogo.svg" width="100px" height="100px" alt="" />
           </div>
           <Formik
@@ -46,10 +50,11 @@ function LoginPage() {
                 <Input.Password name="password" placeholder="Нууц үг" />
               </Form.Item>
               <SubmitButton style={{ width: "100%" }}>Нэвтрэх</SubmitButton>
+              <p className="forget_password_text">Нууц үгээ мартсан?</p>
             </Form>
           </Formik>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 }
