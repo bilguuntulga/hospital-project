@@ -190,7 +190,7 @@ function HomePage() {
                   <Row>
                     <Col>
                       <img
-                        src="chart.png"
+                        src="/chart.png"
                         width="15.34px"
                         height="4.76px"
                         alt=""
@@ -227,7 +227,7 @@ function HomePage() {
                   <Row>
                     <Col>
                       <img
-                        src="chart.png"
+                        src="/chart.png"
                         width="15.34px"
                         height="4.76px"
                         alt=""

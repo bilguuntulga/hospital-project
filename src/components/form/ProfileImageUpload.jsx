@@ -6,7 +6,7 @@ import bucket from "../../utils/bucket";
 function ProfileImageUpload({ name, className, size = "100px" }) {
   const inputRef = useRef();
 
-  const onChange = (file, setFieldValue) => {
+  const uploadImage = async (file, setFieldValue) => {
     const params = {
       ACL: "public-read",
       Body: file,
@@ -27,6 +27,14 @@ function ProfileImageUpload({ name, className, size = "100px" }) {
           toast("Амжилтгүй");
         }
       });
+  };
+
+  const onChange = (file, setFieldValue) => {
+    toast.promise(async () => await uploadImage(file, setFieldValue), {
+      pending: "Илгээж байна",
+      success: "Амжилттай",
+      error: "Амжилтгүй",
+    });
   };
 
   return (

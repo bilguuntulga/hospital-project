@@ -59,6 +59,8 @@ function ProfilePage() {
   const onChangeProfile = async (values) => {
     toast.promise(
       async () => {
+        delete values.created_by;
+        delete values.updated_by;
         await authAPI.update(values);
         navigate(0);
       },
@@ -87,7 +89,7 @@ function ProfilePage() {
                   <SubmitButton icon={<SaveOutlined />}>Хадаглах</SubmitButton>
                 }
               >
-                <Row justify="space-between" align="middle">
+                <Row justify="space-between">
                   <Col span={6}>
                     <Form.Item name="profile_img" label="Зураг">
                       <div className="profile_image_center">
@@ -101,6 +103,12 @@ function ProfilePage() {
                     </Form.Item>
                     <Form.Item name="last_name" label="Нэр">
                       <Input name="last_name" />
+                    </Form.Item>
+                    <Form.Item name="email" label="И-Мэйл">
+                      <Input name="email" />
+                    </Form.Item>
+                    <Form.Item name="phone" label="Утас">
+                      <Input name="phone" />
                     </Form.Item>
                   </Col>
                 </Row>
