@@ -8,7 +8,7 @@ function NavButton({ path, icon, text }) {
     <Link to={path}>
       <div
         className={`side_menu_nav_button ${
-          path === pathname ? "active_side_menu_button" : ""
+          path === `/${pathname.split("/")[1]}` ? "active_side_menu_button" : ""
         }`}
       >
         <img
