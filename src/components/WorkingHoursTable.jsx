@@ -47,8 +47,7 @@ function WorkingHoursTable({ id, workingHours }) {
   return (
     <>
       <Card
-        title="Цагийн хуваарь:"
-        style={{ width: "620px", borderColor: "black", borderRadius: "15px" }}
+        title="Цагийн хуваарь"
         extra={
           <Button
             style={{

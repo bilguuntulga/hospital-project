@@ -1,34 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
-@import 'react-big-calendar/lib/addons/dragAndDrop/styles';
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap");
+@import "react-big-calendar/lib/addons/dragAndDrop/styles";
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap");
 
 .App {
-    display: flex;
-    /* background-color: rgb(163, 187, 202); */
-    width: 100%;
-    background-color: #f3f3f3;
+  display: flex;
+  width: 100%;
+  background-color: #f3f3f3;
 }
 
 .main_Container {
-    width: 100%;
-    margin: 30px 30px 30px 400px;
+  width: 100%;
+  margin: 30px 30px 30px 400px;
 }
 
 .order_time {
-    background-color: white;
-    border-radius: 15px;
-    width: 100%;
+  background-color: white;
+  border-radius: 15px;
+  width: 100%;
 }
-
-
-
-/* .input {
-    width: 195px;
-    height: 71px;
-    left: 302px;
-    top: 267px;
-    border: 1px solid rgba(39, 30, 74, 0.5);
-    border-radius: 23px;
-} */

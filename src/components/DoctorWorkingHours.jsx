@@ -20,8 +20,8 @@ function DoctorWorkingHours({ day, endDate, startDate }) {
         </Col>
         <Col span={12}>
           <p style={{ textAlign: "start" }}>
-            <span style={{ color: "#373FFF" }}>
-              {startDate}-{endDate}
+            <span>
+              {startDate && endDate ? `${startDate} - ${endDate}` : "Амралт"}
             </span>
           </p>
         </Col>

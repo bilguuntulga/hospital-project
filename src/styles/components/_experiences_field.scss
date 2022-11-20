@@ -1,6 +1,23 @@
-.experiences_field_wrapper{
-    background-color: antiquewhite;
-    input{
-        width: 100%;
+.experiences_field_wrapper {
+  .experience_wrapper {
+    display: flex;
+    gap: 1rem;
+
+    .inputs_wrapper {
+      display: flex;
+      gap: 1rem;
+
+      input {
+        padding: 0.3rem;
+        flex: 1;
+      }
     }
+
+    .experience_action_button {
+      width: 2rem;
+      height: 2rem;
+      font-size: 18px;
+      border: none;
+    }
+  }
 }

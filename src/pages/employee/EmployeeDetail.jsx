@@ -11,7 +11,9 @@ import * as yup from "yup";
 import { Field, Formik } from "formik";
 import { Input, SubmitButton, Form } from "formik-antd";
 import DoctorWorkingHours from "../../components/DoctorWorkingHours";
-import WorkingHoursTable from "../../components/WorkingHoursTable";
+import WorkingHoursTable, {
+  dayTranslater,
+} from "../../components/WorkingHoursTable";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ProfileImageUpload from "../../components/form/ProfileImageUpload";
@@ -39,33 +41,13 @@ const EmployeeDetail = () => {
     fetchData();
   }, []);
 
-  const biography_doctorModel = {
-    biography_doctor: "",
-  };
-  const doctor_experienceModel = {
-    graduate_school: "",
-    year: "",
-  };
-  const time_scheduleModel = {
-    time_schedule: [],
-  };
   const personalInformationSchema = yup.object().shape({
     profile_img: yup.string().required("Заавал бөглөнө үү."),
     first_name: yup.string().required("Заавал бөглөнө үү."),
     last_name: yup.string().required("Заавал бөглөнө үү."),
     role: yup.string().required("Заавал бөглөнө үү."),
     salary: yup.string().required("Заавал бөглөнө үү."),
-  });
-
-  const biography_doctorvalidationSchema = yup.object().shape({
-    biography_doctor: "",
-  });
-  const doctor_experienceValidationSchema = yup.object().shape({
-    graduate_school: yup.string().optional(),
-    year: yup.string().optional(),
-  });
-  const time_scheduleValidationSchema = yup.object().shape({
-    time_schedule: yup.string().optional(),
+    desc: yup.string().required("Заавал бөглөнө үү."),
   });
 
   const onSubmit = async (values) => {
@@ -79,7 +61,7 @@ const EmployeeDetail = () => {
     }
   };
 
-  const Converttext = () => {
+  const Tabs = () => {
     switch (clickedButton) {
       case "biography":
         return (
@@ -93,7 +75,7 @@ const EmployeeDetail = () => {
                     style={{ color: "#7B80FF", width: "17px", height: "13px" }}
                   />
                 </Col>
-                <Col>{e.desc}</Col>
+                <Col>{e.role}</Col>
               </Row>
             ))}
           </div>
@@ -101,14 +83,12 @@ const EmployeeDetail = () => {
 
       case "experiences":
         return (
-          <div>
+          <div className="space_elements">
+            {parse(detailData?.experiences_desc ?? "")}
             <Timeline>
               {detailData.experiences.map((e) => (
                 <Timeline.Item color="#7B80FF">
-                  <div
-                    className="experiences_border"
-                    style={{ display: "grid", placeItems: "center" }}
-                  >
+                  <div className="experience_card">
                     <p style={{ color: "gray" }}>{e?.date}</p>
                     <p>{e?.desc}</p>
                     <p style={{ color: "gray" }}>{e?.role}</p>
@@ -126,16 +106,15 @@ const EmployeeDetail = () => {
               <div
                 style={{
                   borderRadius: "10px",
-                  width: "622px",
-                  height: "495px",
+                  width: "600px",
                   border: "0.4px solid  #000000",
-                  padding: "35px",
+                  padding: "2rem",
                 }}
               >
                 {detailData.working_hours.map((e) => (
                   <>
                     <DoctorWorkingHours
-                      day={e?.day}
+                      day={dayTranslater(e?.day)}
                       endDate={e?.end_time}
                       startDate={e?.start_time}
                     />
@@ -153,7 +132,6 @@ const EmployeeDetail = () => {
                       display: "grid",
                       placeItems: "center",
                       fontSize: "20px",
-                      fontFamily: "Kanit', sans-serif",
                     }}
                   >
                     <div
@@ -213,7 +191,7 @@ const EmployeeDetail = () => {
 
       case "settings":
         return (
-          <>
+          <div className="settings_wrapper">
             <Row gutter={5}>
               <Col span={24}>
                 <Formik
@@ -224,9 +202,8 @@ const EmployeeDetail = () => {
                 >
                   <Form layout="vertical">
                     <Card
-                      title="Хувийн мэдээлэл:"
+                      title="Хувийн мэдээлэл"
                       bordered
-                      style={{ borderColor: "black", borderRadius: "15px" }}
                       extra={
                         <Row gutter={10}>
                           <Col>
@@ -261,27 +238,24 @@ const EmployeeDetail = () => {
                             <Col span={18}>
                               <Row gutter={[30, 30]}>
                                 <Col span={12}>
-                                  <Form.Item name="first_name" label="Овог:">
+                                  <Form.Item name="first_name" label="Овог">
                                     <Input name="first_name" />
                                   </Form.Item>
                                 </Col>
                                 <Col span={12}>
-                                  <Form.Item name="last_name" label="Нэр:">
+                                  <Form.Item name="last_name" label="Нэр">
                                     <Input name="last_name" />
                                   </Form.Item>
                                 </Col>
                               </Row>
                               <Row gutter={[30, 30]}>
                                 <Col span={12}>
-                                  <Form.Item name="email" label="И-мэйл:">
+                                  <Form.Item name="email" label="И-мэйл">
                                     <Input name="email" />
                                   </Form.Item>
                                 </Col>
                                 <Col span={12}>
-                                  <Form.Item
-                                    name="phone"
-                                    label="Утасны дугаар:"
-                                  >
+                                  <Form.Item name="phone" label="Утасны дугаар">
                                     <Input name="phone" />
                                   </Form.Item>
                                 </Col>
@@ -331,17 +305,28 @@ const EmployeeDetail = () => {
               render={({ values }) => (
                 <Form>
                   <Card
-                    title="Эмчийн туршлага:"
+                    title="Эмчийн туршлага"
                     bordered
-                    style={{
-                      height: "387px",
-                      width: "620px",
-                      borderColor: "black",
-                      borderRadius: "15px",
-                    }}
                     extra={<Button htmlType="submit">Хадаглах</Button>}
                   >
-                    <ExperiencesField name="experiences" values={values} />
+                    <div className="space_elements">
+                      <Field name="experiences_desc">
+                        {({
+                          field: { name, value },
+                          form: { setFieldValue },
+                        }) => (
+                          <CKEditor
+                            editor={ClassicEditor}
+                            data={value ?? "<p></p>"}
+                            onChange={(event, editor) => {
+                              const data = editor.getData();
+                              setFieldValue(name, data);
+                            }}
+                          />
+                        )}
+                      </Field>
+                      <ExperiencesField name="experiences" values={values} />
+                    </div>
                   </Card>
                 </Form>
               )}
@@ -350,7 +335,7 @@ const EmployeeDetail = () => {
               id={id}
               workingHours={detailData.working_hours}
             />
-          </>
+          </div>
         );
     }
   };
@@ -364,18 +349,7 @@ const EmployeeDetail = () => {
           </b>
         </p>
       </div>
-      <div
-        className="content"
-        style={{
-          backgroundColor: "white",
-          width: "100%",
-          height: "1102.25px",
-          borderBottomLeftRadius: "15px",
-          borderBottomRightRadius: "15px",
-          margin: "0",
-          padding: "0",
-        }}
-      >
+      <div className="content">
         <div className="image_container">
           <img
             src={detailData?.profile_img ?? "/images/profile_img.jpg"}
@@ -392,42 +366,44 @@ const EmployeeDetail = () => {
         >
           {detailData?.role}
         </p>
-        <div className="sub_content">
-          <Row>
-            <Col>
-              <Button
-                onClick={() => setClickedButton("biography")}
-                className="detailBUtton"
-              >
-                Эмчийн намтар
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                onClick={() => setClickedButton("experiences")}
-                className="detailBUtton"
-              >
-                Туршлага
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                onClick={() => setClickedButton("time_schedule")}
-                className="detailBUtton"
-              >
-                Цагийн хуваарь
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                onClick={() => setClickedButton("settings")}
-                className="detailBUtton"
-              >
-                Тохиргоо
-              </Button>
-            </Col>
-          </Row>
-          <Converttext />
+        <div className="tab_container">
+          <div className="buttons_wrapper">
+            <div
+              className={`tab_button ${
+                clickedButton == "biography" ? "active_tab_button" : ""
+              }`}
+              onClick={() => setClickedButton("biography")}
+            >
+              Эмчийн намтар
+            </div>
+            <div
+              className={`tab_button ${
+                clickedButton == "experiences" ? "active_tab_button" : ""
+              }`}
+              onClick={() => setClickedButton("experiences")}
+            >
+              Туршлага
+            </div>
+            <div
+              className={`tab_button ${
+                clickedButton == "time_schedule" ? "active_tab_button" : ""
+              }`}
+              onClick={() => setClickedButton("time_schedule")}
+            >
+              Цагийн хуваарь
+            </div>
+            <div
+              className={`tab_button ${
+                clickedButton == "settings" ? "active_tab_button" : ""
+              }`}
+              onClick={() => setClickedButton("settings")}
+            >
+              Тохиргоо
+            </div>
+          </div>
+          <div className="tabs_wrapper">
+            <Tabs />
+          </div>
         </div>
       </div>
     </div>
