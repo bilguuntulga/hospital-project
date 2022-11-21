@@ -1,7 +1,6 @@
 import { Field } from "formik";
 import React, { memo, useRef } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import bucket from "../../utils/bucket";
 import { deleteMedia, uploadImage } from "../../utils/upload";
 
 function ProfileImageUpload({ name, className, size = "100px" }) {
