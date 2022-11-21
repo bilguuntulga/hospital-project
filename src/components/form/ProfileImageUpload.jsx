@@ -2,39 +2,28 @@ import { Field } from "formik";
 import React, { memo, useRef } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import bucket from "../../utils/bucket";
+import { deleteMedia, uploadImage } from "../../utils/upload";
 
 function ProfileImageUpload({ name, className, size = "100px" }) {
   const inputRef = useRef();
 
-  const uploadImage = async (file, setFieldValue) => {
-    const params = {
-      ACL: "public-read",
-      Body: file,
-      Bucket: "skin-hospital",
-      Key: file.name,
-    };
-
-    bucket
-      .putObject(params)
-      .on("success", (res) => {
-        setFieldValue(
-          name,
-          res["request"]["httpRequest"]["stream"]["responseURL"]
-        );
-      })
-      .send((err) => {
-        if (err) {
-          toast("Амжилтгүй");
-        }
-      });
+  const upload = async (file, setFieldValue) => {
+    const url = await uploadImage(file);
+    setFieldValue(name, url);
   };
 
-  const onChange = (file, setFieldValue) => {
-    toast.promise(async () => await uploadImage(file, setFieldValue), {
-      pending: "Илгээж байна",
-      success: "Амжилттай",
-      error: "Амжилтгүй",
-    });
+  const onChange = (file, setFieldValue, value) => {
+    toast.promise(
+      async () => {
+        if (value) await deleteMedia(value);
+        await upload(file, setFieldValue);
+      },
+      {
+        pending: "Илгээж байна",
+        success: "Амжилттай",
+        error: "Амжилтгүй",
+      }
+    );
   };
 
   return (
@@ -46,7 +35,9 @@ function ProfileImageUpload({ name, className, size = "100px" }) {
               ref={inputRef}
               type="file"
               style={{ display: "none" }}
-              onChange={(e) => onChange(e.target.files[0], setFieldValue)}
+              onChange={(e) =>
+                onChange(e.target.files[0], setFieldValue, value)
+              }
             />
             <div
               className="image_wrapper"
