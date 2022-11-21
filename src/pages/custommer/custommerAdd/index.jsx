@@ -13,7 +13,7 @@ const RegistrationPage = () => {
   const [servicesdata, setServicesDate] = useState([]);
 
   const fetchData = async () => {
-    const res = await servicesAPI.get();
+    const res = await servicesAPI.list();
     setServicesDate(res);
   };
   useEffect(() => {

@@ -2,7 +2,7 @@
   "name": "hospital",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://skin-hospital-backend.herokuapp.com",
+  "proxy": "http://192.168.0.122:6093",
   "homepage": "./",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
