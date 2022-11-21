@@ -24,7 +24,7 @@ function SideMenu() {
           icon={"/custommer.png"}
           text={"Үйлчлүүлэгч"}
         />
-        <NavButton path={"/client"} icon={"/client.png"} text={"Үйлчилгээ"} />
+        <NavButton path={"/services"} icon={"/client.png"} text={"Үйлчилгээ"} />
         <NavButton path={"/resource"} icon={"/resource.png"} text={"Нөөц"} />
         <NavButton path={"/bonus"} icon={"/bonus.png"} text={"Урамшуулал"} />
       </div>
