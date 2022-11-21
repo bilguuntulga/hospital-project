@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import Carousel from "react-multi-carousel";
-import bucket from "../../utils/bucket";
+import { uploadImage } from "../../utils/upload";
 
 function UploadImage({ name, mode = "single" }) {
   const fileInputRef = useRef();
@@ -34,39 +34,14 @@ function UploadImage({ name, mode = "single" }) {
   };
 
   const uploadFile = async (file, setFieldValue, value) => {
-    const params = {
-      ACL: "public-read",
-      Body: file,
-      Bucket: "skin-hospital",
-      Key: file.name,
-    };
-
     if (mode == "single") {
-      bucket
-        .putObject(params)
-        .on("success", (res) => {
-          setFieldValue(
-            name,
-            res["request"]["httpRequest"]["stream"]["responseURL"]
-          );
-        })
-        .send((err) => {
-          if (err) {
-            toast("Амжилтгүй");
-          }
-        });
+      const url = await uploadImage(file);
+      setFieldValue(name, url);
     } else {
-      bucket
-        .putObject(params)
-        .on("success", (res) => {
-          const url = res["request"]["httpRequest"]["stream"]["responseURL"];
-          setFieldValue(name, [...value, url]);
-          console.log(value);
-        })
-        .send((err) => {
-          throw err;
-        });
+      const url = await uploadImage(file);
+      setFieldValue(name, [...value, url]);
     }
+    toast("Амжилттай");
   };
 
   const changeHandler = async (e, setFieldValue, value) => {
