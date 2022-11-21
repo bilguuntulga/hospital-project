@@ -102,6 +102,8 @@ function ServiceDetail() {
               <Button icon={<DeleteOutlined />}>Устгах</Button>
             </Col>
           </Row>
+          <ToastContainer />
+
         </Form>
       </Formik>
     </div>
