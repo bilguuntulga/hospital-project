@@ -1,10 +1,22 @@
 .upload_image_wrapper {
+  overflow: hidden;
+
   .upload_button {
-    background-color: forestgreen;
+    background: linear-gradient(180deg,
+        rgba(0, 105, 205, 0.9) 0%,
+        rgba(150, 110, 206, 0.9) 97.36%,
+        rgba(0, 0, 0, 0) 106.82%,
+        rgba(96, 2, 224, 0.9) 106.82%) !important;
     color: white;
     border: none;
-    padding: 0.5rem;
-    border-radius: 10rem;
+    border-radius: 5px;
+    padding: 5px;
+
+    &:hover,
+    &:focus {
+      color: whitesmoke !important;
+      cursor: pointer;
+    }
   }
 
   .error_message {

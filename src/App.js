@@ -27,7 +27,8 @@ const Report = lazy(() => import("./pages/report"));
 const ServicePage = lazy(() => import("./pages/service"));
 const Resource = lazy(() => import("./pages/resource"));
 const Bonus = lazy(() => import("./pages/bonus"));
-const ServiceDetail = lazy(() => import("./pages/service/ServiceDetail"))
+const ServiceDetail = lazy(() => import("./pages/service/ServiceDetail"));
+const ServiceForm = lazy(() => import("./pages/service/form"));
 
 function App() {
   const location = useLocation();
@@ -71,6 +72,7 @@ function App() {
                   <Route exact path="/profile" element={<Profile />} />
                   <Route exact path="/report" element={<Report />} />
                   <Route exact path="/services/:id" element={<ServiceDetail />} />
+                  <Route exact path="/services/create" element={<ServiceForm />} />
                   <Route exact path="/services" element={<ServicePage />} />
                   <Route exact path="/resource" element={<Resource />} />
                   <Route exact path="/bonus" element={<Bonus />} />

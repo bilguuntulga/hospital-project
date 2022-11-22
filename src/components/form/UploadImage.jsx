@@ -11,7 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Carousel from "react-multi-carousel";
 import { uploadImage } from "../../utils/upload";
 
-function UploadImage({ name, mode = "single" }) {
+function UploadImage({ name, mode = "single", width = "250px", height = "250px" }) {
   const fileInputRef = useRef();
 
   const responsive = {
@@ -41,7 +41,6 @@ function UploadImage({ name, mode = "single" }) {
       const url = await uploadImage(file);
       setFieldValue(name, [...value, url]);
     }
-    toast("Амжилттай");
   };
 
   const changeHandler = async (e, setFieldValue, value) => {
@@ -61,7 +60,7 @@ function UploadImage({ name, mode = "single" }) {
   };
 
   return (
-    <div className="upload_image_wrapper">
+    <div className="upload_image_wrapper" style={{ width: width, height: height }}>
       <Field name={name}>
         {({ field: { value }, meta, form: { setFieldValue } }) => (
           <>
@@ -91,7 +90,7 @@ function UploadImage({ name, mode = "single" }) {
                 }}
               />
             ) : (
-              <div style={{ maxWidth: "250px" }}>
+              <div className="carousel_wrapper">
                 <Carousel responsive={responsive} arrows={true}>
                   {(value || [])?.map((e, i) => (
                     <Image
@@ -119,12 +118,12 @@ function UploadImage({ name, mode = "single" }) {
               </div>
             )}
             {value == "" || value == [] ? (
-              <button
+              <div
                 className="upload_button"
                 onClick={() => fileInputRef.current.click()}
               >
                 {mode == "single" ? "Зураг оруулах" : "Зургууд оруулах"}
-              </button>
+              </div>
             ) : null}
             <p className="error_message">{meta.error}</p>
             <ToastContainer />
