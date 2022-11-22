@@ -14,3 +14,9 @@ export async function uploadImage(file) {
   const data = await res.json();
   return data.secure_url;
 }
+
+export async function deleteMedia(url) {
+  const splited = url?.split("/");
+  const name = splited[splited?.length - 1]?.split(".")[0];
+  return await request.del("/v1/api/delete", { name });
+}

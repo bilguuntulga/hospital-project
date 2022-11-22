@@ -1,5 +1,4 @@
 import React, { memo, useRef } from "react";
-// import AWS from "aws-sdk";
 import { Image, Space } from "antd";
 import { Field } from "formik";
 import {
@@ -9,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import Carousel from "react-multi-carousel";
-import { uploadImage } from "../../utils/upload";
+import { deleteMedia, uploadImage } from "../../utils/upload";
 
 function UploadImage({ name, mode = "single", width = "250px", height = "250px" }) {
   const fileInputRef = useRef();
@@ -36,6 +35,7 @@ function UploadImage({ name, mode = "single", width = "250px", height = "250px" 
   const uploadFile = async (file, setFieldValue, value) => {
     if (mode == "single") {
       const url = await uploadImage(file);
+      if (value) await deleteMedia(value);
       setFieldValue(name, url);
     } else {
       const url = await uploadImage(file);
@@ -56,6 +56,7 @@ function UploadImage({ name, mode = "single", width = "250px", height = "250px" 
 
   const deleteFile = async (fileUrl, setFieldValue, value) => {
     const removed = value?.filter((e) => e != fileUrl);
+    await deleteMedia(fileUrl);
     setFieldValue(name, removed);
   };
 
