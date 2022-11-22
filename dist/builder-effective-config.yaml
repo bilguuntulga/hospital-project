@@ -9,4 +9,6 @@ files:
       - build/**/*
       - node_modules/**/*
       - package.json
+extraMetadata:
+  main: build/electron.js
 electronVersion: 21.3.0
