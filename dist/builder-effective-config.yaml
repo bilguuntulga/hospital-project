@@ -1,16 +1,14 @@
 directories:
   output: dist
   buildResources: assets
+extends: null
+appId: com.example.electron-cra
 files:
   - filter:
-      - build/**/*
+      - dist/**/*
       - build/**/*
       - node_modules/**/*
+      - package.json
 extraMetadata:
-  main: build/electron/main.js
-publish:
-  provider: github
-  repo: hospital-project
-  owner: mnmonherdene1234
-extends: react-cra
+  main: build/electron.js
 electronVersion: 21.3.0
