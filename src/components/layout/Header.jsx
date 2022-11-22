@@ -28,13 +28,8 @@ function Header() {
     {
       key: "2",
       label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          2nd menu item
-        </a>
+        <Link to="work_users"><div>Ажилчид</div></Link>
+
       ),
     },
     {
@@ -63,12 +58,10 @@ function Header() {
             </div>
           </Link>
           <div className="name_role_wrapper">
-            <div className="username">{`${user.first_name ?? "Овог"} ${
-              user.last_name ?? "Нэр"
-            }`}</div>
-            <div className="user_role">{`${
-              user.role === "ADMIN" ? "Админ" : "Ажилчин"
-            }`}</div>
+            <div className="username">{`${user.first_name ?? "Овог"} ${user.last_name ?? "Нэр"
+              }`}</div>
+            <div className="user_role">{`${user.role === "ADMIN" ? "Админ" : "Ажилчин"
+              }`}</div>
           </div>
           <Dropdown
             menu={{ items }}

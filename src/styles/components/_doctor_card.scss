@@ -5,6 +5,12 @@
   position: relative;
   width: 15rem;
   aspect-ratio: 3 / 4;
+  scale: 1;
+  transition: all 0.3s ease-in-out;
+
+  &:hover{
+    scale: 1.05;
+  }
 
   &_image {
     width: 100%;

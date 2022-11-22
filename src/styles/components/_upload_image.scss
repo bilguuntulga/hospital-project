@@ -1,5 +1,7 @@
 .upload_image_wrapper {
   overflow: hidden;
+  display: grid;
+  place-items: center;
 
   .upload_button {
     background: linear-gradient(180deg,

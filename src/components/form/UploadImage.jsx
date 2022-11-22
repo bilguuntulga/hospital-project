@@ -10,7 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Carousel from "react-multi-carousel";
 import { deleteMedia, uploadImage } from "../../utils/upload";
 
-function UploadImage({ name, mode = "single", width = "250px", height = "250px" }) {
+function UploadImage({ name, mode = "single", width = 100, height = "auto" }) {
   const fileInputRef = useRef();
 
   const responsive = {
@@ -61,7 +61,7 @@ function UploadImage({ name, mode = "single", width = "250px", height = "250px" 
   };
 
   return (
-    <div className="upload_image_wrapper" style={{ width: width, height: height }}>
+    <div className="upload_image_wrapper">
       <Field name={name}>
         {({ field: { value }, meta, form: { setFieldValue } }) => (
           <>
@@ -71,9 +71,11 @@ function UploadImage({ name, mode = "single", width = "250px", height = "250px" 
               onChange={(e) => changeHandler(e, setFieldValue, value)}
               style={{ display: "none" }}
             />
+            {JSON.stringify(value)}
             {mode == "single" && value ? (
               <Image
-                height={100}
+                height={height}
+                width={width}
                 src={value}
                 preview={{
                   visible: false,
@@ -91,32 +93,30 @@ function UploadImage({ name, mode = "single", width = "250px", height = "250px" 
                 }}
               />
             ) : (
-              <div className="carousel_wrapper">
-                <Carousel responsive={responsive} arrows={true}>
-                  {(value || [])?.map((e, i) => (
-                    <Image
-                      key={i}
-                      src={e}
-                      width={250}
-                      preview={{
-                        visible: false,
-                        mask: (
-                          <Space>
-                            <FileAddOutlined
-                              onClick={() => fileInputRef.current.click()}
-                            />
-                            <DeleteOutlined
-                              onClick={() =>
-                                deleteFile(e, setFieldValue, value)
-                              }
-                            />
-                          </Space>
-                        ),
-                      }}
-                    />
-                  ))}
-                </Carousel>
-              </div>
+              <Carousel responsive={responsive} arrows={true}>
+                {(value || [])?.map((e, i) => (
+                  <Image
+                    key={i}
+                    src={e}
+                    width={200}
+                    preview={{
+                      visible: false,
+                      mask: (
+                        <Space>
+                          <FileAddOutlined
+                            onClick={() => fileInputRef.current.click()}
+                          />
+                          <DeleteOutlined
+                            onClick={() =>
+                              deleteFile(e, setFieldValue, value)
+                            }
+                          />
+                        </Space>
+                      ),
+                    }}
+                  />
+                ))}
+              </Carousel>
             )}
             {value == "" || value == [] ? (
               <div
@@ -126,7 +126,6 @@ function UploadImage({ name, mode = "single", width = "250px", height = "250px" 
                 {mode == "single" ? "Зураг оруулах" : "Зургууд оруулах"}
               </div>
             ) : null}
-            <p className="error_message">{meta.error}</p>
             <ToastContainer />
           </>
         )}

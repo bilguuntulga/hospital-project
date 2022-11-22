@@ -108,7 +108,7 @@ function ServiceForm({ create = true }) {
                     <Row>
                         <Col span={6}>
                             <Form.Item name="images">
-                                <UploadImage name="images" mode='multi' />
+                                <UploadImage name="images" mode='multi' width={300} height="auto" />
                             </Form.Item>
                         </Col>
                         <Col span={18}>

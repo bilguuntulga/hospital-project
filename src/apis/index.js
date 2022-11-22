@@ -4,5 +4,7 @@ import * as customerAPI from "./customers";
 import * as treadmentsAPI from "./treatments"
 import * as treatmentTimesAPI from "./treatment-times";
 import * as servicesAPI from "./services"
+import * as usersAPI from "./user"
+import * as resourceAPI from "./resource"
 
-export { authAPI, doctorAPI, customerAPI, treadmentsAPI, treatmentTimesAPI, servicesAPI };
+export { authAPI, doctorAPI, customerAPI, treadmentsAPI, treatmentTimesAPI, servicesAPI, usersAPI, resourceAPI };

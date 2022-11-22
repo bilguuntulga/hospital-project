@@ -5,7 +5,7 @@ import { UserOutlined } from "@ant-design/icons";
 import OrderTimeCustommer from "../../components/OrderTimeCustommer";
 import CLineChart from "./chart";
 import PieChart from "./PieCharts";
-import CunstommerNews from "../../components/cunstommerNews";
+import CunstommerNews from "../../components/Customers";
 import CountUp from "react-countup";
 import { customerAPI, doctorAPI, treatmentTimesAPI } from "../../apis";
 
