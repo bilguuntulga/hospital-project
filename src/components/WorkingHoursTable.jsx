@@ -18,8 +18,8 @@ function WorkingHoursTable({ id, workingHours }) {
         }
       });
     } else {
-      const start_time = moment(values.time[0]).format("hh:mm:ss");
-      const end_time = moment(values.time[1]).format("hh:mm:ss");
+      const start_time = moment(values.time[0]).format("HH:mm:ss");
+      const end_time = moment(values.time[1]).format("HH:mm:ss");
       workingHours?.forEach((e) => {
         if (values.day.some((x) => x == e.id)) {
           e.start_time = start_time;
@@ -103,7 +103,7 @@ function WorkingHoursTable({ id, workingHours }) {
                 label="Цаг сонгох"
                 rules={[{ required: true, message: "Заавал бөглөнө үү!" }]}
               >
-                <TimePicker.RangePicker name={"time"} format="hh:mm" />
+                <TimePicker.RangePicker name={"time"} format="HH:mm" />
               </Form.Item>
             ) : null}
             <Button htmlType="submit">Хадаглах</Button>
