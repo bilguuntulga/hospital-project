@@ -2,6 +2,10 @@
   &_header {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: #a8daff;
+    border-radius: 1rem;
 
     .header_title {
       font-size: large;

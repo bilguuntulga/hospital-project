@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Calendar, Card, Col, Modal, Row, Skeleton, TimePicker } from "antd";
 import { Field, Formik } from "formik";
 import { Form, Input, Select, SubmitButton } from "formik-antd";
@@ -8,6 +8,7 @@ import { SaveOutlined } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import PageLoading from "../../components/PageLoading";
 import TreatmentTimesTable from "../../components/TreatmentTimesTable";
+import moment from "moment";
 
 const model = {
   customer_phone: "",
@@ -18,7 +19,8 @@ const model = {
 const validationSchema = yup.object().shape({
   customer_phone: yup
     .string()
-    .min(8, "Бага даа 8 оронтой байна")
+    .min(8, "8 оронтой байна")
+    .max(8, "8 оронтой байна")
     .required("Утасны дугаар оруулна уу"),
   time: yup.array().required("Цаг оруулна уу"),
   doctor: yup.string().required("Эмч сонгон уу"),
@@ -31,7 +33,7 @@ const CalendarApp = () => {
   const [initialValues, setInitialValues] = useState(model);
   const [doctorsLoading, setDoctorsLoading] = useState(false);
   const [doctors, setDoctors] = useState([]);
-  const [times, setTimes] = useState([]);
+  const timesTableRef = useRef();
 
   const onSelect = (value) => {
     const now = new Date();
@@ -46,16 +48,14 @@ const CalendarApp = () => {
   };
 
   const onSubmit = async (values) => {
-    console.log(values);
-    toast.promise(
+    await toast.promise(
       async () => {
         await treatmentTimesAPI.create({
-          customer_phone: values?.customer_phone.trim(),
+          customer_phone: values?.customer_phone?.trim(),
           doctor: values?.doctor,
           start_time: values?.time[0],
           end_time: values?.time[1],
         });
-        setModalVisible(false);
       },
       {
         pending: "Хадгалж байна",
@@ -63,37 +63,39 @@ const CalendarApp = () => {
         success: "Амжилттай",
       }
     );
+
+    setModalVisible(false);
+    timesTableRef.current();
   };
 
-  const onChange = async (values) => {
-    if (values.time[0] && values.time[1]) {
-      const formStartTime = new Date(values.time[0]);
-      const formEndTime = new Date(values.time[1]);
+  const onTimePickerChange = async (value, name, setFieldValue) => {
+    setFieldValue("doctor", "");
+    setFieldValue(name, value);
 
-      const start_time = new Date(selectedDate);
-      start_time.setHours(formStartTime.getHours());
-      start_time.setMinutes(formStartTime.getMinutes());
-      start_time.setSeconds(0);
+    const formStartTime = new Date(value[0]);
+    const formEndTime = new Date(value[1]);
 
-      const end_time = new Date(selectedDate);
-      end_time.setHours(formEndTime.getHours());
-      end_time.setMinutes(formEndTime.getMinutes());
-      end_time.setSeconds(0);
+    const start_time = new Date(selectedDate);
+    start_time.setHours(formStartTime.getHours());
+    start_time.setMinutes(formStartTime.getMinutes());
+    start_time.setSeconds(0);
 
-      setDoctorsLoading(true);
-      const res = await doctorAPI.findAvailable({
-        start_time,
-        end_time,
-      });
-      setDoctors(res);
-      setDoctorsLoading(false);
-    }
+    const end_time = new Date(selectedDate);
+    end_time.setHours(formEndTime.getHours());
+    end_time.setMinutes(formEndTime.getMinutes());
+    end_time.setSeconds(0);
+
+    setDoctorsLoading(true);
+    const res = await doctorAPI.findAvailable({
+      start_time,
+      end_time,
+    });
+    setDoctors(res);
+    setDoctorsLoading(false);
   };
 
   const fetchData = async () => {
     setLoading(true);
-    const res = await treatmentTimesAPI.future();
-    setTimes(res);
     setLoading(false);
   };
 
@@ -107,7 +109,7 @@ const CalendarApp = () => {
     <div className="calendar_page">
       <Card title="Календар">
         <Modal
-          title="Цаг захиалах"
+          title={moment(selectedDate).format("YYYY/MM/DD")}
           open={modalVisible}
           footer={null}
           onCancel={() => setModalVisible(false)}
@@ -118,55 +120,50 @@ const CalendarApp = () => {
             enableReinitialize
             onSubmit={onSubmit}
           >
-            {({ values, setFieldValue }) => (
-              <Form layout="vertical">
-                <Form.Item
-                  name="customer_phone"
-                  label="Хэрэглэгчийн утасны дугаар"
-                >
-                  <Input name="customer_phone" />
-                </Form.Item>
-                <Form.Item
-                  name="time"
-                  onClick={() => {
-                    setFieldValue("doctor", "");
-                    onChange(values);
-                  }}
-                >
-                  <Field name="time">
-                    {({ field: { name, value }, form: { setFieldValue } }) => (
-                      <TimePicker.RangePicker
-                        onChange={(e) => setFieldValue(name, e)}
-                        format="HH:mm"
-                      />
-                    )}
-                  </Field>
-                </Form.Item>
-                <Form.Item name="doctor">
-                  {doctorsLoading ? (
-                    <Skeleton paragraph={{ rows: 0 }} />
-                  ) : (
-                    <Select name="doctor">
-                      {doctors.map((doctor) => (
-                        <Select.Option
-                          value={doctor?.id}
-                        >{`${doctor?.first_name} ${doctor?.last_name}`}</Select.Option>
-                      ))}
-                    </Select>
+            <Form layout="vertical">
+              <Form.Item
+                name="customer_phone"
+                label="Үйлчлүүлэгчийн утасны дугаар"
+              >
+                <Input name="customer_phone" />
+              </Form.Item>
+              <Form.Item name="time" label="Цаг">
+                <Field name="time">
+                  {({ field: { name }, form: { setFieldValue } }) => (
+                    <TimePicker.RangePicker
+                      style={{ width: "100%" }}
+                      onChange={(e) =>
+                        onTimePickerChange(e, name, setFieldValue)
+                      }
+                      format="HH:mm"
+                    />
                   )}
-                </Form.Item>
-                <SubmitButton block icon={<SaveOutlined />}>
-                  Хадаглах
-                </SubmitButton>
-              </Form>
-            )}
+                </Field>
+              </Form.Item>
+              <Form.Item name="doctor" label="Эмч">
+                {doctorsLoading ? (
+                  <Skeleton paragraph={{ rows: 0 }} />
+                ) : (
+                  <Select name="doctor">
+                    {doctors.map((doctor) => (
+                      <Select.Option
+                        value={doctor?.id}
+                      >{`${doctor?.first_name} ${doctor?.last_name}`}</Select.Option>
+                    ))}
+                  </Select>
+                )}
+              </Form.Item>
+              <SubmitButton block icon={<SaveOutlined />}>
+                Хадаглах
+              </SubmitButton>
+            </Form>
           </Formik>
         </Modal>
         <Calendar onSelect={onSelect} />
         <ToastContainer />
       </Card>
       <Card title="Цагууд">
-        <TreatmentTimesTable />
+        <TreatmentTimesTable refreshRef={timesTableRef} />
       </Card>
     </div>
   );

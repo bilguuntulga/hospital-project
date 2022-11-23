@@ -6,6 +6,14 @@
     display: flex;
     gap: 1rem;
     align-items: center;
+
+    .name {
+      font-weight: bolder;
+    }
+
+    .phone {
+      color: gray;
+    }
   }
 
   &_image_wrapper {
@@ -18,6 +26,30 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+  }
+
+  .date_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .actions_wrapper {
+      display: flex;
+      gap: 1rem;
+      font-size: large;
+      padding-right: 1rem;
+      color: black;
+
+      .edit_time:hover {
+        transition: all 0.3s ease-in-out;
+        color: #a8daff;
+      }
+
+      .delete_time:hover {
+        transition: all 0.3s ease-in-out;
+        color: red;
+      }
     }
   }
 }

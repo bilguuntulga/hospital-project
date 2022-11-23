@@ -1,8 +1,9 @@
+import { Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 import { treatmentTimesAPI } from "../../apis";
 import TimeListItem from "./TimeListItem";
 
-function TreatmentTimesTable() {
+function TreatmentTimesTable({ refreshRef }) {
   const [loading, setLoading] = useState(true);
   const [times, setTimes] = useState([]);
 
@@ -14,8 +15,11 @@ function TreatmentTimesTable() {
   };
 
   useEffect(() => {
+    refreshRef.current = fetchData;
     fetchData();
   }, []);
+
+  if (loading) return <Skeleton />;
 
   return (
     <div className="treatment_times_table">
@@ -28,6 +32,7 @@ function TreatmentTimesTable() {
         {times.map((time, i) => (
           <TimeListItem
             key={time?.id ?? i}
+            id={time.id}
             customerImage={time?.customer?.image}
             customerName={`${time?.customer?.first_name} ${time?.customer?.last_name}`}
             customerPhone={time?.customer?.phone}
@@ -36,6 +41,7 @@ function TreatmentTimesTable() {
             doctorPhone={time?.doctor?.phone}
             startTime={time?.start_time}
             endTime={time?.end_time}
+            refreshTable={fetchData}
           />
         ))}
       </div>
