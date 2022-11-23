@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { doctorAPI } from "../../apis";
 import PageLoading from "../../components/PageLoading";
 import DoctorCard from "../../components/doctors/DoctorCard";
+import { Link } from "react-router-dom";
 
 const DoctorPage = () => {
   const [doctersdata, setDoctersData] = useState([]);
@@ -30,18 +31,20 @@ const DoctorPage = () => {
           </b>
         </Col>
         <Col>
-          <Button
-            style={{
-              width: "168px",
-              height: "59px",
-              backgroundColor: "#7B80FF",
-              borderRadius: "10px",
-              color: "white",
-              border: "none",
-            }}
-          >
-            Нэмэх
-          </Button>
+          <Link to="create">
+            <Button
+              style={{
+                width: "168px",
+                height: "59px",
+                backgroundColor: "#7B80FF",
+                borderRadius: "10px",
+                color: "white",
+                border: "none",
+              }}
+            >
+              Нэмэх
+            </Button>
+          </Link>
         </Col>
       </Row>
       <div className="employee_list_wrapper">

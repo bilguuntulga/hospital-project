@@ -30,6 +30,7 @@ const Resource = lazy(() => import("./pages/resource"));
 const Bonus = lazy(() => import("./pages/bonus"));
 const ServiceDetail = lazy(() => import("./pages/service/ServiceDetail"));
 const ServiceForm = lazy(() => import("./pages/service/form"));
+const DoctorCreate = lazy(() => import("./pages/employee/create"))
 
 function App() {
   const location = useLocation();
@@ -78,6 +79,7 @@ function App() {
                   <Route exact path="/resource" element={<Resource />} />
                   <Route exact path="/bonus" element={<Bonus />} />
                   <Route exact path="/work_users" element={<Work_users />} />
+                  <Route exact path="/employee/create" element={<DoctorCreate />} />
                 </Routes>
               </div>
             </Suspense>
