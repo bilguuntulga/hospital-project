@@ -9,6 +9,7 @@ import "./styles/main.scss";
 import { authAPI } from "./apis";
 import Header from "./components/layout/Header";
 import PageLoading from "./components/PageLoading";
+import Work_users from "./pages/work_users";
 const Home = lazy(() => import("./pages/home"));
 const Login = lazy(() => import("./pages/login"));
 const Customer = lazy(() => import("./pages/custommer"));
@@ -33,7 +34,7 @@ const ServiceForm = lazy(() => import("./pages/service/form"));
 function App() {
   const location = useLocation();
   if (location.pathname !== "/login") {
-    authAPI.profile();
+    authAPI.profile().then(data => localStorage.setItem("user", JSON.stringify(data)));
   }
 
   return (
@@ -50,7 +51,7 @@ function App() {
                 <Routes>
                   <Route exact path="/" element={<Home />} />
                   <Route exact path="/calendar" element={<Order_time />} />
-                  <Route exact path="/customer" element={<Custommer_Add />} />
+                  <Route exact path="/customer" element={<Customer />} />
                   <Route exact path="/employee" element={<Employee />} />
                   <Route
                     exact
@@ -65,7 +66,7 @@ function App() {
                   />
                   <Route
                     exact
-                    path="/custommer_news/custommer_detail/:id"
+                    path="/customer/:id"
                     element={<Custommer_detail />}
                   />
                   <Route exact path="/test" element={<Test />} />
@@ -76,6 +77,7 @@ function App() {
                   <Route exact path="/services" element={<ServicePage />} />
                   <Route exact path="/resource" element={<Resource />} />
                   <Route exact path="/bonus" element={<Bonus />} />
+                  <Route exact path="/work_users" element={<Work_users />} />
                 </Routes>
               </div>
             </Suspense>

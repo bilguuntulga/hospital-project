@@ -28,7 +28,7 @@ function ProfileImageUpload({ name, className, size = "100px" }) {
   return (
     <div className={`profile_image_upload_wrapper ${className}`}>
       <Field name={name}>
-        {({ field: { value }, form: { setFieldValue }, meta }) => (
+        {({ field: { value }, form: { setFieldValue } }) => (
           <>
             <input
               ref={inputRef}
@@ -50,7 +50,6 @@ function ProfileImageUpload({ name, className, size = "100px" }) {
               />
               <div className="tip_text">Солих</div>
             </div>
-            <p className="error_message">{meta.error}</p>
             <ToastContainer />
           </>
         )}

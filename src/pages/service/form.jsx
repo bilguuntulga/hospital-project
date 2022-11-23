@@ -105,13 +105,13 @@ function ServiceForm({ create = true }) {
         <div>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
                 <Form layout='vertical'>
-                    <Row>
-                        <Col span={6}>
+                    <Row gutter={50}>
+                        <Col span={10}>
                             <Form.Item name="images">
-                                <UploadImage name="images" mode='multi' />
+                                <UploadImage name="images" mode='multi' width={400} />
                             </Form.Item>
                         </Col>
-                        <Col span={18}>
+                        <Col span={14}>
                             <Form.Item name="name" label="Нэр">
                                 <Input name="name" />
                             </Form.Item>
