@@ -79,7 +79,7 @@ const Customer__Page = () => {
             <Col span={4}></Col>
           </Row>
         </div>
-        {customerdata.map((e) => <Customers image={e?.image} name={`${e?.first_name} ${e?.last_name}`} birthday={e.email} gender={e.gender} phone={e.phone} id={e.id} color={e?.rate} />)}
+        {customerdata.map((e) => <Customers image={e?.image} name={`${e?.first_name} ${e?.last_name}`} birthday={e.email} gender={e.gender} phone={e.phone} id={e.id} rate={e?.rate} />)}
 
       </Space>
     </div>

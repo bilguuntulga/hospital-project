@@ -5,5 +5,6 @@ export const detail = (id) => request.get(`/v1/api/doctors/${id}`);
 export const update = (data) => request.put(`/v1/api/doctors/${data.id}`, data);
 export const count = () => request.get("/v1/api/doctors/info/count");
 export const remove = (id) => request.del(`/v1/api/doctors/${id}`);
+export const create = (data) => request.post(`/v1/api/doctors`, data);
 export const findAvailable = (time) =>
   request.get("/v1/api/doctors/type/available", time);

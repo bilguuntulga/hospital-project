@@ -32,6 +32,7 @@ const validationSchema = yup.object().shape({
 function ServiceForm({ create = true }) {
     const [initialValues, setInitialValues] = useState(model);
     const [loading, setLoading] = useState(!create);
+    const [user, setUser] = useState();
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -92,6 +93,8 @@ function ServiceForm({ create = true }) {
             setInitialValues(res);
             setLoading(false);
         }
+        const res = JSON.parse(localStorage.getItem("user"))
+        setUser(res)
     }
 
     useEffect(() => {

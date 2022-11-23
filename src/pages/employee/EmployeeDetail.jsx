@@ -25,18 +25,10 @@ import PageLoading from "../../components/PageLoading";
 import { toast, ToastContainer } from "react-toastify";
 const { confirm } = Modal;
 
-const personalInfoModel = {
-  profile_img: "",
-  first_name: "",
-  last_name: "",
-  email: "",
-  phone: "",
-};
-
 const EmployeeDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [detailData, setDetailData] = useState(personalInfoModel);
+  const [detailData, setDetailData] = useState({});
   const [clickedButton, setClickedButton] = useState("biography");
   const [loading, setLoading] = useState(true);
 

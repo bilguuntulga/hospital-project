@@ -1,29 +1,13 @@
 import { LineHeightOutlined } from '@ant-design/icons'
 import { Button, Col, Row, Tag } from 'antd'
 import moment from 'moment';
-import React from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-function customers({ image, name, birthday, gender, phone, id, color }) {
-    const Colors = (color) => {
-        switch (color) {
-            case "GOOD": return "#75FF7E"
-            case "MIDDLE": return "#f06d16"
-            case "BAD": return "#d92e41"
-            default: return "white"
-        }
-    }
-    const Rate_Convert = (rate) => {
-        switch (rate) {
-            case "GOOD": return "Сайн"
-            case "MIDDLE": return "Дунд"
-            case "BAD": return "Муу "
-            default: return "Not_found_rate"
-        }
-    }
+function Customers({ image, name, birthday, gender, phone, id, rate }) {
 
     return (
-        <Row justify="space-between" align="middle" gutter={22} style={{ marginTop: "10px", padding: "5px", borderRadius: "15px",backgroundColor:"white" }}>
+        <Row justify="space-between" align="middle" gutter={22} style={{ marginTop: "10px", padding: "5px", borderRadius: "15px", backgroundColor: "white" }}>
             <Col span={4}>
                 <Row align="middle" gutter={20}>
                     <Col>
@@ -47,7 +31,7 @@ function customers({ image, name, birthday, gender, phone, id, color }) {
                 {phone}
             </Col>
             <Col span={4}>
-            <Tag color={Colors(color)} style={{width:"30px",height:"30px",borderRadius:"50%"}}/>
+                <div className={rate == "GOOD" ? "good" : "bad"} style={{ width: "30px", height: "30px", borderRadius: "50%" }}/>
             </Col>
             <Col span={4}>
                 <Link to={`${id}`}>
@@ -62,4 +46,4 @@ const genderTranslater = (gender) => ({
     FEMALE: "Эмэгтэй",
 }[`${gender}`])
 
-export default customers
+export default memo(Customers)

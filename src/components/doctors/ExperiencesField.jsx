@@ -26,7 +26,6 @@ function ExperiencesField({ name, values }) {
                             onChange={(e) => {
                               field_value.date = e.target.value;
                               setFieldValue(field_name, field_value);
-                              console.log(field_value);
                             }}
                           />
                           <input
@@ -35,7 +34,6 @@ function ExperiencesField({ name, values }) {
                             onChange={(e) => {
                               field_value.desc = e.target.value;
                               setFieldValue(field_name, field_value);
-                              console.log(field_value);
                             }}
                           />
                           <input
@@ -44,7 +42,6 @@ function ExperiencesField({ name, values }) {
                             onChange={(e) => {
                               field_value.role = e.target.value;
                               setFieldValue(field_name, field_value);
-                              console.log(field_value);
                             }}
                           />
                         </div>

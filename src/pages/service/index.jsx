@@ -9,10 +9,13 @@ import PageLoading from '../../components/PageLoading'
 const ServicePage = () => {
   const [servicedata, setServiceData] = useState([])
   const [loading, setLoading] = useState(true);
-  const [iscreate, setIsCreate] = useState(true)
+  const [user, setUser] = useState({});
+
   const fetchData = async () => {
     setLoading(true);
     const res = await servicesAPI.list();
+    const user_res = JSON.parse(localStorage.getItem("user"))
+    setUser(user_res)
     setServiceData(res)
     setLoading(false);
   }
@@ -27,7 +30,10 @@ const ServicePage = () => {
     <div className='service'>
       <Row justify="end">
         <Col>
-          <Link to="create"><Button>Нэмэх</Button></Link>
+          {
+            user?.role == "ADMIN" ? <Link to="create"><Button>Нэмэх</Button></Link> : ""
+          }
+
         </Col>
       </Row>
       <br />
