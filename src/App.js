@@ -34,7 +34,7 @@ const ServiceForm = lazy(() => import("./pages/service/form"));
 function App() {
   const location = useLocation();
   if (location.pathname !== "/login") {
-    authAPI.profile();
+    authAPI.profile().then(data => localStorage.setItem("user", JSON.stringify(data)));
   }
 
   return (

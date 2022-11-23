@@ -9,6 +9,7 @@ function Header() {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     window.location = "/login";
   };
 
@@ -25,13 +26,13 @@ function Header() {
         </a>
       ),
     },
-    {
-      key: "2",
-      label: (
-        <Link to="work_users"><div>Ажилчид</div></Link>
-
-      ),
-    },
+    user?.role == "ADMIN" ?
+      {
+        key: "2",
+        label: (
+          <Link to="work_users"><div>Ажилчид</div></Link>
+        ),
+      } : null,
     {
       key: "3",
       label: <div onClick={logout}>Гарах</div>,
@@ -39,7 +40,7 @@ function Header() {
   ];
 
   const fetchData = async () => {
-    const res = await authAPI.profile();
+    const res = JSON.parse(localStorage.getItem("user"));
     setUser(res);
   };
 

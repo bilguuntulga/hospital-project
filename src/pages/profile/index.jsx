@@ -2,10 +2,10 @@ import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Row } from "antd";
 import { Formik } from "formik";
 import { Form, Input, SubmitButton } from "formik-antd";
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { authAPI } from "../../apis";
+import { authAPI, usersAPI } from "../../apis";
 import UploadImage from "../../components/form/UploadImage";
 import * as yup from "yup";
 import ProfileImageUpload from "../../components/form/ProfileImageUpload";
@@ -51,7 +51,7 @@ function ProfilePage() {
 
   const fetchData = async () => {
     setLoading(true);
-    const res = await authAPI.profile();
+    const res = JSON.parse(localStorage.getItem("user"));
     setUser(res);
     setLoading(false);
   };
@@ -66,6 +66,8 @@ function ProfilePage() {
         delete values.created_by;
         delete values.updated_by;
         await authAPI.update(values);
+        const user = await authAPI.profile();
+        localStorage.setItem("user", JSON.stringify(user));
         navigate(0);
       },
       {
@@ -188,4 +190,4 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default memo(ProfilePage);

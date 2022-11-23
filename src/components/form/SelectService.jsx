@@ -1,3 +1,4 @@
+import { Skeleton } from "antd";
 import { Select } from "formik-antd";
 import React, { memo, useEffect, useState } from "react";
 import { servicesAPI } from "../../apis";
@@ -17,8 +18,10 @@ function SelectService({ name, multi = false }) {
     fetchData();
   }, []);
 
+  if (loading) return <Skeleton paragraph={{rows: 0}} />
+
   return (
-    <Select name={name} loading={loading} mode={multi ? "multiple" : ""}>
+    <Select name={name} mode={multi ? "multiple" : ""}>
       {data.map((e, i) => (
         <Select.Option key={i} value={e?.id}>
           {e?.name}
