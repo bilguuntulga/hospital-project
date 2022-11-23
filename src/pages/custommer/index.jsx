@@ -1,6 +1,6 @@
 import { Button, Col, Input, Row, Space } from 'antd'
 import Customers from '../../components/Customers'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import { customerAPI } from '../../apis'
 import PageLoading from '../../components/PageLoading'
 
@@ -86,4 +86,4 @@ const Customer__Page = () => {
   )
 }
 
-export default Customer__Page
+export default memo(Customer__Page)

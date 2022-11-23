@@ -3,7 +3,7 @@ import { Formik, validateYupSchema } from 'formik'
 import { Form, Input, SubmitButton } from 'formik-antd'
 import { Col, Row } from 'antd'
 import "./style.css"
-import CunstommerNews from '../../../components/cunstommerNews'
+import CunstommerNews from '../../../components/Customers'
 import { SearchOutlined } from '@ant-design/icons'
 import * as yup from "yup"
 import { customerAPI } from '../../../apis'
@@ -72,7 +72,7 @@ function CustommerNewsPage() {
 
                 </div>
                 <div style={{ width: "100%", backgroundColor: "white", borderRadius: "15px", padding: "15px", marginTop: "10px" }}>
-                    {customers.map((e) => <CunstommerNews image={e?.image} name={e?.last_name} birthday={e?.birthday} gender={e?.gender} disease_information="Ханиад" phone={e?.phone} id={e.id} />)}
+                    {customers.map((e) => <CunstommerNews image={e?.image} name={e?.last_name} birthday={e?.birthday} gender={e?.gender} phone={e?.phone} id={e.id} />)}
 
                 </div>
             </div>

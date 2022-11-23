@@ -8,17 +8,21 @@ import PieChart from "./PieCharts";
 import CunstommerNews from "../../components/Customers";
 import CountUp from "react-countup";
 import { customerAPI, doctorAPI, treatmentTimesAPI } from "../../apis";
+import Customers from "../../components/Customers";
 
 function HomePage() {
   const [todayTimesCount, setTodayTimesCount] = useState(0);
+  const [customerdata, setCustomerData] = useState([])
   const [doctorsCount, setDoctorsCount] = useState(0);
   const [customersCount, setCustomersCount] = useState(0);
   const [adviceCount, setAdviceCount] = useState(0);
-  const fetchData = () => {
+  const fetchData = async () => {
     treatmentTimesAPI.todayTimesCount().then((res) => setTodayTimesCount(res));
     doctorAPI.count().then((res) => setDoctorsCount(res));
     customerAPI.registeredCount().then((res) => setCustomersCount(res));
     customerAPI.adviceCount().then((res) => setAdviceCount(res));
+    const res = await customerAPI.list();
+    setCustomerData(res)
   };
 
   useEffect(() => {
@@ -354,11 +358,11 @@ function HomePage() {
         >
           <Row style={{ width: "100%" }} align="middle" justify="space-between">
             <Col span={4}>Үйлчлүүлэгчийн нэр</Col>
-            <Col span={4}>Код</Col>
-            <Col span={4}>Төрсөн он сар өдөр</Col>
+            <Col span={4}>И-мэйл</Col>
             <Col span={4}>Хүйс</Col>
-            <Col span={4}>Өвчний мэдээлэл</Col>
             <Col span={4}>Утасны дугаар</Col>
+            <Col span={4}>Status</Col>
+            <Col span={4}></Col>
           </Row>
         </div>
         <div
@@ -369,51 +373,7 @@ function HomePage() {
             padding: "10px",
           }}
         >
-          <CunstommerNews
-            image="ninja.png"
-            name="Ц.Оргил"
-            code="0001"
-            birthday="2021.10.11"
-            gander="Эрэгтэй"
-            disease_information="Ханиад"
-            phone="95646214"
-          />
-          <CunstommerNews
-            image="ninja.png"
-            name="Ц.Оргил"
-            code="0001"
-            birthday="2021.10.11"
-            gander="Эрэгтэй"
-            disease_information="Ханиад"
-            phone="95646214"
-          />
-          <CunstommerNews
-            image="ninja.png"
-            name="Ц.Оргил"
-            code="0001"
-            birthday="2021.10.11"
-            gander="Эрэгтэй"
-            disease_information="Ханиад"
-            phone="95646214"
-          />
-          <CunstommerNews
-            image="ninja.png"
-            name="Ц.Оргил"
-            code="0001"
-            birthday="2021.10.11"
-            gander="Эрэгтэй"
-            disease_information="Ханиад"
-            phone="95646214"
-          />
-          <CunstommerNews
-            image="ninja.png"
-            name="Ц.Оргил"
-            code="0001"
-            birthday="2021.10.11"
-            gander="Эрэгтэй"
-            disease_information="Ханиад"
-            phone="95646214"
-          />
+          {customerdata.map((e) => <Customers image={e?.image} name={`${e?.first_name} ${e?.last_name}`} birthday={e.email} gender={e.gender} phone={e.phone} id={e.id} rate={e?.rate} />)}
         </div>
       </div>
     </>
