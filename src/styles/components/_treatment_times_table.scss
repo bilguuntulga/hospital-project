@@ -1,0 +1,16 @@
+.treatment_times_table {
+  &_header {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    .header_title {
+      font-size: large;
+    }
+  }
+
+  .times_list_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
