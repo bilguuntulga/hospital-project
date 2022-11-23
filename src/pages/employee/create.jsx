@@ -49,6 +49,7 @@ function DoctorCreate() {
             async () => {
                 await doctorAPI.create(values);
                 navigate(-1);
+                
             },
             {
                 pending: "Хадаглаж байна",
