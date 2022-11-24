@@ -4,6 +4,8 @@ import { servicesAPI } from '../../apis'
 import { Button, Col, Row } from 'antd'
 import { Link } from 'react-router-dom'
 import PageLoading from '../../components/PageLoading'
+import { PlusOutlined } from '@ant-design/icons'
+import DoctorCard from '../../components/doctors/DoctorCard'
 
 
 const ServicePage = () => {
@@ -31,7 +33,7 @@ const ServicePage = () => {
       <Row justify="end">
         <Col>
           {
-            user?.role == "ADMIN" ? <Link to="create"><Button>Нэмэх</Button></Link> : ""
+            user?.role == "ADMIN" ? <Link to="create"><Button icon={<PlusOutlined />}>Нэмэх</Button></Link> : ""
           }
 
         </Col>
@@ -39,7 +41,10 @@ const ServicePage = () => {
       <br />
       <div className='services_wrapper'>
         {
-          servicedata.map((e, i) => <Link to={`${e.id}`}><Service name={e?.name} image={e?.images[0]} desc={e?.desc} type={e?.type} price={e?.price} service={e?.service} /></Link>)
+          // servicedata.map((e, i) => <Link to={`${e.id}`}><Service name={e?.name} image={e?.images[0]} desc={e?.desc} type={e?.type} price={e?.price} service={e?.service} /></Link>)
+        }
+        {
+          servicedata.map((e) => <DoctorCard image={e?.images[0]} name={e?.name} url={e.id} role={e.price} />)
         }
       </div>
 

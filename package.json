@@ -2,7 +2,7 @@
   "name": "hospital",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://192.168.0.122:6093",
+  "proxy": "http://192.168.0.122:64536",
   "homepage": "./",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",

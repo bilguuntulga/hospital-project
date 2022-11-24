@@ -26,6 +26,7 @@ const customerModel = {
   gender: "",
   blood_type: "",
   family_status: "",
+  desc:"",
 }
 
 const treatmentModel = {
@@ -50,6 +51,7 @@ const customerValidationSchema = yup.object().shape({
   gender: yup.string().required("Заавал бөгдөнө үү"),
   blood_type: yup.string().required("Заавал бөгдөнө үү"),
   family_status: yup.string().required("Заавал бөгдөнө үү"),
+  desc: yup.string().optional(),
 });
 
 const CustomerDetail = () => {
@@ -245,8 +247,7 @@ const CustomerDetail = () => {
     <>
       <div className='customer_detail_container'>
         <div>
-
-          <p style={{ fontSize: "24px", marginLeft: "50px", marginBottom: "0" }}>Үйлчлүүлэгчийн мэдээлэл</p>
+          <p style={{ fontSize: "24px", marginBottom: "0" }}>Үйлчлүүлэгчийн мэдээлэл</p>
           <Row justify="end">
             <Col style={{ marginRight: "30px" }}>
               <Space><Button onClick={() => customerDelete()} style={{ backgroundColor: "#FF706F", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Устгах</Button><Button onClick={showModal} style={{ backgroundColor: "#CA79C6", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Шинэчлэх</Button></Space>
@@ -328,6 +329,11 @@ const CustomerDetail = () => {
                           <Input.TextArea className='input' name='address' />
                         </Form.Item>
                       </Col>
+                      <Col span={24}>
+                        <Form.Item name="desc">
+                          <Input.TextArea style={{height:"90px"}} name='desc' />
+                        </Form.Item>
+                      </Col>
                     </Row>
                     <SubmitButton block>Хадгалах</SubmitButton>
                   </Form>
@@ -336,8 +342,8 @@ const CustomerDetail = () => {
             </Col>
           </Row>
           <br />
-          <Row style={{ marginLeft: "30px" }}>
-            <Col span={5}>
+          <Row style={{ width: "100%" }} justify="space-between">
+            <Col span={4}>
               <div className='custommer_detail_image'>
                 <img src={customerdetail?.image} style={{ borderRadius: "47px" }} width="200px" height="200px" alt="" />
               </div>
@@ -381,35 +387,26 @@ const CustomerDetail = () => {
             </Col>
           </Row>
           <br />
-          <Row style={{ marginLeft: "30px" }} gutter={20}>
-            <Col span={14}>
-              <div className='customer_detail_table'>
-                <PageHeader extra={<Button onClick={() => createTreatment()}>Үйлчилгээ нэмэх</Button>} />
-                <Table bordere={false} columns={columns} dataSource={treadment} pagination={{ defaultPageSize: 3 }} />
-                <Modal footer={false} title="Эмчилгээ" open={isShowTreatmentModal} onOk={service_handleok} onCancel={serviceCancel}>
-                  <Formik validationSchema={treatmentValidationSchema} initialValues={treatmentInitialValues} onSubmit={treatmentOnSubmit} enableReinitialize>
-                    {({ values }) => <Form layout='vertical'>
-                      <Form.Item name="doctor">
-                        <SelectDoctor name="doctor" />
-                      </Form.Item>
-                      <Form.Item name="services">
-                        <SelectService name="services" multi={true} />
-                      </Form.Item>
-                      <Form.Item name="date">
-                        <RangePicker name='date' style={{ width: "100%" }} />
-                      </Form.Item>
-                      <SubmitButton icon={<SaveOutlined />} block>Хадаглах</SubmitButton>
-                    </Form>}
-                  </Formik>
-                </Modal>
-              </div>
-            </Col>
-            <Col span={8}>
-              <div className='general_information'>
-
-              </div>
-            </Col>
-          </Row>
+          <div className='customer_detail_table'>
+            <PageHeader extra={<Button onClick={() => createTreatment()}>Үйлчилгээ нэмэх</Button>} />
+            <Table bordere={false} columns={columns} dataSource={treadment} pagination={{ defaultPageSize: 3 }} />
+            <Modal footer={false} title="Эмчилгээ" open={isShowTreatmentModal} onOk={service_handleok} onCancel={serviceCancel}>
+              <Formik validationSchema={treatmentValidationSchema} initialValues={treatmentInitialValues} onSubmit={treatmentOnSubmit} enableReinitialize>
+                {({ values }) => <Form layout='vertical'>
+                  <Form.Item name="doctor">
+                    <SelectDoctor name="doctor" />
+                  </Form.Item>
+                  <Form.Item name="services">
+                    <SelectService name="services" multi={true} />
+                  </Form.Item>
+                  <Form.Item name="date">
+                    <RangePicker name='date' style={{ width: "100%" }} />
+                  </Form.Item>
+                  <SubmitButton icon={<SaveOutlined />} block>Хадаглах</SubmitButton>
+                </Form>}
+              </Formik>
+            </Modal>
+          </div>
         </div>
       </div>
     </>

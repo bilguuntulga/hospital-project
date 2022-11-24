@@ -31,7 +31,7 @@ function HomePage() {
 
   return (
     <>
-      <div style={{ width: "95%" }}>
+      <div style={{ width: "100%" }}>
         <Row gutter={10} justify="space-between" style={{ width: "100%" }}>
           <Col span={6}>
             <div className="columns">

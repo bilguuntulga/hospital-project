@@ -1,9 +1,11 @@
-import { Button, Col, Input, Row, Space } from 'antd'
+import { Button, Col, Input, Pagination, Row, Skeleton, Space } from 'antd'
 import Customers from '../../components/Customers'
 import React, { memo, useEffect, useRef, useState } from 'react'
 import { customerAPI } from '../../apis'
 import PageLoading from '../../components/PageLoading'
 import { Link } from 'react-router-dom'
+import { PlusOutlined } from '@ant-design/icons'
+import { Select } from 'formik-antd'
 
 const Customer__Page = () => {
   const [customerdata, setCustomerData] = useState([])
@@ -21,16 +23,23 @@ const Customer__Page = () => {
 
   const onSearch = async (values) => {
     setLoading(true);
-    const res = await customerAPI.search(values)
+    const res = await customerAPI.search({
+      name: values,
+      email: values,
+      phone: values
+    })
     setCustomerData(res)
     setLoading(false);
+  }
+
+  const onPaginationChange = async (page, pageSize) => {
+    console.log("PAGE", page);
+    console.log("PAGE SIZE", pageSize);
   }
 
   useEffect(() => {
     fetchData();
   }, [])
-
-  if (loading) return <PageLoading />
 
   return (
     <div className='customer__container'>
@@ -38,25 +47,12 @@ const Customer__Page = () => {
         <Row justify="space-between">
           <Col>
             <div className="search__container">
-              <Input ref={nameRef} placeholder='Нэр' suffix={<img src='search_icon.png'
-                onClick={() => onSearch({
-                  name: nameRef?.current?.input?.value.toString().trim()
-                })} />} />
-              <Input ref={phoneRef} placeholder='Утас' suffix={<img src='search_icon.png'
-                onClick={() => onSearch({
-                  phone: phoneRef?.current?.input?.value.toString().trim()
-                })}
-              />} />
-              <Input ref={emailRef} placeholder='И-мэйл' suffix={<img src='search_icon.png'
-                onClick={() => onSearch({
-                  email: emailRef?.current?.input?.value.toString().trim()
-                })}
-              />} />
+              <Input ref={nameRef} placeholder='Хайх' suffix={<img src='search_icon.png'
+                onClick={() => onSearch(nameRef?.current?.input?.value.toString().trim())} />} />
             </div>
           </Col>
           <Col>
-            <Link to="create"><Button>Нэмэх</Button></Link>
-
+            <Link to="create"><Button icon={<PlusOutlined />} >Нэмэх</Button></Link>
           </Col>
         </Row>
         <div
@@ -70,7 +66,6 @@ const Customer__Page = () => {
             placeItems: "center",
           }}
         >
-
           <Row style={{ width: "100%" }} align="middle" justify="space-between">
             <Col span={4}>Үйлчлүүлэгчийн нэр</Col>
             <Col span={4}>И-мэйл</Col>
@@ -80,8 +75,16 @@ const Customer__Page = () => {
             <Col span={4}></Col>
           </Row>
         </div>
-        {customerdata.map((e) => <Customers image={e?.image} name={`${e?.first_name} ${e?.last_name}`} birthday={e.email} gender={e.gender} phone={e.phone} id={e.id} rate={e?.rate} />)}
-
+        {loading ? <Skeleton /> : customerdata.map((e) =>
+          <Customers image={e?.image}
+            id={e.id}
+            name={`${e?.first_name} ${e?.last_name}`}
+            birthday={e.email}
+            gender={e.gender}
+            phone={e.phone}
+            rate={e?.rate}
+          />)}
+        <Pagination defaultCurrent={1} total={100} onChange={onPaginationChange} showSizeChanger={false} />
       </Space>
     </div>
   )
