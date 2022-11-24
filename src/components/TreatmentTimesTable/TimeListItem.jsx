@@ -96,7 +96,7 @@ function TimeListItem({
         footer={null}
         onCancel={() => setShowModal(false)}
       >
-        <TreatmentTimeForm id={id} />
+        <TreatmentTimeForm id={id} refreshTable={refreshTable} />
       </Modal>
       <ToastContainer />
     </>

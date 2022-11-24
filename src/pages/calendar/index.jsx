@@ -70,7 +70,6 @@ const CalendarApp = () => {
 
   const onTimePickerChange = async (value, name, setFieldValue) => {
     setFieldValue("doctor", "");
-    setFieldValue(name, value);
 
     const formStartTime = new Date(value[0]);
     const formEndTime = new Date(value[1]);
@@ -84,6 +83,8 @@ const CalendarApp = () => {
     end_time.setHours(formEndTime.getHours());
     end_time.setMinutes(formEndTime.getMinutes());
     end_time.setSeconds(0);
+
+    setFieldValue(name, [start_time, end_time]);
 
     setDoctorsLoading(true);
     const res = await doctorAPI.findAvailable({

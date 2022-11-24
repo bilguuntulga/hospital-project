@@ -1,5 +1,5 @@
-import { LoadingOutlined, SaveOutlined } from "@ant-design/icons";
-import { Skeleton, Spin } from "antd";
+import { SaveOutlined } from "@ant-design/icons";
+import { Skeleton, TimePicker } from "antd";
 import { Formik } from "formik";
 import { DatePicker, Form, Input, Select, SubmitButton } from "formik-antd";
 import React, { memo, useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import moment from "moment/moment";
 
 const model = {
   customer_phone: "",
+  date: null,
   time: [],
   doctor: "",
 };
@@ -24,7 +25,7 @@ const validationSchema = yup.object().shape({
   doctor: yup.string().required("Эмч сонгон уу"),
 });
 
-function TreatmentTimeForm({ id = "" }) {
+function TreatmentTimeForm({ id = "", refreshTable }) {
   const [initialValues, setInitialValues] = useState(model);
   const [doctors, setDoctors] = useState([]);
   const [doctorsLoading, setDoctorsLoading] = useState(false);
@@ -33,10 +34,11 @@ function TreatmentTimeForm({ id = "" }) {
   const onSubmit = async (values) => {
     await toast.promise(
       async () => {
-        if (id) await treatmentTimesAPI.update(values);
-        else
+        if (id) {
+          await treatmentTimesAPI.update(values);
+        } else
           await treatmentTimesAPI.create({
-            customer_phone: values?.customer_phone?.trim(),
+            customer_phone: values?.customer_phone,
             doctor: values?.doctor,
             start_time: values?.time[0],
             end_time: values?.time[1],
@@ -48,18 +50,38 @@ function TreatmentTimeForm({ id = "" }) {
         success: "Амжилттай",
       }
     );
+
+    refreshTable();
   };
 
-  const onRangePickerChange = async (value, setFieldValue) => {
-    setFieldValue("doctor", "");
+  const onRangePickerChange = async (value, setFieldValue, values) => {
+    if (!values.date) return;
+
     setDoctorsLoading(true);
+    setFieldValue("doctor", "");
+
+    const startTime = new Date(values.date);
+    const newStartTime = new Date(value[0]);
+    startTime.setHours(newStartTime.getHours());
+    startTime.setMinutes(newStartTime.getMinutes());
+    startTime.setSeconds(0);
+
+    const endTime = new Date(values.date);
+    const newEndTime = new Date(value[1]);
+    endTime.setHours(newEndTime.getHours());
+    endTime.setMinutes(newEndTime.getMinutes());
+    endTime.setSeconds(0);
+
     const res = await doctorAPI.findAvailable({
-      start_time: value[0],
-      end_time: value[1],
+      start_time: startTime,
+      end_time: endTime,
     });
+
+    setFieldValue("start_time", startTime);
+    setFieldValue("end_time", endTime);
+
     setDoctors(res);
     setDoctorsLoading(false);
-    fetchData();
   };
 
   const fetchData = async () => {
@@ -91,12 +113,7 @@ function TreatmentTimeForm({ id = "" }) {
     fetchData();
   }, []);
 
-  if (loading)
-    return (
-      <Spin
-        indicator={<LoadingOutlined spin style={{ fontSize: "2.5rem" }} />}
-      />
-    );
+  if (loading) return <Skeleton />;
 
   return (
     <div>
@@ -114,11 +131,16 @@ function TreatmentTimeForm({ id = "" }) {
             >
               <Input name="customer_phone" />
             </Form.Item>
+            <Form.Item name="date" label="Өдөр">
+              <DatePicker name="date" style={{ width: "100%" }} />
+            </Form.Item>
             <Form.Item name="time" label="Цаг">
-              <DatePicker.RangePicker
+              <TimePicker.RangePicker
+                defaultPickerValue={values.time}
                 name="time"
-                onChange={(e) => onRangePickerChange(e, setFieldValue)}
+                onChange={(e) => onRangePickerChange(e, setFieldValue, values)}
                 style={{ width: "100%" }}
+                format="HH:mm"
               />
             </Form.Item>
             <Form.Item name="doctor" label="Эмч">
