@@ -1,105 +1,102 @@
-import { Button, Card, Col, Row, Space, Table, Modal, Descriptions, message, PageHeader, Select, } from 'antd';
-import React, { useEffect, useState } from 'react'
+import { Button, Col, Row, Space, Table, Modal, message, PageHeader } from 'antd';
+import React, { memo, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { customerAPI, treadmentsAPI, doctorAPI } from '../../../apis';
+import { customerAPI, treatmentsAPI } from '../../../apis';
 import "./style.css"
 import * as yup from "yup"
 import { Formik } from 'formik';
-import { Form, Input, SubmitButton, DatePicker } from 'formik-antd';
+import { Form, Input, SubmitButton, DatePicker, Select } from 'formik-antd';
 import moment from 'moment';
 import UploadImage from "../../../components/form/UploadImage";
 import SelectService from '../../../components/form/SelectService';
 import SelectDoctor from "../../../components/form/SelectDoctor";
-import { DeleteOutlined, EditFilled, EditOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+import { DeleteOutlined, EditFilled, EditOutlined, ExclamationCircleFilled, SaveOutlined } from '@ant-design/icons';
+import ProfileImageUpload from "../../../components/form/ProfileImageUpload";
 import { toast } from 'react-toastify';
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
-const model = {
+const customerModel = {
   email: "",
   phone: "",
   address: "",
   image: "",
   first_name: "",
   last_name: "",
+  gender: "",
+  blood_type: "",
+  family_status: "",
 }
 
-const serviceCreateModel = {
+const treatmentModel = {
   doctor: "",
   services: [],
   date: []
 }
 
-const serviceValidationSchema = yup.object().shape({
+const treatmentValidationSchema = yup.object().shape({
   doctor: yup.string().required("Заавал бөглөнө үү"),
   services: yup.array().required("Заавал бөглөнө үү"),
   date: yup.array().required("Заавал бөглөнө үү"),
-})
+});
 
-const showDeleteConfirm = (id) => {
-  confirm({
-    title: `Устгахдаа итгэлтэй байэа уу`,
-    icon: <ExclamationCircleFilled />,
-    okText: 'Тийм',
-    okType: 'danger',
-    cancelText: 'Үгүй',
-    async onOk() {
-      await treadmentsAPI.remove(id)
-    },
-    onCancel() {
-    },
-  });
-};
+const customerValidationSchema = yup.object().shape({
+  email: yup.string().email().required("Заавал бөгдөнө үү"),
+  phone: yup.string().required("Заавал бөгдөнө үү"),
+  address: yup.string().required("Заавал бөгдөнө үү"),
+  first_name: yup.string().required("Заавал бөгдөнө үү"),
+  last_name: yup.string().required("Заавал бөгдөнө үү"),
+  image: yup.string().required("Заавал бөгдөнө үү"),
+  gender: yup.string().required("Заавал бөгдөнө үү"),
+  blood_type: yup.string().required("Заавал бөгдөнө үү"),
+  family_status: yup.string().required("Заавал бөгдөнө үү"),
+});
 
-const Detail = () => {
+const CustomerDetail = () => {
   const [customerdetail, setCustomerDetail] = useState({});
   const [treadment, setTreadMent] = useState([])
-  const [doctorData, setDoctorData] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isServiceModal, setIsServiceModal] = useState(false)
-  const [initialValues, setInitialValues] = useState(model);
-  const [onetreadmentdata, setOneTreadmentData] = useState(serviceCreateModel)
+  const [isShowTreatmentModal, setIsShowTreatmentModal] = useState(false)
+  const [customerInitialValues, setCustomerInitialValues] = useState(customerModel);
+  const [treatmentInitialValues, setTreatmentInitialValues] = useState(treatmentModel)
   const { id } = useParams();
-  const now = new Date();
 
-  const fetechData = async () => {
-    const res = await customerAPI.get(id)
-    const res2 = await treadmentsAPI.list(id)
-    const doctorRes = await doctorAPI.list();
-    setDoctorData(doctorRes)
-    setCustomerDetail(res)
-    setInitialValues(res);
-    setTreadMent(res2)
+  const fetchData = async () => {
+    const customer = await customerAPI.get(id);
+    const treatments = await treatmentsAPI.list(id);
+    setCustomerDetail(customer)
+    setCustomerInitialValues(customer);
+    setTreadMent(treatments);
   }
-  const serviceShowModal = async (id) => {
-    const res = await treadmentsAPI.get(id);
+
+  const showTreatmentModal = async (id) => {
+    const res = await treatmentsAPI.get(id);
     res.doctor = res?.doctor?.id;
     res.customer = res?.customer?.id;
-    let servicesIds = [];
 
     const services = res.services;
     delete res.services;
-    let service_ids = [];
+    let serviceIds = [];
     for (let i = 0; i < services.length; i++) {
-      service_ids.push(services[i].id);
+      serviceIds.push(services[i].id);
     }
-    res.services = service_ids;
+    res.services = serviceIds;
 
     const startTime = moment(res?.start_time);
     const endTime = moment(res?.end_time);
 
     res.date = [startTime, endTime];
 
-    setOneTreadmentData(res)
-    setIsServiceModal(true)
+    setTreatmentInitialValues(res)
+    setIsShowTreatmentModal(true)
   }
 
   const service_handleok = () => {
-    setIsServiceModal(false)
+    setIsShowTreatmentModal(false)
   }
 
   const serviceCancel = () => {
-    setIsServiceModal(false)
+    setIsShowTreatmentModal(false)
   }
 
   const showModal = () => {
@@ -113,53 +110,68 @@ const Detail = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   useEffect(() => {
-    fetechData()
+    fetchData()
   }, [])
 
-  const validationSchema = {
-    email: yup.string().email().required("Заавал бөгдөнө үү"),
-    phone: yup.number().required("Заавал бөгдөнө үү"),
-    address: yup.string().required("Заавал бөгдөнө үү"),
-    first_name: yup.string().required("Заавал бөгдөнө үү"),
-    last_name: yup.string().required("Заавал бөгдөнө үү"),
-    image: yup.string().required("Заавал бөгдөнө үү")
-  }
-  const serviceOnSubmit = async (values) => {
+  const treatmentOnSubmit = async (values) => {
     const start_time = values.date[0];
     const end_time = values.date[1];
     delete values.date;
 
     try {
-      await treadmentsAPI.create({
-        ...values,
-        customer: id,
-        start_time,
-        end_time
-      })
-      message.success("Амжилттай")
+      if (values.id) {
+        delete values.customer;
+        delete values.created_by;
+        delete values.updated_by;
+        await treatmentsAPI.update({
+          ...values,
+          customer: id
+        });
+      } else {
+        await treatmentsAPI.create({
+          ...values,
+          customer: id,
+          start_time,
+          end_time
+        });
+      }
+      message.success("Амжилттай");
+      fetchData();
+      setIsShowTreatmentModal(false);
     } catch (error) {
-      message.error(error)
+      message.error(error?.message);
     }
   }
 
-  const onCreate = async () => {
-    setOneTreadmentData(serviceCreateModel);
-    setIsServiceModal(true);
+  const createTreatment = async () => {
+    setTreatmentInitialValues(treatmentModel);
+    setIsShowTreatmentModal(true);
   }
 
-  const Submit = async (values) => {
-    console.log(values)
+  const showDeleteConfirm = (id) => {
+    confirm({
+      title: `Устгах даа итгэлтэй байэа уу`,
+      icon: <ExclamationCircleFilled />,
+      okText: 'Тийм',
+      okType: 'danger',
+      cancelText: 'Үгүй',
+      async onOk() {
+        await treatmentsAPI.remove(id)
+        fetchData();
+      },
+    });
+  };
+
+  const customerOnSubmit = async (values) => {
     delete values.created_by;
     delete values.updated_by;
     toast.promise(
       async () => {
-        if (values.id)
-          await treadmentsAPI.update(values);
-        else
-          await treadmentsAPI.create(values);
-
-        serviceShowModal(false)
+        customerAPI.update(values);
+        setIsModalOpen(false)
+        fetchData()
       },
       {
         pending: "Хадаглаж байна",
@@ -167,8 +179,8 @@ const Detail = () => {
         success: "Амжилттай",
       }
     );
-
   }
+
   const columns = [
     {
       title: "Огноо",
@@ -188,7 +200,7 @@ const Detail = () => {
     },
     {
       title: "Үйлдэд",
-      render: (_, row) => <><Button icon={<EditOutlined onClick={() => serviceShowModal(row.id)} />} />&#160; <Button icon={<DeleteOutlined onClick={() => showDeleteConfirm(row.id)} />} /></>
+      render: (_, row) => <><Button icon={<EditOutlined onClick={() => showTreatmentModal(row.id)} />} />&#160; <Button icon={<DeleteOutlined onClick={() => showDeleteConfirm(row.id)} />} /></>
 
     }
   ]
@@ -202,15 +214,20 @@ const Detail = () => {
           <Row justify="end">
             <Col style={{ marginRight: "30px" }}>
               <Space><Button style={{ backgroundColor: "#FF706F", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Устгах</Button><Button onClick={showModal} style={{ backgroundColor: "#CA79C6", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Шинэчлэх</Button></Space>
-              <Modal footer={false} title={`${initialValues?.first_name}`} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={Submit}>
+              <Modal footer={false} title={`${customerInitialValues?.first_name} ${customerInitialValues?.last_name}`} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Formik initialValues={customerInitialValues} validationSchema={customerValidationSchema} onSubmit={customerOnSubmit}>
                   <Form layout='vertical'>
+                    <Row justify="center" style={{ textAlign: "center" }}>
+                      <Form.Item name="image">
+                        <Col span={24}>
+                          <ProfileImageUpload name="image" />
+                        </Col>
+                      </Form.Item>
+                    </Row>
                     <Row gutter={30}>
                       <Col>
-                        <Form.Item name="first_name" label="Нэр">
-                          <Select>
-                            <Select.Option></Select.Option>
-                          </Select>
+                        <Form.Item name="first_name" label="Овог">
+                          <Input className='input' name='first_name' />
                         </Form.Item>
                       </Col>
                       <Col>
@@ -228,18 +245,55 @@ const Detail = () => {
                           <Input className='input' name='phone' />
                         </Form.Item>
                       </Col>
-                      <Col>
-                        <Form.Item name="address" label="Хаяг">
-                          <Input className='input' name='address' />
+                      <Col span={12}>
+                        <Form.Item label="gender" name="gender">
+                          <Select name="gender">
+                            <Select.Option value="MALE">
+                              Эрэгтэй
+                            </Select.Option>
+                            <Select.Option value="FEMALE">
+                              Эмэгтэй
+                            </Select.Option>
+                          </Select>
                         </Form.Item>
                       </Col>
-                      <Col>
-                        <Form.Item name="image" label="Хаяг">
-                          <UploadImage name="image" />
+                      <Col span={12}>
+                        <Form.Item name="blood_type" label="blood_type">
+                          <Select name="blood_type">
+                            <Select.Option value="1-0">
+                              1-0
+                            </Select.Option>
+                            <Select.Option value="2-A">
+                              2-A
+                            </Select.Option>
+                            <Select.Option value="3-B">
+                              3-B
+                            </Select.Option>
+                            <Select.Option value="4-AB">
+                              4-AB
+                            </Select.Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col span={24}>
+                        <Form.Item name="family_status">
+                          <Select name="family_status">
+                            <Select.Option value="MARRIED">
+                              Гэрлэсэн
+                            </Select.Option>
+                            <Select.Option value="NOT_MARRIED">
+                              Гэрлээгүй
+                            </Select.Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col span={24}>
+                        <Form.Item name="address">
+                          <Input.TextArea className='input' name='address' />
                         </Form.Item>
                       </Col>
                     </Row>
-                    <SubmitButton htmlType='submit'>Хадгалах</SubmitButton>
+                    <SubmitButton block>Хадгалах</SubmitButton>
                   </Form>
                 </Formik>
               </Modal>
@@ -257,7 +311,7 @@ const Detail = () => {
                 <p>Өвчтөны түүх</p>
                 <p style={{ color: "rgba(39, 30, 74, 0.8);" }}>{customerdetail?.other}</p>
                 <br />
-                <Row justify="space-between" style={{ width: "70%" }} >
+                <Row justify="space-between" style={{ textAlign: "center" }}>
                   <Col>
                     <p>Нэр</p>
                     <p> {customerdetail?.first_name} {customerdetail?.last_name}</p>
@@ -270,6 +324,19 @@ const Detail = () => {
                     <p>Хаяг</p>
                     {customerdetail.address}
                   </Col>
+                  <Col>
+                    <p>Хүйс</p>
+                    {customerdetail?.gender == "MALE" ? "Эрэгтэй" : "Эмэгтэй"}
+                  </Col>
+                  <Col>
+                    <p>Цусны бүлэг</p>
+                    {customerdetail?.blood_type}
+                  </Col>
+                  <Col>
+                    <p>Гэр бүлийн байдал</p>
+                    {customerdetail?.family_status == "MARRIED" ? "Гэрлэсэн " : "Гэрлээгүй"}
+                  </Col>
+
                 </Row>
 
               </div>
@@ -279,10 +346,10 @@ const Detail = () => {
           <Row style={{ marginLeft: "30px" }} gutter={20}>
             <Col span={14}>
               <div className='customer_detail_table'>
-                <PageHeader extra={<Button onClick={() => onCreate()}>Үйлчилгээ нэмэх</Button>} />
+                <PageHeader extra={<Button onClick={() => createTreatment()}>Үйлчилгээ нэмэх</Button>} />
                 <Table bordere={false} columns={columns} dataSource={treadment} pagination={{ defaultPageSize: 3 }} />
-                <Modal footer={false} title=" " open={isServiceModal} onOk={service_handleok} onCancel={serviceCancel}>
-                  <Formik validationSchema={serviceValidationSchema} initialValues={onetreadmentdata} onSubmit={serviceOnSubmit} enableReinitialize>
+                <Modal footer={false} title="Эмчилгээ" open={isShowTreatmentModal} onOk={service_handleok} onCancel={serviceCancel}>
+                  <Formik validationSchema={treatmentValidationSchema} initialValues={treatmentInitialValues} onSubmit={treatmentOnSubmit} enableReinitialize>
                     {({ values }) => <Form layout='vertical'>
                       <Form.Item name="doctor">
                         <SelectDoctor name="doctor" />
@@ -293,7 +360,7 @@ const Detail = () => {
                       <Form.Item name="date">
                         <RangePicker name='date' style={{ width: "100%" }} />
                       </Form.Item>
-                      <SubmitButton block>Үүсгэх</SubmitButton>
+                      <SubmitButton icon={<SaveOutlined />} block>Хадаглах</SubmitButton>
                     </Form>}
                   </Formik>
                 </Modal>
@@ -311,4 +378,4 @@ const Detail = () => {
   )
 }
 
-export default Detail
+export default memo(CustomerDetail);
