@@ -70,6 +70,7 @@ function App() {
                     path="/customer/:id"
                     element={<Custommer_detail />}
                   />
+                  <Route exact path="/customer/create" element={<Custommer_Add />} />
                   <Route exact path="/test" element={<Test />} />
                   <Route exact path="/profile" element={<Profile />} />
                   <Route exact path="/report" element={<Report />} />

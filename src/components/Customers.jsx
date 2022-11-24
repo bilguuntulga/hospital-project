@@ -33,8 +33,7 @@ function Customers({ image, name, birthday, gender, phone, id, rate }) {
                 <div className={rate == "GOOD" ? "good" : "bad"} style={{ width: "30px", height: "30px", borderRadius: "50%" }} />
             </Col>
             <Col span={4}>
-                <Link to={`/customer/
-                ${id}`}>
+                <Link to={`/customer/${id}`}>
                     <Button style={{ borderRadius: "5px", width: "88px", height: "27px", fontFamily: "kanit", fontStyle: "normal", fontWeight: "300", fontSize: "12px", lineHeight: "18px", border: "none" }}>Дэлгэрэнгүй</Button>
                 </Link>
             </Col>

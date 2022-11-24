@@ -1,12 +1,12 @@
 import { Button, Col, Row, Space, Table, Modal, message, PageHeader } from 'antd';
 import React, { memo, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { customerAPI, treatmentsAPI } from '../../../apis';
 import "./style.css"
 import * as yup from "yup"
 import { Formik } from 'formik';
 import { Form, Input, SubmitButton, DatePicker, Select } from 'formik-antd';
-import moment from 'moment';
+import moment, { relativeTimeRounding } from 'moment';
 import UploadImage from "../../../components/form/UploadImage";
 import SelectService from '../../../components/form/SelectService';
 import SelectDoctor from "../../../components/form/SelectDoctor";
@@ -60,6 +60,7 @@ const CustomerDetail = () => {
   const [customerInitialValues, setCustomerInitialValues] = useState(customerModel);
   const [treatmentInitialValues, setTreatmentInitialValues] = useState(treatmentModel)
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     const customer = await customerAPI.get(id);
@@ -163,6 +164,34 @@ const CustomerDetail = () => {
       },
     });
   };
+  const customerDelete = async () => {
+    confirm({
+      title: `${customerdetail?.first_name} ${customerdetail?.last_name} хэрэглэгчийг устгахдаа итгэлтэй байна уу?`,
+      icon: <ExclamationCircleFilled />,
+      okText: 'Тийм',
+      okType: 'danger',
+      cancelText: 'Үгүй',
+      onOk: async () => {
+        toast.promise(
+          async () => {
+            await customerAPI.remove(id);
+            setIsModalOpen(false);
+            message.success("Амжилттай");
+            navigate(-1);
+            await fetchData();
+          },
+          {
+            pending: "Хадаглаж байна",
+            error: "Амжилтгүй",
+            success: "Амжилттай",
+          }
+        );
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
 
   const customerOnSubmit = async (values) => {
     delete values.created_by;
@@ -204,7 +233,14 @@ const CustomerDetail = () => {
 
     }
   ]
-
+  const UNDIFINEDCheck = (text) => {
+    if (text == "MARRIED") {
+      return "Гэрлэсэн"
+    }
+    else {
+      return "Гэрлээгүй"
+    }
+  }
   return (
     <>
       <div className='customer_detail_container'>
@@ -213,7 +249,7 @@ const CustomerDetail = () => {
           <p style={{ fontSize: "24px", marginLeft: "50px", marginBottom: "0" }}>Үйлчлүүлэгчийн мэдээлэл</p>
           <Row justify="end">
             <Col style={{ marginRight: "30px" }}>
-              <Space><Button style={{ backgroundColor: "#FF706F", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Устгах</Button><Button onClick={showModal} style={{ backgroundColor: "#CA79C6", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Шинэчлэх</Button></Space>
+              <Space><Button onClick={() => customerDelete()} style={{ backgroundColor: "#FF706F", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Устгах</Button><Button onClick={showModal} style={{ backgroundColor: "#CA79C6", borderRadius: "5px", width: "154px", height: "29px", color: "white", border: "none" }}>Шинэчлэх</Button></Space>
               <Modal footer={false} title={`${customerInitialValues?.first_name} ${customerInitialValues?.last_name}`} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <Formik initialValues={customerInitialValues} validationSchema={customerValidationSchema} onSubmit={customerOnSubmit}>
                   <Form layout='vertical'>
@@ -260,8 +296,8 @@ const CustomerDetail = () => {
                       <Col span={12}>
                         <Form.Item name="blood_type" label="blood_type">
                           <Select name="blood_type">
-                            <Select.Option value="1-0">
-                              1-0
+                            <Select.Option value="1-O">
+                              1-O
                             </Select.Option>
                             <Select.Option value="2-A">
                               2-A
@@ -326,15 +362,17 @@ const CustomerDetail = () => {
                   </Col>
                   <Col>
                     <p>Хүйс</p>
-                    {customerdetail?.gender == "MALE" ? "Эрэгтэй" : "Эмэгтэй"}
+                    {customerdetail?.family_status == "UNDIFINED" ? "Мэдээлэл дутуу байна " : customerdetail?.family_status == "MALE" ? "Эрэгтэй" : "Эмэгтэй"}
                   </Col>
                   <Col>
                     <p>Цусны бүлэг</p>
                     {customerdetail?.blood_type}
+                    {customerdetail?.family_status == "UNDIFINED" ? "Мэдээлэл дутуу байна " : customerdetail?.blood_type}
+
                   </Col>
                   <Col>
                     <p>Гэр бүлийн байдал</p>
-                    {customerdetail?.family_status == "MARRIED" ? "Гэрлэсэн " : "Гэрлээгүй"}
+                    {customerdetail?.family_status == "UNDIFINED" ? "Мэдээлэл дутуу байна " : UNDIFINEDCheck(customerdetail?.family_status)}
                   </Col>
 
                 </Row>

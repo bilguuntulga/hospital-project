@@ -3,6 +3,7 @@ import Customers from '../../components/Customers'
 import React, { memo, useEffect, useRef, useState } from 'react'
 import { customerAPI } from '../../apis'
 import PageLoading from '../../components/PageLoading'
+import { Link } from 'react-router-dom'
 
 const Customer__Page = () => {
   const [customerdata, setCustomerData] = useState([])
@@ -33,7 +34,6 @@ const Customer__Page = () => {
 
   return (
     <div className='customer__container'>
-      <p style={{ fontSize: "20px" }}><b>Registration</b></p>
       <Space direction='vertical' style={{ width: "100%" }}>
         <Row justify="space-between">
           <Col>
@@ -55,7 +55,8 @@ const Customer__Page = () => {
             </div>
           </Col>
           <Col>
-            <Button>Нэмэх</Button>
+            <Link to="create"><Button>Нэмэх</Button></Link>
+
           </Col>
         </Row>
         <div
