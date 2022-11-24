@@ -34,7 +34,7 @@ function Customers({ image, name, birthday, gender, phone, id, rate }) {
             </Col>
             <Col span={4}>
                 <Link to={`/customer/${id}`}>
-                    <Button style={{ borderRadius: "5px", width: "88px", height: "27px", fontFamily: "kanit", fontStyle: "normal", fontWeight: "300", fontSize: "12px", lineHeight: "18px", border: "none" }}>Дэлгэрэнгүй</Button>
+                    <Button>Дэлгэрэнгүй</Button>
                 </Link>
             </Col>
         </Row>

@@ -10,7 +10,7 @@ import { Formik } from 'formik'
 import { Form, Input } from 'formik-antd'
 import UploadImage from "../../components/form/UploadImage"
 import { toast } from 'react-toastify'
-import { ExclamationCircleFilled } from '@ant-design/icons'
+import { ExclamationCircleFilled, PlusOutlined } from '@ant-design/icons'
 const { confirm } = Modal;
 
 
@@ -106,7 +106,7 @@ const ResourcePage = () => {
 
   return (
     <div className='resource'>
-      <PageHeader extra={<Button onClick={onCreate}>Нэмэх</Button>} />
+      <PageHeader extra={<Button onClick={onCreate} icon={<PlusOutlined />}>Нэмэх</Button>} />
       <div className="resource_wrapper">
         {rescourcedata.map((e) =>
           <div key={e?.id} onClick={() => showModal(e.id)}>
