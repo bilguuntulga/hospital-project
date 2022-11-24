@@ -112,7 +112,7 @@ function Work_user_page() {
         setUserList(res)
         setLoading(false);
     }
-    useEffect(() => {
+    React.useEffect(() => {
         fetchData();
     }, [])
 

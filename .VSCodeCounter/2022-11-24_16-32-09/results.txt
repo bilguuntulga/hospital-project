@@ -1,0 +1,151 @@
+Date : 2022-11-24 16:32:09
+Directory : /home/mn/Documents/Hospital/hospital-project/src
+Total : 93 files,  5100 codes, 26 comments, 515 blanks, all 5641 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| JavaScript React |         43 |      4,011 |         13 |        326 |      4,350 |
+| SCSS             |         32 |        603 |          4 |        109 |        716 |
+| JavaScript       |         13 |        281 |          0 |         44 |        325 |
+| CSS              |          5 |        205 |          9 |         36 |        250 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                             | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                |         93 |      5,100 |         26 |        515 |      5,641 |
+| apis                                                                                             |          9 |         72 |          0 |         11 |         83 |
+| components                                                                                       |         21 |      1,093 |         12 |        109 |      1,214 |
+| components/TreatmentTimesTable                                                                   |          2 |        147 |          0 |         13 |        160 |
+| components/doctors                                                                               |          2 |        108 |          0 |          6 |        114 |
+| components/form                                                                                  |          5 |        395 |          0 |         46 |        441 |
+| components/layout                                                                                |          3 |        130 |         12 |         15 |        157 |
+| components/layout/SideMenu                                                                       |          2 |         57 |          0 |          7 |         64 |
+| pages                                                                                            |         26 |      3,110 |         10 |        250 |      3,370 |
+| pages/bonus                                                                                      |          1 |          7 |          0 |          2 |          9 |
+| pages/calendar                                                                                   |          1 |        154 |          0 |         20 |        174 |
+| pages/custommer                                                                                  |          8 |        897 |          8 |         84 |        989 |
+| pages/custommer/advice                                                                           |          2 |         76 |          0 |          6 |         82 |
+| pages/custommer/custommerAdd                                                                     |          2 |        209 |          7 |         16 |        232 |
+| pages/custommer/custommerNews                                                                    |          3 |        532 |          1 |         52 |        585 |
+| pages/employee                                                                                   |          3 |        652 |          0 |         33 |        685 |
+| pages/home                                                                                       |          4 |        535 |          1 |         30 |        566 |
+| pages/login                                                                                      |          1 |        102 |          0 |         11 |        113 |
+| pages/profile                                                                                    |          1 |        183 |          0 |         11 |        194 |
+| pages/report                                                                                     |          1 |          7 |          0 |          2 |          9 |
+| pages/resource                                                                                   |          1 |        134 |          0 |         13 |        147 |
+| pages/service                                                                                    |          3 |        199 |          0 |         24 |        223 |
+| pages/test                                                                                       |          1 |         38 |          0 |          4 |         42 |
+| pages/work_users                                                                                 |          1 |        202 |          1 |         16 |        219 |
+| styles                                                                                           |         32 |        603 |          4 |        109 |        716 |
+| styles/abstracts                                                                                 |          4 |          0 |          0 |          4 |          4 |
+| styles/base                                                                                      |          2 |          4 |          0 |          3 |          7 |
+| styles/components                                                                                |         12 |        313 |          0 |         53 |        366 |
+| styles/layout                                                                                    |          1 |          0 |          0 |          1 |          1 |
+| styles/pages                                                                                     |         11 |        207 |          0 |         28 |        235 |
+| styles/themes                                                                                    |          1 |         65 |          4 |         14 |         83 |
+| utils                                                                                            |          2 |        102 |          0 |         26 |        128 |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                         | language         | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| /home/mn/Documents/Hospital/hospital-project/src/App.js                                          | JavaScript       |         91 |          0 |          5 |         96 |
+| /home/mn/Documents/Hospital/hospital-project/src/apis/auth.js                                    | JavaScript       |          6 |          0 |          2 |          8 |
+| /home/mn/Documents/Hospital/hospital-project/src/apis/customers.js                               | JavaScript       |         14 |          0 |          3 |         17 |
+| /home/mn/Documents/Hospital/hospital-project/src/apis/doctors.js                                 | JavaScript       |          9 |          0 |          2 |         11 |
+| /home/mn/Documents/Hospital/hospital-project/src/apis/index.js                                   | JavaScript       |          9 |          0 |          1 |         10 |
+| /home/mn/Documents/Hospital/hospital-project/src/apis/resource.js                                | JavaScript       |          6 |          0 |          0 |          6 |
+| /home/mn/Documents/Hospital/hospital-project/src/apis/services.js                                | JavaScript       |          6 |          0 |          0 |          6 |
+| /home/mn/Documents/Hospital/hospital-project/src/apis/treatment-times.js                         | JavaScript       |          9 |          0 |          2 |         11 |
+| /home/mn/Documents/Hospital/hospital-project/src/apis/treatments.js                              | JavaScript       |          6 |          0 |          1 |          7 |
+| /home/mn/Documents/Hospital/hospital-project/src/apis/user.js                                    | JavaScript       |          7 |          0 |          0 |          7 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/Customers.jsx                        | JavaScript React |         45 |          0 |          3 |         48 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/DoctorWorkingHours.jsx               | JavaScript React |         31 |          0 |          3 |         34 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/OrderTimeCustommer.jsx               | JavaScript React |         25 |          0 |          3 |         28 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/PageLoading.jsx                      | JavaScript React |         13 |          0 |          3 |         16 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/TreatmentTimesTable/TimeListItem.jsx | JavaScript React |        101 |          0 |          6 |        107 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/TreatmentTimesTable/index.jsx        | JavaScript React |         46 |          0 |          7 |         53 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/WorkingHoursTable.jsx                | JavaScript React |        122 |          0 |          7 |        129 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/advice.jsx                           | JavaScript React |         19 |          0 |          3 |         22 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/doctors.jsx                          | JavaScript React |         15 |          0 |          2 |         17 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/doctors/DoctorCard.jsx               | JavaScript React |         16 |          0 |          3 |         19 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/doctors/ExperiencesField.jsx         | JavaScript React |         92 |          0 |          3 |         95 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/form/ProfileImageUpload.jsx          | JavaScript React |         56 |          0 |          6 |         62 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/form/SelectDoctor.jsx                | JavaScript React |         28 |          0 |          7 |         35 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/form/SelectService.jsx               | JavaScript React |         28 |          0 |          7 |         35 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/form/TreatmentTimeForm.jsx           | JavaScript React |        153 |          0 |         18 |        171 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/form/UploadImage.jsx                 | JavaScript React |        130 |          0 |          8 |        138 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/layout/Header.jsx                    | JavaScript React |         73 |         12 |          8 |         93 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/layout/SideMenu/NavButton.jsx        | JavaScript React |         24 |          0 |          4 |         28 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/layout/SideMenu/index.jsx            | JavaScript React |         33 |          0 |          3 |         36 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/service.jsx                          | JavaScript React |         27 |          0 |          3 |         30 |
+| /home/mn/Documents/Hospital/hospital-project/src/components/services.jsx                         | JavaScript React |         16 |          0 |          2 |         18 |
+| /home/mn/Documents/Hospital/hospital-project/src/index.js                                        | JavaScript       |         16 |          0 |          2 |         18 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/bonus/index.jsx                           | JavaScript React |          7 |          0 |          2 |          9 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/calendar/index.jsx                        | JavaScript React |        154 |          0 |         20 |        174 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/custommer/advice/index.jsx                | JavaScript React |         57 |          0 |          5 |         62 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/custommer/advice/style.css                | CSS              |         19 |          0 |          1 |         20 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/custommer/custommerAdd/index.jsx          | JavaScript React |        181 |          0 |         10 |        191 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/custommer/custommerAdd/style.css          | CSS              |         28 |          7 |          6 |         41 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/custommer/custommerNews/detail.jsx        | JavaScript React |        389 |          0 |         30 |        419 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/custommer/custommerNews/index.jsx         | JavaScript React |         73 |          0 |         10 |         83 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/custommer/custommerNews/style.css         | CSS              |         70 |          1 |         12 |         83 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/custommer/index.jsx                       | JavaScript React |         80 |          0 |         10 |         90 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/employee/EmployeeDetail.jsx               | JavaScript React |        443 |          0 |         15 |        458 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/employee/create.jsx                       | JavaScript React |        151 |          0 |         11 |        162 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/employee/index.jsx                        | JavaScript React |         58 |          0 |          7 |         65 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/home/PieCharts.jsx                        | JavaScript React |         40 |          0 |          7 |         47 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/home/chart.jsx                            | JavaScript React |         41 |          0 |          4 |         45 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/home/index.jsx                            | JavaScript React |        379 |          0 |          5 |        384 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/home/style.css                            | CSS              |         75 |          1 |         14 |         90 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/login/index.jsx                           | JavaScript React |        102 |          0 |         11 |        113 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/profile/index.jsx                         | JavaScript React |        183 |          0 |         11 |        194 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/report/index.jsx                          | JavaScript React |          7 |          0 |          2 |          9 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/resource/index.jsx                        | JavaScript React |        134 |          0 |         13 |        147 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/service/ServiceDetail.jsx                 | JavaScript React |         10 |          0 |          3 |         13 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/service/form.jsx                          | JavaScript React |        148 |          0 |         12 |        160 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/service/index.jsx                         | JavaScript React |         41 |          0 |          9 |         50 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/test/index.jsx                            | JavaScript React |         38 |          0 |          4 |         42 |
+| /home/mn/Documents/Hospital/hospital-project/src/pages/work_users/index.jsx                      | JavaScript React |        202 |          1 |         16 |        219 |
+| /home/mn/Documents/Hospital/hospital-project/src/style.css                                       | CSS              |         13 |          0 |          3 |         16 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/abstracts/_functions.scss                | SCSS             |          0 |          0 |          1 |          1 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/abstracts/_mixins.scss                   | SCSS             |          0 |          0 |          1 |          1 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/abstracts/_placeholders.scss             | SCSS             |          0 |          0 |          1 |          1 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/abstracts/_variables.scss                | SCSS             |          0 |          0 |          1 |          1 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/base/_reset.scss                         | SCSS             |          0 |          0 |          1 |          1 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/base/_typography.scss                    | SCSS             |          4 |          0 |          2 |          6 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_client.scss                  | SCSS             |         24 |          0 |          4 |         28 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_customer.scss                | SCSS             |          6 |          0 |          1 |          7 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_doctor_card.scss             | SCSS             |         29 |          0 |          6 |         35 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_experiences_field.scss       | SCSS             |         20 |          0 |          4 |         24 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_header.scss                  | SCSS             |         47 |          0 |          7 |         54 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_nav_button.scss              | SCSS             |         29 |          0 |          4 |         33 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_page_loading.scss            | SCSS             |          6 |          0 |          1 |          7 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_profile_image_upload.scss    | SCSS             |         29 |          0 |          5 |         34 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_side_menu.scss               | SCSS             |         33 |          0 |          5 |         38 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_time_list_item.scss          | SCSS             |         46 |          0 |         10 |         56 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_treatment_times_table.scss   | SCSS             |         18 |          0 |          3 |         21 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/components/_upload_image.scss            | SCSS             |         26 |          0 |          3 |         29 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/layout/_header.scss                      | SCSS             |          0 |          0 |          1 |          1 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/main.scss                                | SCSS             |         14 |          0 |          6 |         20 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_calendar.scss                     | SCSS             |          5 |          0 |          1 |          6 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_customer.scss                     | SCSS             |         13 |          0 |          0 |         13 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_employee.scss                     | SCSS             |          8 |          0 |          1 |          9 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_employee_detail.scss              | SCSS             |        112 |          0 |         17 |        129 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_login.scss                        | SCSS             |         33 |          0 |          4 |         37 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_profile.scss                      | SCSS             |          9 |          0 |          2 |         11 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_resource.scss                     | SCSS             |          7 |          0 |          0 |          7 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_resourceDetail.scss               | SCSS             |          5 |          0 |          1 |          6 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_service.scss                      | SCSS             |          7 |          0 |          0 |          7 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/_test.scss                         | SCSS             |          3 |          0 |          1 |          4 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/pages/service_detrail.scss               | SCSS             |          5 |          0 |          1 |          6 |
+| /home/mn/Documents/Hospital/hospital-project/src/styles/themes/_themes.scss                      | SCSS             |         65 |          4 |         14 |         83 |
+| /home/mn/Documents/Hospital/hospital-project/src/utils/request.js                                | JavaScript       |         82 |          0 |         23 |        105 |
+| /home/mn/Documents/Hospital/hospital-project/src/utils/upload.js                                 | JavaScript       |         20 |          0 |          3 |         23 |
+| Total                                                                                            |                  |      5,100 |         26 |        515 |      5,641 |
++--------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

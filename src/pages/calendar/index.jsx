@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Calendar, Card, Col, Modal, Row, Skeleton, TimePicker } from "antd";
+import { Calendar, Card, Modal, Skeleton, TimePicker } from "antd";
 import { Field, Formik } from "formik";
 import { Form, Input, Select, SubmitButton } from "formik-antd";
 import * as yup from "yup";
@@ -42,12 +42,12 @@ const CalendarApp = () => {
     const date = new Date(value);
 
     if (date < now) return;
-
+    setInitialValues(model);
     setSelectedDate(date);
     setModalVisible(true);
   };
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { resetForm }) => {
     await toast.promise(
       async () => {
         await treatmentTimesAPI.create({
@@ -63,6 +63,7 @@ const CalendarApp = () => {
         success: "Амжилттай",
       }
     );
+    resetForm();
 
     setModalVisible(false);
     timesTableRef.current();
