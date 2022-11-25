@@ -1,8 +1,9 @@
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { doctorAPI } from "../../apis";
-import { Button, Card, Col, Modal, Row, Timeline } from "antd";
+import { Button, Card, Col, Modal, PageHeader, Row, Timeline } from "antd";
 import {
+  ArrowLeftOutlined,
   ArrowRightOutlined,
   DeleteOutlined,
   ExclamationCircleOutlined,
@@ -385,6 +386,7 @@ const EmployeeDetail = () => {
 
   return (
     <div className="employee_detail_container">
+      <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
       <div className="header" style={{ width: "100%", height: "112px" }}>
         <p className="name">
           <b>
@@ -412,33 +414,29 @@ const EmployeeDetail = () => {
         <div className="tab_container">
           <div className="buttons_wrapper">
             <div
-              className={`tab_button ${
-                clickedButton === "biography" ? "active_tab_button" : ""
-              }`}
+              className={`tab_button ${clickedButton === "biography" ? "active_tab_button" : ""
+                }`}
               onClick={() => setClickedButton("biography")}
             >
               Эмчийн намтар
             </div>
             <div
-              className={`tab_button ${
-                clickedButton === "experiences" ? "active_tab_button" : ""
-              }`}
+              className={`tab_button ${clickedButton === "experiences" ? "active_tab_button" : ""
+                }`}
               onClick={() => setClickedButton("experiences")}
             >
               Туршлага
             </div>
             <div
-              className={`tab_button ${
-                clickedButton === "time_schedule" ? "active_tab_button" : ""
-              }`}
+              className={`tab_button ${clickedButton === "time_schedule" ? "active_tab_button" : ""
+                }`}
               onClick={() => setClickedButton("time_schedule")}
             >
               Цагийн хуваарь
             </div>
             <div
-              className={`tab_button ${
-                clickedButton === "settings" ? "active_tab_button" : ""
-              }`}
+              className={`tab_button ${clickedButton === "settings" ? "active_tab_button" : ""
+                }`}
               onClick={() => setClickedButton("settings")}
             >
               Тохиргоо

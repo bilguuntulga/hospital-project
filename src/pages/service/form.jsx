@@ -1,12 +1,12 @@
-import { Button, Col, Row } from 'antd'
+import { Button, Card, Col, PageHeader, Row } from 'antd'
 import { Formik } from 'formik'
 import { Form, Input, Select } from 'formik-antd'
 import React, { memo, useEffect, useState } from 'react'
 import UploadImage from '../../components/form/UploadImage'
 import * as yup from "yup";
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { servicesAPI } from '../../apis'
-import { DeleteColumnOutlined, DeleteOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, DeleteColumnOutlined, DeleteOutlined } from '@ant-design/icons';
 import { toast, ToastContainer } from "react-toastify";
 import SelectService from '../../components/form/SelectService';
 import PageLoading from '../../components/PageLoading'
@@ -35,7 +35,7 @@ function ServiceForm({ create = true }) {
     const [user, setUser] = useState();
     const { id } = useParams();
     const navigate = useNavigate();
-
+    const { pathname } = useLocation()
     const onSubmit = async (values) => {
         if (create) {
             toast.promise(
@@ -105,55 +105,59 @@ function ServiceForm({ create = true }) {
 
 
     return (
-        <div>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
-                <Form layout='vertical'>
-                    <Row gutter={50}>
-                        <Col span={10}>
-                            <Form.Item name="images">
-                                <UploadImage name="images" mode='multi' width={400} />
-                            </Form.Item>
-                        </Col>
-                        <Col span={14}>
-                            <Form.Item name="name" label="Нэр">
-                                <Input name="name" />
-                            </Form.Item>
-                            <Form.Item name="desc" label="Тайлбар">
-                                <Input name="desc" />
-                            </Form.Item>
-                            <Form.Item name="type" label="Төрөл">
-                                <Select name='type'>
-                                    <Select.Option value="PACKAGE">
-                                        Багц
-                                    </Select.Option>
-                                    <Select.Option value="BASIC">
-                                        Үндсэн
-                                    </Select.Option>
-                                    <Select.Option value="ADDITIONAL">
-                                        Нэмэлт
-                                    </Select.Option>
-                                </Select>
-                            </Form.Item>
-                            <Form.Item name="price" label="Үнэ">
-                                <Input type='number' name="price" />
-                            </Form.Item>
-                            <Form.Item name="services" label="Үйлчилгээнүүд">
-                                <SelectService name="services" multi={true} />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={12} justify="end">
-                        <Col>
-                            <Button htmlType='submit'>Хадаглах</Button>
-                        </Col>
-                        <Col>
-                            <Button icon={<DeleteOutlined />} onClick={onDelete}>Устгах</Button>
-                        </Col>
-                    </Row>
-                </Form>
-            </Formik>
-            <ToastContainer />
-        </div>
+        <>
+            <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
+
+            <Card>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
+                    <Form layout='vertical'>
+                        <Row gutter={50}>
+                            <Col span={10}>
+                                <Form.Item name="images">
+                                    <UploadImage name="images" mode='multi' width={400} />
+                                </Form.Item>
+                            </Col>
+                            <Col span={14}>
+                                <Form.Item name="name" label="Нэр">
+                                    <Input name="name" />
+                                </Form.Item>
+                                <Form.Item name="desc" label="Тайлбар">
+                                    <Input name="desc" />
+                                </Form.Item>
+                                <Form.Item name="type" label="Төрөл">
+                                    <Select name='type'>
+                                        <Select.Option value="PACKAGE">
+                                            Багц
+                                        </Select.Option>
+                                        <Select.Option value="BASIC">
+                                            Үндсэн
+                                        </Select.Option>
+                                        <Select.Option value="ADDITIONAL">
+                                            Нэмэлт
+                                        </Select.Option>
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item name="price" label="Үнэ">
+                                    <Input type='number' name="price" />
+                                </Form.Item>
+                                <Form.Item name="services" label="Үйлчилгээнүүд">
+                                    <SelectService name="services" multi={true} />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row gutter={12} justify="end">
+                            <Col>
+                                <Button htmlType='submit'>Хадаглах</Button>
+                            </Col>
+                            <Col>
+                                {pathname == "/services/create" ? "" : <Button icon={<DeleteOutlined />} onClick={onDelete}>Устгах</Button>}
+                            </Col>
+                        </Row>
+                    </Form>
+                </Formik>
+                <ToastContainer />
+            </Card>
+        </>
     )
 }
 

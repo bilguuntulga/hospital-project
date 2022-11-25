@@ -10,7 +10,7 @@ import moment, { relativeTimeRounding } from 'moment';
 import UploadImage from "../../../components/form/UploadImage";
 import SelectService from '../../../components/form/SelectService';
 import SelectDoctor from "../../../components/form/SelectDoctor";
-import { DeleteOutlined, EditFilled, EditOutlined, ExclamationCircleFilled, SaveOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, DeleteOutlined, EditFilled, EditOutlined, ExclamationCircleFilled, SaveOutlined } from '@ant-design/icons';
 import ProfileImageUpload from "../../../components/form/ProfileImageUpload";
 import { toast } from 'react-toastify';
 const { RangePicker } = DatePicker;
@@ -26,7 +26,7 @@ const customerModel = {
   gender: "",
   blood_type: "",
   family_status: "",
-  desc:"",
+  desc: "",
 }
 
 const treatmentModel = {
@@ -245,7 +245,9 @@ const CustomerDetail = () => {
   }
   return (
     <>
+      <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
       <div className='customer_detail_container'>
+
         <div>
           <p style={{ fontSize: "24px", marginBottom: "0" }}>Үйлчлүүлэгчийн мэдээлэл</p>
           <Row justify="end">
@@ -331,7 +333,7 @@ const CustomerDetail = () => {
                       </Col>
                       <Col span={24}>
                         <Form.Item name="desc">
-                          <Input.TextArea style={{height:"90px"}} name='desc' />
+                          <Input.TextArea style={{ height: "90px" }} name='desc' />
                         </Form.Item>
                       </Col>
                     </Row>

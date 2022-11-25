@@ -3,7 +3,7 @@ import ServiceForm from "./form";
 
 function ServiceDetail() {
   return (
-    <div className='service__detail'>
+    <div>
       <ServiceForm create={false} />
     </div>
 
