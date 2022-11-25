@@ -52,6 +52,7 @@ const Customer__Page = () => {
             </div>
           </Col>
           <Col>
+          <Button>Зөвөлгөө</Button>	&nbsp;
             <Link to="create"><Button icon={<PlusOutlined />} >Нэмэх</Button></Link>
           </Col>
         </Row>

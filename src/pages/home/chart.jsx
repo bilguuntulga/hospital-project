@@ -32,7 +32,7 @@ class App extends Component {
                             options={this.state.options}
                             series={this.state.series}
                             type="histogram"
-                            width="400"
+                            width="100%"
                             height="130"
                         />
                     </div>

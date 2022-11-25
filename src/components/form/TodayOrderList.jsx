@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment/moment'
 
-const OrderTimeCustomer = ({ image, name, bool, time, link }) => {
+const OrderTimeCustomer = ({ image, name, time, doctorName }) => {
     return (
         <div>
             <Row justify="space-between" align="middle" style={{ marginTop: "10px" }}>
@@ -14,12 +14,10 @@ const OrderTimeCustomer = ({ image, name, bool, time, link }) => {
                 </Col>
                 <Col>
                     <b>{name}</b>
-                    <p>{moment(time).format('lll')}</p>
+                    <p>{doctorName}</p>
                 </Col>
                 <Col>
-                    {bool ? <Link to={link}><Button style={{ backgroundColor: "#FEEEEF", borderRadius: "5px", width: "88px", height: "27px", fontFamily: "kanit", fontStyle: "normal", fontWeight: "300", fontSize: "12px", lineHeight: "18px", border: "none" }}>Дэлгэрэнгүй</Button> </Link> :
-                        <p style={{ marginLeft: "150px" }}>{time}</p>
-                    }
+                    <p>{moment(time).format("Өнөөдөр: "+"LT")}</p>
                 </Col>
             </Row>
         </div>

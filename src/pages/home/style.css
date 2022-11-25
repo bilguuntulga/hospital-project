@@ -2,7 +2,6 @@
 .columns {
     background: #FFFFFF;
     box-shadow: 0px 4px 15px rgba(216, 210, 252, 0.64);
-    border-radius: 15px;
     height: 100px;
     display: grid;
     place-items: center;
@@ -43,7 +42,6 @@
 }
 
 .button {
-    background: none;
     border: none;
     height: 55px;
     border-radius: 5px;
@@ -51,17 +49,12 @@
 
 .button_container {
     display: flex;
+    margin-left: 15px;
+    place-items: center;
     gap: 25px;
 
 }
 
-.ant-btn:hover,
-.ant-btn:focus {
-    background: rgba(217, 217, 217, 0.6);
-    border-radius: 5px;
-    color: gray;
-    border: none;
-}
 
 .sevenDay {
     background-image: url(../../../public/sevenDay.png);
@@ -72,18 +65,4 @@
     color: white;
     display: grid;
     place-items: center;
-}
-
-.sevenDayButton {
-    width: 77px;
-    height: 32px;
-    font-family: 'Kanit';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 21px;
-    background: #7A6EFD;
-    border-radius: 6px;
-    border: none;
-    color: white;
 }
