@@ -1,4 +1,4 @@
-import { Col, Row, Skeleton } from "antd";
+import { Button, Col, Row, Skeleton } from "antd";
 import { Formik } from "formik";
 import { DatePicker, Form, Input, SubmitButton } from "formik-antd";
 import React, { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import { SearchOutlined } from "@ant-design/icons";
 
 const searchModel = {
   date: [],
-  phone_number: "",
+  customer_phone: "",
   doctor: "",
 };
 
@@ -48,24 +48,31 @@ function TreatmentTimesTable({ refreshRef }) {
     <div className="treatment_times_table">
       <Formik onSubmit={onSubmit} initialValues={searchModel}>
         <Form layout="vertical">
-          <Row justify="space-between" align="middle">
-            <Col span={7}>
+          <Row justify="space-around" align="middle">
+            <Col span={6}>
               <Form.Item name="date" label="Он, Сар, Өдөр">
                 <DatePicker.RangePicker name="date" style={{ width: "100%" }} />
               </Form.Item>
             </Col>
-            <Col span={7}>
+            <Col span={6}>
               <Form.Item name="customer_phone" label="Үйлчлүүлэгчийн утас">
                 <Input name="customer_phone" />
               </Form.Item>
             </Col>
-            <Col span={7}>
+            <Col span={6}>
               <Form.Item name="doctor" label="Эмч">
                 <SelectDoctor name="doctor" />
               </Form.Item>
             </Col>
             <Col>
-              <SubmitButton icon={<SearchOutlined />}>Хайх</SubmitButton>
+              <Row gutter={10}>
+                <Col>
+                  <SubmitButton icon={<SearchOutlined />}>Хайх</SubmitButton>
+                </Col>
+                <Col>
+                  <Button onClick={() => fetchData()}>Ирээдүй</Button>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Form>
@@ -81,10 +88,14 @@ function TreatmentTimesTable({ refreshRef }) {
             key={time?.id ?? i}
             id={time.id}
             customerImage={time?.customer?.image}
-            customerName={`${time?.customer?.first_name} ${time?.customer?.last_name}`}
+            customerName={`${time?.customer?.first_name ?? "Устсан"} ${
+              time?.customer?.last_name ?? "үйлчлүүлэгч"
+            }`}
             customerPhone={time?.customer?.phone}
             doctorImage={time?.doctor?.profile_img}
-            doctorName={`${time?.doctor?.first_name} ${time?.doctor?.last_name}`}
+            doctorName={`${time?.doctor?.first_name ?? "Устсан"} ${
+              time?.doctor?.last_name ?? "Эмч"
+            }`}
             doctorPhone={time?.doctor?.phone}
             startTime={time?.start_time}
             endTime={time?.end_time}

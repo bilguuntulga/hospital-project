@@ -59,7 +59,10 @@ function TimeListItem({
       <div className="time_list_item">
         <div className="profile_wrapper">
           <div className="time_list_item_image_wrapper">
-            <img src={customerImage} alt={customerName} />
+            <img
+              src={customerImage ?? "/images/profile_img.jpg"}
+              alt={customerName}
+            />
           </div>
           <div>
             <div className="name">{customerName}</div>
@@ -80,14 +83,16 @@ function TimeListItem({
             {moment(startTime).format("YYYY/MM/DD HH:mm:ss")}-
             {moment(endTime).format("HH:mm:ss")}
           </div>
-          <div className="actions_wrapper">
-            <div className="edit_time" onClick={() => setShowModal(true)}>
-              <EditOutlined />
+          {new Date(endTime) > new Date() ? (
+            <div className="actions_wrapper">
+              <div className="edit_time" onClick={() => setShowModal(true)}>
+                <EditOutlined />
+              </div>
+              <div className="delete_time" onClick={remove}>
+                <DeleteOutlined />
+              </div>
             </div>
-            <div className="delete_time" onClick={remove}>
-              <DeleteOutlined />
-            </div>
-          </div>
+          ) : null}
         </div>
       </div>
       <Modal
