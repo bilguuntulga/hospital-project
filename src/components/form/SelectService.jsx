@@ -21,7 +21,7 @@ function SelectService({ name, multi = false }) {
   if (loading) return <Skeleton paragraph={{rows: 0}} />
 
   return (
-    <Select name={name} mode={multi ? "multiple" : ""}>
+    <Select name={name} mode={multi ? "multiple" : ""} showSearch>
       {data.map((e, i) => (
         <Select.Option key={i} value={e?.id}>
           {e?.name}

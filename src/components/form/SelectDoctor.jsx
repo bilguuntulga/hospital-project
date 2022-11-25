@@ -21,7 +21,7 @@ function SelectDoctor({ name, multi = false }) {
     if (loading) return <Skeleton paragraph={{ rows: 0 }} />
 
     return (
-        <Select name={name} mode={multi ? "multiple" : ""}>
+        <Select name={name} mode={multi ? "multiple" : ""} showSearch={true}>
             {data.map((e, i) => (
                 <Select.Option key={i} value={e?.id}>
                     {`${e?.first_name} ${e?.last_name}`}

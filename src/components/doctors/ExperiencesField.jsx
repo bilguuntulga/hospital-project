@@ -47,30 +47,15 @@ function ExperiencesField({ name, values }) {
                         </div>
                       )}
                     </Field>
-                    <button
-                      className="experience_action_button bg-green text-white rounded-full"
-                      type="button"
-                      onClick={() =>
-                        arrayHelpers.insert(index, {
-                          date: "",
-                          desc: "",
-                          role: "",
-                        })
-                      }
-                    >
-                      +
-                    </button>
-                    <button
-                      className="experience_action_button bg-red text-white rounded-full"
-                      type="button"
+                    <Button
                       onClick={() => arrayHelpers.remove(index)}
                     >
                       -
-                    </button>
+                    </Button>
                   </div>
                 );
               })
-            ) : (
+            ) : ""}
               <Button
                 onClick={() =>
                   arrayHelpers.push({
@@ -83,7 +68,6 @@ function ExperiencesField({ name, values }) {
               >
                 Туршлага нэмэх
               </Button>
-            )}
           </div>
         )}
       />
