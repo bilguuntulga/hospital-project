@@ -98,7 +98,7 @@ const RegistrationPage = () => {
                 <Row gutter={20}>
                   <Col span={12}>
                     <Form.Item name="gender">
-                      <Select name="gender" className="input" bordered={false}>
+                      <Select name="gender" className="input" bordered={false} showSearch>
                         <Select.Option value="MALE" >Эрэгтэй</Select.Option>
                         <Select.Option value="FEMALE">Эмэгтэй</Select.Option>
                       </Select>

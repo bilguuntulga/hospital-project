@@ -10,13 +10,17 @@ import { Select } from 'formik-antd'
 const Customer__Page = () => {
   const [customerdata, setCustomerData] = useState([])
   const [loading, setLoading] = useState(true);
+  const [adviceData, setAdviceData] = useState([]);
+  const [isadvice, setISAdvice] = useState(true)
   const nameRef = useRef();
   const phoneRef = useRef();
   const emailRef = useRef();
 
   const fetchData = async () => {
     setLoading(true);
-    const res = await customerAPI.list()
+    const res = await customerAPI.registered()
+    const advice = await customerAPI.advice();
+    setAdviceData(advice)
     setCustomerData(res)
     setLoading(false);
   }
@@ -52,7 +56,7 @@ const Customer__Page = () => {
             </div>
           </Col>
           <Col>
-          <Button>Зөвөлгөө</Button>	&nbsp;
+            <Button onClick={() => setISAdvice(!isadvice)} className='advice__button'>{isadvice ? "Зөвөлгөө" : "Үйлчлүүлэг "}</Button>	&nbsp;
             <Link to="create"><Button icon={<PlusOutlined />} >Нэмэх</Button></Link>
           </Col>
         </Row>
@@ -76,7 +80,7 @@ const Customer__Page = () => {
             <Col span={4}></Col>
           </Row>
         </div>
-        {loading ? <Skeleton /> : customerdata.map((e) =>
+        {isadvice ? loading ? <Skeleton /> : customerdata.map((e) =>
           <Customers image={e?.image}
             id={e.id}
             name={`${e?.first_name} ${e?.last_name}`}
@@ -84,7 +88,15 @@ const Customer__Page = () => {
             gender={e.gender}
             phone={e.phone}
             rate={e?.rate}
-          />)}
+          />) : loading ? <Skeleton /> : adviceData.map((e) =>
+            <Customers image={e?.image}
+              id={e.id}
+              name={`${e?.first_name} ${e?.last_name}`}
+              birthday={e.email}
+              gender={e.gender}
+              phone={e.phone}
+              rate={e?.rate}
+            />)}
         <Pagination defaultCurrent={1} total={100} onChange={onPaginationChange} showSizeChanger={false} />
       </Space>
     </div>
