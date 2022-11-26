@@ -1,19 +1,20 @@
 @import "./abstracts/functions", "./abstracts//mixins",
-"./abstracts/placeholders", "./abstracts//variables";
+  "./abstracts/placeholders", "./abstracts//variables";
 
 @import "./base/reset", "./base/typography";
 
 @import "./components/upload_image", "./components/profile_image_upload",
-"./components/experiences_field", "./components/page_loading",
-"./components/doctor_card", "./components/side_menu",
-"./components/nav_button", "./components/header", "./components/client",
-"./components/treatment_times_table", "./components/time_list_item", "./components/customer";
+  "./components/experiences_field", "./components/page_loading",
+  "./components/doctor_card", "./components/side_menu",
+  "./components/nav_button", "./components/header", "./components/client",
+  "./components/treatment_times_table", "./components/time_list_item",
+  "./components/customer", "./components/notification_item";
 
 @import "./layout/header";
 
 @import "./pages/test", "./pages/employee_detail", "./pages/profile",
-"./pages/login", "./pages/employee", "./pages/service",
-"./pages/service_detrail.scss", "./pages/customer", "./pages/resource", './pages/home',
-"./pages/resourceDetail", "./pages/calendar";
+  "./pages/login", "./pages/employee", "./pages/service",
+  "./pages/service_detrail.scss", "./pages/customer", "./pages/resource",
+  "./pages/home", "./pages/resourceDetail", "./pages/calendar";
 
 @import "./themes/themes";
