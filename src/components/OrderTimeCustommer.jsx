@@ -8,8 +8,8 @@ const OrderTimeCustomer = ({ image, name, bool, time, link }) => {
         <div>
             <Row justify="space-between" align="middle" style={{ marginTop: "10px" }}>
                 <Col>
-                    <div style={{ backgroundColor: "#E9E9E9", display: "grid", placeItems: "center", width: "50px", height: "50px", borderRadius: "50% " }}>
-                        <img width="29px" height="29px" src={image} alt="" />
+                    <div style={{ backgroundColor: "#E9E9E9", display: "grid", placeItems: "center", width: "50px", height: "50px", borderRadius: "50% " ,padding:"5px"}}>
+                        <img width="100%" height="100%" style={{borderRadius:"50%"}} src={image} alt="" />
                     </div>
                 </Col>
                 <Col>

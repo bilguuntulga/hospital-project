@@ -15,7 +15,7 @@ function Customers({ image, name, birthday, gender, phone, id, rate }) {
                             <img width="40px" height="40px" src={image} alt="" style={{ borderRadius: "50%" }} />
                         </div>
                     </Col>
-                    <Col>
+                    <Col style={{marginTop:"13px"}}>
                         <p>{name}</p>
                     </Col>
                 </Row>
