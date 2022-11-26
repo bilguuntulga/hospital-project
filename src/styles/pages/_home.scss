@@ -6,7 +6,14 @@
         overflow-x: hidden;
         padding: 20px;
         height: 304px;
-
+    }
+    .Not_order__time__content{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding: 20px;
+        height: 304px;
+        display: grid;
+        place-items: center;
     }
 
 }

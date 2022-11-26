@@ -9,6 +9,9 @@
         padding: 15px;
         border-radius: 23px;
         gap: 55px;
+        .ant-switch{
+            width: 150px;
+        }
     }
     .advice__button{
         background: linear-gradient(180deg, #FF706F 0%, #FC0079 100%);

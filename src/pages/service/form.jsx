@@ -6,7 +6,7 @@ import UploadImage from '../../components/form/UploadImage'
 import * as yup from "yup";
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { servicesAPI } from '../../apis'
-import { ArrowLeftOutlined, DeleteColumnOutlined, DeleteOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, DeleteColumnOutlined, DeleteOutlined, SaveOutlined } from '@ant-design/icons';
 import { toast, ToastContainer } from "react-toastify";
 import SelectService from '../../components/form/SelectService';
 import PageLoading from '../../components/PageLoading'
@@ -126,54 +126,67 @@ function ServiceForm({ create = true }) {
     return (
         <>
             <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
-            <Card title="Үйлчилгээ">
+            <Card title="Үйлчилгээ" extra={<Row gutter={30}>
+                <Col>
+                    {pathname == "/services/create" ? "" : <Button icon={<DeleteOutlined />} onClick={onDelete}>Устгах</Button>}
+                </Col>
+                <Col>
+                    <Button icon={<SaveOutlined/>} htmlType='submit'>Хадаглах</Button>
+                </Col>
+            </Row>}>
                 <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
                     {({ values }) => <Form layout='vertical'>
-                        <Row gutter={50}>
+                        <Row gutter={50} align="middle">
                             <Col span={10}>
                                 <Form.Item name="images">
                                     <UploadImage name="images" mode='multi' width={400} />
                                 </Form.Item>
                             </Col>
                             <Col span={14}>
-                                <Form.Item name="name" label="Нэр">
-                                    <Input name="name" />
-                                </Form.Item>
-                                <Form.Item name="desc" label="Тайлбар">
-                                    <Input name="desc" />
-                                </Form.Item>
-                                <Form.Item name="type" label="Төрөл">
-                                    <Select name='type'>
-                                        <Select.Option value="PACKAGE">
-                                            Багц
-                                        </Select.Option>
-                                        <Select.Option value="BASIC">
-                                            Үндсэн
-                                        </Select.Option>
-                                        <Select.Option value="ADDITIONAL">
-                                            Нэмэлт
-                                        </Select.Option>
-                                    </Select>
-                                </Form.Item>
-                                <Form.Item name="price" label="Үнэ">
-                                    <Input type='number' name="price" />
-                                </Form.Item>
+                                <Row gutter={30}>
+                                    <Col span={12}>
+                                        <Form.Item name="name" label="Нэр">
+                                            <Input name="name" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Form.Item name="desc" label="Тайлбар">
+                                            <Input name="desc" />
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                                <Row gutter={30}>
+                                    <Col span={12}>
+                                        <Form.Item name="type" label="Төрөл">
+                                            <Select name='type'>
+                                                <Select.Option value="PACKAGE">
+                                                    Багц
+                                                </Select.Option>
+                                                <Select.Option value="BASIC">
+                                                    Үндсэн
+                                                </Select.Option>
+                                                <Select.Option value="ADDITIONAL">
+                                                    Нэмэлт
+                                                </Select.Option>
+                                            </Select>
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Form.Item name="price" label="Үнэ">
+                                            <Input type='number' name="price" />
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
                                 <Form.Item name="services" label="Үйлчилгээнүүд">
                                     <SelectService name="services" multi={true} />
                                 </Form.Item>
                                 <Form.Item name="resources" label="Нөөц">
                                     <ResourcesSelect name="resources" values={values} />
                                 </Form.Item>
+
                             </Col>
                         </Row>
-                        <Row gutter={12} justify="end">
-                            <Col>
-                                <Button htmlType='submit'>Хадаглах</Button>
-                            </Col>
-                            <Col>
-                                {pathname == "/services/create" ? "" : <Button icon={<DeleteOutlined />} onClick={onDelete}>Устгах</Button>}
-                            </Col>
-                        </Row>
+
                     </Form>}
                 </Formik>
                 <ToastContainer />

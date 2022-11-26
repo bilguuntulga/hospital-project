@@ -1,6 +1,6 @@
-import { Button, Col, Modal, PageHeader, Row } from 'antd'
+import { Button, Col, Modal, PageHeader, Row, Badge } from 'antd'
 import React, { memo, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { createSearchParams, Link } from 'react-router-dom'
 import { resourceAPI } from '../../apis'
 import Doctors from '../../components/doctors'
 import DoctorCard from '../../components/doctors/DoctorCard'
@@ -10,7 +10,7 @@ import { Formik } from 'formik'
 import { Form, Input } from 'formik-antd'
 import UploadImage from "../../components/form/UploadImage"
 import { toast } from 'react-toastify'
-import { ExclamationCircleFilled, PlusOutlined } from '@ant-design/icons'
+import { DeleteOutlined, ExclamationCircleFilled, PlusOutlined, SaveOutlined } from '@ant-design/icons'
 const { confirm } = Modal;
 
 
@@ -102,7 +102,21 @@ const ResourcePage = () => {
     fetchData()
   }, [])
 
+
   if (loading) return <PageLoading />
+
+  const quantityColor = (quantity) => {
+    if (quantity < 15) {
+      return "#d9635b"
+    }
+    else if (quantity > 15 && quantity < 20) {
+      return "#15a5b3"
+    }
+    else if (quantity > 20) {
+      return "#47d6ab"
+    }
+  }
+
 
   return (
     <div className='resource'>
@@ -110,7 +124,9 @@ const ResourcePage = () => {
       <div className="resource_wrapper">
         {rescourcedata.map((e) =>
           <div key={e?.id} onClick={() => showModal(e.id)}>
-            <DoctorCard image={e?.image} name={e?.name} role={e?.quantity} />
+            <Badge.Ribbon text={`${e?.quantity} ширхэг`} color={quantityColor(e?.quantity)}>
+              <DoctorCard image={e?.image} name={e?.name} />
+            </Badge.Ribbon>
           </div>
         )}
       </div>
@@ -130,14 +146,14 @@ const ResourcePage = () => {
             <Form.Item name='quantity'>
               <Input name='quantity' type='number' />
             </Form.Item>
-            <Button style={{ width: "100%" }} htmlType="submit">
+            <Button block icon={<SaveOutlined />} htmlType="submit">
               Хадаглах
             </Button>
           </Form>
         </Formik>
         <br />
         {
-          oneresourceData?.id ? <Button onClick={() => showDeleteConfirm(oneresourceData.id)} style={{ width: "100%" }}>Устгах</Button> : ""
+          oneresourceData?.id ? <Button icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(oneresourceData.id)} style={{ width: "100%" }}>Устгах</Button> : ""
         }
       </Modal>
     </div>

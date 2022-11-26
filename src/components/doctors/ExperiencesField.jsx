@@ -1,4 +1,4 @@
-import { FolderAddOutlined } from "@ant-design/icons";
+import { CloseOutlined, FolderAddOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { Field, FieldArray } from "formik";
 import React, { memo } from "react";
@@ -50,7 +50,7 @@ function ExperiencesField({ name, values }) {
                     <Button
                       onClick={() => arrayHelpers.remove(index)}
                     >
-                      -
+                      <CloseOutlined/>
                     </Button>
                   </div>
                 );

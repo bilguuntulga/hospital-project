@@ -1,4 +1,4 @@
-import { Button, Col, Row, Space, Table, Modal, message, PageHeader } from 'antd';
+import { Button, Col, Row, Space, Table, Modal, message, PageHeader, Switch } from 'antd';
 import React, { memo, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { customerAPI, treatmentsAPI } from '../../../apis';
@@ -27,6 +27,7 @@ const customerModel = {
   blood_type: "",
   family_status: "",
   desc: "",
+  rate:"",
 }
 
 const treatmentModel = {
@@ -52,6 +53,7 @@ const customerValidationSchema = yup.object().shape({
   blood_type: yup.string().required("Заавал бөгдөнө үү"),
   family_status: yup.string().required("Заавал бөгдөнө үү"),
   desc: yup.string().optional(),
+  rate: yup.string().optional(),
 });
 
 const CustomerDetail = () => {
@@ -297,7 +299,7 @@ const CustomerDetail = () => {
                         </Form.Item>
                       </Col>
                       <Col span={12}>
-                        <Form.Item name="blood_type" label="blood_type">
+                        <Form.Item name="blood_type" label="Цусны бүлэг">
                           <Select name="blood_type">
                             <Select.Option value="1-O">
                               1-O
@@ -315,24 +317,33 @@ const CustomerDetail = () => {
                         </Form.Item>
                       </Col>
                       <Col span={24}>
-                        <Form.Item name="family_status">
-                          <Select name="family_status">
-                            <Select.Option value="MARRIED">
-                              Гэрлэсэн
-                            </Select.Option>
-                            <Select.Option value="NOT_MARRIED">
-                              Гэрлээгүй
-                            </Select.Option>
-                          </Select>
+                        <Row gutter={30} >
+                          <Col span={12}>
+                            <Form.Item name="family_status" label="Гэр бүлийн байдал">
+                              <Select name="family_status">
+                                <Select.Option value="MARRIED">
+                                  Гэрлэсэн
+                                </Select.Option>
+                                <Select.Option value="NOT_MARRIED">
+                                  Гэрлээгүй
+                                </Select.Option>
+                              </Select>
+                            </Form.Item>
+                          </Col>
+                          <Col span={6}>
+                            <Form.Item label="Байдал" name="rate">
+                              <Switch name="rate" checkedChildren="Сайн"unCheckedChildren="Муу"/>
+                            </Form.Item>
+                          </Col>
+                        </Row>
+                      </Col>
+                      <Col span={24}>
+                        <Form.Item name="address" label="Гэрийн хайг">
+                          <Input.TextArea name='address' />
                         </Form.Item>
                       </Col>
                       <Col span={24}>
-                        <Form.Item name="address">
-                          <Input.TextArea className='input' name='address' />
-                        </Form.Item>
-                      </Col>
-                      <Col span={24}>
-                        <Form.Item name="desc">
+                        <Form.Item name="desc" label="Тайлбар">
                           <Input.TextArea style={{ height: "90px" }} name='desc' />
                         </Form.Item>
                       </Col>

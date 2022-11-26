@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Empty, Row } from "antd";
 import "./style.css";
 import { UserOutlined } from "@ant-design/icons";
 import OrderTimeCustommer from "../../components/OrderTimeCustommer";
@@ -125,14 +125,14 @@ function HomePage() {
                   borderRadius: "15px",
                 }}
               >
-                <div className="order__time__content">
-                  {orderTimeCustomer.map((e) => <OrderTimeCustommer
+                <div className={orderTimeCustomer?.length > 0 ?"order__time__content":"Not_order__time__content"}>
+                  {orderTimeCustomer?.length > 0 ? orderTimeCustomer.map((e) => <OrderTimeCustommer
                     name={`${e?.customer?.first_name} ${e?.customer?.last_name}`}
                     image={e?.customer?.image}
                     time={e?.start_time}
                     bool={true}
                     link={`/customer/${e?.customer?.id}`}
-                  />)}
+                  />) : <Empty />}
 
                 </div>
               </div>

@@ -53,15 +53,15 @@ function ResourcesSelect({ values, name }) {
                 {values[name] && values[name]?.length > 0 ? (
                     values[name]?.map((resource, i) => <Field name={`${name}.${i}`}>
                         {({ field: { value, name }, form: { setFieldValue } }) => <>
-                            <Row gutter={20} style={{marginBottom: "1rem"}}>
-                                <Col span={6}>
+                            <Row gutter={20} style={{ marginBottom: "1rem" }}>
+                                <Col span={12}>
                                     <Select onChange={(resourceId) => onSelectResource(value, resourceId, name, setFieldValue)} defaultValue={value?.resource}>
                                         {resources.map((e, i) => (
                                             <Select.Option key={i} value={e?.id}>{e?.name}</Select.Option>
                                         ))}
                                     </Select>
                                 </Col>
-                                <Col span={6}>
+                                <Col span={12}>
                                     <Input type='number' defaultValue={value?.quantity} onChange={(e) => onQuantityChnage(value, +e?.target?.value, name, setFieldValue)} />
                                 </Col>
                             </Row>
@@ -72,7 +72,7 @@ function ResourcesSelect({ values, name }) {
                 <Button onClick={() => arrayHelpers.push({
                     resource: "",
                     quantity: 0
-                })} icon={<PlusOutlined />}>Нөөц нэмэх</Button>
+                })} block icon={<PlusOutlined />}>Нөөц нэмэх</Button>
             </>}
         </FieldArray>
     )
