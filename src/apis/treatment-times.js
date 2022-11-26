@@ -10,3 +10,7 @@ export const update = (data) =>
   request.put(`/v1/api/treatment-times/${data.id}`, data);
 export const search = (data) =>
   request.post("/v1/api/treatment-times/search/all", data);
+export const notifications = () =>
+  request.get("/v1/api/treatment-times/type/notifications");
+export const getNotification = (id) =>
+  request.get("/v1/api/treatment-times/type/notifications/" + id);

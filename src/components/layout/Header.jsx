@@ -1,11 +1,16 @@
 import { DownOutlined } from "@ant-design/icons";
-import { Badge, Dropdown } from "antd";
+import { Badge, Dropdown, Popover } from "antd";
 import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { authAPI } from "../../apis";
+import io from "socket.io-client";
+import { treatmentTimesAPI } from "../../apis";
+import NotiItem from "../NotiItem";
 
 function Header() {
   const [user, setUser] = useState({});
+  const [socket, setSocket] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+  const [newNotiCount, setNewNotiCount] = useState(0);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -14,18 +19,6 @@ function Header() {
   };
 
   const items = [
-    {
-      key: "1",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          1st menu item
-        </a>
-      ),
-    },
     user?.role == "ADMIN"
       ? {
           key: "2",
@@ -43,24 +36,65 @@ function Header() {
   ];
 
   const fetchData = async () => {
-    const res = JSON.parse(localStorage.getItem("user"));
-    setUser(res);
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUser(user);
+  };
+
+  const fetchNotifications = async () => {
+    const res = await treatmentTimesAPI.notifications();
+    setNotifications(res);
+    const count = res?.filter((e) => e?.seen == false).length;
+    setNewNotiCount(count);
   };
 
   useEffect(() => {
     fetchData();
+    fetchNotifications();
   }, []);
+
+  useEffect(() => {
+    const newSocket = io("http://localhost:64536");
+    setSocket(newSocket);
+    return () => newSocket.close();
+  }, [setSocket]);
+
+  const handleMessage = (data) => {
+    console.log(data);
+  };
+
+  socket?.on("notification", handleMessage);
+
+  const notifiContent = (
+    <div>
+      {notifications.map((e) => (
+        <NotiItem
+          key={e?.id}
+          id={e?.id}
+          image={e?.customer?.image ?? "/images/profile_img.jpg"}
+          name={`${e?.customer.first_name ?? "Овог"} ${
+            e?.customer.last_name ?? "Нэр"
+          }`}
+          phone={e?.customer?.phone}
+          startTime={e?.start_time}
+          seen={e?.seen}
+          refreshNotis={fetchNotifications}
+        />
+      ))}
+    </div>
+  );
 
   return (
     <div className="header_wrapper">
       <div className="header_content">
-        <Badge count={5}>
-          <img
-            className="notification_icon"
-            src="/images/bell.png"
-            alt="notification"
-          />
-        </Badge>
+        <Popover content={notifiContent} trigger="click" placement="bottom">
+          <Badge count={newNotiCount}>
+            <img
+              className="notification_icon"
+              src="/images/bell.png"
+              alt="notification"
+            />
+          </Badge>
+        </Popover>
         <div className="profile_wrapper">
           <Link to="/profile">
             <div className="profile_image_wrapper">
