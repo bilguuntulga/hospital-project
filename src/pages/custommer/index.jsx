@@ -1,4 +1,4 @@
-import { Button, Col, Input, Pagination, Row, Skeleton, Space } from 'antd'
+import { Button, Col, Input, Pagination, Row, Skeleton, Space, Switch } from 'antd'
 import Customers from '../../components/Customers'
 import React, { memo, useEffect, useRef, useState } from 'react'
 import { customerAPI } from '../../apis'
@@ -44,15 +44,20 @@ const Customer__Page = () => {
   useEffect(() => {
     fetchData();
   }, [])
+  const isclick =()=>{
+
+  }
 
   return (
     <div className='customer__container'>
       <Space direction='vertical' style={{ width: "100%" }}>
-        <Row justify="space-between">
+        <Row align="middle" justify="space-between">
           <Col>
             <div className="search__container">
-              <Input ref={nameRef} placeholder='Хайх' suffix={<img src='search_icon.png'
+              <Input  ref={nameRef} placeholder='Хайх' suffix={<img src='search_icon.png'
                 onClick={() => onSearch(nameRef?.current?.input?.value.toString().trim())} />} />
+                <Switch checkedChildren={`Сайн `} unCheckedChildren="Муу" size='50'/>
+                <Switch checkedChildren={`Эрэгтэй `} unCheckedChildren="Эмэгтэй"/>
             </div>
           </Col>
           <Col>

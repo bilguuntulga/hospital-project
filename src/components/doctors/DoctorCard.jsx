@@ -1,7 +1,10 @@
+import { Badge } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 
 function DoctorCard({ name, image, role, url }) {
+
+ 
   return (
     <Link to={url}>
       <div className="doctor_card_wrapper">
@@ -11,7 +14,7 @@ function DoctorCard({ name, image, role, url }) {
           <div className="doctor_card_wrapper_info_wrapper_role">{role}</div>
         </div>
       </div>
-    </Link>
+    </Link >
   );
 }
 

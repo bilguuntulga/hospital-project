@@ -72,7 +72,7 @@ function ResourcesSelect({ values, name }) {
                 <Button onClick={() => arrayHelpers.push({
                     resource: "",
                     quantity: 0
-                })} icon={<PlusOutlined />}>Нөөц нэмэх</Button>
+                })} block icon={<PlusOutlined />}>Нөөц нэмэх</Button>
             </>}
         </FieldArray>
     )
