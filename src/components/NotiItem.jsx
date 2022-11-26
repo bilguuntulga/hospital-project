@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment/moment";
 import { treatmentTimesAPI } from "../apis";
-import { Modal } from "antd";
+import { Card, Col, Descriptions, Modal, Row } from "antd";
 import { genderTranslator } from "../utils/functions";
 
 function NotiItem({ id, image, name, phone, startTime, seen, refreshNotis }) {
@@ -35,9 +35,8 @@ function NotiItem({ id, image, name, phone, startTime, seen, refreshNotis }) {
         footer={null}
       >
         <div className="notification_detail_wrapper">
-          <div className="notification_detail_wrapper_customer_doctor">
-            <div>
-              <p>Үйлчлүүлэгч</p>
+          <Card title={<Row justify={"space-between"} ><Col span={12}>Үйлчлүүлэгч</Col><Col span={12}>Эмч</Col></Row>}>
+            <div className="notification_detail_wrapper_customer_doctor">
               <div className="notification_detail_wrapper_profile_wrapper">
                 <div className="notification_detail_wrapper_profile_wrapper_image_wrapper">
                   <img
@@ -53,9 +52,6 @@ function NotiItem({ id, image, name, phone, startTime, seen, refreshNotis }) {
                   </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <p>Эмч</p>
               <div className="notification_detail_wrapper_profile_wrapper">
                 <div className="notification_detail_wrapper_profile_wrapper_image_wrapper">
                   <img
@@ -72,12 +68,16 @@ function NotiItem({ id, image, name, phone, startTime, seen, refreshNotis }) {
                 </div>
               </div>
             </div>
-          </div>
-          <p>Эхлэх цаг:</p>
-          <p>
-            {moment(time?.start_time).format("YYYY/MM/DD HH:mm:ss")}-
-            {moment(time?.end_time).format("HH:mm:ss")}
-          </p>
+          </Card>
+          <br />
+          <Descriptions bordered layout="vertical">
+            <Descriptions.Item label="Эхлэх цаг">
+              {moment(time?.start_time).format("YYYY/MM/DD HH:mm:ss")}
+            </Descriptions.Item>
+            <Descriptions.Item label="Дуусах цаг">
+              {moment(time?.end_time).format("YYYY/MM/DD HH:mm:ss")}
+            </Descriptions.Item>
+          </Descriptions>
         </div>
       </Modal>
     </>
