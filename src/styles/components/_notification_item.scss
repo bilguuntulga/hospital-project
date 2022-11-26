@@ -43,8 +43,8 @@
 
 .notification_detail_wrapper {
     &_customer_doctor{
-        display: flex;
-        justify-content: space-evenly;
+        display: flex; 
+        justify-content: space-between;
     }
   &_profile_wrapper {
     display: flex;
