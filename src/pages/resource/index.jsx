@@ -132,7 +132,7 @@ const ResourcePage = () => {
       </div>
       <Modal title={`${oneresourceData?.name == "" ? "Нөөц нэмэх" : oneresourceData?.name}`} open={isModalOpen} onCancel={() => setIsModalOpen(false)} footer={false} >
         <Formik onSubmit={onSubmit} initialValues={oneresourceData} validationSchema={validationSchema} enableReinitialize>
-          <Form>
+          <Form layout='vertical'>
             <Row justify="center">
               <Col>
                 <Form.Item name="image">
@@ -140,10 +140,10 @@ const ResourcePage = () => {
                 </Form.Item>
               </Col>
             </Row>
-            <Form.Item name="name">
+            <Form.Item name="name" label="Нэр">
               <Input name='name' />
             </Form.Item>
-            <Form.Item name='quantity'>
+            <Form.Item name='quantity' label="Тоо ширхэг">
               <Input name='quantity' type='number' />
             </Form.Item>
             <Button block icon={<SaveOutlined />} htmlType="submit">

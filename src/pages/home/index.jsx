@@ -267,13 +267,13 @@ function HomePage() {
                     padding: "10px"
                   }}
                 >
-                  {todayorderdata.map((e) =>
+                  {todayorderdata.length>0? todayorderdata.map((e) =>
                     <TOdayOrderList
                       image={e?.customer?.image}
                       name={`${e?.customer?.first_name} ${e?.customer?.last_name}`}
                       time={e.start_time}
                       doctorName={`${e?.doctor?.first_name} ${e?.doctor?.last_name}`}
-                    />)}
+                    />):<Empty/>}
 
                 </div>
                 <p>03-09 Nov,2021</p>

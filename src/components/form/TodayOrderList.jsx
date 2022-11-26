@@ -6,7 +6,7 @@ import moment from 'moment/moment'
 const OrderTimeCustomer = ({ image, name, time, doctorName }) => {
     return (
         <div>
-            <Row justify="space-between" align="middle" style={{ marginTop: "10px" }}>
+            <Row gutter={30} align="middle" style={{ marginTop: "10px" }}>
                 <Col>
                     <div style={{ backgroundColor: "#E9E9E9", width: "50px", height: "50px", borderRadius: "100rem", overflow: "hidden" }}>
                         <img style={{ width: "100%", height: "100%", objectFit: "cover" }} src={image} alt="" />
@@ -17,7 +17,7 @@ const OrderTimeCustomer = ({ image, name, time, doctorName }) => {
                     <p>{doctorName}</p>
                 </Col>
                 <Col>
-                    <p>{moment(time).format("Өнөөдөр: " + "LT")}</p>
+                    <p>{moment(time).format("Өнөөдөр: " + "HH:mm:ss")}</p>
                 </Col>
             </Row>
         </div>
