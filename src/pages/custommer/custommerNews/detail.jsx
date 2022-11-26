@@ -406,13 +406,13 @@ const CustomerDetail = () => {
             <Modal footer={false} title="Эмчилгээ" open={isShowTreatmentModal} onOk={service_handleok} onCancel={serviceCancel}>
               <Formik validationSchema={treatmentValidationSchema} initialValues={treatmentInitialValues} onSubmit={treatmentOnSubmit} enableReinitialize>
                 {({ values }) => <Form layout='vertical'>
-                  <Form.Item name="doctor">
+                  <Form.Item name="doctor" label="Эмчийн нэр">
                     <SelectDoctor name="doctor" />
                   </Form.Item>
-                  <Form.Item name="services">
+                  <Form.Item name="services" label="Үйлчилгээ">
                     <SelectService name="services" multi={true} />
                   </Form.Item>
-                  <Form.Item name="date">
+                  <Form.Item name="date" label="Үйлчилгээ авах хугацаа">
                     <RangePicker name='date' style={{ width: "100%" }} />
                   </Form.Item>
                   <SubmitButton icon={<SaveOutlined />} block>Хадаглах</SubmitButton>

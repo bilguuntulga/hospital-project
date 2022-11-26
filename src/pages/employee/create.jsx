@@ -1,7 +1,7 @@
-import { DeleteOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, DeleteOutlined } from '@ant-design/icons';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Button, Card, Col, Row } from 'antd';
+import { Button, Card, Col, PageHeader, Row } from 'antd';
 import { Field, Formik } from 'formik';
 import { Form, Input, SubmitButton } from 'formik-antd';
 import React from 'react'
@@ -43,13 +43,13 @@ const validationSchema = yup.object().shape({
 function DoctorCreate() {
 
     const navigate = useNavigate();
-    
+
     const onSubmit = async (values) => {
         toast.promise(
             async () => {
                 await doctorAPI.create(values);
                 navigate(-1);
-                
+
             },
             {
                 pending: "Хадаглаж байна",
@@ -61,101 +61,106 @@ function DoctorCreate() {
 
 
     return (
-        <div>
-            <div style={{ backgroundColor: "white", padding: "25px", borderRadius: "15px" }}>
-                <Formik initialValues={model} validationSchema={validationSchema} onSubmit={onSubmit}>
-                    {({ values, setFieldValue }) => <Form layout='vertical'>
-                        <Row >
-                            <Col span={6}>
-                                <div style={{ display: "grid", placeItems: "center" }}>
-                                    <Form.Item label="" name="profile_img">
-                                        <ProfileImageUpload name="profile_img" />
-                                    </Form.Item>
-                                </div>
-                            </Col>
-                            <Col span={18}>
-                                <Row gutter={15}>
-                                    <Col span={12}>
-                                        <Form.Item label="Овог" name="first_name">
-                                            <Input name='first_name' />
+        <>
+            <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
+            <div>
+                <div style={{ backgroundColor: "white", padding: "25px", borderRadius: "15px" }}>
+                    <PageHeader title="Ажилтан нэмэх"/>
+                    <br />
+                    <Formik initialValues={model} validationSchema={validationSchema} onSubmit={onSubmit}>
+                        {({ values, setFieldValue }) => <Form layout='vertical'>
+                            <Row >
+                                <Col span={6}>
+                                    <div style={{ display: "grid", placeItems: "center" }}>
+                                        <Form.Item label="" name="profile_img">
+                                            <ProfileImageUpload name="profile_img" />
                                         </Form.Item>
-                                    </Col>
-                                    <Col span={12}>
-                                        <Form.Item label="Нэр" name="last_name">
-                                            <Input name='last_name' />
-                                        </Form.Item></Col>
-                                </Row>
-                                <Row gutter={15}>
-                                    <Col span={12}>
-                                        <Form.Item label="И-мэйл" name="email">
-                                            <Input name='email' />
-                                        </Form.Item>
-                                    </Col>
-                                    <Col span={12}>
-                                        <Form.Item label="Утас" name="phone">
-                                            <Input name='phone' />
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
-                                <Row gutter={15}>
-                                    <Col span={12}>
-                                        <Form.Item label="Мэргэжил" name="role">
-                                            <Input name='role' />
-                                        </Form.Item>
-                                    </Col>
-                                    <Col span={12}>
-                                        <Form.Item label="Цалин" name="salary">
-                                            <Input name='salary' type='number' />
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
-                        <Row gutter={15}>
-                            <Col span={12}>
-                                <Field name="desc">
-                                    {({
-                                        field: { name, value },
-                                        form: { setFieldValue },
-                                    }) => (
-                                        <CKEditor
-                                            editor={ClassicEditor}
-                                            data={value ?? "<p></p>"}
-                                            onChange={(event, editor) => {
-                                                const data = editor.getData();
-                                                setFieldValue(name, data);
-                                            }}
-                                        />
-                                    )}
-                                </Field>
-                            </Col>
-                            <Col span={12}>
-                                <Field name="experiences_desc">
-                                    {({
-                                        field: { name, value },
-                                        form: { setFieldValue },
-                                    }) => (
-                                        <CKEditor
-                                            editor={ClassicEditor}
-                                            data={value ?? "<p></p>"}
-                                            onChange={(event, editor) => {
-                                                const data = editor.getData();
-                                                setFieldValue(name, data);
-                                            }}
-                                        />
-                                    )}
-                                </Field>
-                            </Col>
-                        </Row>
-                        <br />
-                        <Form.Item name="experiences" label="">
-                            <ExperiencesField name="experiences" values={values} />
-                        </Form.Item>
-                        <SubmitButton block>Бүртгэх</SubmitButton>
-                    </Form>}
-                </Formik>
+                                    </div>
+                                </Col>
+                                <Col span={18}>
+                                    <Row gutter={15}>
+                                        <Col span={12}>
+                                            <Form.Item label="Овог" name="first_name">
+                                                <Input name='first_name' />
+                                            </Form.Item>
+                                        </Col>
+                                        <Col span={12}>
+                                            <Form.Item label="Нэр" name="last_name">
+                                                <Input name='last_name' />
+                                            </Form.Item></Col>
+                                    </Row>
+                                    <Row gutter={15}>
+                                        <Col span={12}>
+                                            <Form.Item label="И-мэйл" name="email">
+                                                <Input name='email' />
+                                            </Form.Item>
+                                        </Col>
+                                        <Col span={12}>
+                                            <Form.Item label="Утас" name="phone">
+                                                <Input name='phone' />
+                                            </Form.Item>
+                                        </Col>
+                                    </Row>
+                                    <Row gutter={15}>
+                                        <Col span={12}>
+                                            <Form.Item label="Мэргэжил" name="role">
+                                                <Input name='role' />
+                                            </Form.Item>
+                                        </Col>
+                                        <Col span={12}>
+                                            <Form.Item label="Цалин" name="salary">
+                                                <Input name='salary' type='number' />
+                                            </Form.Item>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                            <Row gutter={15}>
+                                <Col span={12}>
+                                    <Field name="desc">
+                                        {({
+                                            field: { name, value },
+                                            form: { setFieldValue },
+                                        }) => (
+                                            <CKEditor
+                                                editor={ClassicEditor}
+                                                data={value ?? "<p></p>"}
+                                                onChange={(event, editor) => {
+                                                    const data = editor.getData();
+                                                    setFieldValue(name, data);
+                                                }}
+                                            />
+                                        )}
+                                    </Field>
+                                </Col>
+                                <Col span={12}>
+                                    <Field name="experiences_desc">
+                                        {({
+                                            field: { name, value },
+                                            form: { setFieldValue },
+                                        }) => (
+                                            <CKEditor
+                                                editor={ClassicEditor}
+                                                data={value ?? "<p></p>"}
+                                                onChange={(event, editor) => {
+                                                    const data = editor.getData();
+                                                    setFieldValue(name, data);
+                                                }}
+                                            />
+                                        )}
+                                    </Field>
+                                </Col>
+                            </Row>
+                            <br />
+                            <Form.Item name="experiences" label="">
+                                <ExperiencesField name="experiences" values={values} />
+                            </Form.Item>
+                            <SubmitButton block>Бүртгэх</SubmitButton>
+                        </Form>}
+                    </Formik>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
