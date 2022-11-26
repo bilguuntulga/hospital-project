@@ -1,5 +1,5 @@
 import { DownOutlined } from "@ant-design/icons";
-import { Dropdown } from "antd";
+import { Badge, Dropdown } from "antd";
 import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { authAPI } from "../../apis";
@@ -26,13 +26,16 @@ function Header() {
         </a>
       ),
     },
-    user?.role == "ADMIN" ?
-      {
-        key: "2",
-        label: (
-          <Link to="work_users"><div>Ажилчид</div></Link>
-        ),
-      } : null,
+    user?.role == "ADMIN"
+      ? {
+          key: "2",
+          label: (
+            <Link to="work_users">
+              <div>Ажилчид</div>
+            </Link>
+          ),
+        }
+      : null,
     {
       key: "3",
       label: <div onClick={logout}>Гарах</div>,
@@ -51,7 +54,13 @@ function Header() {
   return (
     <div className="header_wrapper">
       <div className="header_content">
-        <img className="notification_icon" src="/images/bell.png" alt="notification" />
+        <Badge count={5}>
+          <img
+            className="notification_icon"
+            src="/images/bell.png"
+            alt="notification"
+          />
+        </Badge>
         <div className="profile_wrapper">
           <Link to="/profile">
             <div className="profile_image_wrapper">
@@ -59,10 +68,12 @@ function Header() {
             </div>
           </Link>
           <div className="name_role_wrapper">
-            <div className="username">{`${user.first_name ?? "Овог"} ${user.last_name ?? "Нэр"
-              }`}</div>
-            <div className="user_role">{`${user.role === "ADMIN" ? "Админ" : "Ажилчин"
-              }`}</div>
+            <div className="username">{`${user.first_name ?? "Овог"} ${
+              user.last_name ?? "Нэр"
+            }`}</div>
+            <div className="user_role">{`${
+              user.role === "ADMIN" ? "Админ" : "Ажилчин"
+            }`}</div>
           </div>
           <Dropdown
             menu={{ items }}
