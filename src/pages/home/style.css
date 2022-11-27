@@ -41,6 +41,10 @@
     border-radius: 50%;
 }
 
+.img_container img{
+    width: 1.5rem;
+}
+
 .button {
     border: none;
     height: 55px;

@@ -19,3 +19,9 @@ export const registeredCount = () =>
 export const advice = () => request.get("/v1/api/customers/type/advice");
 export const registered = () =>
   request.get("/v1/api/customers/type/registered");
+export const weeklyGrowth = () =>
+  request.get("/v1/api/customers/info/weekly-customer-growth");
+export const monthlyGrowth = () =>
+  request.get("/v1/api/customers/info/monthly-customer-growth");
+export const yearGrowth = () =>
+  request.get("/v1/api/customers/info/year-customer-growth");

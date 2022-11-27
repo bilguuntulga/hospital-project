@@ -62,7 +62,6 @@ function Header() {
   const handleMessage = async () => {
     await fetchNotifications();
     audioPlayer.current.play();
-    console.log("Notification received! Successfully");
   };
 
   socket?.on("notification", handleMessage);
@@ -96,6 +95,7 @@ function Header() {
               className="notification_icon"
               src="/images/bell.png"
               alt="notification"
+              onClick={fetchNotifications}
             />
           </Badge>
         </Popover>

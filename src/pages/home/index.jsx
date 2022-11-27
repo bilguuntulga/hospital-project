@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Empty, Row } from "antd";
+import { Button, Col, Empty, Row, Select } from "antd";
 import "./style.css";
 import { UserOutlined } from "@ant-design/icons";
 import OrderTimeCustommer from "../../components/OrderTimeCustommer";
@@ -7,30 +7,51 @@ import CLineChart from "./chart";
 import PieChart from "./PieCharts";
 import CunstommerNews from "../../components/Customers";
 import CountUp from "react-countup";
-import { customerAPI, doctorAPI, treatmentTimesAPI, today_orderAPI } from "../../apis";
+import {
+  customerAPI,
+  doctorAPI,
+  treatmentTimesAPI,
+  today_orderAPI,
+} from "../../apis";
 import Customers from "../../components/Customers";
-import TOdayOrderList from "../../components/form/TodayOrderList"
+import TOdayOrderList from "../../components/form/TodayOrderList";
 
 function HomePage() {
   const [todayTimesCount, setTodayTimesCount] = useState(0);
-  const [customerdata, setCustomerData] = useState([])
+  const [customerdata, setCustomerData] = useState([]);
   const [doctorsCount, setDoctorsCount] = useState(0);
   const [customersCount, setCustomersCount] = useState(0);
   const [adviceCount, setAdviceCount] = useState(0);
   const [orderTimeCustomer, setOrderTImeCustomer] = useState([]);
   const [todayorderdata, setTodayOrderData] = useState([]);
+  const [customerGrowth, setCustomerGrowth] = useState({});
 
   const fetchData = async () => {
     treatmentTimesAPI.todayTimesCount().then((res) => setTodayTimesCount(res));
     doctorAPI.count().then((res) => setDoctorsCount(res));
     customerAPI.registeredCount().then((res) => setCustomersCount(res));
     customerAPI.adviceCount().then((res) => setAdviceCount(res));
-    const res = await customerAPI.list();
-    setCustomerData(res)
-    const orderTime = await treatmentTimesAPI.future();
-    setOrderTImeCustomer(orderTime)
-    const todayOrder = await today_orderAPI.list();
-    setTodayOrderData(todayOrder)
+    customerAPI.list().then((res) => setCustomerData(res));
+    treatmentTimesAPI.future().then((res) => setOrderTImeCustomer(res));
+    today_orderAPI.list().then((res) => setTodayOrderData(res));
+    customerAPI.weeklyGrowth().then((res) => setCustomerGrowth(res));
+  };
+
+  const customerGrowthOnChange = (value) => {
+    switch (value) {
+      case "WEEKLY":
+        customerAPI.weeklyGrowth().then((res) => setCustomerGrowth(res));
+        break;
+      case "MONTHLY":
+        customerAPI.monthlyGrowth().then((res) => setCustomerGrowth(res));
+        break;
+      case "YEAR":
+        customerAPI.yearGrowth().then((res) => setCustomerGrowth(res));
+        break;
+      default:
+        customerAPI.weeklyGrowth().then((res) => setCustomerGrowth(res));
+        break;
+    }
   };
 
   useEffect(() => {
@@ -118,22 +139,34 @@ function HomePage() {
           <Row justify="space-between" gutter={55}>
             <Col span={8}>
               <p>Цаг захиалсан үйлчлүүлэгч</p>
-              <div className="order__time__customer"
+              <div
+                className="order__time__customer"
                 style={{
                   backgroundColor: "white",
                   padding: "20px",
                   borderRadius: "15px",
                 }}
               >
-                <div className={orderTimeCustomer?.length > 0 ?"order__time__content":"Not_order__time__content"}>
-                  {orderTimeCustomer?.length > 0 ? orderTimeCustomer.map((e) => <OrderTimeCustommer
-                    name={`${e?.customer?.first_name} ${e?.customer?.last_name}`}
-                    image={e?.customer?.image}
-                    time={e?.start_time}
-                    bool={true}
-                    link={`/customer/${e?.customer?.id}`}
-                  />) : <Empty />}
-
+                <div
+                  className={
+                    orderTimeCustomer?.length > 0
+                      ? "order__time__content"
+                      : "Not_order__time__content"
+                  }
+                >
+                  {orderTimeCustomer?.length > 0 ? (
+                    orderTimeCustomer.map((e) => (
+                      <OrderTimeCustommer
+                        name={`${e?.customer?.first_name} ${e?.customer?.last_name}`}
+                        image={e?.customer?.image}
+                        time={e?.start_time}
+                        bool={true}
+                        link={`/customer/${e?.customer?.id}`}
+                      />
+                    ))
+                  ) : (
+                    <Empty />
+                  )}
                 </div>
               </div>
               <br />
@@ -144,14 +177,28 @@ function HomePage() {
                   width: "100%",
                   height: "137px",
                   borderRadius: "15px",
-                  padding: "10px"
+                  padding: "10px",
                 }}
               >
                 <CLineChart />
               </div>
             </Col>
             <Col span={8}>
-              <p>Үйлчлүүлэгч</p>
+              <Row justify="space-between">
+                <Col>
+                  <p>Үйлчлүүлэгч</p>
+                </Col>
+                <Col>
+                  <Select
+                    defaultValue="WEEKLY"
+                    onChange={customerGrowthOnChange}
+                  >
+                    <Select.Option value="WEEKLY">7 хоног</Select.Option>
+                    <Select.Option value="MONTHLY">Сар</Select.Option>
+                    <Select.Option value="YEAR">Жил</Select.Option>
+                  </Select>
+                </Col>
+              </Row>
               <div
                 style={{
                   backgroundColor: "white",
@@ -178,7 +225,9 @@ function HomePage() {
                     </div>
                   </Col>
                   <Col>
-                    <b>10.0k</b>
+                    <b>
+                      <CountUp end={customerGrowth?.new ?? 0} duration={0.5} />
+                    </b>
                     <p>Шинэ үйлчлүүлэгч</p>
                   </Col>
                   <Col>
@@ -192,7 +241,13 @@ function HomePage() {
                         />
                       </Col>
                       <Col>
-                        <p style={{ color: "#8C85F0" }}>15%</p>
+                        <p style={{ color: "#8C85F0" }}>
+                          <CountUp
+                            end={customerGrowth?.percent ?? 0}
+                            duration={0.5}
+                          />
+                          %
+                        </p>
                       </Col>
                     </Row>
                   </Col>
@@ -215,7 +270,9 @@ function HomePage() {
                     </div>
                   </Col>
                   <Col>
-                    <b>10.0k</b>
+                    <b>
+                      <CountUp end={customerGrowth?.old ?? 0} duration={0.5} />
+                    </b>
                     <p>Хуучин үйлчлүүлэгч</p>
                   </Col>
                   <Col>
@@ -229,20 +286,31 @@ function HomePage() {
                         />
                       </Col>
                       <Col>
-                        <p style={{ color: "#8C85F0" }}>15%</p>
+                        <p style={{ color: "#8C85F0" }}>
+                          <CountUp
+                            end={customerGrowth?.distance ?? 0}
+                            duration={0.5}
+                          />
+                        </p>
                       </Col>
                     </Row>
                   </Col>
                 </Row>
               </div>
-              <p>Хүйс</p>
+              <p
+                style={{
+                  marginTop: "1rem",
+                }}
+              >
+                Хүйс
+              </p>
               <div
                 style={{
-                  height: "320px",
+                  height: "304px",
                   backgroundColor: "white",
                   borderRadius: "15px",
                   display: "grid",
-                  placeItems: "center"
+                  placeItems: "center",
                 }}
               >
                 <PieChart />
@@ -264,17 +332,21 @@ function HomePage() {
                     overflowY: "scroll",
                     overflowX: "hidden",
                     height: "270px",
-                    padding: "10px"
+                    padding: "10px",
                   }}
                 >
-                  {todayorderdata.length>0? todayorderdata.map((e) =>
-                    <TOdayOrderList
-                      image={e?.customer?.image}
-                      name={`${e?.customer?.first_name} ${e?.customer?.last_name}`}
-                      time={e.start_time}
-                      doctorName={`${e?.doctor?.first_name} ${e?.doctor?.last_name}`}
-                    />):<Empty/>}
-
+                  {todayorderdata.length > 0 ? (
+                    todayorderdata.map((e) => (
+                      <TOdayOrderList
+                        image={e?.customer?.image}
+                        name={`${e?.customer?.first_name} ${e?.customer?.last_name}`}
+                        time={e.start_time}
+                        doctorName={`${e?.doctor?.first_name} ${e?.doctor?.last_name}`}
+                      />
+                    ))
+                  ) : (
+                    <Empty />
+                  )}
                 </div>
                 <p>03-09 Nov,2021</p>
                 <div className="button_container">
@@ -352,7 +424,17 @@ function HomePage() {
             padding: "10px",
           }}
         >
-          {customerdata.map((e) => <Customers image={e?.image} name={`${e?.first_name} ${e?.last_name}`} birthday={e.email} gender={e.gender} phone={e.phone} id={e.id} rate={e?.rate} />)}
+          {customerdata.map((e) => (
+            <Customers
+              image={e?.image}
+              name={`${e?.first_name} ${e?.last_name}`}
+              birthday={e.email}
+              gender={e.gender}
+              phone={e.phone}
+              id={e.id}
+              rate={e?.rate}
+            />
+          ))}
         </div>
       </div>
     </>

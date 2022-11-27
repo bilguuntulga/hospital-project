@@ -1,4 +1,4 @@
-import { Button, Col, Row, Skeleton } from "antd";
+import { Button, Col, Empty, Row, Skeleton } from "antd";
 import { Formik } from "formik";
 import { DatePicker, Form, Input, SubmitButton } from "formik-antd";
 import React, { useEffect, useState } from "react";
@@ -83,25 +83,29 @@ function TreatmentTimesTable({ refreshRef }) {
         <div className="header_title">Цаг</div>
       </div>
       <div className="times_list_wrapper">
-        {times.map((time, i) => (
-          <TimeListItem
-            key={time?.id ?? i}
-            id={time.id}
-            customerImage={time?.customer?.image}
-            customerName={`${time?.customer?.first_name ?? "Устсан"} ${
-              time?.customer?.last_name ?? "үйлчлүүлэгч"
-            }`}
-            customerPhone={time?.customer?.phone}
-            doctorImage={time?.doctor?.profile_img}
-            doctorName={`${time?.doctor?.first_name ?? "Устсан"} ${
-              time?.doctor?.last_name ?? "Эмч"
-            }`}
-            doctorPhone={time?.doctor?.phone}
-            startTime={time?.start_time}
-            endTime={time?.end_time}
-            refreshTable={fetchData}
-          />
-        ))}
+        {times.length > 0 ? (
+          times.map((time, i) => (
+            <TimeListItem
+              key={time?.id ?? i}
+              id={time.id}
+              customerImage={time?.customer?.image}
+              customerName={`${time?.customer?.first_name ?? "Устсан"} ${
+                time?.customer?.last_name ?? "үйлчлүүлэгч"
+              }`}
+              customerPhone={time?.customer?.phone}
+              doctorImage={time?.doctor?.profile_img}
+              doctorName={`${time?.doctor?.first_name ?? "Устсан"} ${
+                time?.doctor?.last_name ?? "Эмч"
+              }`}
+              doctorPhone={time?.doctor?.phone}
+              startTime={time?.start_time}
+              endTime={time?.end_time}
+              refreshTable={fetchData}
+            />
+          ))
+        ) : (
+          <Empty />
+        )}
       </div>
     </div>
   );
