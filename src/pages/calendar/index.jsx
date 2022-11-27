@@ -63,8 +63,8 @@ const CalendarApp = () => {
         success: "Амжилттай",
       }
     );
-    resetForm();
 
+    resetForm();
     setModalVisible(false);
     timesTableRef.current();
   };

@@ -1,6 +1,6 @@
 import { DownOutlined } from "@ant-design/icons";
 import { Badge, Dropdown, Popover } from "antd";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import { treatmentTimesAPI } from "../../apis";
@@ -11,6 +11,7 @@ function Header() {
   const [socket, setSocket] = useState(null);
   const [notifications, setNotifications] = useState([]);
   const [newNotiCount, setNewNotiCount] = useState(0);
+  const audioPlayer = useRef();
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -58,8 +59,10 @@ function Header() {
     return () => newSocket.close();
   }, [setSocket]);
 
-  const handleMessage = (data) => {
-    console.log(data);
+  const handleMessage = async () => {
+    await fetchNotifications();
+    audioPlayer.current.play();
+    console.log("Notification received! Successfully");
   };
 
   socket?.on("notification", handleMessage);
@@ -85,6 +88,7 @@ function Header() {
 
   return (
     <div className="header_wrapper">
+      <audio ref={audioPlayer} src={"/sounds/notification.mp3"} />
       <div className="header_content">
         <Popover content={notifiContent} trigger="click" placement="bottom">
           <Badge count={newNotiCount}>
