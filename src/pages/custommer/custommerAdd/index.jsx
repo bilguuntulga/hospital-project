@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Col, PageHeader, Row } from "antd";
 import { DatePicker, Form, Input, SubmitButton, Select } from "formik-antd";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -8,6 +8,7 @@ import Services from "../../../components/services";
 import { customerAPI, servicesAPI, ServicesAPI } from "../../../apis";
 import ProfileImageUpload from "../../../components/form/ProfileImageUpload";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -51,10 +52,9 @@ const RegistrationPage = () => {
 
   return (
     <div>
-      <p style={{ fontSize: "20px" }}>
-        <b>Registration</b>
-      </p>
+      <PageHeader title={<ArrowLeftOutlined onClick={navigate(-1)}/>} />
       <div className="custommer_news">
+        <PageHeader title="Хэрэглэгч нэмэх"/>
         <Formik initialValues={model} validationSchema={validationSchema} onSubmit={onFinish}>
           <Form>
             <Row gutter={30} justify="space-between">
