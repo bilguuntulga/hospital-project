@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { DayPilot, DayPilotCalendar, DayPilotNavigator } from "@daypilot/daypilot-lite-react";
-import { treatmentTimesAPI } from '../apis';
+import { doctorAPI, treatmentTimesAPI } from '../apis';
+import "./CalendarStyles.css"
+import { message, Modal } from 'antd';
+import { Formik } from 'formik';
+import { Form, Input, Select, SubmitButton } from 'formik-antd';
+import * as yup from "yup";
+import { PlusOutlined, SaveOutlined } from '@ant-design/icons';
+const { confirm } = Modal;
 
 const styles = {
   wrap: {
@@ -21,62 +28,133 @@ class Event {
     this.end = end;
     this.text = text;
     this.backColor = backColor;
-
   }
 }
 
 class Calendar extends Component {
-
   constructor(props) {
     super(props);
     this.calendarRef = React.createRef();
     this.state = {
-      viewType: "Week",
-      durationBarVisible: false,
-      timeRangeSelectedHandling: "Enabled",
-      timeFormat: "en-us",
-      onTimeRangeSelected: async args => {
-        console.log(args);
-        const dp = this.calendar;
-        const modal = await DayPilot.Modal.prompt("New", "");
-        dp.clearSelection();
-        if (!modal.result) { return; }
-        dp.events.add({
-          start: args.start,
-          end: args.end,
-          id: DayPilot.guid(),
-          text: modal.result
-        });
-      },
-      eventDeleteHandling: "Update",
-      onEventClick: async args => {
-        const dp = this.calendar;
-        const modal = await DayPilot.Modal.prompt("Update event text:", args.e.text());
-        if (!modal.result) { return; }
-        const e = args.e;
-        e.data.text = modal.result;
-        dp.events.update(e);
-      },
-      onEventDelete: (args) => {
-        console.log("Delete this event: ", args?.e?.data?.id);
-      },
-      onEventResize: (args) => {
-        console.log("onEventResize", args);
+      time: {},
+      showCreateModal: false,
+      showUpdateModal: false,
+      doctors: [],
+      startTime: "",
+      endTime: "",
+      updateTime: { ...this.model },
+      calendarProps: {
+        viewType: "Week",
+        durationBarVisible: false,
+        timeRangeSelectedHandling: "Enabled",
+        timeFormat: "Clock24Hours",
+        locale: "nb-no",
+        onTimeRangeSelected: async args => {
+          console.log(args);
+          const dp = this.calendar;
+          dp.clearSelection();
+
+          await this.getDoctors(args.start, args.end);
+          this.setState((prevState) => ({
+            ...prevState,
+            showCreateModal: true,
+            startTime: new Date(args.start).toISOString(),
+            endTime: new Date(args.end).toISOString()
+          }));
+        },
+        eventDeleteHandling: "Update",
+        onEventClick: async args => {
+          const time = await treatmentTimesAPI.get(args?.e?.data?.id);
+          await this.getDoctors(time.start_time, time.end_time);
+
+          this.setState((prevState) => ({
+            ...prevState,
+            time,
+            showUpdateModal: true,
+            updateTime: {
+              id: time?.id,
+              customer_phone: time?.customer?.phone,
+              doctor: time?.doctor?.id
+            }
+          }));
+        },
+        onEventDelete: (args) => {
+          this.deleteTime(args?.e?.data?.id);
+        },
+        onEventResize: (args) => {
+          console.log("onEventResize", args);
+        }
       }
     };
   }
+
+  model = {
+    customer_phone: "",
+    doctor: ""
+  }
+
+  validationSchema = yup.object().shape({
+    customer_phone: yup
+      .string()
+      .min(8, "8 оронтой байна")
+      .max(8, "8 оронтой байна")
+      .required("Утасны дугаар оруулна уу"),
+    doctor: yup.string().required("Эмч сонгон уу")
+  })
 
   get calendar() {
     return this.calendarRef.current.control;
   }
 
-  async initCalendar() {
+  async getDoctors(start, end) {
+    const startTime = new Date(start).toISOString();
+    const endTime = new Date(end).toISOString();
+
+    console.log("startTime", startTime);
+    console.log("endTime", endTime);
+
+    const doctors = await doctorAPI.findAvailable({
+      start_time: startTime,
+      end_time: endTime
+    });
+
+    this.setState((preState) => ({
+      ...preState,
+      doctors: doctors
+    }));
+  }
+
+  async deleteTime(id) {
+    try {
+      confirm({
+        title: "Устгах",
+        content: "Та устгах даа итгэлтэй байна уу?",
+        okText: "Тийм",
+        cancelText: "Үгүй",
+        onOk: async () => {
+          await treatmentTimesAPI.remove(id);
+          message.success("Амжилттай");
+          this.fetchData();
+        }
+      });
+    } catch (error) {
+      message.error(error?.message);
+    }
+  }
+
+  async fetchData() {
     const times = await treatmentTimesAPI.list();
 
     let events = [];
 
     times.forEach((time) => {
-      events.push(new Event(time?.id, time?.start_time, time?.end_time, time?.customer?.phone));
+      const start = new Date(time?.start_time);
+      start.setHours(start.getHours() + 8);
+      const end = new Date(time?.end_time);
+      end.setHours(end.getHours() + 8);
+
+      const text = `${time?.customer?.first_name} ${time?.customer?.last_name} ${time?.customer?.phone} ${new Date(time?.start_time)}`;
+      events.push(new Event(time?.id, start, end, text));
     });
 
     const startDate = new Date();
@@ -86,71 +164,134 @@ class Calendar extends Component {
   }
 
   componentDidMount() {
+    DayPilot.Locale.register(
+      new DayPilot.Locale('en-us',
+        {
+          dayNames: ['Ням', 'Даваа', 'Мягмар', 'Лхавга', 'Пүрэв', 'Баасан', 'Бямба'],
+          dayNamesShort: ['Ня', 'Да', 'Мя', 'Лх', 'Пү', 'Ба', 'Бя'],
+          monthNames: ['1 сар', '2 сар', '3 сар', '4 сар', '5 сар', '6 сар', '7 сар', '8 сар', '9 сар', '10 сар', '11 сар', '12 сар'],
+          monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+          timePattern: 'hh:mm:ss',
+          datePattern: 'yyyy/MM/dd',
+          dateTimePattern: 'yyyy/MM/dd hh:mm:ss',
+          timeFormat: 'Clock24Hours',
+          weekStarts: 1,
+          timezone: 8
+        }
+      ));
 
+    this.fetchData();
+  }
 
-    const events = [
-      {
-        id: 1,
-        text: "Event 1",
-        start: "2022-03-07T10:30:00",
-        end: "2022-03-07T13:00:00"
-      },
-      {
-        id: 2,
-        text: "Event 2",
-        start: "2022-03-08T09:30:00",
-        end: "2022-03-08T11:30:00",
-        backColor: "#6aa84f"
-      },
-      {
-        id: 3,
-        text: "Event 3",
-        start: "2022-03-08T12:00:00",
-        end: "2022-03-08T15:00:00",
-        backColor: "#f1c232"
-      },
-      {
-        id: 4,
-        text: "Event 4",
-        start: "2022-03-06T11:30:00",
-        end: "2022-03-06T14:30:00",
-        backColor: "#cc4125"
-      },
-    ];
+  async createTime(values) {
+    values.start_time = this.state.startTime;
+    values.end_time = this.state.endTime;
 
-    const startDate = new Date();
+    try {
+      await treatmentTimesAPI.create(values);
+      await this.fetchData();
+      message.success("Амжилттай");
+    } catch (error) {
+      console.log(error);
+      message.error("Амжилтгүй");
+    }
+  }
 
-    this.calendar.update({ startDate, events });
-    console.log(this.calendar);
-
-    this.initCalendar();
+  async updateTime(values) {
+    try {
+      await treatmentTimesAPI.update(values);
+      await this.fetchData();
+      message.success("Амжилттай");
+    } catch (error) {
+      console.log(error);
+      message.error("Амжилтгүй");
+    }
   }
 
   render() {
     return (
-      <div style={styles.wrap}>
+      <div>
         <div style={styles.left}>
-
+          <DayPilotNavigator
+            selectMode={"week"}
+            showMonths={3}
+            skipMonths={1}
+            startDate={new Date()}
+            selectionDay={new Date()}
+            orientation="Horizontal"
+            onTimeRangeSelected={args => {
+              this.calendar.update({
+                startDate: args.day
+              });
+            }}
+          />
         </div>
         <div style={styles.main}>
           <DayPilotCalendar
-            {...this.state}
+            {...this.state.calendarProps}
             ref={this.calendarRef}
           />
         </div>
-        <DayPilotNavigator
-          selectMode={"week"}
-          showMonths={3}
-          skipMonths={3}
-          startDate={"2023-03-07"}
-          selectionDay={"2023-03-07"}
-          onTimeRangeSelected={args => {
-            this.calendar.update({
-              startDate: args.day
-            });
-          }}
-
-        />
+        <Modal
+          open={this.state.showCreateModal}
+          title="Цаг нэмэх"
+          onCancel={() => this.setState((preState) => ({
+            ...preState,
+            showCreateModal: false
+          }))}
+          footer={false}
+        >
+          <Formik onSubmit={(values, { resetForm }) => {
+            this.createTime(values);
+            resetForm();
+          }} initialValues={this.model} validationSchema={this.validationSchema}>
+            <Form layout='vertical'>
+              <Form.Item name="customer_phone" label="Үйлчлүүлэгчийн утасны дугаар">
+                <Input name="customer_phone" />
+              </Form.Item>
+              <Form.Item name="doctor" label="Эмч">
+                <Select name="doctor">
+                  {this.state.doctors.map((doctor) => (
+                    <Select.Option
+                      value={doctor?.id}
+                    >{`${doctor?.first_name} ${doctor?.last_name}`}</Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              <SubmitButton icon={<SaveOutlined />} block>Хадгалах</SubmitButton>
+            </Form>
+          </Formik>
+        </Modal>
+        <Modal
+          open={this.state.showUpdateModal}
+          onCancel={() => this.setState((preState) => ({
+            ...preState,
+            showUpdateModal: false
+          }))}
+          footer={null}
+        >
+          <Formik
+            validationSchema={this.validationSchema}
+            initialValues={this.state.updateTime}
+            enableReinitialize
+          >
+            <Form layout='vertical'>
+              <Form.Item name="customer_phone" label="Үйлчлүүлэгчийн утасны дугаар">
+                <Input name="customer_phone" />
+              </Form.Item>
+              <Form.Item name="doctor" label="Эмч">
+                <Select name="doctor">
+                  {this.state.doctors.map((doctor) => (
+                    <Select.Option
+                      value={doctor?.id}
+                    >{`${doctor?.first_name} ${doctor?.last_name}`}</Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              <SubmitButton icon={<SaveOutlined />} block>Хадгалах</SubmitButton>
+            </Form>
+          </Formik>
+        </Modal>
       </div>
     );
   }
