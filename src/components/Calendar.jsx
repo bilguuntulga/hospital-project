@@ -50,9 +50,13 @@ class Calendar extends Component {
         timeFormat: "Clock24Hours",
         locale: "nb-no",
         onTimeRangeSelected: async args => {
-          console.log(args);
           const dp = this.calendar;
           dp.clearSelection();
+
+          const now = new Date();
+          const startTime = new Date(args.start);
+
+          if (now > startTime) return;
 
           await this.getDoctors(args.start, args.end);
           this.setState((prevState) => ({
@@ -74,7 +78,9 @@ class Calendar extends Component {
             updateTime: {
               id: time?.id,
               customer_phone: time?.customer?.phone,
-              doctor: time?.doctor?.id
+              doctor: `${time?.doctor?.first_name} ${time?.doctor?.last_name}`,
+              start_time: time?.start_time,
+              end_time: time?.end_time
             }
           }));
         },
@@ -82,7 +88,20 @@ class Calendar extends Component {
           this.deleteTime(args?.e?.data?.id);
         },
         onEventResize: (args) => {
-          console.log("onEventResize", args);
+          const data = {
+            id: args?.e?.data?.id,
+            start_time: new Date(args?.newStart),
+            end_time: new Date(args?.newEnd)
+          }
+          this.updateTime(data);
+        },
+        onEventMove: (args) => {
+          const data = {
+            id: args?.e?.data?.id,
+            start_time: new Date(args?.newStart),
+            end_time: new Date(args?.newEnd)
+          }
+          this.updateTime(data);
         }
       }
     };
@@ -109,9 +128,6 @@ class Calendar extends Component {
   async getDoctors(start, end) {
     const startTime = new Date(start).toISOString();
     const endTime = new Date(end).toISOString();
-
-    console.log("startTime", startTime);
-    console.log("endTime", endTime);
 
     const doctors = await doctorAPI.findAvailable({
       start_time: startTime,
@@ -153,8 +169,8 @@ class Calendar extends Component {
       const end = new Date(time?.end_time);
       end.setHours(end.getHours() + 8);
 
-      const text = `${time?.customer?.first_name} ${time?.customer?.last_name} ${time?.customer?.phone} ${new Date(time?.start_time)}`;
-      events.push(new Event(time?.id, start, end, text));
+      const text = `${time?.doctor?.first_name} ${time?.doctor?.last_name} \n ${time?.customer?.phone}`;
+      events.push(new Event(time?.id, start, end, text, time?.doctor?.color));
     });
 
     const startDate = new Date();
@@ -198,19 +214,30 @@ class Calendar extends Component {
   }
 
   async updateTime(values) {
+
+    if (values?.doctor?.includes(" ")) {
+      delete values.doctor;
+    }
+
     try {
       await treatmentTimesAPI.update(values);
-      await this.fetchData();
       message.success("Амжилттай");
     } catch (error) {
       console.log(error);
       message.error("Амжилтгүй");
     }
+
+    await this.fetchData();
+    this.setState((prevState) => ({
+      ...prevState,
+      showUpdateModal: false
+    }));
   }
 
   render() {
     return (
       <div>
+        
         <div style={styles.left}>
           <DayPilotNavigator
             selectMode={"week"}
@@ -226,6 +253,7 @@ class Calendar extends Component {
             }}
           />
         </div>
+        <br />
         <div style={styles.main}>
           <DayPilotCalendar
             {...this.state.calendarProps}
@@ -274,6 +302,7 @@ class Calendar extends Component {
             validationSchema={this.validationSchema}
             initialValues={this.state.updateTime}
             enableReinitialize
+            onSubmit={(values) => this.updateTime(values)}
           >
             <Form layout='vertical'>
               <Form.Item name="customer_phone" label="Үйлчлүүлэгчийн утасны дугаар">
