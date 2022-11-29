@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Calendar, Card, Modal, Skeleton, TimePicker } from "antd";
+import {Card, Modal, Skeleton, TimePicker } from "antd";
 import { Field, Formik } from "formik";
 import { Form, Input, Select, SubmitButton } from "formik-antd";
 import * as yup from "yup";
@@ -9,6 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import PageLoading from "../../components/PageLoading";
 import TreatmentTimesTable from "../../components/TreatmentTimesTable";
 import moment from "moment";
+import Calendar from "../../components/Calendar";
 
 const model = {
   customer_phone: "",
@@ -161,7 +162,8 @@ const CalendarApp = () => {
             </Form>
           </Formik>
         </Modal>
-        <Calendar onSelect={onSelect} />
+        {/* <Calendar onSelect={onSelect} /> */}
+        <Calendar/>
         <ToastContainer />
       </Card>
       <Card title="Цагууд">
