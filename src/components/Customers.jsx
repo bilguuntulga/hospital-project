@@ -11,8 +11,8 @@ function Customers({ image, name, birthday, gender, phone, id, rate }) {
             <Col span={4}>
                 <Row align="middle" gutter={20}>
                     <Col>
-                        <div style={{ backgroundColor: "#E9E9E9", width: "50px", height: "50px", borderRadius: "50%", display: "grid", placeItems: "center" }}>
-                            <img width="40px" height="40px" src={image} alt="" style={{ borderRadius: "50%" }} />
+                        <div style={{ backgroundColor: "#E9E9E9", width: "50px", height: "50px", borderRadius: "50%", display: "grid", placeItems: "center",padding:"3px" }}>
+                            <img className='image' width="40px" height="40px" src={image} alt="" style={{ borderRadius: "50%" }} />
                         </div>
                     </Col>
                     <Col style={{marginTop:"13px"}}>

@@ -358,7 +358,7 @@ const CustomerDetail = () => {
           <Row style={{ width: "100%" }} justify="space-between">
             <Col span={4}>
               <div className='custommer_detail_image'>
-                <img src={customerdetail?.image} style={{ borderRadius: "47px" }} width="200px" height="200px" alt="" />
+                <img className='image' src={customerdetail?.image}  alt="" />
               </div>
             </Col>
             <Col span={19}>
