@@ -22,6 +22,7 @@ const model = {
     salary: 1000000,
     desc: "",
     experiences_desc: "",
+    color: "",
     experiences: []
 };
 
@@ -35,6 +36,7 @@ const validationSchema = yup.object().shape({
     salary: yup.number().required("Заавал бөглөнө үү"),
     desc: yup.string().required("Заавал бөглөнө үү"),
     experiences_desc: yup.string().required("Заавал бөглөнө үү"),
+    color: yup.string().required("Заавал бөглөнө үү"),
     experiences: yup.array().required("Заавал бөглөнө үү"),
 })
 
@@ -65,7 +67,7 @@ function DoctorCreate() {
             <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
             <div>
                 <div style={{ backgroundColor: "white", padding: "25px", borderRadius: "15px" }}>
-                    <PageHeader title="Ажилтан нэмэх"/>
+                    <PageHeader title="Ажилтан нэмэх" />
                     <br />
                     <Formik initialValues={model} validationSchema={validationSchema} onSubmit={onSubmit}>
                         {({ values, setFieldValue }) => <Form layout='vertical'>
@@ -152,9 +154,18 @@ function DoctorCreate() {
                                 </Col>
                             </Row>
                             <br />
-                            <Form.Item name="experiences" label="">
-                                <ExperiencesField name="experiences" values={values} />
-                            </Form.Item>
+                            <Row gutter={30}>
+                                <Col span={12}>
+                                    <Form.Item name="experiences" label="Эмчийн туршлага">
+                                        <ExperiencesField name="experiences" values={values} />
+                                    </Form.Item>
+                                </Col>
+                                <Col span={12}>
+                                    <Form.Item name="color" label="Өнгө сонгох">
+                                        <Input type='color' name='color' />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
                             <SubmitButton block>Бүртгэх</SubmitButton>
                         </Form>}
                     </Formik>

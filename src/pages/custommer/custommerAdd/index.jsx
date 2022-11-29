@@ -56,17 +56,17 @@ const RegistrationPage = () => {
       <div className="custommer_news">
         <PageHeader title="Хэрэглэгч нэмэх"/>
         <Formik initialValues={model} validationSchema={validationSchema} onSubmit={onFinish}>
-          <Form>
+          <Form layout="vertical">
             <Row gutter={30} justify="space-between">
               <Col span={12}>
-                <Form.Item name="first_name">
-                  <Input className="input" placeholder="Нэр" name="first_name" />
+                <Form.Item name="first_name" label="Овог">
+                  <Input className="input" placeholder="Овог" name="first_name" />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item name="last_name">
+                <Form.Item name="last_name" label="Нэр">
                   <Input
-                    placeholder="Овог нэр"
+                    placeholder="Нэр"
                     className="input"
                     name="last_name"
                   />
@@ -75,14 +75,14 @@ const RegistrationPage = () => {
             </Row>
             <Row gutter={30}>
               <Col span={12}>
-                <Form.Item name="email">
+                <Form.Item name="email" label="И-мэйл">
                   <Input className="input" placeholder="И-мэйл" name="email" />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Row gutter={20}>
                   <Col span={12}>
-                    <Form.Item name="phone">
+                    <Form.Item name="phone" label="Утас">
                       <Input
                         className="input"
                         name="phone"
@@ -97,7 +97,7 @@ const RegistrationPage = () => {
               <Col span={12}>
                 <Row gutter={20}>
                   <Col span={12}>
-                    <Form.Item name="gender">
+                    <Form.Item name="gender" label="Хүйс">
                       <Select name="gender" className="input" bordered={false} showSearch>
                         <Select.Option value="MALE" >Эрэгтэй</Select.Option>
                         <Select.Option value="FEMALE">Эмэгтэй</Select.Option>
@@ -105,7 +105,7 @@ const RegistrationPage = () => {
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item name="family_status">
+                    <Form.Item name="family_status" label="Гэр бүлийн байдал">
                       <Select className="input" name="family_status" bordered={false}>
                         <Select.Option value="MARRIED">
                           Гэрлэсэн
@@ -121,7 +121,7 @@ const RegistrationPage = () => {
               <Col span={12}>
                 <Row gutter={20}>
                   <Col span={12}>
-                    <Form.Item name="blood_type">
+                    <Form.Item name="blood_type" label="Цусны бүлэг">
                       <Select name="blood_type" className="input" bordered={false}>
                         <Select.Option value="1-O">
                           1-O
@@ -139,7 +139,7 @@ const RegistrationPage = () => {
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item name="birthday">
+                    <Form.Item name="birthday" label="Төрсөн огноо">
                       <DatePicker
                         name="birthday"
                         style={{ width: "100%" }}
@@ -152,7 +152,7 @@ const RegistrationPage = () => {
             </Row>
             <Row gutter={30}>
               <Col span={12}>
-                <Form.Item name="address">
+                <Form.Item name="address" label="Гэрийн хаяг">
                   <Input
                     className="input"
                     name="address"
@@ -161,7 +161,7 @@ const RegistrationPage = () => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item name="desc">
+                <Form.Item name="desc"label="Тайлбар">
                   <Input className="input" name="desc" placeholder="Бусад" />
                 </Form.Item>
               </Col>

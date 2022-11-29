@@ -51,6 +51,7 @@ const EmployeeDetail = () => {
     last_name: yup.string().required("Заавал бөглөнө үү."),
     role: yup.string().required("Заавал бөглөнө үү."),
     salary: yup.string().required("Заавал бөглөнө үү."),
+    color: yup.string().required("Заавал бөглөнө үү."),
     desc: yup.string().required("Заавал бөглөнө үү."),
   });
 
@@ -253,9 +254,9 @@ const EmployeeDetail = () => {
                       </Row>
                     }
                   >
-                    <Row>
+                    <Row >
                       <Col span={24}>
-                        <Row justify="space-around" align="middle">
+                        <Row justify="space-around" align="middle" gutter={30}>
                           <Col span={6}>
                             <Form.Item name="profile_img">
                               <div className="profile_image_center_wrapper">
@@ -264,6 +265,9 @@ const EmployeeDetail = () => {
                                   size="150px"
                                 />
                               </div>
+                            </Form.Item>
+                            <Form.Item name="color" label="Өнгө" >
+                              <Input name="color" type="color"/>
                             </Form.Item>
                           </Col>
                           <Col span={18}>
