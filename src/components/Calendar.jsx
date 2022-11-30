@@ -164,7 +164,13 @@ class Calendar extends Component {
           await treatmentTimesAPI.remove(id);
           message.success("Амжилттай");
           this.fetchData();
+        },
+        onCancel: async () => {
+          this.fetchData();
         }
+
+
+
       });
     } catch (error) {
       message.error(error?.message);
@@ -259,7 +265,7 @@ class Calendar extends Component {
         <div className='day__pilot__navigation'>
           <DayPilotNavigator
             selectMode={"week"}
-            showMonths={7}
+            showMonths={5}
             skipMonths={1}
             startDate={new Date()}
             selectionDay={new Date()}
