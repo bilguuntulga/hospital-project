@@ -223,94 +223,136 @@ const EmployeeDetail = () => {
         );
 
       case "settings":
-        return <div className="settings_wrapper">
-          <Row gutter={5}>
-            <Col span={24}>
-              <Formik
-                initialValues={detailData}
-                validationSchema={personalInformationSchema}
-                enableReinitialize
-                onSubmit={onSubmit}
-              >
-                <Form layout="vertical">
-                  <Card
-                    title="Хувийн мэдээлэл"
-                    bordered
-                    extra={
-                      <Row gutter={10}>
-                        <Col>
-                          <SubmitButton
-                            style={{
-                              width: "100px",
-                              height: "29px",
-                              backgroundColor: "#434AFE",
-                              borderRadius: "5px",
-                              border: "none",
-                            }}
-                          >
-                            Хадгалах
-                          </SubmitButton>
-                        </Col>
-                      </Row>
-                    }
-                  >
-                    <Row >
-                      <Col span={24}>
-                        <Row justify="space-around" align="middle" gutter={30}>
-                          <Col span={6}>
-                            <Form.Item name="profile_img">
-                              <div className="profile_image_center_wrapper">
-                                <ProfileImageUpload
-                                  name="profile_img"
-                                  size="150px"
-                                />
-                              </div>
-                            </Form.Item>
-                            <Form.Item name="color" label="Өнгө" >
-                              <Input name="color" type="color"/>
-                            </Form.Item>
-                          </Col>
-                          <Col span={18}>
-                            <Row gutter={[30, 30]}>
-                              <Col span={12}>
-                                <Form.Item name="first_name" label="Овог">
-                                  <Input name="first_name" />
-                                </Form.Item>
-                              </Col>
-                              <Col span={12}>
-                                <Form.Item name="last_name" label="Нэр">
-                                  <Input name="last_name" />
-                                </Form.Item>
-                              </Col>
-                            </Row>
-                            <Row gutter={[30, 30]}>
-                              <Col span={12}>
-                                <Form.Item name="email" label="И-мэйл">
-                                  <Input name="email" />
-                                </Form.Item>
-                              </Col>
-                              <Col span={12}>
-                                <Form.Item name="phone" label="Утасны дугаар">
-                                  <Input name="phone" />
-                                </Form.Item>
-                              </Col>
-                            </Row>
-                            <Row gutter={[30, 30]}>
-                              <Col span={12}>
-                                <Form.Item name="role" label="Мэргэжил">
-                                  <Input name="role" />
-                                </Form.Item>
-                              </Col>
-                              <Col span={12}>
-                                <Form.Item name="salary" label="Цалин">
-                                  <Input name="salary" type="number" />
-                                </Form.Item>
-                              </Col>
-                            </Row>
+        return (
+          <div className="settings_wrapper">
+            <Row gutter={5}>
+              <Col span={24}>
+                <Formik
+                  initialValues={detailData}
+                  validationSchema={personalInformationSchema}
+                  enableReinitialize
+                  onSubmit={onSubmit}
+                >
+                  <Form layout="vertical">
+                    <Card
+                      title="Хувийн мэдээлэл"
+                      bordered
+                      extra={
+                        <Row gutter={10}>
+                          <Col>
+                            <SubmitButton
+                              style={{
+                                width: "100px",
+                                height: "29px",
+                                backgroundColor: "#434AFE",
+                                borderRadius: "5px",
+                                border: "none",
+                              }}
+                            >
+                              Хадгалах
+                            </SubmitButton>
                           </Col>
                         </Row>
-                        <Form.Item name="desc" label="Намтар:">
-                          <Field name="desc">
+                      }
+                    >
+                      <Row>
+                        <Col span={24}>
+                          <Row
+                            justify="space-around"
+                            align="middle"
+                            gutter={30}
+                          >
+                            <Col span={6}>
+                              <Form.Item name="profile_img">
+                                <div className="profile_image_center_wrapper">
+                                  <ProfileImageUpload
+                                    name="profile_img"
+                                    size="150px"
+                                  />
+                                </div>
+                              </Form.Item>
+                              <Form.Item name="color" label="Өнгө">
+                                <Input name="color" type="color" />
+                              </Form.Item>
+                            </Col>
+                            <Col span={18}>
+                              <Row gutter={[30, 30]}>
+                                <Col span={12}>
+                                  <Form.Item name="first_name" label="Овог">
+                                    <Input name="first_name" />
+                                  </Form.Item>
+                                </Col>
+                                <Col span={12}>
+                                  <Form.Item name="last_name" label="Нэр">
+                                    <Input name="last_name" />
+                                  </Form.Item>
+                                </Col>
+                              </Row>
+                              <Row gutter={[30, 30]}>
+                                <Col span={12}>
+                                  <Form.Item name="email" label="И-мэйл">
+                                    <Input name="email" />
+                                  </Form.Item>
+                                </Col>
+                                <Col span={12}>
+                                  <Form.Item name="phone" label="Утасны дугаар">
+                                    <Input name="phone" />
+                                  </Form.Item>
+                                </Col>
+                              </Row>
+                              <Row gutter={[30, 30]}>
+                                <Col span={12}>
+                                  <Form.Item name="role" label="Мэргэжил">
+                                    <Input name="role" />
+                                  </Form.Item>
+                                </Col>
+                                <Col span={12}>
+                                  <Form.Item name="salary" label="Цалин">
+                                    <Input name="salary" type="number" />
+                                  </Form.Item>
+                                </Col>
+                              </Row>
+                            </Col>
+                          </Row>
+                          <Form.Item name="desc" label="Намтар:">
+                            <Field name="desc">
+                              {({
+                                field: { name, value },
+                                form: { setFieldValue },
+                              }) => (
+                                <CKEditor
+                                  editor={ClassicEditor}
+                                  data={value ?? "<p></p>"}
+                                  onChange={(event, editor) => {
+                                    const data = editor.getData();
+                                    setFieldValue(name, data);
+                                  }}
+                                />
+                              )}
+                            </Field>
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                    </Card>
+                  </Form>
+                </Formik>
+              </Col>
+            </Row>
+            <Formik
+              initialValues={detailData}
+              enableReinitialize
+              onSubmit={onSubmit}
+              render={({ values }) => (
+                <Form>
+                  <Card
+                    title="Эмчийн туршлага"
+                    bordered
+                    extra={<Button htmlType="submit">Хадаглах</Button>}
+                  >
+                    <div className="space_elements">
+                      <Row gutter={30}>
+                        <Col xs={24} lg={12}>
+                          <Field name="experiences_desc">
                             {({
                               field: { name, value },
                               form: { setFieldValue },
@@ -325,66 +367,33 @@ const EmployeeDetail = () => {
                               />
                             )}
                           </Field>
-                        </Form.Item>
-                      </Col>
-                    </Row>
+                        </Col>
+                        <Col xs={24} lg={12}>
+                          <ExperiencesField
+                            name="experiences"
+                            values={values}
+                          />
+                        </Col>
+                      </Row>
+                    </div>
                   </Card>
                 </Form>
-              </Formik>
-            </Col>
-          </Row>
-          <Formik
-            initialValues={detailData}
-            enableReinitialize
-            onSubmit={onSubmit}
-            render={({ values }) => (
-              <Form>
-                <Card
-                  title="Эмчийн туршлага"
-                  bordered
-                  extra={<Button htmlType="submit">Хадаглах</Button>}
-                >
-                  <div className="space_elements">
-                    <Row gutter={30}>
-                      <Col span={12}>
-                        <Field name="experiences_desc">
-                          {({
-                            field: { name, value },
-                            form: { setFieldValue },
-                          }) => (
-                            <CKEditor
-                              editor={ClassicEditor}
-                              data={value ?? "<p></p>"}
-                              onChange={(event, editor) => {
-                                const data = editor.getData();
-                                setFieldValue(name, data);
-                              }}
-                            />
-                          )}
-                        </Field>
-                      </Col>
-                      <Col span={12}>
-                        <ExperiencesField name="experiences" values={values} />
-                      </Col>
-                    </Row>
-                  </div>
-                </Card>
-              </Form>
-            )}
-          />
-          <WorkingHoursTable
-            id={id}
-            workingHours={detailData.working_hours}
-          />
-          <Button
-            className="delete_button"
-            block
-            icon={<DeleteOutlined />}
-            onClick={onDelete}
-          >
-            Ажилтан Устгах
-          </Button>
-        </div>
+              )}
+            />
+            <WorkingHoursTable
+              id={id}
+              workingHours={detailData.working_hours}
+            />
+            <Button
+              className="delete_button"
+              block
+              icon={<DeleteOutlined />}
+              onClick={onDelete}
+            >
+              Ажилтан Устгах
+            </Button>
+          </div>
+        );
 
       default:
         return <h1>NOT FOUND ERROR</h1>;
@@ -423,29 +432,33 @@ const EmployeeDetail = () => {
         <div className="tab_container">
           <div className="buttons_wrapper">
             <div
-              className={`tab_button ${clickedButton === "biography" ? "active_tab_button" : ""
-                }`}
+              className={`tab_button ${
+                clickedButton === "biography" ? "active_tab_button" : ""
+              }`}
               onClick={() => setClickedButton("biography")}
             >
               Эмчийн намтар
             </div>
             <div
-              className={`tab_button ${clickedButton === "experiences" ? "active_tab_button" : ""
-                }`}
+              className={`tab_button ${
+                clickedButton === "experiences" ? "active_tab_button" : ""
+              }`}
               onClick={() => setClickedButton("experiences")}
             >
               Туршлага
             </div>
             <div
-              className={`tab_button ${clickedButton === "time_schedule" ? "active_tab_button" : ""
-                }`}
+              className={`tab_button ${
+                clickedButton === "time_schedule" ? "active_tab_button" : ""
+              }`}
               onClick={() => setClickedButton("time_schedule")}
             >
               Цагийн хуваарь
             </div>
             <div
-              className={`tab_button ${clickedButton === "settings" ? "active_tab_button" : ""
-                }`}
+              className={`tab_button ${
+                clickedButton === "settings" ? "active_tab_button" : ""
+              }`}
               onClick={() => setClickedButton("settings")}
             >
               Тохиргоо
