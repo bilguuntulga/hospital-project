@@ -45,18 +45,13 @@
     width: 1.5rem;
 }
 
-.button {
-    border: none;
-    height: 55px;
-    border-radius: 5px;
-}
+
 
 .button_container {
     display: flex;
     margin-left: 15px;
     place-items: center;
-    gap: 25px;
-
+    gap: 15px;
 }
 
 

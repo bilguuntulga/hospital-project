@@ -8,6 +8,7 @@ import * as usersAPI from "./user"
 import * as resourceAPI from "./resource"
 import * as today_orderAPI from "./today_order"
 import * as paginationAPI from "./pagination"
+import * as selectedDatAPI from './selectedday'
 
 export {
     authAPI,
@@ -20,4 +21,5 @@ export {
     resourceAPI,
     today_orderAPI,
     paginationAPI,
+    selectedDatAPI
 };
