@@ -102,7 +102,7 @@ function Header() {
         <div className="profile_wrapper">
           <Link to="/profile">
             <div className="profile_image_wrapper">
-              <img src={user.profile_img ?? ""} alt="Profile" />
+              <img src={user?.profile_img ?? ""} alt="Profile" />
             </div>
           </Link>
           <div className="name_role_wrapper">
