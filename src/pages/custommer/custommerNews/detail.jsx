@@ -1,11 +1,11 @@
-import { Button, Col, Row, Space, Table, Modal, message, PageHeader, Switch } from 'antd';
+import { Button, Col, Row, Space, Table, Modal, message, PageHeader } from 'antd';
 import React, { memo, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { customerAPI, treatmentsAPI } from '../../../apis';
 import "./style.css"
 import * as yup from "yup"
 import { Formik } from 'formik';
-import { Form, Input, SubmitButton, DatePicker, Select } from 'formik-antd';
+import { Form, Input, SubmitButton, DatePicker, Select, Switch } from 'formik-antd';
 import moment, { relativeTimeRounding } from 'moment';
 import UploadImage from "../../../components/form/UploadImage";
 import SelectService from '../../../components/form/SelectService';
@@ -27,7 +27,7 @@ const customerModel = {
   blood_type: "",
   family_status: "",
   desc: "",
-  rate:"",
+  rate: "",
 }
 
 const treatmentModel = {
@@ -68,6 +68,12 @@ const CustomerDetail = () => {
 
   const fetchData = async () => {
     const customer = await customerAPI.get(id);
+
+    if (customer.rate == "GOOD")
+      customer.rate = true;
+    else
+      customer.rate = false;
+
     const treatments = await treatmentsAPI.list(id);
     setCustomerDetail(customer)
     setCustomerInitialValues(customer);
@@ -200,6 +206,13 @@ const CustomerDetail = () => {
   const customerOnSubmit = async (values) => {
     delete values.created_by;
     delete values.updated_by;
+
+    if (values.rate)
+      values.rate = "GOOD"
+    else
+      values.rate = "BAD"
+
+
     toast.promise(
       async () => {
         customerAPI.update(values);
@@ -332,7 +345,7 @@ const CustomerDetail = () => {
                           </Col>
                           <Col span={6}>
                             <Form.Item label="Байдал" name="rate">
-                              <Switch name="rate" checkedChildren="Сайн"unCheckedChildren="Муу"/>
+                              <Switch name="rate" checkedChildren="Сайн" unCheckedChildren="Муу" />
                             </Form.Item>
                           </Col>
                         </Row>
@@ -358,7 +371,7 @@ const CustomerDetail = () => {
           <Row style={{ width: "100%" }} justify="space-between">
             <Col span={4}>
               <div className='custommer_detail_image'>
-                <img className='image' src={customerdetail?.image}  alt="" />
+                <img className='image' src={customerdetail?.image} alt="" />
               </div>
             </Col>
             <Col span={19}>

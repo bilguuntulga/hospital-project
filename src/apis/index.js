@@ -7,5 +7,17 @@ import * as servicesAPI from "./services"
 import * as usersAPI from "./user"
 import * as resourceAPI from "./resource"
 import * as today_orderAPI from "./today_order"
+import * as paginationAPI from "./pagination"
 
-export { authAPI, doctorAPI, customerAPI, treatmentsAPI, treatmentTimesAPI, servicesAPI, usersAPI, resourceAPI, today_orderAPI };
+export {
+    authAPI,
+    doctorAPI,
+    customerAPI,
+    treatmentsAPI,
+    treatmentTimesAPI,
+    servicesAPI,
+    usersAPI,
+    resourceAPI,
+    today_orderAPI,
+    paginationAPI,
+};

@@ -59,6 +59,7 @@ class Calendar extends Component {
           if (now > startTime) return;
 
           await this.getDoctors(args.start, args.end);
+
           this.setState((prevState) => ({
             ...prevState,
             showCreateModal: true,
@@ -84,22 +85,34 @@ class Calendar extends Component {
             }
           }));
         },
-        onEventDelete: (args) => {
-          this.deleteTime(args?.e?.data?.id);
+        onEventDelete: async (args) => {
+          const time = await treatmentTimesAPI.get(args?.e?.data?.id);
+
+          if (new Date(time?.end_time) > new Date()) {
+            this.deleteTime(args?.e?.data?.id);
+          }
+          else {
+            message.warning("Өнгөрсөн цагийг устгах боломжгүй")
+            this.fetchData();
+          }
         },
-        onEventResize: (args) => {
+        onEventResize: async (args) => {
+          const time = await treatmentTimesAPI.get(args?.e?.data?.id);
           const data = {
             id: args?.e?.data?.id,
             start_time: new Date(args?.newStart),
-            end_time: new Date(args?.newEnd)
+            end_time: new Date(args?.newEnd),
+            doctor: time?.doctor?.id
           }
           this.updateTime(data);
         },
-        onEventMove: (args) => {
+        onEventMove: async (args) => {
+          const time = await treatmentTimesAPI.get(args?.e?.data?.id);
           const data = {
             id: args?.e?.data?.id,
             start_time: new Date(args?.newStart),
-            end_time: new Date(args?.newEnd)
+            end_time: new Date(args?.newEnd),
+            doctor: time?.doctor?.id
           }
           this.updateTime(data);
         }
@@ -211,6 +224,11 @@ class Calendar extends Component {
       console.log(error);
       message.error("Амжилтгүй");
     }
+
+    this.setState((prevState) => ({
+      ...prevState,
+      showCreateModal: false
+    }));
   }
 
   async updateTime(values) {
@@ -237,7 +255,7 @@ class Calendar extends Component {
   render() {
     return (
       <div>
-        
+
         <div className='day__pilot__navigation'>
           <DayPilotNavigator
             selectMode={"week"}
@@ -258,7 +276,7 @@ class Calendar extends Component {
           <DayPilotCalendar
             {...this.state.calendarProps}
             ref={this.calendarRef}
-            
+
           />
         </div>
         <Modal
