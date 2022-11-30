@@ -54,7 +54,7 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    const newSocket = io("http://192.168.0.122:64536");
+    const newSocket = io("http://localhost:64536");
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
