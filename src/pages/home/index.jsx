@@ -10,6 +10,7 @@ import {
   doctorAPI,
   treatmentTimesAPI,
   today_orderAPI,
+  selectedDatAPI
 } from "../../apis";
 import Customers from "../../components/Customers";
 import TOdayOrderList from "../../components/form/TodayOrderList";
@@ -24,6 +25,8 @@ function HomePage() {
   const [orderTimeCustomer, setOrderTImeCustomer] = useState([]);
   const [todayorderdata, setTodayOrderData] = useState([]);
   const [customerGrowth, setCustomerGrowth] = useState({});
+  const [selectedDay, setSlecetedDay] = useState(0);
+  const [weeklyTimes, setWeeklyTimes] = useState([]);
 
   const fetchData = async () => {
     treatmentTimesAPI.todayTimesCount().then((res) => setTodayTimesCount(res));
@@ -34,6 +37,7 @@ function HomePage() {
     treatmentTimesAPI.future().then((res) => setOrderTImeCustomer(res));
     today_orderAPI.list().then((res) => setTodayOrderData(res));
     customerAPI.weeklyGrowth().then((res) => setCustomerGrowth(res));
+    treatmentTimesAPI.weeklyTimes().then((res) => setWeeklyTimes(res));
   };
 
   const customerGrowthOnChange = (value) => {
@@ -52,6 +56,29 @@ function HomePage() {
         break;
     }
   };
+  const daytranslate = (day) => {
+    switch (day) {
+      case 0: return "Бя"
+      case 1: return "Да"
+      case 2: return "Мя"
+      case 3: return "Лх"
+      case 4: return "Ба"
+      case 5: return "Бя"
+      case 6: return "Ня"
+    }
+  }
+
+  const daytranslatenumber = (day) => {
+    switch (day) {
+      case 0: return "Бя"
+      case 1: return "Да"
+      case 2: return "Мя"
+      case 3: return "Лх"
+      case 4: return "Ба"
+      case 5: return "Бя"
+      case 6: return "Ня"
+    }
+  }
 
   useEffect(() => {
     fetchData();
@@ -59,7 +86,7 @@ function HomePage() {
 
   return (
     <>
-      <div style={{ width: "100%" }}>
+      <div className="dashboard__container" style={{ width: "100%" }}>
         <Row justify="space-between" style={{ width: "100%" }}>
           <Col span={5}>
             <div className="columns">
@@ -325,6 +352,7 @@ function HomePage() {
                   borderRadius: "15px",
                 }}
               >
+
                 <div
                   style={{
                     overflowY: "scroll",
@@ -333,42 +361,17 @@ function HomePage() {
                     padding: "10px",
                   }}
                 >
-                  {todayorderdata.length > 0 ? (
-                    todayorderdata.map((e) => (
-                      <TOdayOrderList
-                        image={e?.customer?.image}
-                        name={`${e?.customer?.first_name} ${e?.customer?.last_name}`}
-                        time={e.start_time}
-                        doctorName={`${e?.doctor?.first_name} ${e?.doctor?.last_name}`}
-                      />
-                    ))
-                  ) : (
-                    <Empty />
-                  )}
+                  {weeklyTimes[selectedDay]?.times?.map((e) => <TOdayOrderList
+                    image={e?.image}
+                    name={`${e?.name}`}
+                    start_time={e?.start_time}
+                    end_time={e?.end_time}
+                    doctorName={e?.phone}
+                  />)}
                 </div>
                 <p>03-09 Nov,2021</p>
                 <div className="button_container">
-                  <Button className="button">
-                    S <br />3
-                  </Button>
-                  <Button className="button">
-                    M <br />4
-                  </Button>
-                  <Button className="button">
-                    T <br />5
-                  </Button>
-                  <Button className="button">
-                    W <br />6
-                  </Button>
-                  <Button className="button">
-                    T<br />7
-                  </Button>
-                  <Button className="button">
-                    F<br />8
-                  </Button>
-                  <Button className="button">
-                    S<br />9
-                  </Button>
+                  {weeklyTimes.map((e, i) => <Button key={e + i} onClick={() => setSlecetedDay(i)} className="button">{daytranslate(e.day)} <br />{new Date(e.date).getDate()}</Button>)}
                 </div>
                 <br />
                 <div className="sevenDay">

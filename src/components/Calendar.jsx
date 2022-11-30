@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DayPilot, DayPilotCalendar, DayPilotNavigator } from "@daypilot/daypilot-lite-react";
 import { doctorAPI, treatmentTimesAPI } from '../apis';
-import { message, Modal } from 'antd';
+import { Col, message, Modal, PageHeader, Row, Select as Antd__Select } from 'antd';
 import { Formik } from 'formik';
 import "./CalendarStyles.css"
 import { Form, Input, Select, SubmitButton } from 'formik-antd';
@@ -264,7 +264,7 @@ class Calendar extends Component {
 
         <div className='day__pilot__navigation'>
           <DayPilotNavigator
-            selectMode={"week"}
+            selectMode={this.state.calendarProps.viewType}
             showMonths={5}
             skipMonths={1}
             startDate={new Date()}
@@ -277,12 +277,24 @@ class Calendar extends Component {
             }}
           />
         </div>
-        <br />
+        <PageHeader extra={<Antd__Select style={{ width: "100px" }} defaultValue={this.state.calendarProps.viewType} onChange={(value) => this.setState((prevState) => ({
+          ...prevState,
+          calendarProps: {
+            ...this.state.calendarProps,
+            viewType: value
+          }
+        }))}>
+          <Antd__Select.Option value="Day">
+            1 хоног
+          </Antd__Select.Option>
+          <Antd__Select.Option value="Week">
+            7 хоног
+          </Antd__Select.Option>
+        </Antd__Select>} />
         <div style={styles.main}>
           <DayPilotCalendar
             {...this.state.calendarProps}
             ref={this.calendarRef}
-
           />
         </div>
         <Modal
@@ -294,6 +306,7 @@ class Calendar extends Component {
           }))}
           footer={false}
         >
+
           <Formik onSubmit={(values, { resetForm }) => {
             this.createTime(values);
             resetForm();

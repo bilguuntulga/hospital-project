@@ -15,3 +15,4 @@ export const notifications = () =>
   request.get("/v1/api/treatment-times/type/notifications");
 export const getNotification = (id) =>
   request.get("/v1/api/treatment-times/type/notifications/" + id);
+export const weeklyTimes = () => request.get("/v1/api/treatment-times/info/weekly-times")
