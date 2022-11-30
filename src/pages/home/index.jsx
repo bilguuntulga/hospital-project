@@ -3,9 +3,7 @@ import { Button, Col, Empty, Row, Select } from "antd";
 import "./style.css";
 import { UserOutlined } from "@ant-design/icons";
 import OrderTimeCustommer from "../../components/OrderTimeCustommer";
-import CLineChart from "./chart";
 import PieChart from "./PieCharts";
-import CunstommerNews from "../../components/Customers";
 import CountUp from "react-countup";
 import {
   customerAPI,
@@ -16,6 +14,7 @@ import {
 } from "../../apis";
 import Customers from "../../components/Customers";
 import TOdayOrderList from "../../components/form/TodayOrderList";
+import ServicesChart from "../../components/ServicesChart";
 
 function HomePage() {
   const [todayTimesCount, setTodayTimesCount] = useState(0);
@@ -202,12 +201,11 @@ function HomePage() {
                 style={{
                   backgroundColor: "white",
                   width: "100%",
-                  height: "137px",
                   borderRadius: "15px",
                   padding: "10px",
                 }}
               >
-                <CLineChart />
+                <ServicesChart />
               </div>
             </Col>
             <Col span={8}>
