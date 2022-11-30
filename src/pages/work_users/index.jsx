@@ -119,7 +119,7 @@ function Work_user_page() {
     const columns = [
         {
             title: 'Name',
-            render: (_, row) => <>{row.first_name} {row.last_name}</>
+            render: (_, row) => <>{row?.first_name} {row?.last_name}</>
         },
         {
             title: "Үүрэг",

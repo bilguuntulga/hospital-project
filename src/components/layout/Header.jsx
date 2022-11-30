@@ -73,8 +73,8 @@ function Header() {
           key={e?.id}
           id={e?.id}
           image={e?.customer?.image ?? "/images/profile_img.jpg"}
-          name={`${e?.customer.first_name ?? "Овог"} ${
-            e?.customer.last_name ?? "Нэр"
+          name={`${e?.customer?.first_name ?? "Овог"} ${
+            e?.customer?.last_name ?? "Нэр"
           }`}
           phone={e?.customer?.phone}
           startTime={e?.start_time}
@@ -106,11 +106,11 @@ function Header() {
             </div>
           </Link>
           <div className="name_role_wrapper">
-            <div className="username">{`${user.first_name ?? "Овог"} ${
-              user.last_name ?? "Нэр"
+            <div className="username">{`${user?.first_name ?? "Овог"} ${
+              user?.last_name ?? "Нэр"
             }`}</div>
             <div className="user_role">{`${
-              user.role === "ADMIN" ? "Админ" : "Ажилчин"
+              user?.role === "ADMIN" ? "Админ" : "Ажилчин"
             }`}</div>
           </div>
           <Dropdown
