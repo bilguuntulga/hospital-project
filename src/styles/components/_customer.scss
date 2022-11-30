@@ -5,3 +5,8 @@
 .bad{
     background: linear-gradient(180deg, #E72C2C 0%, #FC0079 100%);
 }
+.image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

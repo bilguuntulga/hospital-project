@@ -3,18 +3,22 @@
         border-radius: 23px !important;
         border: 1px solid #0069CD !important;
     }
-    .search__container{
+
+    .search__container {
         display: flex;
         background-color: white;
         padding: 15px;
         border-radius: 23px;
         gap: 55px;
-        .ant-switch{
-            width: 150px;
+
+        .ant-select-selector {
+            border-radius: 23px;
         }
     }
-    .advice__button{
+
+    .advice__button {
         background: linear-gradient(180deg, #FF706F 0%, #FC0079 100%);
-border-radius: 5px;
+        border-radius: 5px;
     }
+
 }

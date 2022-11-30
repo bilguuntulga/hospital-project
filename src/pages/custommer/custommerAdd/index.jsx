@@ -1,4 +1,4 @@
-import { Col, PageHeader, Row } from "antd";
+import { Card, Col, PageHeader, Row } from "antd";
 import { DatePicker, Form, Input, SubmitButton, Select } from "formik-antd";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -52,134 +52,131 @@ const RegistrationPage = () => {
 
   return (
     <div>
-      <PageHeader title={<ArrowLeftOutlined onClick={navigate(-1)}/>} />
+      <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
       <div className="custommer_news">
-        <PageHeader title="Хэрэглэгч нэмэх"/>
         <Formik initialValues={model} validationSchema={validationSchema} onSubmit={onFinish}>
           <Form layout="vertical">
-            <Row gutter={30} justify="space-between">
-              <Col span={12}>
-                <Form.Item name="first_name" label="Овог">
-                  <Input className="input" placeholder="Овог" name="first_name" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item name="last_name" label="Нэр">
-                  <Input
-                    placeholder="Нэр"
-                    className="input"
-                    name="last_name"
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={30}>
-              <Col span={12}>
-                <Form.Item name="email" label="И-мэйл">
-                  <Input className="input" placeholder="И-мэйл" name="email" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Row gutter={20}>
-                  <Col span={12}>
-                    <Form.Item name="phone" label="Утас">
-                      <Input
-                        className="input"
-                        name="phone"
-                        placeholder="Утас"
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-            <Row gutter={30}>
-              <Col span={12}>
-                <Row gutter={20}>
-                  <Col span={12}>
-                    <Form.Item name="gender" label="Хүйс">
-                      <Select name="gender" className="input" bordered={false} showSearch>
-                        <Select.Option value="MALE" >Эрэгтэй</Select.Option>
-                        <Select.Option value="FEMALE">Эмэгтэй</Select.Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item name="family_status" label="Гэр бүлийн байдал">
-                      <Select className="input" name="family_status" bordered={false}>
-                        <Select.Option value="MARRIED">
-                          Гэрлэсэн
-                        </Select.Option>
-                        <Select.Option value="NOT_MARRIED">
-                          Гэрлээгүй
-                        </Select.Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Col>
-              <Col span={12}>
-                <Row gutter={20}>
-                  <Col span={12}>
-                    <Form.Item name="blood_type" label="Цусны бүлэг">
-                      <Select name="blood_type" className="input" bordered={false}>
-                        <Select.Option value="1-O">
-                          1-O
-                        </Select.Option>
-                        <Select.Option value="2-A">
-                          2-A
-                        </Select.Option>
-                        <Select.Option value="3-B">
-                          3-B
-                        </Select.Option>
-                        <Select.Option value="4-AB">
-                          4-AB
-                        </Select.Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item name="birthday" label="Төрсөн огноо">
-                      <DatePicker
-                        name="birthday"
-                        style={{ width: "100%" }}
-                        className="input"
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-            <Row gutter={30}>
-              <Col span={12}>
-                <Form.Item name="address" label="Гэрийн хаяг">
-                  <Input
-                    className="input"
-                    name="address"
-                    placeholder="Гэрийн хаяг"
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item name="desc"label="Тайлбар">
-                  <Input className="input" name="desc" placeholder="Бусад" />
-                </Form.Item>
-              </Col>
-            </Row>
+            <Card title="Хэрэглэгч нэмэх" bordered={false} extra={<SubmitButton >Хадгалах</SubmitButton>}>
+              <Row justify="center">
+                <Col span={6} style={{display:"grid",placeItems:"center"}}>
+                  <Form.Item name="image">
+                    <ProfileImageUpload name="image" />
+                    <br />
+                    <b>Профайл зураг </b>
+                  </Form.Item>
+                </Col>
+                <Col span={18}>
+                  <Row gutter={30} justify="space-between">
+                    <Col span={12}>
+                          <Form.Item name="first_name" label="Овог">
+                            <Input className="input" placeholder="Овог" name="first_name" />
+                          </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item name="last_name" label="Нэр">
+                        <Input
+                          placeholder="Нэр"
+                          className="input"
+                          name="last_name"
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Form.Item name="email" label="И-мэйл">
+                        <Input className="input" placeholder="И-мэйл" name="email" />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item name="phone" label="Утас">
+                        <Input
+                          className="input"
+                          name="phone"
+                          placeholder="Утас"
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Row gutter={20}>
+                        <Col span={12}>
+                          <Form.Item name="gender" label="Хүйс">
+                            <Select name="gender" className="input" bordered={false} showSearch>
+                              <Select.Option value="MALE" >Эрэгтэй</Select.Option>
+                              <Select.Option value="FEMALE">Эмэгтэй</Select.Option>
+                            </Select>
+                          </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                          <Form.Item name="family_status" label="Гэр бүлийн байдал">
+                            <Select className="input" name="family_status" bordered={false}>
+                              <Select.Option value="MARRIED">
+                                Гэрлэсэн
+                              </Select.Option>
+                              <Select.Option value="NOT_MARRIED">
+                                Гэрлээгүй
+                              </Select.Option>
+                            </Select>
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col span={12}>
+                      <Row gutter={20}>
+                        <Col span={12}>
+                          <Form.Item name="blood_type" label="Цусны бүлэг">
+                            <Select name="blood_type" className="input" bordered={false}>
+                              <Select.Option value="1-O">
+                                1-O
+                              </Select.Option>
+                              <Select.Option value="2-A">
+                                2-A
+                              </Select.Option>
+                              <Select.Option value="3-B">
+                                3-B
+                              </Select.Option>
+                              <Select.Option value="4-AB">
+                                4-AB
+                              </Select.Option>
+                            </Select>
+                          </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                          <Form.Item name="birthday" label="Төрсөн огноо">
+                            <DatePicker
+                              name="birthday"
+                              style={{ width: "100%" }}
+                              className="input"
+                            />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Form.Item name="address" label="Гэрийн хаяг">
+                        <Input
+                          className="input"
+                          name="address"
+                          placeholder="Гэрийн хаяг"
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item name="desc" label="Тайлбар">
+                        <Input className="input" name="desc" placeholder="Бусад" />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
 
-            <Row gutter={30}>
-              <Col span={12}>
-                <Form.Item name="image">
-                  <ProfileImageUpload name="image" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
 
-              </Col>
-            </Row>
-            <Row justify="end">
-              <SubmitButton >Хадгалах</SubmitButton>
-            </Row>
+
+            </Card>
           </Form>
         </Formik>
       </div>

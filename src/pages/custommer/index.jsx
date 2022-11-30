@@ -1,11 +1,10 @@
-import { Button, Col, Input, Pagination, Row, Skeleton, Space, Switch } from 'antd'
+import { Button, Col, Input, Pagination, Row, Skeleton, Space, Select } from 'antd'
 import Customers from '../../components/Customers'
 import React, { memo, useEffect, useRef, useState } from 'react'
 import { customerAPI } from '../../apis'
 import PageLoading from '../../components/PageLoading'
 import { Link } from 'react-router-dom'
 import { PlusOutlined } from '@ant-design/icons'
-import { Select } from 'formik-antd'
 
 const Customer__Page = () => {
   const [customerdata, setCustomerData] = useState([])
@@ -44,7 +43,7 @@ const Customer__Page = () => {
   useEffect(() => {
     fetchData();
   }, [])
-  const isclick =()=>{
+  const isclick = () => {
 
   }
 
@@ -52,14 +51,26 @@ const Customer__Page = () => {
     <div className='customer__container'>
       <Space direction='vertical' style={{ width: "100%" }}>
         <Row align="middle" justify="space-between">
-          <Col>
-            <div className="search__container">
-              <Input  ref={nameRef} placeholder='Хайх' suffix={<img src='search_icon.png'
+          <div className="search__container">
+            <Col>
+              <Input ref={nameRef} placeholder='Хайх' suffix={<img src='search_icon.png'
                 onClick={() => onSearch(nameRef?.current?.input?.value.toString().trim())} />} />
-                <Switch checkedChildren={`Сайн `} unCheckedChildren="Муу" size='50'/>
-                <Switch checkedChildren={`Эрэгтэй `} unCheckedChildren="Эмэгтэй"/>
-            </div>
-          </Col>
+            </Col>
+            <Col>
+            <Select style={{width:"100px"}}>
+                  <Select.Option>Сайн</Select.Option>
+                  <Select.Option>Муу</Select.Option>
+                  <Select.Option>Бүгд</Select.Option>
+                </Select>
+            </Col>
+            <Col>
+            <Select style={{width:"100px"}}>
+                  <Select.Option>Эрэгтэй</Select.Option>
+                  <Select.Option>Эмэгтэй</Select.Option>
+                  <Select.Option>Бүгд</Select.Option>
+                </Select>
+            </Col>
+          </div>
           <Col>
             <Button onClick={() => setISAdvice(!isadvice)} className='advice__button'>{isadvice ? "Зөвөлгөө" : "Үйлчлүүлэг "}</Button>	&nbsp;
             <Link to="create"><Button icon={<PlusOutlined />} >Нэмэх</Button></Link>

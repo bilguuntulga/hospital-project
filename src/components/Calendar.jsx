@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { DayPilot, DayPilotCalendar, DayPilotNavigator } from "@daypilot/daypilot-lite-react";
 import { doctorAPI, treatmentTimesAPI } from '../apis';
-import "./CalendarStyles.css"
 import { message, Modal } from 'antd';
 import { Formik } from 'formik';
+import "./CalendarStyles.css"
 import { Form, Input, Select, SubmitButton } from 'formik-antd';
 import * as yup from "yup";
 import { PlusOutlined, SaveOutlined } from '@ant-design/icons';
@@ -238,10 +238,10 @@ class Calendar extends Component {
     return (
       <div>
         
-        <div style={styles.left}>
+        <div className='day__pilot__navigation'>
           <DayPilotNavigator
             selectMode={"week"}
-            showMonths={3}
+            showMonths={7}
             skipMonths={1}
             startDate={new Date()}
             selectionDay={new Date()}
@@ -258,6 +258,7 @@ class Calendar extends Component {
           <DayPilotCalendar
             {...this.state.calendarProps}
             ref={this.calendarRef}
+            
           />
         </div>
         <Modal

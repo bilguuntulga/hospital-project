@@ -1,16 +1,17 @@
-import { Button, Card, Col, PageHeader, Row } from 'antd'
+import { Button, Card, Col, message, Modal, PageHeader, Row } from 'antd'
 import { Formik } from 'formik'
-import { Form, Input, Select } from 'formik-antd'
+import { Form, Input, Select, SubmitButton } from 'formik-antd'
 import React, { memo, useEffect, useState } from 'react'
 import UploadImage from '../../components/form/UploadImage'
 import * as yup from "yup";
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { servicesAPI } from '../../apis'
-import { ArrowLeftOutlined, DeleteColumnOutlined, DeleteOutlined, SaveOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, DeleteColumnOutlined, DeleteOutlined, ExclamationCircleOutlined, SaveOutlined } from '@ant-design/icons';
 import { toast, ToastContainer } from "react-toastify";
 import SelectService from '../../components/form/SelectService';
 import PageLoading from '../../components/PageLoading'
 import ResourcesSelect from '../../components/form/ResourcesSelect'
+const { confirm } = Modal
 
 const model = {
     name: "",
@@ -27,7 +28,7 @@ const validationSchema = yup.object().shape({
     desc: yup.string().optional(),
     type: yup.string().required("Заавал бөглөнө үү."),
     price: yup.number().required("Заавал бөглөнө үү."),
-    services: yup.array().required("Заавал бөглөнө үү."),
+    services: yup.array().optional(),
     images: yup.array().required("Заавал бөглөнө үү."),
     resources: yup.array().optional()
 })
@@ -36,14 +37,34 @@ function ServiceForm({ create = true }) {
     const [initialValues, setInitialValues] = useState(model);
     const [loading, setLoading] = useState(!create);
     const [user, setUser] = useState();
+    const [open, setOpen] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
     const { pathname } = useLocation()
+
+    const confirm = () => {
+        Modal.confirm({
+            title: 'Устгах',
+            icon: <ExclamationCircleOutlined />,
+            content: "Устгахдаа итгэлтэй байна уу ?",
+            cancelText: 'Үгүй',
+            okText: 'Тийм',
+            onOk: async () => {
+                await servicesAPI.remove(id);
+                message.success("Амжилттай");
+                fetchData()
+                navigate(-1)
+            }
+        });
+    };
+
     const onSubmit = async (values) => {
         if (create) {
             toast.promise(
                 async () => {
                     await servicesAPI.create(values);
+                    message.success("Амжилттай");
+                    fetchData()
                 },
                 {
                     pending: "Хадаглаж байна",
@@ -126,16 +147,17 @@ function ServiceForm({ create = true }) {
     return (
         <>
             <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
-            <Card title="Үйлчилгээ" extra={<Row gutter={30}>
-                <Col>
-                    {pathname == "/services/create" ? "" : <Button icon={<DeleteOutlined />} onClick={onDelete}>Устгах</Button>}
-                </Col>
-                <Col>
-                    <Button icon={<SaveOutlined/>} htmlType='submit'>Хадаглах</Button>
-                </Col>
-            </Row>}>
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
-                    {({ values }) => <Form layout='vertical'>
+
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
+                {({ values }) => <Form layout='vertical'>
+                    <Card title="Үйлчилгээ" extra={<Row gutter={30}>
+                        <Col>
+                            {pathname == "/services/create" ? "" : <Button icon={<DeleteOutlined />} onClick={() => confirm()}>Устгах</Button>}
+                        </Col>
+                        <Col>
+                            <SubmitButton icon={<SaveOutlined />}>Хадаглаж</SubmitButton>
+                        </Col>
+                    </Row>}>
                         <Row gutter={50} align="middle">
                             <Col span={10}>
                                 <Form.Item name="images">
@@ -186,11 +208,10 @@ function ServiceForm({ create = true }) {
 
                             </Col>
                         </Row>
-
-                    </Form>}
-                </Formik>
-                <ToastContainer />
-            </Card>
+                    </Card>
+                </Form>}
+            </Formik>
+            <ToastContainer />
         </>
     )
 }
