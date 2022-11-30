@@ -1,16 +1,12 @@
 .experiences_field_wrapper {
   .experience_wrapper {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
 
     .inputs_wrapper {
       display: flex;
-      gap: 1rem;
-
-      input {
-        padding: 0.3rem;
-        flex: 1;
-      }
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .experience_action_button {
