@@ -54,7 +54,7 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    const newSocket = io("http://192.168.0.122:64536");
+    const newSocket = io("http://localhost:64536");
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
@@ -73,8 +73,8 @@ function Header() {
           key={e?.id}
           id={e?.id}
           image={e?.customer?.image ?? "/images/profile_img.jpg"}
-          name={`${e?.customer.first_name ?? "Овог"} ${
-            e?.customer.last_name ?? "Нэр"
+          name={`${e?.customer?.first_name ?? "Овог"} ${
+            e?.customer?.last_name ?? "Нэр"
           }`}
           phone={e?.customer?.phone}
           startTime={e?.start_time}
@@ -102,15 +102,15 @@ function Header() {
         <div className="profile_wrapper">
           <Link to="/profile">
             <div className="profile_image_wrapper">
-              <img src={user.profile_img ?? ""} alt="Profile" />
+              <img src={user?.profile_img ?? ""} alt="Profile" />
             </div>
           </Link>
           <div className="name_role_wrapper">
-            <div className="username">{`${user.first_name ?? "Овог"} ${
-              user.last_name ?? "Нэр"
+            <div className="username">{`${user?.first_name ?? "Овог"} ${
+              user?.last_name ?? "Нэр"
             }`}</div>
             <div className="user_role">{`${
-              user.role === "ADMIN" ? "Админ" : "Ажилчин"
+              user?.role === "ADMIN" ? "Админ" : "Ажилчин"
             }`}</div>
           </div>
           <Dropdown

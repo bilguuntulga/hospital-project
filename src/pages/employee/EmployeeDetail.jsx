@@ -73,7 +73,7 @@ const EmployeeDetail = () => {
 
   const onDelete = async () => {
     confirm({
-      title: `${detailData.first_name} ${detailData.last_name} устгах`,
+      title: `${detailData?.first_name} ${detailData?.last_name} устгах`,
       icon: <ExclamationCircleOutlined />,
       content: "Та устгах даа итгэлтэй байна уу?",
       okText: "Устгах",

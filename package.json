@@ -2,7 +2,7 @@
   "name": "hospital",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://192.168.0.122:64536",
+  "proxy": "http://localhost:64536",
   "homepage": "./",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -35,6 +35,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
     "sass": "^1.56.1",
+    "serve": "^14.1.2",
     "socket.io-client": "^4.5.4",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"

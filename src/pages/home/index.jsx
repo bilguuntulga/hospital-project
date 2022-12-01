@@ -429,10 +429,10 @@ function HomePage() {
             <Customers
               image={e?.image}
               name={`${e?.first_name} ${e?.last_name}`}
-              birthday={e.email}
-              gender={e.gender}
-              phone={e.phone}
-              id={e.id}
+              birthday={e?.email}
+              gender={e?.gender}
+              phone={e?.phone}
+              id={e?.id}
               rate={e?.rate}
             />
           ))}
