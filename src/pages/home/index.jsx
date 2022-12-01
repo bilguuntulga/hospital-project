@@ -28,7 +28,7 @@ function HomePage() {
   const [selectedDay, setSlecetedDay] = useState(0);
   const [weeklyTimes, setWeeklyTimes] = useState([]);
 
-  const fetchData = async () => {
+  const fetchData = () => {
     treatmentTimesAPI.todayTimesCount().then((res) => setTodayTimesCount(res));
     doctorAPI.count().then((res) => setDoctorsCount(res));
     customerAPI.registeredCount().then((res) => setCustomersCount(res));

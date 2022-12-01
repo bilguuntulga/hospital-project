@@ -1,7 +1,7 @@
 export const genderTranslator = (gender) => {
   switch (gender) {
     case "MALE":
-      return "аа";
+      return "Эрэгтэй";
     case "FEMALE":
       return "Эмэгтэй";
     default:
