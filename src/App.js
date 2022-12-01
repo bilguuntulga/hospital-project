@@ -17,7 +17,6 @@ const Employee = lazy(() => import("./pages/employee"));
 const Order_time = lazy(() => import("./pages/calendar"));
 const Custommer_News = lazy(() => import("./pages/custommer"));
 const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"));
-const Advice = lazy(() => import("./pages/custommer/advice"));
 const EmployeeDetail = lazy(() => import("./pages/employee/EmployeeDetail"));
 const Test = lazy(() => import("./pages/test"));
 const Profile = lazy(() => import("./pages/profile"));
@@ -31,6 +30,7 @@ const Bonus = lazy(() => import("./pages/bonus"));
 const ServiceDetail = lazy(() => import("./pages/service/ServiceDetail"));
 const ServiceForm = lazy(() => import("./pages/service/form"));
 const DoctorCreate = lazy(() => import("./pages/employee/create"))
+const Advice = lazy(() => import("./pages/advice"))
 
 function App() {
   const location = useLocation();
@@ -59,7 +59,7 @@ function App() {
                     path="/custommer_news"
                     element={<Custommer_News />}
                   />
-                  <Route exact path="/advice" element={<Advice />} />
+                  <Route exact path="customer/advice" element={<Advice />} />
                   <Route
                     exact
                     path="/employee/detail/:id"
@@ -81,7 +81,7 @@ function App() {
                   <Route exact path="/bonus" element={<Bonus />} />
                   <Route exact path="/work_users" element={<Work_users />} />
                   <Route exact path="/employee/create" element={<DoctorCreate />} />
-                  
+
                 </Routes>
               </div>
             </Suspense>

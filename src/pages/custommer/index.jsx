@@ -134,6 +134,8 @@ const CustomerPage = () => {
             </Col>
           </div>
           <Col>
+            <Link to='advice'><Button>Зөвөлгөө</Button></Link>
+            &nbsp; &nbsp; &nbsp;
             <Link to="create"><Button icon={<PlusOutlined />} >Нэмэх</Button></Link>
           </Col>
         </Row>
