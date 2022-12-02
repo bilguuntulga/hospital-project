@@ -34,7 +34,8 @@ import {
   SaveOutlined,
 } from "@ant-design/icons";
 import ProfileImageUpload from "../../../components/form/ProfileImageUpload";
-import { toast } from "react-toastify";
+import Quesstion from "../../advice/index"
+import { toast } from 'react-toastify';
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
@@ -546,6 +547,7 @@ const CustomerDetail = () => {
             </Modal>
           </div>
         </div>
+        <Quesstion id={id}/>
       </div>
     </>
   );
