@@ -15,4 +15,16 @@ export const notifications = () =>
   request.get("/v1/api/treatment-times/type/notifications");
 export const getNotification = (id) =>
   request.get("/v1/api/treatment-times/type/notifications/" + id);
-export const weeklyTimes = () => request.get("/v1/api/treatment-times/info/weekly-times")
+export const weeklyTimes = () =>
+  request.get("/v1/api/treatment-times/info/weekly-times");
+
+export const TreatmentTimesErrorConverter = (message) => {
+  switch (message) {
+    case "DOCTOR_IS_RESTING":
+      return "Эмч амарж байна";
+    case "PAST_TENSE":
+      return "Өнгөрсөн цаг байна";
+    default:
+      return "Амжилтгүй";
+  }
+};

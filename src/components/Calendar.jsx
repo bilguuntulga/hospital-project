@@ -1,24 +1,35 @@
-import React, { Component } from 'react';
-import { DayPilot, DayPilotCalendar, DayPilotNavigator } from "@daypilot/daypilot-lite-react";
-import { doctorAPI, treatmentTimesAPI } from '../apis';
-import { Col, message, Modal, PageHeader, Row, Select as Antd__Select } from 'antd';
-import { Formik } from 'formik';
-import "./CalendarStyles.css"
-import { Form, Input, Select, SubmitButton } from 'formik-antd';
+import React, { Component } from "react";
+import {
+  DayPilot,
+  DayPilotCalendar,
+  DayPilotNavigator,
+} from "@daypilot/daypilot-lite-react";
+import { doctorAPI, treatmentTimesAPI } from "../apis";
+import {
+  Col,
+  message,
+  Modal,
+  PageHeader,
+  Row,
+  Select as Antd__Select,
+} from "antd";
+import { Formik } from "formik";
+import { Form, Input, Select, SubmitButton } from "formik-antd";
 import * as yup from "yup";
-import { PlusOutlined, SaveOutlined } from '@ant-design/icons';
+import { PlusOutlined, SaveOutlined } from "@ant-design/icons";
+import { TreatmentTimesErrorConverter } from "../apis/treatment-times";
 const { confirm } = Modal;
 
 const styles = {
   wrap: {
-    display: "flex"
+    display: "flex",
   },
   left: {
-    marginRight: "10px"
+    marginRight: "10px",
   },
   main: {
-    flexGrow: "1"
-  }
+    flexGrow: "1",
+  },
 };
 
 class Event {
@@ -48,8 +59,8 @@ class Calendar extends Component {
         durationBarVisible: false,
         timeRangeSelectedHandling: "Enabled",
         timeFormat: "Clock24Hours",
-        locale: "nb-no",
-        onTimeRangeSelected: async args => {
+        locale: "en-us",
+        onTimeRangeSelected: async (args) => {
           const dp = this.calendar;
           dp.clearSelection();
 
@@ -64,11 +75,11 @@ class Calendar extends Component {
             ...prevState,
             showCreateModal: true,
             startTime: new Date(args.start).toISOString(),
-            endTime: new Date(args.end).toISOString()
+            endTime: new Date(args.end).toISOString(),
           }));
         },
         eventDeleteHandling: "Update",
-        onEventClick: async args => {
+        onEventClick: async (args) => {
           const time = await treatmentTimesAPI.get(args?.e?.data?.id);
           await this.getDoctors(time.start_time, time.end_time);
 
@@ -81,8 +92,8 @@ class Calendar extends Component {
               customer_phone: time?.customer?.phone,
               doctor: `${time?.doctor?.first_name} ${time?.doctor?.last_name}`,
               start_time: time?.start_time,
-              end_time: time?.end_time
-            }
+              end_time: time?.end_time,
+            },
           }));
         },
         onEventDelete: async (args) => {
@@ -90,9 +101,8 @@ class Calendar extends Component {
 
           if (new Date(time?.end_time) > new Date()) {
             this.deleteTime(args?.e?.data?.id);
-          }
-          else {
-            message.warning("Өнгөрсөн цагийг устгах боломжгүй")
+          } else {
+            message.warning("Өнгөрсөн цагийг устгах боломжгүй");
             this.fetchData();
           }
         },
@@ -102,8 +112,8 @@ class Calendar extends Component {
             id: args?.e?.data?.id,
             start_time: new Date(args?.newStart),
             end_time: new Date(args?.newEnd),
-            doctor: time?.doctor?.id
-          }
+            doctor: time?.doctor?.id,
+          };
           this.updateTime(data);
         },
         onEventMove: async (args) => {
@@ -112,18 +122,18 @@ class Calendar extends Component {
             id: args?.e?.data?.id,
             start_time: new Date(args?.newStart),
             end_time: new Date(args?.newEnd),
-            doctor: time?.doctor?.id
-          }
+            doctor: time?.doctor?.id,
+          };
           this.updateTime(data);
-        }
-      }
+        },
+      },
     };
   }
 
   model = {
     customer_phone: "",
-    doctor: ""
-  }
+    doctor: "",
+  };
 
   validationSchema = yup.object().shape({
     customer_phone: yup
@@ -131,8 +141,8 @@ class Calendar extends Component {
       .min(8, "8 оронтой байна")
       .max(8, "8 оронтой байна")
       .required("Утасны дугаар оруулна уу"),
-    doctor: yup.string().required("Эмч сонгон уу")
-  })
+    doctor: yup.string().required("Эмч сонгон уу"),
+  });
 
   get calendar() {
     return this.calendarRef.current.control;
@@ -144,12 +154,12 @@ class Calendar extends Component {
 
     const doctors = await doctorAPI.findAvailable({
       start_time: startTime,
-      end_time: endTime
+      end_time: endTime,
     });
 
     this.setState((preState) => ({
       ...preState,
-      doctors: doctors
+      doctors: doctors,
     }));
   }
 
@@ -167,10 +177,7 @@ class Calendar extends Component {
         },
         onCancel: async () => {
           this.fetchData();
-        }
-
-
-
+        },
       });
     } catch (error) {
       message.error(error?.message);
@@ -200,20 +207,53 @@ class Calendar extends Component {
 
   componentDidMount() {
     DayPilot.Locale.register(
-      new DayPilot.Locale('en-us',
-        {
-          dayNames: ['Ням', 'Даваа', 'Мягмар', 'Лхавга', 'Пүрэв', 'Баасан', 'Бямба'],
-          dayNamesShort: ['Ня', 'Да', 'Мя', 'Лх', 'Пү', 'Ба', 'Бя'],
-          monthNames: ['1 сар', '2 сар', '3 сар', '4 сар', '5 сар', '6 сар', '7 сар', '8 сар', '9 сар', '10 сар', '11 сар', '12 сар'],
-          monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-          timePattern: 'hh:mm:ss',
-          datePattern: 'yyyy/MM/dd',
-          dateTimePattern: 'yyyy/MM/dd hh:mm:ss',
-          timeFormat: 'Clock24Hours',
-          weekStarts: 1,
-          timezone: 8
-        }
-      ));
+      new DayPilot.Locale("en-us", {
+        dayNames: [
+          "Ням",
+          "Даваа",
+          "Мягмар",
+          "Лхавга",
+          "Пүрэв",
+          "Баасан",
+          "Бямба",
+        ],
+        dayNamesShort: ["Ня", "Да", "Мя", "Лх", "Пү", "Ба", "Бя"],
+        monthNames: [
+          "1 сар",
+          "2 сар",
+          "3 сар",
+          "4 сар",
+          "5 сар",
+          "6 сар",
+          "7 сар",
+          "8 сар",
+          "9 сар",
+          "10 сар",
+          "11 сар",
+          "12 сар",
+        ],
+        monthNamesShort: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+        ],
+        timePattern: "hh:mm:ss",
+        datePattern: "yyyy/MM/dd",
+        dateTimePattern: "yyyy/MM/dd hh:mm:ss",
+        timeFormat: "Clock24Hours",
+        weekStarts: 1,
+        timezone: 8,
+      })
+    );
 
     this.fetchData();
   }
@@ -233,12 +273,11 @@ class Calendar extends Component {
 
     this.setState((prevState) => ({
       ...prevState,
-      showCreateModal: false
+      showCreateModal: false,
     }));
   }
 
   async updateTime(values) {
-
     if (values?.doctor?.includes(" ")) {
       delete values.doctor;
     }
@@ -247,22 +286,22 @@ class Calendar extends Component {
       await treatmentTimesAPI.update(values);
       message.success("Амжилттай");
     } catch (error) {
-      console.log(error);
-      message.error("Амжилтгүй");
+      message.error(
+        TreatmentTimesErrorConverter(error?.message) ?? "Амжилтгүй"
+      );
     }
 
     await this.fetchData();
     this.setState((prevState) => ({
       ...prevState,
-      showUpdateModal: false
+      showUpdateModal: false,
     }));
   }
 
   render() {
     return (
       <div>
-
-        <div className='day__pilot__navigation'>
+        <div className="day__pilot__navigation">
           <DayPilotNavigator
             selectMode={this.state.calendarProps.viewType}
             showMonths={5}
@@ -270,27 +309,33 @@ class Calendar extends Component {
             startDate={new Date()}
             selectionDay={new Date()}
             orientation="Horizontal"
-            onTimeRangeSelected={args => {
+            onTimeRangeSelected={(args) => {
               this.calendar.update({
-                startDate: args.day
+                startDate: args.day,
               });
             }}
           />
         </div>
-        <PageHeader extra={<Antd__Select style={{ width: "100px" }} defaultValue={this.state.calendarProps.viewType} onChange={(value) => this.setState((prevState) => ({
-          ...prevState,
-          calendarProps: {
-            ...this.state.calendarProps,
-            viewType: value
+        <PageHeader
+          extra={
+            <Antd__Select
+              style={{ width: "100px" }}
+              defaultValue={this.state.calendarProps.viewType}
+              onChange={(value) =>
+                this.setState((prevState) => ({
+                  ...prevState,
+                  calendarProps: {
+                    ...this.state.calendarProps,
+                    viewType: value,
+                  },
+                }))
+              }
+            >
+              <Antd__Select.Option value="Day">1 хоног</Antd__Select.Option>
+              <Antd__Select.Option value="Week">7 хоног</Antd__Select.Option>
+            </Antd__Select>
           }
-        }))}>
-          <Antd__Select.Option value="Day">
-            1 хоног
-          </Antd__Select.Option>
-          <Antd__Select.Option value="Week">
-            7 хоног
-          </Antd__Select.Option>
-        </Antd__Select>} />
+        />
         <div style={styles.main}>
           <DayPilotCalendar
             {...this.state.calendarProps}
@@ -300,19 +345,27 @@ class Calendar extends Component {
         <Modal
           open={this.state.showCreateModal}
           title="Цаг нэмэх"
-          onCancel={() => this.setState((preState) => ({
-            ...preState,
-            showCreateModal: false
-          }))}
+          onCancel={() =>
+            this.setState((preState) => ({
+              ...preState,
+              showCreateModal: false,
+            }))
+          }
           footer={false}
         >
-
-          <Formik onSubmit={(values, { resetForm }) => {
-            this.createTime(values);
-            resetForm();
-          }} initialValues={this.model} validationSchema={this.validationSchema}>
-            <Form layout='vertical'>
-              <Form.Item name="customer_phone" label="Үйлчлүүлэгчийн утасны дугаар">
+          <Formik
+            onSubmit={(values, { resetForm }) => {
+              this.createTime(values);
+              resetForm();
+            }}
+            initialValues={this.model}
+            validationSchema={this.validationSchema}
+          >
+            <Form layout="vertical">
+              <Form.Item
+                name="customer_phone"
+                label="Үйлчлүүлэгчийн утасны дугаар"
+              >
                 <Input name="customer_phone" />
               </Form.Item>
               <Form.Item name="doctor" label="Эмч">
@@ -324,16 +377,20 @@ class Calendar extends Component {
                   ))}
                 </Select>
               </Form.Item>
-              <SubmitButton icon={<SaveOutlined />} block>Хадгалах</SubmitButton>
+              <SubmitButton icon={<SaveOutlined />} block>
+                Хадгалах
+              </SubmitButton>
             </Form>
           </Formik>
         </Modal>
         <Modal
           open={this.state.showUpdateModal}
-          onCancel={() => this.setState((preState) => ({
-            ...preState,
-            showUpdateModal: false
-          }))}
+          onCancel={() =>
+            this.setState((preState) => ({
+              ...preState,
+              showUpdateModal: false,
+            }))
+          }
           footer={null}
         >
           <Formik
@@ -342,8 +399,11 @@ class Calendar extends Component {
             enableReinitialize
             onSubmit={(values) => this.updateTime(values)}
           >
-            <Form layout='vertical'>
-              <Form.Item name="customer_phone" label="Үйлчлүүлэгчийн утасны дугаар">
+            <Form layout="vertical">
+              <Form.Item
+                name="customer_phone"
+                label="Үйлчлүүлэгчийн утасны дугаар"
+              >
                 <Input name="customer_phone" />
               </Form.Item>
               <Form.Item name="doctor" label="Эмч">
@@ -355,7 +415,9 @@ class Calendar extends Component {
                   ))}
                 </Select>
               </Form.Item>
-              <SubmitButton icon={<SaveOutlined />} block>Хадгалах</SubmitButton>
+              <SubmitButton icon={<SaveOutlined />} block>
+                Хадгалах
+              </SubmitButton>
             </Form>
           </Formik>
         </Modal>

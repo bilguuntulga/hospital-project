@@ -5,6 +5,6 @@ export const genderTranslator = (gender) => {
     case "FEMALE":
       return "Эмэгтэй";
     default:
-      return "GENDER_NOTFOUND";
+      return "";
   }
 };

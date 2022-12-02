@@ -1,14 +1,24 @@
 .day__pilot__navigation {
-    width: 100%;
-    .navigator_default_main {
-        background-color: white;
-        margin: auto;
-    }
+  width: 100%;
+  .navigator_default_main {
+    background-color: white;
+    margin: auto;
+  }
 }
-.calendar_default_main{
-    background-color: #94bee6;
-    border:  solid 5px green;
+.calendar_default_main {
+  background-color: #94bee6;
+  border: solid 5px green;
+}
 
+.calendar_default_event_inner {
+  background: #2e78d6;
+  border: none;
+  border-radius: 5px;
+  font-size: 10pt;
+  padding: 5px;
 }
-.navigator_default_titleleft{
+
+.calendar_default_main {
+  border-radius: 1rem;
+  overflow: hidden;
 }
