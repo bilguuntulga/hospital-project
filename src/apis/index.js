@@ -10,6 +10,7 @@ import * as today_orderAPI from "./today_order"
 import * as paginationAPI from "./pagination"
 import * as selectedDatAPI from './selectedday'
 import * as bonusAPI from "./bonus"
+import * as anythingAPI from "./anything"
 
 export {
     authAPI,
@@ -24,4 +25,5 @@ export {
     paginationAPI,
     selectedDatAPI,
     bonusAPI,
+    anythingAPI
 };

@@ -1,8 +1,9 @@
-import { ArrowLeftOutlined } from '@ant-design/icons'
-import { Card, Col, PageHeader, Radio, Row, Collapse } from 'antd'
+import { SaveOutlined } from '@ant-design/icons'
+import { Card, Col, Row, Collapse, message } from 'antd'
 import { Formik } from 'formik'
-import { Form, Input, TimePicker } from 'formik-antd'
-import React, { memo } from 'react'
+import { Form, Input, SubmitButton, TimePicker, Radio } from 'formik-antd'
+import React, { memo, useEffect, useState } from 'react'
+import { anythingAPI } from '../../apis'
 import * as yup from "yup"
 const { Item } = Form;
 
@@ -21,40 +22,81 @@ const model = {
     q8: "", q9: "", q10: "",
     q11: "", q12: "", q13: "", q14: "", q15: "",
     q16: "", q17: "", q18: "", q19: "", q20: "", q21: "", q22: "",
-
 }
-const validationSchema = yup.object().shape({
-    q1: yup.string().required("Заавал бөглөнө үү"), q2: yup.string().optional(),
-    q3: yup.string().required("Заавал бөглөнө үү"), q3_1: yup.string().required("Заавал бөглөнө үү"), q3_2: yup.string().required("Заавал бөглөнө үү"), q3_3: yup.string().required("Заавал бөглөнө үү"), q3_4: yup.string().required("Заавал бөглөнө үү"), q3_5: yup.string().required("Заавал бөглөнө үү"),
-    q4: yup.string().required("Заавал бөглөнө үү"),
-    q4_day1_start: yup.string().required("Заавал бөглөнө үү"), q4_day2_start: yup.string().required("Заавал бөглөнө үү"), q4_day3_start: yup.string().required("Заавал бөглөнө үү"), q4_day4_start: yup.string().required("Заавал бөглөнө үү"), q4_day5_start: yup.string().required("Заавал бөглөнө үү"), q4_day6_start: yup.string().required("Заавал бөглөнө үү"), q4_day7_start: yup.string().required("Заавал бөглөнө үү"),
-    q4_day1_end: yup.string().required("Заавал бөглөнө үү"), q4_day2_end: yup.string().required("Заавал бөглөнө үү"), q4_day3_end: yup.string().required("Заавал бөглөнө үү"), q4_day4_end: yup.string().required("Заавал бөглөнө үү"), q4_day5_end: yup.string().required("Заавал бөглөнө үү"), q4_day6_end: yup.string().required("Заавал бөглөнө үү"), q4_day7_end: yup.string().required("Заавал бөглөнө үү"),
-    q5: yup.string().required("Заавал бөглөнө үү"), q6: yup.string().required("Заавал бөглөнө үү"),
-    q7: yup.string().required("Заавал бөглөнө үү"), q8: yup.string().required("Заавал бөглөнө үү"),
-    q12day1_morning: yup.string().required("Заавал бөглөнө үү"), q12day1_day: yup.string().required("Заавал бөглөнө үү"), q12day1_evening: yup.string().required("Заавал бөглөнө үү"),
-    q12day1_morning_time: yup.string().required("Заавал бөглөнө үү"), q12day1_day_time: yup.string().required("Заавал бөглөнө үү"), q12day1_evening_time: yup.string().required("Заавал бөглөнө үү"),
-    q12day2_morning: yup.string().required("Заавал бөглөнө үү"), q12day2_day: yup.string().required("Заавал бөглөнө үү"), q12day2_evening: yup.string().required("Заавал бөглөнө үү"),
-    q12day2_morning_time: yup.string().required("Заавал бөглөнө үү"), q12day2_day_time: yup.string().required("Заавал бөглөнө үү"), q12day2_evening_time: yup.string().required("Заавал бөглөнө үү"),
-    q12day3_morning: yup.string().required("Заавал бөглөнө үү"), q12day3_day: yup.string().required("Заавал бөглөнө үү"), q12day3_evening: yup.string().required("Заавал бөглөнө үү"),
-    q12day3_morning_time: yup.string().required("Заавал бөглөнө үү"), q12day3_day_time: yup.string().required("Заавал бөглөнө үү"), q12day3_evening_time: yup.string().required("Заавал бөглөнө үү"),
 
-    q9: yup.string().required("Заавал бөглөнө үү"), q10: yup.string().required("Заавал бөглөнө үү"),
-    q11: yup.string().required("Заавал бөглөнө үү"), q12: yup.string().required("Заавал бөглөнө үү"),
-    q13: yup.string().required("Заавал бөглөнө үү"), q14: yup.string().required("Заавал бөглөнө үү"),
-    q15: yup.string().required("Заавал бөглөнө үү"), q16: yup.string().required("Заавал бөглөнө үү"),
-    q17: yup.string().required("Заавал бөглөнө үү"), q18: yup.string().required("Заавал бөглөнө үү"),
-    q19: yup.string().required("Заавал бөглөнө үү"), q20: yup.string().required("Заавал бөглөнө үү"),
-    q21: yup.string().required("Заавал бөглөнө үү"), q22: yup.string().required("Заавал бөглөнө үү"),
+const validationSchema = yup.object().shape({
+    q1: yup.string().optional(), q2: yup.string().optional(),
+    q3: yup.string().optional(), q3_1: yup.string().optional(), q3_2: yup.string().optional(), q3_3: yup.string().optional(), q3_4: yup.string().optional(), q3_5: yup.string().optional(),
+    q4: yup.string().optional(),
+    q4_day1_start: yup.string().optional(), q4_day2_start: yup.string().optional(), q4_day3_start: yup.string().optional(), q4_day4_start: yup.string().optional(), q4_day5_start: yup.string().optional(), q4_day6_start: yup.string().optional(), q4_day7_start: yup.string().optional(),
+    q4_day1_end: yup.string().optional(), q4_day2_end: yup.string().optional(), q4_day3_end: yup.string().optional(), q4_day4_end: yup.string().optional(), q4_day5_end: yup.string().optional(), q4_day6_end: yup.string().optional(), q4_day7_end: yup.string().optional(),
+    q5: yup.string().optional(), q6: yup.string().optional(),
+    q7: yup.string().optional(), q8: yup.string().optional(),
+    q12day1_morning: yup.string().optional(), q12day1_day: yup.string().optional(), q12day1_evening: yup.string().optional(),
+    q12day1_morning_time: yup.string().optional(), q12day1_day_time: yup.string().optional(), q12day1_evening_time: yup.string().optional(),
+    q12day2_morning: yup.string().optional(), q12day2_day: yup.string().optional(), q12day2_evening: yup.string().optional(),
+    q12day2_morning_time: yup.string().optional(), q12day2_day_time: yup.string().optional(), q12day2_evening_time: yup.string().optional(),
+    q12day3_morning: yup.string().optional(), q12day3_day: yup.string().optional(), q12day3_evening: yup.string().optional(),
+    q12day3_morning_time: yup.string().optional(), q12day3_day_time: yup.string().optional(), q12day3_evening_time: yup.string().optional(),
+
+    q9: yup.string().optional(), q10: yup.string().optional(),
+    q11: yup.string().optional(), q12: yup.string().optional(),
+    q13: yup.string().optional(), q14: yup.string().optional(),
+    q15: yup.string().optional(), q16: yup.string().optional(),
+    q17: yup.string().optional(), q18: yup.string().optional(),
+    q19: yup.string().optional(), q20: yup.string().optional(),
+    q21: yup.string().optional(), q22: yup.string().optional(),
 })
 
 function AdvicePage({ id }) {
+
+    const [initialValues, setInitialValues] = useState(model);
+    const [advice, setAdvice] = useState();
+
+    const onSubmit = async (values) => {
+        try {
+            if (!advice) {
+                await anythingAPI.create({
+                    any: {
+                        customer_id: id,
+                        type: "q1",
+                        ...values
+                    }
+                });
+            } else {
+                await anythingAPI.update({
+                    id: advice?.id,
+                    any: {
+                        ...values
+                    }
+                });
+            }
+
+            message.success("Амжилттай");
+        } catch (error) {
+            message.error("Амжилтгүй");
+        }
+    };
+
+    const fetchData = async () => {
+        const res = await anythingAPI.getQ1(id);
+        if (res) {
+            setAdvice(res);
+            setInitialValues(res.any);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <>
             <br />
             <Collapse >
                 <Collapse.Panel header="1-р Асуултууд" key="1">
                     <Card title="Асуулт" bordered={false}>
-                        <Formik initialValues={model}>
+                        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
                             <Form layout='vertical'>
                                 <Row gutter={30}>
                                     <Col span={12}>
@@ -77,7 +119,7 @@ function AdvicePage({ id }) {
                                             <Input placeholder='text' name='q3' />
                                         </Item>
                                         <Item label="3.1. Арьсны асуудал " name="q3_1">
-                                            <Input placeholder='text' name='q3' />
+                                            <Input placeholder='text' name='q3_1' />
                                         </Item>
                                         <Item label="3.2. Чийгшил" name="q3_2">
                                             <Input placeholder='text' name='q3_2' />
@@ -181,7 +223,6 @@ function AdvicePage({ id }) {
                                             </Col>
                                         </Row>
                                         <Row>
-
                                             <Col span={12}>
                                                 <Item label="5. Усны хэрэглээ " name="q5">
                                                     <Radio.Group name="q5">
@@ -451,27 +492,28 @@ function AdvicePage({ id }) {
                                 </Row>
                                 <Row>
                                     <Col span={8}>
-                                        <Item name="q19" label="Асуулт.19 B,C вирус байгаа юу ?">
-                                            <Radio.Group name="q19">
-                                                <Radio value="YES">Тийм</Radio>
-                                                <Radio value="NO">Үгүй</Radio>
-                                            </Radio.Group>
-                                        </Item>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Item name="q20" label="Асуулт.20 Ужиг хууч өвчинтэй юу ?">
+                                        <Item name="q20" label="Асуулт.19 B,C вирус байгаа юу ?">
                                             <Radio.Group name="q20">
                                                 <Radio value="YES">Тийм</Radio>
                                                 <Radio value="NO">Үгүй</Radio>
                                             </Radio.Group>
                                         </Item>
                                     </Col>
+                                    <Col span={8}>
+                                        <Item name="q21" label="Асуулт.20 Ужиг хууч өвчинтэй юу ?">
+                                            <Radio.Group name="q21">
+                                                <Radio value="YES">Тийм</Radio>
+                                                <Radio value="NO">Үгүй</Radio>
+                                            </Radio.Group>
+                                        </Item>
+                                    </Col>
                                 </Row>
+                                <SubmitButton block icon={<SaveOutlined />}>Хадгалах</SubmitButton>
                             </Form>
                         </Formik>
                     </Card>
                 </Collapse.Panel>
-                <Collapse.Panel header="2-р асуултууд">
+                <Collapse.Panel header="2-р Асуултууд" key='2'>
                 </Collapse.Panel>
             </Collapse>
         </>
