@@ -29,13 +29,14 @@ const Resource = lazy(() => import("./pages/resource"));
 const Bonus = lazy(() => import("./pages/bonus"));
 const ServiceDetail = lazy(() => import("./pages/service/ServiceDetail"));
 const ServiceForm = lazy(() => import("./pages/service/form"));
-const DoctorCreate = lazy(() => import("./pages/employee/create"))
-const Advice = lazy(() => import("./pages/advice"))
+const DoctorCreate = lazy(() => import("./pages/employee/create"));
 
 function App() {
   const location = useLocation();
   if (location.pathname !== "/login") {
-    authAPI.profile().then(data => localStorage.setItem("user", JSON.stringify(data)));
+    authAPI
+      .profile()
+      .then((data) => localStorage.setItem("user", JSON.stringify(data)));
   }
 
   return (
@@ -59,7 +60,6 @@ function App() {
                     path="/custommer_news"
                     element={<Custommer_News />}
                   />
-                  <Route exact path="customer/advice" element={<Advice />} />
                   <Route
                     exact
                     path="/employee/detail/:id"
@@ -70,18 +70,33 @@ function App() {
                     path="/customer/:id"
                     element={<Custommer_detail />}
                   />
-                  <Route exact path="/customer/create" element={<Custommer_Add />} />
+                  <Route
+                    exact
+                    path="/customer/create"
+                    element={<Custommer_Add />}
+                  />
                   <Route exact path="/test" element={<Test />} />
                   <Route exact path="/profile" element={<Profile />} />
                   <Route exact path="/report" element={<Report />} />
-                  <Route exact path="/services/:id" element={<ServiceDetail />} />
-                  <Route exact path="/services/create" element={<ServiceForm />} />
+                  <Route
+                    exact
+                    path="/services/:id"
+                    element={<ServiceDetail />}
+                  />
+                  <Route
+                    exact
+                    path="/services/create"
+                    element={<ServiceForm />}
+                  />
                   <Route exact path="/services" element={<ServicePage />} />
                   <Route exact path="/resource" element={<Resource />} />
                   <Route exact path="/bonus" element={<Bonus />} />
                   <Route exact path="/work_users" element={<Work_users />} />
-                  <Route exact path="/employee/create" element={<DoctorCreate />} />
-
+                  <Route
+                    exact
+                    path="/employee/create"
+                    element={<DoctorCreate />}
+                  />
                 </Routes>
               </div>
             </Suspense>
