@@ -7,6 +7,8 @@ import {
   Modal,
   message,
   PageHeader,
+  Collapse,
+  Card,
 } from "antd";
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -36,6 +38,7 @@ import {
 import ProfileImageUpload from "../../../components/form/ProfileImageUpload";
 import { toast } from "react-toastify";
 import Question1 from "../../../components/form/Question1";
+import Question2 from "../../../components/form/Question2";
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
@@ -547,7 +550,18 @@ const CustomerDetail = () => {
             </Modal>
           </div>
         </div>
-        <Question1 id={id} />
+        <br />
+        <div className="customer_detail_table">
+          <PageHeader title="Асуулт" />
+          <Collapse>
+            <Collapse.Panel header="1-р Асуултууд" key="1">
+              <Question1 id={id} />
+            </Collapse.Panel>
+            <Collapse.Panel header="2-р Асуултууд" key="2">
+              <Question2 />
+            </Collapse.Panel>
+          </Collapse>
+        </div>
       </div>
     </>
   );
