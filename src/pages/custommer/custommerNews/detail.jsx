@@ -12,6 +12,7 @@ import SelectService from '../../../components/form/SelectService';
 import SelectDoctor from "../../../components/form/SelectDoctor";
 import { ArrowLeftOutlined, DeleteOutlined, EditFilled, EditOutlined, ExclamationCircleFilled, SaveOutlined } from '@ant-design/icons';
 import ProfileImageUpload from "../../../components/form/ProfileImageUpload";
+import Quesstion from "../../advice/index"
 import { toast } from 'react-toastify';
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
@@ -434,6 +435,7 @@ const CustomerDetail = () => {
             </Modal>
           </div>
         </div>
+        <Quesstion id={id}/>
       </div>
     </>
   )
