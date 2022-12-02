@@ -10,6 +10,7 @@ import { authAPI } from "./apis";
 import Header from "./components/layout/Header";
 import PageLoading from "./components/PageLoading";
 import Work_users from "./pages/work_users";
+import LazyPageWrapper from "./components/LazyWrapper";
 const Home = lazy(() => import("./pages/home"));
 const Login = lazy(() => import("./pages/login"));
 const Customer = lazy(() => import("./pages/custommer"));
@@ -58,17 +59,20 @@ function App() {
                   <Route
                     exact
                     path="/custommer_news"
-                    element={<Custommer_News />}
+                    element={<LazyPageWrapper lazy_path={"./pages/custommer"}/>}
                   />
                   <Route
                     exact
                     path="/employee/detail/:id"
                     element={<EmployeeDetail />}
+                    
                   />
                   <Route
                     exact
                     path="/customer/:id"
-                    element={<Custommer_detail />}
+                    // element={<Custommer_detail />}
+                    element={<LazyPageWrapper lazy_path={"./pages/custommer/custommerNews/detail"}/>}
+
                   />
                   <Route
                     exact
