@@ -1,14 +1,14 @@
 .dashboard__container {
   .ordersCardContaienr {
     .order__time__content {
-      overflow-y: scroll;
+      overflow-y: auto;
       overflow-x: hidden;
       padding: 20px;
       height: 605px;
     }
 
     .Not_order__time__content {
-      overflow-y: scroll;
+      overflow-y: auto;
       overflow-x: hidden;
       padding: 20px;
       height: 605px;

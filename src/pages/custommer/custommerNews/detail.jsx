@@ -492,7 +492,13 @@ const CustomerDetail = () => {
           <br />
           <div className="customer_detail_table">
             <PageHeader
-              title="Эмчилгээ"
+              title={`Эмчилгээ ${
+                customerDetail?.bonus
+                  ? `${customerDetail?.bonus?.discount}${
+                      customerDetail?.bonus?.type == "PERCENT" ? "%" : "₮"
+                    } хямдрал`
+                  : ""
+              }`}
               extra={
                 <Button
                   onClick={() => createTreatment()}
