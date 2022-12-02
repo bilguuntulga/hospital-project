@@ -224,7 +224,7 @@ function AdvicePage({ id }) {
                                         </Row>
                                         <Row>
                                             <Col span={12}>
-                                                <Item label="5. Усны хэрэглээ " name="q5">
+                                                <Item label="5. Усны хэрэглээ" name="q5">
                                                     <Radio.Group name="q5">
                                                         <Radio value="MUTCH">Их (2.5л)</Radio>
                                                         <Radio value="MEDIUM">Дунд (1.5л)</Radio>
