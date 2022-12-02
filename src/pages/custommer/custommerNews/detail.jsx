@@ -567,4 +567,4 @@ const CustomerDetail = () => {
   );
 };
 
-export default memo(CustomerDetail);
+export default CustomerDetail;
