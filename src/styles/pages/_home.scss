@@ -1,37 +1,35 @@
 .dashboard__container {
-    .ordersCardContaienr {
-        .order__time__content {
-            overflow-y: scroll;
-            overflow-x: hidden;
-            padding: 20px;
-            height: 304px;
-        }
-
-        .Not_order__time__content {
-            overflow-y: scroll;
-            overflow-x: hidden;
-            padding: 20px;
-            height: 304px;
-            display: grid;
-            place-items: center;
-        }
-
+  .ordersCardContaienr {
+    .order__time__content {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 20px;
+      height: 605px;
     }
 
-    .button {
-        border: none;
-        height: 55px;
-        border-radius: 5px;
-        transition: all 0.5s ease-in-out;
-
-        &:hover,
-        &:focus {
-            color: black !important;
-            background:rgba(217, 217, 217) !important;
-        transition: all 0.5s ease-in;
-
-            // filter: invert(10);
-        }
+    .Not_order__time__content {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 20px;
+      height: 605px;
+      display: grid;
+      place-items: center;
     }
+  }
 
+  .button {
+    border: none;
+    height: 55px;
+    border-radius: 5px;
+    transition: all 0.5s ease-in-out;
+
+    &:hover,
+    &:focus {
+      color: black !important;
+      background: rgba(217, 217, 217) !important;
+      transition: all 0.5s ease-in;
+
+      // filter: invert(10);
+    }
+  }
 }

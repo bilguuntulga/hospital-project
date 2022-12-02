@@ -35,7 +35,14 @@ function NotiItem({ id, image, name, phone, startTime, seen, refreshNotis }) {
         footer={null}
       >
         <div className="notification_detail_wrapper">
-          <Card title={<Row justify={"space-between"} ><Col span={12}>Үйлчлүүлэгч</Col><Col span={12}>Эмч</Col></Row>}>
+          <Card
+            title={
+              <Row justify={"space-between"}>
+                <Col span={12}>Үйлчлүүлэгч</Col>
+                <Col span={12}>Эмч</Col>
+              </Row>
+            }
+          >
             <div className="notification_detail_wrapper_customer_doctor">
               <div className="notification_detail_wrapper_profile_wrapper">
                 <div className="notification_detail_wrapper_profile_wrapper_image_wrapper">
@@ -61,10 +68,7 @@ function NotiItem({ id, image, name, phone, startTime, seen, refreshNotis }) {
                 </div>
                 <div>
                   <div>{`${time?.doctor?.first_name} ${time?.doctor?.last_name}`}</div>
-                  <div>
-                    {time?.doctor?.phone}{" "}
-                    {genderTranslator(time?.doctor?.gender)}
-                  </div>
+                  <div>{time?.doctor?.phone}</div>
                 </div>
               </div>
             </div>

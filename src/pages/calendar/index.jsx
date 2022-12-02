@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {Card, Modal, Skeleton, TimePicker } from "antd";
+import { Card, Modal, Skeleton, TimePicker } from "antd";
 import { Field, Formik } from "formik";
 import { Form, Input, Select, SubmitButton } from "formik-antd";
 import * as yup from "yup";
@@ -162,13 +162,12 @@ const CalendarApp = () => {
             </Form>
           </Formik>
         </Modal>
-        {/* <Calendar onSelect={onSelect} /> */}
-        <Calendar/>
+        <Calendar />
         <ToastContainer />
       </Card>
-      <Card title="Цагууд">
+      {/* <Card title="Цагууд">
         <TreatmentTimesTable refreshRef={timesTableRef} />
-      </Card>
+      </Card> */}
     </div>
   );
 };

@@ -14,7 +14,6 @@ import {
   Select as Antd__Select,
 } from "antd";
 import { Formik } from "formik";
-import "./CalendarStyles.css";
 import { Form, Input, Select, SubmitButton } from "formik-antd";
 import * as yup from "yup";
 import { PlusOutlined, SaveOutlined } from "@ant-design/icons";
@@ -60,7 +59,7 @@ class Calendar extends Component {
         durationBarVisible: false,
         timeRangeSelectedHandling: "Enabled",
         timeFormat: "Clock24Hours",
-        locale: "nb-no",
+        locale: "en-us",
         onTimeRangeSelected: async (args) => {
           const dp = this.calendar;
           dp.clearSelection();

@@ -24,9 +24,10 @@ const Bonus__Page = () => {
 
   const columns = [
     {
-      title: "Үнэ",
+      title: "Нөхцөл",
       dataIndex: "condition",
       key: "condition",
+      render: (_, row) => `${row?.condition}₮`,
     },
     {
       title: "Төрөл",
