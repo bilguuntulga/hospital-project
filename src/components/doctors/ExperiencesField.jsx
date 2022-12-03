@@ -27,6 +27,7 @@ function ExperiencesField({ name, values }) {
                           }) => (
                             <div className="inputs_wrapper">
                               <input
+                              style={{width:"100%"}}
                                 defaultValue={field_value.date}
                                 placeholder="Он"
                                 onChange={(e) => {
@@ -35,6 +36,7 @@ function ExperiencesField({ name, values }) {
                                 }}
                               />
                               <input
+                              style={{width:"100%"}}
                                 defaultValue={field_value.desc}
                                 placeholder="Хаана"
                                 onChange={(e) => {
@@ -43,6 +45,7 @@ function ExperiencesField({ name, values }) {
                                 }}
                               />
                               <input
+                              style={{width:"100%"}}
                                 defaultValue={field_value.role}
                                 placeholder="Мэргэжил"
                                 onChange={(e) => {
