@@ -174,420 +174,394 @@ function Question1({ id }) {
   }, []);
 
   return (
-    <>
-      <br />
-      <Collapse>
-        <Collapse.Panel header="1-р Асуултууд" key="1">
-          <Card title="Асуулт" bordered={false}>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-              enableReinitialize
-            >
-              <Form layout="vertical">
-                <Row gutter={30}>
-                  <Col span={12}>
-                    <Item
-                      label="1. Өмнө нь ижил төрлийн эмчилгээд орж байсан эсэх ??"
-                      name="q1"
-                    >
-                      <Radio.Group name="q1">
-                        <Radio value="YES">Тийм</Radio>
-                        <Radio value="NO">Үгүй</Radio>
-                      </Radio.Group>
+    <Card title="Асуулт" bordered={false}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+        enableReinitialize
+      >
+        <Form layout="vertical">
+          <Row gutter={30}>
+            <Col span={12}>
+              <Item
+                label="1. Өмнө нь ижил төрлийн эмчилгээд орж байсан эсэх ??"
+                name="q1"
+              >
+                <Radio.Group name="q1">
+                  <Radio value="YES">Тийм</Radio>
+                  <Radio value="NO">Үгүй</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+            <Col span={12}>
+              <Item
+                label="2. Эмчилгээнд орж байсан бол хаана орж байсан бэ"
+                name="q2"
+              >
+                <Input placeholder="text" name="q2" />
+              </Item>
+            </Col>
+          </Row>
+          <Row gutter={30}>
+            <Col span={12}>
+              <Item label="3. Арьсны төрөл " name="q3">
+                <Input placeholder="text" name="q3" />
+              </Item>
+              <Item label="3.1. Арьсны асуудал " name="q3_1">
+                <Input placeholder="text" name="q3_1" />
+              </Item>
+              <Item label="3.2. Чийгшил" name="q3_2">
+                <Input placeholder="text" name="q3_2" />
+              </Item>
+              <Item label="3.3. Тэжээл " name="q3_3">
+                <Input placeholder="" name="q3_3" />
+              </Item>
+              <Item label="3.4. Арьсны зузаан " name="q3_4">
+                <Input placeholder="text" name="q3_4" />
+              </Item>
+              <Item label="3.5. Онцлог " name="q3_5">
+                <Input placeholder="text" name="q3_5" />
+              </Item>
+            </Col>
+            <Col span={12}>
+              <div>4. Нойр: Сүүлийн 7 хоног</div>
+              <Row gutter={10}>
+                <Col>
+                  <Col>
+                    <Item label="1-дх Утсан цаг" name="q4_day1_start">
+                      <TimePicker name="q4_day1_end" />
                     </Item>
                   </Col>
-                  <Col span={12}>
-                    <Item
-                      label="2. Эмчилгээнд орж байсан бол хаана орж байсан бэ"
-                      name="q2"
-                    >
-                      <Input placeholder="text" name="q2" />
+                  <Col>
+                    <Item label="1-дх Өглөө сэрсэн цаг" name="q4_day1_end">
+                      <TimePicker name="q4_day2_end" />
                     </Item>
                   </Col>
-                </Row>
-                <Row gutter={30}>
-                  <Col span={12}>
-                    <Item label="3. Арьсны төрөл " name="q3">
-                      <Input placeholder="text" name="q3" />
-                    </Item>
-                    <Item label="3.1. Арьсны асуудал " name="q3_1">
-                      <Input placeholder="text" name="q3_1" />
-                    </Item>
-                    <Item label="3.2. Чийгшил" name="q3_2">
-                      <Input placeholder="text" name="q3_2" />
-                    </Item>
-                    <Item label="3.3. Тэжээл " name="q3_3">
-                      <Input placeholder="" name="q3_3" />
-                    </Item>
-                    <Item label="3.4. Арьсны зузаан " name="q3_4">
-                      <Input placeholder="text" name="q3_4" />
-                    </Item>
-                    <Item label="3.5. Онцлог " name="q3_5">
-                      <Input placeholder="text" name="q3_5" />
+                </Col>
+                <Col>
+                  <Col>
+                    <Item label="2-дх Утсан цаг" name="q4_day2_start">
+                      <TimePicker name="q4_day2_start" />
                     </Item>
                   </Col>
-                  <Col span={12}>
-                    <div>4. Нойр: Сүүлийн 7 хоног</div>
-                    <Row gutter={10}>
-                      <Col>
-                        <Col>
-                          <Item label="1-дх Утсан цаг" name="q4_day1_start">
-                            <TimePicker name="q4_day1_end" />
-                          </Item>
-                        </Col>
-                        <Col>
-                          <Item
-                            label="1-дх Өглөө сэрсэн цаг"
-                            name="q4_day1_end"
-                          >
-                            <TimePicker name="q4_day2_end" />
-                          </Item>
-                        </Col>
-                      </Col>
-                      <Col>
-                        <Col>
-                          <Item label="2-дх Утсан цаг" name="q4_day2_start">
-                            <TimePicker name="q4_day2_start" />
-                          </Item>
-                        </Col>
-                        <Col>
-                          <Item
-                            label="2-дх Өглөө сэрсэн цаг"
-                            name="q4_day2_end"
-                          >
-                            <TimePicker name="q4_day2_end" />
-                          </Item>
-                        </Col>
-                      </Col>
-                      <Col>
-                        <Col>
-                          <Item label="3-дх Утсан цаг" name="q4_day3_start">
-                            <TimePicker name="q4_day3_start" />
-                          </Item>
-                        </Col>
-                        <Col>
-                          <Item
-                            label="3-дх Өглөө сэрсэн цаг"
-                            name="q4_day3_end"
-                          >
-                            <TimePicker name="q4_day3_end" />
-                          </Item>
-                        </Col>
-                      </Col>
-                      <Col>
-                        <Col>
-                          <Item label="4-дх Утсан цаг" name="q4_day4_start">
-                            <TimePicker name="q4_day4_start" />
-                          </Item>
-                        </Col>
-                        <Col>
-                          <Item
-                            label="4-дх Өглөө сэрсэн цагг"
-                            name="q4_day4_end"
-                          >
-                            <TimePicker name="q4_day4_end" />
-                          </Item>
-                        </Col>
-                      </Col>
-                      <Col>
-                        <Col>
-                          <Item label="5-дх Утсан цаг" name="q4_day5_start">
-                            <TimePicker name="q4_day5_start" />
-                          </Item>
-                        </Col>
-                        <Col>
-                          <Item
-                            label="5-дх Өглөө сэрсэн цаг"
-                            name="q4_day5_end"
-                          >
-                            <TimePicker name="q4_day5_end" />
-                          </Item>
-                        </Col>
-                      </Col>
-                      <Col>
-                        <Col>
-                          <Item label="6-дх Утсан цаг" name="q4_day6_start">
-                            <TimePicker name="q4_day6_start" />
-                          </Item>
-                        </Col>
-                        <Col>
-                          <Item
-                            label="6-дх Өглөө сэрсэн цаг"
-                            name="q4_day6_end"
-                          >
-                            <TimePicker name="q4_day6_end" />
-                          </Item>
-                        </Col>
-                      </Col>
-                      <Col>
-                        <Col>
-                          <Item label="7-дх Утсан цагv" name="q4_day7_start">
-                            <TimePicker name="q4_day7_start" />
-                          </Item>
-                        </Col>
-                        <Col>
-                          <Item
-                            label="7-дх Өглөө сэрсэн цаг"
-                            name="q4_day7_end"
-                          >
-                            <TimePicker name="q4_day7_end" />
-                          </Item>
-                        </Col>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="5. Усны хэрэглээ" name="q5">
-                          <Radio.Group name="q5">
-                            <Radio value="MUTCH">Их (2.5л)</Radio>
-                            <Radio value="MEDIUM">Дунд (1.5л)</Radio>
-                            <Radio value="LITTLE">
-                              Бага (1.5л түүнээс бага)
-                            </Radio>
-                          </Radio.Group>
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="6. Өтгөний гаралт: " name="q11">
-                          <Radio.Group name="q11">
-                            <Radio value="24HOURS">24 цагт 1-2</Radio>
-                            <Radio value="48HOURS">48 цагт 1-2</Radio>
-                            <Radio value="72HOURS">72 цагт 1-2</Radio>
-                            <Radio value="AND_ABOUVE_THAT">Түүнээс дээш</Radio>
-                          </Radio.Group>
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={4}>
-                    <Item
-                      label="7. Хооллолт: Дэглэм бариж байгаа эсэх"
-                      name="q6"
-                    >
-                      <Radio.Group name="q6">
-                        <Radio value="YES">Тийм</Radio>
-                        <Radio value="NO">Үгүй</Radio>
-                      </Radio.Group>
+                  <Col>
+                    <Item label="2-дх Өглөө сэрсэн цаг" name="q4_day2_end">
+                      <TimePicker name="q4_day2_end" />
                     </Item>
                   </Col>
-                  <Col span={4}>
-                    <Item label="8. Цагаан идээний хэрэглээ: " name="q7">
-                      <Radio.Group name="q7">
-                        <Radio value="MUTCH">Их</Radio>
-                        <Radio value="MEDIUM">Дунд </Radio>
-                        <Radio value="LITTLE">Бага</Radio>
-                      </Radio.Group>
+                </Col>
+                <Col>
+                  <Col>
+                    <Item label="3-дх Утсан цаг" name="q4_day3_start">
+                      <TimePicker name="q4_day3_start" />
                     </Item>
                   </Col>
-                  <Col span={4}>
-                    <Item label="9. Ислэг ихтэй хүнсний хэрэглээ:" name="q8">
-                      <Radio.Group name="q8">
-                        <Radio value="MUTCH">Их</Radio>
-                        <Radio value="MEDIUM">Дунд </Radio>
-                        <Radio value="LITTLE">Бага</Radio>
-                      </Radio.Group>
+                  <Col>
+                    <Item label="3-дх Өглөө сэрсэн цаг" name="q4_day3_end">
+                      <TimePicker name="q4_day3_end" />
                     </Item>
                   </Col>
-                  <Col span={4}>
-                    <Item label="10. Цагаан идээний хэрэглээ: " name="q9">
-                      <Radio.Group name="q9">
-                        <Radio value="MUTCH">Их</Radio>
-                        <Radio value="MEDIUM">Дунд </Radio>
-                        <Radio value="LITTLE">Бага</Radio>
-                      </Radio.Group>
+                </Col>
+                <Col>
+                  <Col>
+                    <Item label="4-дх Утсан цаг" name="q4_day4_start">
+                      <TimePicker name="q4_day4_start" />
                     </Item>
                   </Col>
-                  <Col span={4}>
-                    <Item label="11. Арьс арчилгаа:" name="q10">
-                      <Radio.Group name="q10">
-                        <Radio value="LITTLE">Бага</Radio>
-                        <Radio value="MEDIUM">Дунд </Radio>
-                        <Radio value="NORMAL">Хэвийн</Radio>
-                        <Radio value="MUTCH">Хэт их</Radio>
-                      </Radio.Group>
+                  <Col>
+                    <Item label="4-дх Өглөө сэрсэн цагг" name="q4_day4_end">
+                      <TimePicker name="q4_day4_end" />
                     </Item>
                   </Col>
-                </Row>
-                <p>Асуулт.12 Сүүлийн 72 цагт идсэн хоол хүнсээ хэлнэ үү ?</p>
-                <Row>
-                  <Col span={8}>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="1. Өглөө" name="q12day1_morning">
-                          <Input name="q12day1_morning" />
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="Цаг" name="q12day1_morning_time">
-                          <TimePicker name="q12day1_morning_time" />
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col span={8}>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="1. Өдөр" name="q12day1_day">
-                          <Input name="q12day1_day_time" />
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="Цаг" name="q12day1_day_time">
-                          <TimePicker name="q12day1_day_time" />
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col span={8}>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="1. Орой" name="q12day1_evening">
-                          <Input name="q12day1_evening" />
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="Цаг" name="q12day1_evening_time">
-                          <TimePicker name="q12day1_evening_time" />
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={8}>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="2. Өглөө" name="q12day2_morning">
-                          <Input name="q12day2_morning" />
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="Цаг" name="q12day2_morning_time">
-                          <TimePicker name="q12day2_morning_time" />
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col span={8}>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="2. Өдөр" name="q12day2_day">
-                          <Input name="q12day2_day" />
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="Цаг" name="q12day2_day_time">
-                          <TimePicker name="q12day2_day_time" />
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col span={8}>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="2. Орой" name="q12day2_evening">
-                          <Input name="q12day2_evening" />
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="Цаг" name="q12day1_evening_time">
-                          <TimePicker name="q12day1_evening_time" />
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={8}>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="3. Өглөө" name="q12day3_morning">
-                          <Input name="q12day3_morning" />
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="Цаг" name="q12day3_morning_time">
-                          <TimePicker name="q12day3_morning_time" />
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col span={8}>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="3. Өдөр" name="q12day3_day">
-                          <Input name="q12day3_day" />
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="Цаг" name="q12day3_day_time">
-                          <TimePicker name="q12day3_day_time" />
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col span={8}>
-                    <Row>
-                      <Col span={12}>
-                        <Item label="3. Орой" name="q12day3_evening">
-                          <Input name="q12day3_evening" />
-                        </Item>
-                      </Col>
-                      <Col span={12}>
-                        <Item label="Цаг" name="q12day3_evening_time">
-                          <TimePicker name="q12day3_evening_time" />
-                        </Item>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row gutter={30}>
-                  <Col span={8}>
-                    <Item
-                      name="q13"
-                      label="Асуулт.13 Согтууруулах ундааны хэрэглээ (Архи, Пиво, Виски , Коньякь)"
-                    >
-                      <Radio.Group name="q13">
-                        <Radio value="SEVENDAY1-2">7 хоногт 1-2 удаа</Radio>
-                        <Radio value="FOURTEEN1-2">14 хоногт 1-2 удаа</Radio>
-                        <Radio value="THIRTY1-2">30 хоногт 1-2 удаа</Radio>
-                      </Radio.Group>
+                </Col>
+                <Col>
+                  <Col>
+                    <Item label="5-дх Утсан цаг" name="q4_day5_start">
+                      <TimePicker name="q4_day5_start" />
                     </Item>
                   </Col>
-                  <Col span={8}>
-                    <Item
-                      name="q14"
-                      label="Асуулт.14 Тамхи болон бусад электрон тамхи хэрэглэдэг эсэх">
-                      <Radio.Group name="q14">
-                        <Radio value="YES">Тийм</Radio>
-                        <Radio value="NO">Үгүй</Radio>
-                      </Radio.Group>
+                  <Col>
+                    <Item label="5-дх Өглөө сэрсэн цаг" name="q4_day5_end">
+                      <TimePicker name="q4_day5_end" />
                     </Item>
                   </Col>
-                  <Col span={8}>
-                    <Item
-                      name="q15"
-                      label="Асуулт.15 Ямар нэгэн харшилтай юу ?"
-                    >
-                      <Radio.Group name="q15">
-                        <Radio value="YES">Тийм</Radio>
-                        <Radio value="NO">Үгүй</Radio>
-                      </Radio.Group>
+                </Col>
+                <Col>
+                  <Col>
+                    <Item label="6-дх Утсан цаг" name="q4_day6_start">
+                      <TimePicker name="q4_day6_start" />
                     </Item>
                   </Col>
-                </Row>
-                <Row gutter={30}>
-                  <Col span={8}>
-                    <Item
-                      name="q16"
-                      label="Асуулт.16 Харшилтай бол юуны харшилтай бэ ? "
-                    >
-                      <Input name="q16" />
+                  <Col>
+                    <Item label="6-дх Өглөө сэрсэн цаг" name="q4_day6_end">
+                      <TimePicker name="q4_day6_end" />
                     </Item>
+                  </Col>
+                </Col>
+                <Col>
+                  <Col>
+                    <Item label="7-дх Утсан цагv" name="q4_day7_start">
+                      <TimePicker name="q4_day7_start" />
+                    </Item>
+                  </Col>
+                  <Col>
+                    <Item label="7-дх Өглөө сэрсэн цаг" name="q4_day7_end">
+                      <TimePicker name="q4_day7_end" />
+                    </Item>
+                  </Col>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Item label="5. Усны хэрэглээ" name="q5">
+                    <Radio.Group name="q5">
+                      <Radio value="MUTCH">Их (2.5л)</Radio>
+                      <Radio value="MEDIUM">Дунд (1.5л)</Radio>
+                      <Radio value="LITTLE">Бага (1.5л түүнээс бага)</Radio>
+                    </Radio.Group>
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="6. Өтгөний гаралт: " name="q11">
+                    <Radio.Group name="q11">
+                      <Radio value="24HOURS">24 цагт 1-2</Radio>
+                      <Radio value="48HOURS">48 цагт 1-2</Radio>
+                      <Radio value="72HOURS">72 цагт 1-2</Radio>
+                      <Radio value="AND_ABOUVE_THAT">Түүнээс дээш</Radio>
+                    </Radio.Group>
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={4}>
+              <Item label="7. Хооллолт: Дэглэм бариж байгаа эсэх" name="q6">
+                <Radio.Group name="q6">
+                  <Radio value="YES">Тийм</Radio>
+                  <Radio value="NO">Үгүй</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+            <Col span={4}>
+              <Item label="8. Цагаан идээний хэрэглээ: " name="q7">
+                <Radio.Group name="q7">
+                  <Radio value="MUTCH">Их</Radio>
+                  <Radio value="MEDIUM">Дунд </Radio>
+                  <Radio value="LITTLE">Бага</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+            <Col span={4}>
+              <Item label="9. Ислэг ихтэй хүнсний хэрэглээ:" name="q8">
+                <Radio.Group name="q8">
+                  <Radio value="MUTCH">Их</Radio>
+                  <Radio value="MEDIUM">Дунд </Radio>
+                  <Radio value="LITTLE">Бага</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+            <Col span={4}>
+              <Item label="10. Цагаан идээний хэрэглээ: " name="q9">
+                <Radio.Group name="q9">
+                  <Radio value="MUTCH">Их</Radio>
+                  <Radio value="MEDIUM">Дунд </Radio>
+                  <Radio value="LITTLE">Бага</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+            <Col span={4}>
+              <Item label="11. Арьс арчилгаа:" name="q10">
+                <Radio.Group name="q10">
+                  <Radio value="LITTLE">Бага</Radio>
+                  <Radio value="MEDIUM">Дунд </Radio>
+                  <Radio value="NORMAL">Хэвийн</Radio>
+                  <Radio value="MUTCH">Хэт их</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+          </Row>
+          <p>Асуулт.12 Сүүлийн 72 цагт идсэн хоол хүнсээ хэлнэ үү ?</p>
+          <Row>
+            <Col span={8}>
+              <Row>
+                <Col span={12}>
+                  <Item label="1. Өглөө" name="q12day1_morning">
+                    <Input name="q12day1_morning" />
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="Цаг" name="q12day1_morning_time">
+                    <TimePicker name="q12day1_morning_time" />
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={8}>
+              <Row>
+                <Col span={12}>
+                  <Item label="1. Өдөр" name="q12day1_day">
+                    <Input name="q12day1_day_time" />
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="Цаг" name="q12day1_day_time">
+                    <TimePicker name="q12day1_day_time" />
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={8}>
+              <Row>
+                <Col span={12}>
+                  <Item label="1. Орой" name="q12day1_evening">
+                    <Input name="q12day1_evening" />
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="Цаг" name="q12day1_evening_time">
+                    <TimePicker name="q12day1_evening_time" />
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <Row>
+                <Col span={12}>
+                  <Item label="2. Өглөө" name="q12day2_morning">
+                    <Input name="q12day2_morning" />
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="Цаг" name="q12day2_morning_time">
+                    <TimePicker name="q12day2_morning_time" />
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={8}>
+              <Row>
+                <Col span={12}>
+                  <Item label="2. Өдөр" name="q12day2_day">
+                    <Input name="q12day2_day" />
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="Цаг" name="q12day2_day_time">
+                    <TimePicker name="q12day2_day_time" />
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={8}>
+              <Row>
+                <Col span={12}>
+                  <Item label="2. Орой" name="q12day2_evening">
+                    <Input name="q12day2_evening" />
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="Цаг" name="q12day1_evening_time">
+                    <TimePicker name="q12day1_evening_time" />
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <Row>
+                <Col span={12}>
+                  <Item label="3. Өглөө" name="q12day3_morning">
+                    <Input name="q12day3_morning" />
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="Цаг" name="q12day3_morning_time">
+                    <TimePicker name="q12day3_morning_time" />
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={8}>
+              <Row>
+                <Col span={12}>
+                  <Item label="3. Өдөр" name="q12day3_day">
+                    <Input name="q12day3_day" />
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="Цаг" name="q12day3_day_time">
+                    <TimePicker name="q12day3_day_time" />
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={8}>
+              <Row>
+                <Col span={12}>
+                  <Item label="3. Орой" name="q12day3_evening">
+                    <Input name="q12day3_evening" />
+                  </Item>
+                </Col>
+                <Col span={12}>
+                  <Item label="Цаг" name="q12day3_evening_time">
+                    <TimePicker name="q12day3_evening_time" />
+                  </Item>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <Item
+                name="q13"
+                label="Асуулт.13 Согтууруулах ундааны хэрэглээ (Архи, Пиво, Виски , Коньякь)"
+              >
+                <Radio.Group name="q13">
+                  <Radio value="SEVENDAY1-2">7 хоногт 1-2 удаа</Radio>
+                  <Radio value="FOURTEEN1-2">14 хоногт 1-2 удаа</Radio>
+                  <Radio value="THIRTY1-2">30 хоногт 1-2 удаа</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+            <Col span={8}>
+              <Item
+                name="q14"
+                label="Асуулт.14 Тамхи болон бусад электрон тамхи хэрэглэдэг эсэх"
+              >
+                <Radio.Group name="q14">
+                  <Radio value="YES">Тийм</Radio>
+                  <Radio value="NO">Үгүй</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+            <Col span={8}>
+              <Item name="q15" label="Асуулт.15 Ямар нэгэн харшилтай юу ?">
+                <Radio.Group name="q15">
+                  <Radio value="YES">Тийм</Radio>
+                  <Radio value="NO">Үгүй</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+          </Row>
+          <Row gutter={220}>
+            <Col>
+              <Item
+                name="q16"
+                label="Асуулт.16 Харшилтай бол юуны харшилтай бэ ? "
+              >
+                <Input name="q16" />
+              </Item>
+            </Col>
+            <Col>
+              <Item name="q17" label="Асуулт.17 Харшилдаг эм тариа бий юу">
+                <Row gutter={20}>
+                  <Col>
+                    <Input name="q17" />
                   </Col>
                   <Col span={8}>
                     <Item
@@ -614,50 +588,55 @@ function Question1({ id }) {
                     </Item>
                   </Col>
                 </Row>
-                <Row>
-                  <Col span={12}>
-                    <Item
-                      name="q18"
-                      label="Асуулт.18 Сүүлийн 24 сард ямар нэгэн хагалгаа болон мэс ажилбарт орсон уу ?"
-                    >
-                      <Radio.Group name="q18">
-                        <Radio value="YES">Тийм</Radio>
-                        <Radio value="NO">Үгүй</Radio>
-                      </Radio.Group>
-                    </Item>
-                  </Col>
-                  <Col span={12}>
-
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={8}>
-                    <Item name="q20" label="Асуулт.19 B,C вирус байгаа юу ?">
-                      <Radio.Group name="q20">
-                        <Radio value="YES">Тийм</Radio>
-                        <Radio value="NO">Үгүй</Radio>
-                      </Radio.Group>
-                    </Item>
-                  </Col>
-                  <Col span={8}>
-                    <Item name="q21" label="Асуулт.20 Ужиг хууч өвчинтэй юу ?">
-                      <Radio.Group name="q21">
-                        <Radio value="YES">Тийм</Radio>
-                        <Radio value="NO">Үгүй</Radio>
-                      </Radio.Group>
-                    </Item>
-                  </Col>
-                </Row>
-                <SubmitButton block icon={<SaveOutlined />}>
-                  Хадгалах
-                </SubmitButton>
-              </Form>
-            </Formik>
-          </Card>
-        </Collapse.Panel>
-        <Collapse.Panel header="2-р Асуултууд" key="2"></Collapse.Panel>
-      </Collapse>
-    </>
+              </Item>
+            </Col>
+            <Col></Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Item
+                name="q18"
+                label="Асуулт.18 Сүүлийн 24 сард ямар нэгэн хагалгаа болон мэс ажилбарт орсон уу ?"
+              >
+                <Radio.Group name="q18">
+                  <Radio value="YES">Тийм</Radio>
+                  <Radio value="NO">Үгүй</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+            <Col span={12}>
+              <Item
+                name="q19"
+                label="Асуулт.19 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?"
+              >
+                <Input name="q19" />
+              </Item>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <Item name="q20" label="Асуулт.19 B,C вирус байгаа юу ?">
+                <Radio.Group name="q20">
+                  <Radio value="YES">Тийм</Radio>
+                  <Radio value="NO">Үгүй</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+            <Col span={8}>
+              <Item name="q21" label="Асуулт.20 Ужиг хууч өвчинтэй юу ?">
+                <Radio.Group name="q21">
+                  <Radio value="YES">Тийм</Radio>
+                  <Radio value="NO">Үгүй</Radio>
+                </Radio.Group>
+              </Item>
+            </Col>
+          </Row>
+          <SubmitButton block icon={<SaveOutlined />}>
+            Хадгалах
+          </SubmitButton>
+        </Form>
+      </Formik>
+    </Card>
   );
 }
 

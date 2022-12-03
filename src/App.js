@@ -48,8 +48,8 @@ function App() {
           <Navbar />
           <Header />
           <div className="container">
-            <Suspense fallback={<PageLoading />}>
-              <div style={{ marginTop: "50px" }}>
+            <div style={{ marginTop: "50px" }}>
+              <Suspense fallback={<PageLoading />}>
                 <Routes>
                   <Route exact path="/" element={<Home />} />
                   <Route exact path="/calendar" element={<Order_time />} />
@@ -98,8 +98,8 @@ function App() {
                     element={<DoctorCreate />}
                   />
                 </Routes>
-              </div>
-            </Suspense>
+              </Suspense>
+            </div>
           </div>
         </>
       )}
