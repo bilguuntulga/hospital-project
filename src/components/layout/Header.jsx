@@ -59,7 +59,7 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    const newSocket = io("http://192.168.0.122:64536");
+    const newSocket = io("http://172.104.185.229:64536");
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);

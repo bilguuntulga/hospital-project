@@ -17,7 +17,6 @@ function SideMenu() {
           icon={"/calendar.png"}
           text={"Календар"}
         />
-        <NavButton path={"/report"} icon={"/report.png"} text={"Тайлан"} />
         <NavButton path={"/employee"} icon={"/employee.png"} text={"Ажилтан"} />
         <NavButton
           path={"/customer"}
