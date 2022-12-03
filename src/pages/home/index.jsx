@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Empty, Row, Select } from "antd";
+import { Button, Col, Empty, Row, Select, Tag, Table } from "antd";
 import "./style.css";
 import { UserOutlined } from "@ant-design/icons";
 import OrderTimeCustommer from "../../components/OrderTimeCustommer";
@@ -15,6 +15,7 @@ import {
 import Customers from "../../components/Customers";
 import TOdayOrderList from "../../components/form/TodayOrderList";
 import ServicesChart from "../../components/ServicesChart";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [todayTimesCount, setTodayTimesCount] = useState(0);
@@ -74,6 +75,43 @@ function HomePage() {
         return "Бя";
     }
   };
+
+  const columns = [
+    {
+      title: "Үйлчлүүлэгчийн нэр",
+      render: (_, row) => (
+        <>
+          {row?.first_name} {row?.last_name}
+        </>
+      ),
+    },
+    {
+      title: "И-мэйл",
+      dataIndex: "email",
+    },
+    {
+      title: "Хүйс",
+      render: (_, row) => (row.gender == "MALE" ? "Эрэгтэй" : "Эмэгтэй"),
+    },
+    {
+      title: "Утасны дугаар",
+      dataIndex: "phone",
+    },
+    {
+      title: "Үнэлгээ",
+      render: (_, row) => (
+        <Tag style={{ borderRadius: "50%" }} color={row.color} />
+      ),
+    },
+    {
+      title: "",
+      render: (_, row) => (
+        <Link to={`/customer/${row?.id}`}>
+          <Button>Дэлгэрэнгүй</Button>
+        </Link>
+      ),
+    },
+  ];
 
   useEffect(() => {
     fetchData();
@@ -415,7 +453,8 @@ function HomePage() {
           padding: "10px",
         }}
       >
-        {customerdata.map((e) => (
+        <Table columns={columns} dataSource={customerdata} />
+        {/* {customerdata.map((e) => (
           <Customers
             image={e?.image}
             name={`${e?.first_name} ${e?.last_name}`}
@@ -425,7 +464,7 @@ function HomePage() {
             id={e?.id}
             rate={e?.rate}
           />
-        ))}
+        ))} */}
       </div>
     </div>
   );
