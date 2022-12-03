@@ -444,7 +444,7 @@ const CustomerDetail = () => {
                 <img className="image" src={customerDetail?.image} alt="" />
               </div>
             </Col>
-            <Col xl={19} xxl lg={24}>
+            <Col xl={24} xxl={20} lg={24}>
               <div className="customer_detail_hystory">
                 <p>Тайлбар</p>
                 <p style={{ color: "rgba(39, 30, 74, 0.8);" }}>
