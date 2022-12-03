@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import {
   DayPilot,
   DayPilotCalendar,
@@ -304,7 +304,7 @@ class Calendar extends Component {
         <div className="day__pilot__navigation">
           <DayPilotNavigator
             selectMode={this.state.calendarProps.viewType}
-            showMonths={5}
+            showMonths={3}
             skipMonths={1}
             startDate={new Date()}
             selectionDay={new Date()}
@@ -426,4 +426,4 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+export default memo(Calendar);
