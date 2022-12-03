@@ -1,0 +1,17 @@
+.question__container {
+  display: grid;
+  place-items: center;
+  .image__container {
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  
+  
+  ._button {
+    width: 170px;
+    text-align: center;
+    margin-top: 10px;
+    height: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+}
