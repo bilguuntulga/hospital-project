@@ -43,7 +43,6 @@
     border-radius: 0.5rem;
     overflow: hidden;
     width: fit-content;
-    margin: 2rem;
     margin: auto;
 
     .tab_button {
@@ -54,6 +53,12 @@
       padding: 0.5rem 4rem;
       font-size: larger;
       transition: all 0.3s ease-in-out;
+
+      @media (max-width: 1400px) {
+        font-size: medium;
+        padding: 0.3rem 2rem;
+        margin-top: 1rem;
+      }
     }
 
     .active_tab_button {

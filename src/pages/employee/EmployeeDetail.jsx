@@ -61,7 +61,6 @@ const EmployeeDetail = () => {
     toast.promise(
       async () => {
         await doctorAPI.update(values);
-        await fetchData();
       },
       {
         pending: "Хадаглаж байна",
@@ -134,8 +133,8 @@ const EmployeeDetail = () => {
 
       case "time_schedule":
         return (
-          <Row>
-            <Col span={11}>
+          <Row justify="center">
+            <Col xl={24} xxl={11}>
               <div
                 style={{
                   borderRadius: "10px",
@@ -156,7 +155,7 @@ const EmployeeDetail = () => {
                 ))}
               </div>
             </Col>
-            <Col span={12}>
+            <Col xl={24} lg={24} xxl={12}>
               <Row>
                 <Col span={12}>
                   <div
@@ -187,7 +186,7 @@ const EmployeeDetail = () => {
                     </p>
                   </div>
                 </Col>
-                <Col>
+                <Col span={12}>
                   <div
                     style={{
                       marginTop: "80px",
@@ -262,7 +261,7 @@ const EmployeeDetail = () => {
                             align="middle"
                             gutter={30}
                           >
-                            <Col span={6}>
+                            <Col lg={24} xl={6}>
                               <Form.Item name="profile_img">
                                 <div className="profile_image_center_wrapper">
                                   <ProfileImageUpload
@@ -275,38 +274,38 @@ const EmployeeDetail = () => {
                                 <Input name="color" type="color" />
                               </Form.Item>
                             </Col>
-                            <Col span={18}>
+                            <Col lg={24} xl={18}>
                               <Row gutter={[30, 30]}>
-                                <Col span={12}>
+                                <Col lg={12} xl={12}>
                                   <Form.Item name="first_name" label="Овог">
                                     <Input name="first_name" />
                                   </Form.Item>
                                 </Col>
-                                <Col span={12}>
+                                <Col lg={12} xl={12}>
                                   <Form.Item name="last_name" label="Нэр">
                                     <Input name="last_name" />
                                   </Form.Item>
                                 </Col>
                               </Row>
                               <Row gutter={[30, 30]}>
-                                <Col span={12}>
+                                <Col lg={12} xl={12}>
                                   <Form.Item name="email" label="И-мэйл">
                                     <Input name="email" />
                                   </Form.Item>
                                 </Col>
-                                <Col span={12}>
+                                <Col lg={12} xl={12}>
                                   <Form.Item name="phone" label="Утасны дугаар">
                                     <Input name="phone" />
                                   </Form.Item>
                                 </Col>
                               </Row>
                               <Row gutter={[30, 30]}>
-                                <Col span={12}>
+                                <Col lg={12} xl={12}>
                                   <Form.Item name="role" label="Мэргэжил">
                                     <Input name="role" />
                                   </Form.Item>
                                 </Col>
-                                <Col span={12}>
+                                <Col lg={12} xl={12}>
                                   <Form.Item name="salary" label="Цалин">
                                     <Input name="salary" type="number" />
                                   </Form.Item>

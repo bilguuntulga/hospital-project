@@ -438,8 +438,8 @@ const CustomerDetail = () => {
             </Col>
           </Row>
           <br />
-          <Row style={{ width: "100%" }} gutter={[30,30]} justify="center">
-            <Col xl={4} lg={8}> 
+          <Row style={{ width: "100%" }} gutter={[30, 30]} justify="center">
+            <Col xl={4} lg={10}>
               <div className="custommer_detail_image">
                 <img className="image" src={customerDetail?.image} alt="" />
               </div>
@@ -451,27 +451,25 @@ const CustomerDetail = () => {
                   {customerDetail?.desc}
                 </p>
                 <br />
-                <Row
+                <Row gutter={10}
                   justify="space-between"
                   style={{ textAlign: "center" }}
                   wrap={true}
                 >
                   <Col>
                     <p>Нэр</p>
-                    <p>
                       {`${customerDetail?.first_name} ${customerDetail?.last_name}` ===
                       "Овог Нэр"
                         ? "-"
                         : `${customerDetail?.first_name} ${customerDetail?.last_name}`}
-                    </p>
                   </Col>
                   <Col>
-                    <p>Утас</p>
-                    <p>{customerDetail?.phone ?? "-"}</p>
+                      <p>Утас</p>
+                    {customerDetail?.phone ?? "-"}
                   </Col>
                   <Col>
                     <p>И-мэйл</p>
-                    <p>{customerDetail?.email ?? "-"}</p>
+                    {customerDetail?.email ?? "-"}
                   </Col>
                   <Col>
                     <p>Хаяг</p>
