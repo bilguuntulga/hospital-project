@@ -36,6 +36,12 @@
   border-radius: 47px;
   padding: 60px;
 }
+.customer_detail_container p{
+  color: black;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
 
 .custommer_detail_image {
   width: 100%;
