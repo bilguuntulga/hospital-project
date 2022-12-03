@@ -3,7 +3,7 @@ import { Badge, Dropdown, Popover } from "antd";
 import React, { memo, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
-import { treatmentTimesAPI } from "../../apis";
+import { authAPI, treatmentTimesAPI } from "../../apis";
 import NotiItem from "../NotiItem";
 
 function Header() {
@@ -37,8 +37,13 @@ function Header() {
   ];
 
   const fetchData = async () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    setUser(user);
+    let user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      user = await authAPI.profile();
+      setUser(user);
+    } else {
+      setUser(user);
+    }
   };
 
   const fetchNotifications = async () => {
@@ -122,18 +127,6 @@ function Header() {
           </Dropdown>
         </div>
       </div>
-      {/* <Row>
-        <Col span={12}>
-          <b>
-            <p style={{ fontSize: "16px", margin: "0" }}>
-              Сайн байна уу, {user.first_name} {user.last_name}
-            </p>
-          </b>
-          <p style={{ fontSize: "17px" }}>
-            Өдрийг сайхан өнгөрүүлээрэй, Ажлын амжилт хүсэе
-          </p>
-        </Col>
-      </Row> */}
     </div>
   );
 }
