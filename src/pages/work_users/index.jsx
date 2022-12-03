@@ -86,7 +86,7 @@ function Work_user_page() {
     profile_img: yup.string().required("Заавал бөглөнө үү."),
     email: yup.string().email().required("Заавал бөглөнө үү."),
     username: yup.string().required("Заавал бөглөнө үү."),
-    password: yup.string().optional(),
+    password: yup.string().required("Заавал бөглөнө үү."),
   });
 
   const onSubmit = async (values) => {
@@ -223,9 +223,9 @@ function Work_user_page() {
                 </Form.Item>
               </Col>
             </Row>
-            <Form.Item label="ҮҮрэг" name="role">
+            <Form.Item label="Үүрэг" name="role">
               <Select name="role">
-                <Select.Option value="WORKER">Ажилчин</Select.Option>
+                <Select.Option value="WORKER">Ажилтан</Select.Option>
                 <Select.Option value="ADMIN">Админ</Select.Option>
               </Select>
             </Form.Item>
@@ -234,9 +234,7 @@ function Work_user_page() {
               <Input name="username" />
             </Form.Item>
             <Form.Item label="Нууц үг" name="password">
-              <Tooltip title="Бөглөхгүй байж болно.">
-                <Input.Password name="password" />
-              </Tooltip>
+              <Input.Password name="password" />
             </Form.Item>
             <Button
               style={{ width: "100%" }}
