@@ -86,10 +86,6 @@ function HomePage() {
       ),
     },
     {
-      title: "И-мэйл",
-      dataIndex: "email",
-    },
-    {
       title: "Хүйс",
       render: (_, row) => (row.gender == "MALE" ? "Эрэгтэй" : "Эмэгтэй"),
     },

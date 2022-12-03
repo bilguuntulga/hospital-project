@@ -58,10 +58,6 @@ const CustomerPage = () => {
       ),
     },
     {
-      title: "И-мэйл",
-      dataIndex: "email",
-    },
-    {
       title: "Хүйс",
       render: (_, row) => (row.gender == "MALE" ? "Эрэгтэй" : "Эмэгтэй"),
     },
@@ -122,7 +118,7 @@ const CustomerPage = () => {
       <Space direction="vertical" style={{ width: "100%" }}>
         <Row align="middle" justify="space-between">
           <div className="search__container">
-            <Col>
+            <Col >
               <Input
                 ref={nameRef}
                 placeholder="Хайх"
