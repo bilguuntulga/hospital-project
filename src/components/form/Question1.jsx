@@ -313,7 +313,7 @@ function Question1({ id }) {
                 </Col>
               </Row>
               <Row>
-                <Col span={12}>
+                <Col span={24}>
                   <Item label="5. Усны хэрэглээ" name="q5">
                     <Radio.Group name="q5">
                       <Radio value="MUTCH">Их (2.5л)</Radio>
@@ -322,7 +322,7 @@ function Question1({ id }) {
                     </Radio.Group>
                   </Item>
                 </Col>
-                <Col span={12}>
+                <Col span={24}>
                   <Item label="6. Өтгөний гаралт: " name="q11">
                     <Radio.Group name="q11">
                       <Radio value="24HOURS">24 цагт 1-2</Radio>
@@ -335,8 +335,8 @@ function Question1({ id }) {
               </Row>
             </Col>
           </Row>
-          <Row>
-            <Col span={4}>
+          <Row gutter={30}>
+            <Col span={5}>
               <Item label="7. Хооллолт: Дэглэм бариж байгаа эсэх" name="q6">
                 <Radio.Group name="q6">
                   <Radio value="YES">Тийм</Radio>
@@ -353,7 +353,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={4}>
+            <Col span={5}>
               <Item label="9. Ислэг ихтэй хүнсний хэрэглээ:" name="q8">
                 <Radio.Group name="q8">
                   <Radio value="MUTCH">Их</Radio>
@@ -371,7 +371,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={4}>
+            <Col span={5}>
               <Item label="11. Арьс арчилгаа:" name="q10">
                 <Radio.Group name="q10">
                   <Radio value="LITTLE">Бага</Radio>
@@ -515,8 +515,8 @@ function Question1({ id }) {
               </Row>
             </Col>
           </Row>
-          <Row>
-            <Col span={8}>
+          <Row gutter={30}>
+            <Col span={9}>
               <Item
                 name="q13"
                 label="Асуулт.13 Согтууруулах ундааны хэрэглээ (Архи, Пиво, Виски , Коньякь)"
@@ -539,7 +539,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={8}>
+            <Col span={7}>
               <Item name="q15" label="Асуулт.15 Ямар нэгэн харшилтай юу ?">
                 <Radio.Group name="q15">
                   <Radio value="YES">Тийм</Radio>
@@ -548,8 +548,8 @@ function Question1({ id }) {
               </Item>
             </Col>
           </Row>
-          <Row gutter={220}>
-            <Col>
+          <Row gutter={30}>
+            <Col span={8}>
               <Item
                 name="q16"
                 label="Асуулт.16 Харшилтай бол юуны харшилтай бэ ? "
@@ -557,46 +557,36 @@ function Question1({ id }) {
                 <Input name="q16" />
               </Item>
             </Col>
-            <Col>
-              <Item name="q17" label="Асуулт.17 Харшилдаг эм тариа бий юу">
-                <Row gutter={20}>
-                  <Col>
-                    <Input name="q17" />
-                  </Col>
-                  <Col span={8}>
-                    <Item
-                      name="q17"
-                      label="Асуулт.17 Харшилдаг эм тариа бий юу"
-                    >
-                      <Row gutter={20}>
-                        <Col>
-                          <Input name="q17" />
-                        </Col>
-                        <Col>
-                          <Radio.Group name="q17">
-                            <Radio value="NO">Үгүй</Radio>
-                          </Radio.Group>
-                        </Col>
-                      </Row>
-                    </Item>
-                  </Col>
-                  <Col span={8}>
-                    <Item
-                      name="q19"
-                      label="Асуулт.19 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?">
-                      <Input name="q19" />
-                    </Item>
-                  </Col>
-                </Row>
-              </Item>
+            <Col span={8}>
+              <Col>
+                <Item name="q17" label="Асуулт.17 Харшилдаг эм тариа бий юу">
+                  <Row gutter={20}>
+                    <Col>
+                      <Input name="q17" />
+                    </Col>
+                    <Col>
+                      <Radio.Group name="q17">
+                        <Radio value="NO">Үгүй</Radio>
+                      </Radio.Group>
+                    </Col>
+                  </Row>
+                </Item>
+              </Col>
             </Col>
-            <Col></Col>
-          </Row>
-          <Row>
-            <Col span={12}>
+            <Col span={8}>
               <Item
                 name="q18"
-                label="Асуулт.18 Сүүлийн 24 сард ямар нэгэн хагалгаа болон мэс ажилбарт орсон уу ?"
+                label="Асуулт.18 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?"
+              >
+                <Input name="q19" />
+              </Item>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={10}>
+              <Item
+                name="q19"
+                label="Асуулт.19 Сүүлийн 24 сард ямар нэгэн хагалгаа болон мэс ажилбарт орсон уу ?"
               >
                 <Radio.Group name="q18">
                   <Radio value="YES">Тийм</Radio>
@@ -604,17 +594,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={12}>
-              <Item
-                name="q19"
-                label="Асуулт.19 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?"
-              >
-                <Input name="q19" />
-              </Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={8}>
+            <Col span={7}>
               <Item name="q20" label="Асуулт.19 B,C вирус байгаа юу ?">
                 <Radio.Group name="q20">
                   <Radio value="YES">Тийм</Radio>
@@ -622,7 +602,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={8}>
+            <Col span={7}>
               <Item name="q21" label="Асуулт.20 Ужиг хууч өвчинтэй юу ?">
                 <Radio.Group name="q21">
                   <Radio value="YES">Тийм</Radio>
@@ -631,6 +611,7 @@ function Question1({ id }) {
               </Item>
             </Col>
           </Row>
+          <Row></Row>
           <SubmitButton block icon={<SaveOutlined />}>
             Хадгалах
           </SubmitButton>
