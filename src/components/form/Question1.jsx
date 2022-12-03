@@ -392,7 +392,7 @@ function Question1({ id }) {
             </Col>
           </Row>
           <Row gutter={30}>
-            <Col xl={5} lg={12}>
+            <Col xl={12} xxl={5} lg={12}>
               <Item label="7. Хооллолт: Дэглэм бариж байгаа эсэх" name="q6">
                 <Radio.Group name="q6">
                   <Radio value="YES">Тийм</Radio>
@@ -400,7 +400,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col spaxl={4} lg={12}>
+            <Col xl={12} lg={12} xxl={5}>
               <Item label="8. Цагаан идээний хэрэглээ: " name="q7">
                 <Radio.Group name="q7">
                   <Radio value="MUTCH">Их</Radio>
@@ -409,7 +409,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col xl={5} lg={12}>
+            <Col xl={12} xxl={5} lg={12}>
               <Item label="9. Ислэг ихтэй хүнсний хэрэглээ:" name="q8">
                 <Radio.Group name="q8">
                   <Radio value="MUTCH">Их</Radio>
@@ -418,7 +418,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col spaxl={4} lg={12}>
+            <Col xl={12} xxl={5} lg={12}>
               <Item label="10. Цагаан идээний хэрэглээ: " name="q9">
                 <Radio.Group name="q9">
                   <Radio value="MUTCH">Их</Radio>
@@ -427,7 +427,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col xl={5} lg={24}>
+            <Col xl={12} xxl={4} lg={24}>
               <Item label="11. Арьс арчилгаа:" name="q10">
                 <Radio.Group name="q10">
                   <Radio value="LITTLE">Бага</Radio>
@@ -480,7 +480,7 @@ function Question1({ id }) {
                     <TimePicker name="q12day1_evening_time" />
                   </Item>
                 </Col>
-              </Row >
+              </Row>
             </Col>
           </Row>
           <Row gutter={30}>
