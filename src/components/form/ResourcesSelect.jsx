@@ -94,6 +94,7 @@ function ResourcesSelect({ values, name }) {
                           <Button
                             icon={<CloseOutlined />}
                             onClick={() => arrayHelpers.remove(i)}
+                            className="delete__button"
                           />
                         </Col>
                       </Row>

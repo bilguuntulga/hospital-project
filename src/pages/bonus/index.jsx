@@ -84,6 +84,7 @@ const BonusPage = () => {
               />
               <Button
                 icon={<DeleteOutlined />}
+                className="delete__button"
                 onClick={() => showDeleteConfirm(row.id)}
                 danger
               />
