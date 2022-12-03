@@ -438,13 +438,13 @@ const CustomerDetail = () => {
             </Col>
           </Row>
           <br />
-          <Row style={{ width: "100%" }} justify="space-between">
-            <Col span={4}>
+          <Row style={{ width: "100%" }} gutter={[30,30]} justify="center">
+            <Col xl={4} lg={8}> 
               <div className="custommer_detail_image">
                 <img className="image" src={customerDetail?.image} alt="" />
               </div>
             </Col>
-            <Col span={19}>
+            <Col xl={19} lg={24}>
               <div className="customer_detail_hystory">
                 <p>Тайлбар</p>
                 <p style={{ color: "rgba(39, 30, 74, 0.8);" }}>

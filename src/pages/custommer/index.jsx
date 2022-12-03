@@ -7,6 +7,8 @@ import {
   Skeleton,
   Space,
   Select,
+  Table,
+  PageHeader,
 } from "antd";
 import Customers from "../../components/Customers";
 import React, { memo, useEffect, useRef, useState } from "react";
@@ -21,7 +23,7 @@ const CustomerPage = () => {
   const [gender, setGenter] = useState("ALL");
   const [type, setType] = useState("ALL");
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(15);
   const [total, setTotal] = useState(0);
   const nameRef = useRef();
 
@@ -45,6 +47,51 @@ const CustomerPage = () => {
     setCustomers(res);
     setLoading(false);
   };
+
+  const columns = [
+    {
+      title: "Нэр",
+      render: (_, row) => (
+        <>
+          {row?.first_name} {row?.last_name}
+        </>
+      ),
+    },
+    {
+      title: "И-мэйл",
+      dataIndex: "email",
+    },
+    {
+      title: "Хүйс",
+      render: (_, row) => (row.gender == "MALE" ? "Эрэгтэй" : "Эмэгтэй"),
+    },
+    {
+      title: "Утасны дугаар",
+      dataIndex: "phone",
+    },
+    {
+      title: "Үнэлгээ",
+      render: (_, row) => (
+        <div
+          className={row.rate == "GOOD" ? "good" : "bad"}
+          style={{
+            borderRadius: "50%",
+            width: "30px",
+            height: "30px",
+            border: "none",
+          }}
+        />
+      ),
+    },
+    {
+      title: "",
+      render: (_, row) => (
+        <Link to={`/customer/${row?.id}`}>
+          <Button>Дэлгэрэнгүй</Button>
+        </Link>
+      ),
+    },
+  ];
 
   useEffect(() => {
     fetchData();
@@ -135,16 +182,16 @@ const CustomerPage = () => {
             </Col>
           </div>
           <Col>
-            <Link to="advice">
-              <Button>Зөвөлгөө</Button>
-            </Link>
-            &nbsp; &nbsp; &nbsp;
-            <Link to="create">
-              <Button icon={<PlusOutlined />}>Нэмэх</Button>
-            </Link>
+            <PageHeader
+              extra={
+                <Link to="create">
+                  <Button icon={<PlusOutlined />}>Нэмэх</Button>
+                </Link>
+              }
+            />
           </Col>
         </Row>
-        <div
+        {/* <div
           style={{
             width: "100%",
             height: "69px",
@@ -163,8 +210,8 @@ const CustomerPage = () => {
             <Col span={4}>Үнэлгээ</Col>
             <Col span={4}></Col>
           </Row>
-        </div>
-        {loading ? (
+        </div> */}
+        {/* {loading ? (
           <Skeleton />
         ) : (
           customers.map((e) => (
@@ -178,7 +225,13 @@ const CustomerPage = () => {
               rate={e?.rate}
             />
           ))
-        )}
+        )} */}
+        <Table
+          columns={columns}
+          dataSource={customers}
+          pagination={false}
+          loading={loading}
+        />
         <Row justify="end">
           <Col span={24}>
             <Pagination

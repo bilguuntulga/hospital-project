@@ -100,7 +100,7 @@ function HomePage() {
     {
       title: "Үнэлгээ",
       render: (_, row) => (
-        <Tag style={{ borderRadius: "50%" }} color={row.color} />
+        <div className={row.rate == "GOOD" ? "good" : "bad"} style={{ borderRadius: "50%",width:"30px" ,height:"30px",border:"none" }} />
       ),
     },
     {
@@ -425,7 +425,7 @@ function HomePage() {
       </div>
       <br />
       <p>Үйлчлүүлэгчдийн мэдээлэл</p>
-      <div
+      {/* <div
         style={{
           width: "100%",
           height: "69px",
@@ -444,7 +444,7 @@ function HomePage() {
           <Col span={4}>Үнэлгээ</Col>
           <Col span={4}></Col>
         </Row>
-      </div>
+      </div> */}
       <div
         style={{
           width: "100%",
