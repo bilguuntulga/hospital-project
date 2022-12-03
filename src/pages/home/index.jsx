@@ -16,6 +16,7 @@ import Customers from "../../components/Customers";
 import TOdayOrderList from "../../components/form/TodayOrderList";
 import ServicesChart from "../../components/ServicesChart";
 import { Link } from "react-router-dom";
+import RoundedImage from "../../components/RoundedImage";
 
 function HomePage() {
   const [todayTimesCount, setTodayTimesCount] = useState(0);
@@ -78,7 +79,10 @@ function HomePage() {
 
   const columns = [
     {
-      title: "Үйлчлүүлэгчийн нэр",
+      render: (_, row) => <RoundedImage image={row?.image} size={40} />,
+    },
+    {
+      title: "Нэр",
       render: (_, row) => (
         <>
           {row?.first_name} {row?.last_name}
@@ -454,7 +458,7 @@ function HomePage() {
           padding: "10px",
         }}
       >
-        <Table columns={columns} dataSource={customerdata} />
+        <Table columns={columns} dataSource={customerdata} pagination={false} />
         {/* {customerdata.map((e) => (
           <Customers
             image={e?.image}
