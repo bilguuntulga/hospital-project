@@ -14,7 +14,7 @@ function LoginPage() {
   };
 
   const forgotInitialValues = {
-    phone: "",
+    email: "",
   };
 
   const loginValidationSchema = yup.object().shape({
@@ -23,7 +23,7 @@ function LoginPage() {
   });
 
   const forgotValidationSchema = yup.object().shape({
-    phone: yup.string().min(8).required("Заавал бөглөнө үү"),
+    email: yup.string().min(8).required("Заавал бөглөнө үү"),
   });
 
   const onLogin = async (values) => {
@@ -89,8 +89,8 @@ function LoginPage() {
               validationSchema={forgotValidationSchema}
             >
               <Form layout="vertical">
-                <Form.Item name="phone">
-                  <Input name="phone" placeholder="Утас" />
+                <Form.Item name="email">
+                  <Input name="email" placeholder="И-Мэйл" />
                 </Form.Item>
                 <SubmitButton block>Илгээх</SubmitButton>
                 <p

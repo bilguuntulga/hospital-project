@@ -22,7 +22,6 @@ const Custommer_News = lazy(() => import("./pages/custommer"));
 const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"));
 const Test = lazy(() => import("./pages/test"));
 const Profile = lazy(() => import("./pages/profile"));
-const Report = lazy(() => import("./pages/report"));
 const ServicePage = lazy(() => import("./pages/service"));
 const Resource = lazy(() => import("./pages/resource"));
 const Bonus = lazy(() => import("./pages/bonus"));
@@ -75,7 +74,6 @@ function App() {
                   />
                   <Route exact path="/test" element={<Test />} />
                   <Route exact path="/profile" element={<Profile />} />
-                  <Route exact path="/report" element={<Report />} />
                   <Route
                     exact
                     path="/services/:id"

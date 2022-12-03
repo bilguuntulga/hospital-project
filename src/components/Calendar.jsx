@@ -200,6 +200,7 @@ class Calendar extends Component {
     });
 
     const startDate = new Date();
+    this.calendar.height = 600;
 
     this.calendar.update({ startDate, events });
   }
