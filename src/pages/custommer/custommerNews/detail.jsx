@@ -169,6 +169,8 @@ const CustomerDetail = () => {
         await treatmentsAPI.update({
           ...values,
           customer: id,
+          start_time,
+          end_time,
         });
       } else {
         await treatmentsAPI.create({
@@ -279,15 +281,22 @@ const CustomerDetail = () => {
     {
       title: "Үйлдэл",
       render: (_, row) => (
-        <>
-          <Button
-            icon={<EditOutlined onClick={() => showTreatmentModal(row.id)} />}
-          />
-          &#160;{" "}
-          <Button
-            icon={<DeleteOutlined onClick={() => showDeleteConfirm(row.id)} />}
-          />
-        </>
+        <Space>
+          {new Date(row?.end_time) > new Date() ? (
+            <>
+              <Button
+                icon={
+                  <EditOutlined onClick={() => showTreatmentModal(row.id)} />
+                }
+              />
+              <Button
+                icon={
+                  <DeleteOutlined onClick={() => showDeleteConfirm(row.id)} />
+                }
+              />
+            </>
+          ) : null}
+        </Space>
       ),
     },
   ];
