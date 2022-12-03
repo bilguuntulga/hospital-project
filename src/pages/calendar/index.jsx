@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { Card, Modal, Skeleton, TimePicker } from "antd";
 import { Field, Formik } from "formik";
 import { Form, Input, Select, SubmitButton } from "formik-antd";
@@ -7,7 +7,6 @@ import { doctorAPI, treatmentTimesAPI } from "../../apis";
 import { SaveOutlined } from "@ant-design/icons";
 import { toast, ToastContainer } from "react-toastify";
 import PageLoading from "../../components/PageLoading";
-import TreatmentTimesTable from "../../components/TreatmentTimesTable";
 import moment from "moment";
 import Calendar from "../../components/Calendar";
 
@@ -35,18 +34,6 @@ const CalendarApp = () => {
   const [doctorsLoading, setDoctorsLoading] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const timesTableRef = useRef();
-
-  const onSelect = (value) => {
-    const now = new Date();
-    now.setHours(0);
-    now.setMinutes(0);
-    const date = new Date(value);
-
-    if (date < now) return;
-    setInitialValues(model);
-    setSelectedDate(date);
-    setModalVisible(true);
-  };
 
   const onSubmit = async (values, { resetForm }) => {
     await toast.promise(
@@ -111,65 +98,11 @@ const CalendarApp = () => {
   return (
     <div className="calendar_page">
       <Card title="Календар">
-        <Modal
-          title={moment(selectedDate).format("YYYY/MM/DD")}
-          open={modalVisible}
-          footer={null}
-          onCancel={() => setModalVisible(false)}
-        >
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            enableReinitialize
-            onSubmit={onSubmit}
-          >
-            <Form layout="vertical">
-              <Form.Item
-                name="customer_phone"
-                label="Үйлчлүүлэгчийн утасны дугаар"
-              >
-                <Input name="customer_phone" />
-              </Form.Item>
-              <Form.Item name="time" label="Цаг">
-                <Field name="time">
-                  {({ field: { name }, form: { setFieldValue } }) => (
-                    <TimePicker.RangePicker
-                      style={{ width: "100%" }}
-                      onChange={(e) =>
-                        onTimePickerChange(e, name, setFieldValue)
-                      }
-                      format="HH:mm"
-                    />
-                  )}
-                </Field>
-              </Form.Item>
-              <Form.Item name="doctor" label="Эмч">
-                {doctorsLoading ? (
-                  <Skeleton paragraph={{ rows: 0 }} />
-                ) : (
-                  <Select name="doctor">
-                    {doctors.map((doctor) => (
-                      <Select.Option
-                        value={doctor?.id}
-                      >{`${doctor?.first_name} ${doctor?.last_name}`}</Select.Option>
-                    ))}
-                  </Select>
-                )}
-              </Form.Item>
-              <SubmitButton block icon={<SaveOutlined />}>
-                Хадаглах
-              </SubmitButton>
-            </Form>
-          </Formik>
-        </Modal>
         <Calendar />
         <ToastContainer />
       </Card>
-      {/* <Card title="Цагууд">
-        <TreatmentTimesTable refreshRef={timesTableRef} />
-      </Card> */}
     </div>
   );
 };
 
-export default CalendarApp;
+export default memo(CalendarApp);

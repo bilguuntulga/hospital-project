@@ -50,6 +50,8 @@ const BonusPage = () => {
   const [customers, setCustomers] = useState([]);
   const navigate = useNavigate();
 
+  const userRole = JSON.parse(localStorage.getItem("user"))?.role;
+
   const bonusColumns = [
     {
       title: "Нөхцөл",
@@ -75,14 +77,18 @@ const BonusPage = () => {
             icon={<UserOutlined />}
             onClick={() => showCustomersModal(row?.id)}
           />
-          <Button
-            icon={<EditOutlined onClick={() => showUpdateModal(row?.id)} />}
-          />
-          <Button
-            icon={<DeleteOutlined />}
-            onClick={() => showDeleteConfirm(row.id)}
-            danger
-          />
+          {userRole == "ADMIN" ? (
+            <>
+              <Button
+                icon={<EditOutlined onClick={() => showUpdateModal(row?.id)} />}
+              />
+              <Button
+                icon={<DeleteOutlined />}
+                onClick={() => showDeleteConfirm(row.id)}
+                danger
+              />
+            </>
+          ) : null}
         </Space>
       ),
     },
@@ -193,9 +199,11 @@ const BonusPage = () => {
       <Card
         title="Урамшуулал"
         extra={
-          <Button onClick={() => onCreate()} icon={<PlusOutlined />}>
-            Нэмэх
-          </Button>
+          userRole == "ADMIN" ? (
+            <Button onClick={() => onCreate()} icon={<PlusOutlined />}>
+              Нэмэх
+            </Button>
+          ) : null
         }
       >
         <Table
