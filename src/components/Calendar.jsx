@@ -169,6 +169,7 @@ class Calendar extends Component {
         title: "Устгах",
         content: "Та устгах даа итгэлтэй байна уу?",
         okText: "Тийм",
+        okType:"danger",
         cancelText: "Үгүй",
         onOk: async () => {
           await treatmentTimesAPI.remove(id);
