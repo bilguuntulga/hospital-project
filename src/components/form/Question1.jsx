@@ -563,10 +563,29 @@ function Question1({ id }) {
                   <Col>
                     <Input name="q17" />
                   </Col>
-                  <Col>
-                    <Radio.Group name="q17">
-                      <Radio value="NO">Үгүй</Radio>
-                    </Radio.Group>
+                  <Col span={8}>
+                    <Item
+                      name="q17"
+                      label="Асуулт.17 Харшилдаг эм тариа бий юу"
+                    >
+                      <Row gutter={20}>
+                        <Col>
+                          <Input name="q17" />
+                        </Col>
+                        <Col>
+                          <Radio.Group name="q17">
+                            <Radio value="NO">Үгүй</Radio>
+                          </Radio.Group>
+                        </Col>
+                      </Row>
+                    </Item>
+                  </Col>
+                  <Col span={8}>
+                    <Item
+                      name="q19"
+                      label="Асуулт.19 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?">
+                      <Input name="q19" />
+                    </Item>
                   </Col>
                 </Row>
               </Item>

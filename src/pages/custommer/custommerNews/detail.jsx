@@ -300,7 +300,6 @@ const CustomerDetail = () => {
       <div className="customer_detail_container">
         <div>
           <p style={{ fontSize: "24px", marginBottom: "0" }}>
-            Үйлчлүүлэгчийн мэдээлэл
           </p>
           <Row justify="end">
             <Col>
