@@ -75,9 +75,6 @@ function Work_user_page() {
           }
         );
       },
-      onCancel() {
-        console.log("Cancel");
-      },
     });
   };
 

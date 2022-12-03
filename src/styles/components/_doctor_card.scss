@@ -4,12 +4,12 @@
   overflow: hidden;
   position: relative;
   // min-width: 15rem;
-  width: 17rem;
+  width: 14rem;
   aspect-ratio: 3 / 4;
   scale: 1;
   transition: all 0.3s ease-in-out;
 
-  &:hover{
+  &:hover {
     scale: 1.05;
   }
 

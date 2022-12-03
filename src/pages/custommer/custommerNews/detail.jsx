@@ -229,9 +229,6 @@ const CustomerDetail = () => {
           }
         );
       },
-      onCancel() {
-        console.log("Cancel");
-      },
     });
   };
 
