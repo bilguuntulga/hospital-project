@@ -439,12 +439,12 @@ const CustomerDetail = () => {
           </Row>
           <br />
           <Row style={{ width: "100%" }} gutter={[30, 30]} justify="center">
-            <Col xl={4} lg={10}>
+            <Col xl={8} xxl={4} lg={10}>
               <div className="custommer_detail_image">
                 <img className="image" src={customerDetail?.image} alt="" />
               </div>
             </Col>
-            <Col xl={19} lg={24}>
+            <Col xl={19} xxl lg={24}>
               <div className="customer_detail_hystory">
                 <p>Тайлбар</p>
                 <p style={{ color: "rgba(39, 30, 74, 0.8);" }}>
