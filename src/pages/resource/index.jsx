@@ -82,9 +82,6 @@ const ResourcePage = () => {
           }
         );
       },
-      onCancel() {
-        console.log("Cancel");
-      },
     });
   };
 

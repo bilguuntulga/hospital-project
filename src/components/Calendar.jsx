@@ -200,7 +200,6 @@ class Calendar extends Component {
     });
 
     const startDate = new Date();
-    console.log(events);
 
     this.calendar.update({ startDate, events });
   }
