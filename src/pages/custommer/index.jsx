@@ -116,77 +116,81 @@ const CustomerPage = () => {
   return (
     <div className="customer__container">
       <Space direction="vertical" style={{ width: "100%" }}>
-        <Row align="middle" justify="space-between">
-          <div className="search__container">
-            <Col >
-              <Input
-                ref={nameRef}
-                placeholder="Хайх"
-                suffix={
-                  <img
-                    src="search_icon.png"
-                    onClick={() =>
-                      onSearch(nameRef?.current?.input?.value.toString().trim())
+        <PageHeader
+          title={
+              <div className="search__container">
+            <Row align="middle" justify="center" gutter={[30,30]}>
+                <Col xl={7} lg={8}>
+                  <Input
+                    ref={nameRef}
+                    placeholder="Хайх"
+                    suffix={
+                      <img
+                        src="search_icon.png"
+                        onClick={() =>
+                          onSearch(
+                            nameRef?.current?.input?.value.toString().trim()
+                          )
+                        }
+                      />
                     }
                   />
-                }
-              />
-            </Col>
-            <Col>
-              <div className="select___conataienr">
-                <div>Үнэлгээ: </div>
-                <div>
-                  <Select
-                    style={{ width: "100px" }}
-                    onChange={setRate}
-                    defaultValue="ALL"
-                  >
-                    <Select.Option value="GOOD">Сайн</Select.Option>
-                    <Select.Option value="BAD">Муу</Select.Option>
-                    <Select.Option value="ALL">Бүгд</Select.Option>
-                  </Select>
-                </div>
+                </Col>
+                <Col xl={5} lg={8}>
+                  <div className="select___conataienr">
+                    <div>Үнэлгээ: </div>
+                    <div>
+                      <Select
+                        style={{ width: "100px" }}
+                        onChange={setRate}
+                        defaultValue="ALL"
+                      >
+                        <Select.Option value="GOOD">Сайн</Select.Option>
+                        <Select.Option value="BAD">Муу</Select.Option>
+                        <Select.Option value="ALL">Бүгд</Select.Option>
+                      </Select>
+                    </div>
+                  </div>
+                </Col>
+                <Col xl={5} lg={8}>
+                  <div className="select___conataienr">
+                    <div>Хүйс: </div>
+                    <Select
+                      style={{ width: "100px" }}
+                      onChange={setGenter}
+                      defaultValue="ALL"
+                    >
+                      <Select.Option value="MALE">Эрэгтэй</Select.Option>
+                      <Select.Option value="FEMALE">Эмэгтэй</Select.Option>
+                      <Select.Option value="ALL">Бүгд</Select.Option>
+                    </Select>
+                  </div>
+                </Col>
+                <Col xl={5} lg={8}>
+                  <div className="select___conataienr">
+                    <div>Төрөл: </div>
+                    <Select
+                      style={{ width: "100px" }}
+                      onChange={setType}
+                      defaultValue="ALL"
+                    >
+                      <Select.Option value="REGISTERED">
+                        Бүртгэлтэй
+                      </Select.Option>
+                      <Select.Option value="ADVICE"> Зөвөлгөө</Select.Option>
+                      <Select.Option value="ALL">Бүгд</Select.Option>
+                    </Select>
+                  </div>
+                </Col>
+            </Row>
               </div>
-            </Col>
-            <Col>
-              <div className="select___conataienr">
-                <div>Хүйс: </div>
-                <Select
-                  style={{ width: "100px" }}
-                  onChange={setGenter}
-                  defaultValue="ALL"
-                >
-                  <Select.Option value="MALE">Эрэгтэй</Select.Option>
-                  <Select.Option value="FEMALE">Эмэгтэй</Select.Option>
-                  <Select.Option value="ALL">Бүгд</Select.Option>
-                </Select>
-              </div>
-            </Col>
-            <Col>
-              <div className="select___conataienr">
-                <div>Төрөл: </div>
-                <Select
-                  style={{ width: "100px" }}
-                  onChange={setType}
-                  defaultValue="ALL"
-                >
-                  <Select.Option value="REGISTERED">Бүртгэлтэй</Select.Option>
-                  <Select.Option value="ADVICE"> Зөвөлгөө</Select.Option>
-                  <Select.Option value="ALL">Бүгд</Select.Option>
-                </Select>
-              </div>
-            </Col>
-          </div>
-          <Col>
-            <PageHeader
-              extra={
-                <Link to="create">
-                  <Button icon={<PlusOutlined />}>Нэмэх</Button>
-                </Link>
-              }
-            />
-          </Col>
-        </Row>
+          }
+          extra={
+            <Link to="create">
+              <Button icon={<PlusOutlined />}>Нэмэх</Button>
+            </Link>
+          }
+        />
         {/* <div
           style={{
             width: "100%",
