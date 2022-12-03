@@ -87,7 +87,7 @@ class ServicesChart extends Component {
           }}
           series={this.state?.data?.series ?? this.state.series}
           type="bar"
-          height={250}
+          height={235}
         />
       </div>
     );
