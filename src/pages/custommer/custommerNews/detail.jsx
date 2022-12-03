@@ -39,6 +39,7 @@ import ProfileImageUpload from "../../../components/form/ProfileImageUpload";
 import { toast } from "react-toastify";
 import Question1 from "../../../components/form/Question1";
 import Question2 from "../../../components/form/Question2";
+import PageLoading from "../../../components/PageLoading";
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
@@ -83,6 +84,7 @@ const customerValidationSchema = yup.object().shape({
 });
 
 const CustomerDetail = () => {
+  const [loading, setLoading] = useState(true);
   const [customerDetail, setCustomerDetail] = useState({});
   const [treadment, setTreadMent] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -95,6 +97,7 @@ const CustomerDetail = () => {
   const navigate = useNavigate();
 
   const fetchData = async () => {
+    setLoading(true);
     const customer = await customerAPI.get(id);
 
     if (customer.rate == "GOOD") customer.rate = true;
@@ -104,6 +107,7 @@ const CustomerDetail = () => {
     setCustomerDetail(customer);
     setCustomerInitialValues(customer);
     setTreadMent(treatments);
+    setLoading(false);
   };
 
   const showTreatmentModal = async (id) => {
@@ -287,6 +291,8 @@ const CustomerDetail = () => {
       ),
     },
   ];
+
+  if (loading) return <PageLoading />;
 
   return (
     <>

@@ -10,6 +10,9 @@ import { authAPI } from "./apis";
 import Header from "./components/layout/Header";
 import PageLoading from "./components/PageLoading";
 import Work_users from "./pages/work_users";
+import ServiceDetail from "./pages/service/ServiceDetail";
+import EmployeeDetail from "./pages/employee/EmployeeDetail";
+import CustomerDetail from "./pages/custommer/custommerNews/detail";
 const Home = lazy(() => import("./pages/home"));
 const Login = lazy(() => import("./pages/login"));
 const Customer = lazy(() => import("./pages/custommer"));
@@ -17,17 +20,12 @@ const Employee = lazy(() => import("./pages/employee"));
 const Order_time = lazy(() => import("./pages/calendar"));
 const Custommer_News = lazy(() => import("./pages/custommer"));
 const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"));
-const EmployeeDetail = lazy(() => import("./pages/employee/EmployeeDetail"));
 const Test = lazy(() => import("./pages/test"));
 const Profile = lazy(() => import("./pages/profile"));
-const Custommer_detail = lazy(() =>
-  import("./pages/custommer/custommerNews/detail")
-);
 const Report = lazy(() => import("./pages/report"));
 const ServicePage = lazy(() => import("./pages/service"));
 const Resource = lazy(() => import("./pages/resource"));
 const Bonus = lazy(() => import("./pages/bonus"));
-const ServiceDetail = lazy(() => import("./pages/service/ServiceDetail"));
 const ServiceForm = lazy(() => import("./pages/service/form"));
 const DoctorCreate = lazy(() => import("./pages/employee/create"));
 
@@ -68,7 +66,7 @@ function App() {
                   <Route
                     exact
                     path="/customer/:id"
-                    element={<Custommer_detail />}
+                    element={<CustomerDetail />}
                   />
                   <Route
                     exact
