@@ -9,12 +9,14 @@ import {
   Select,
   Table,
   PageHeader,
+  Image,
 } from "antd";
 import Customers from "../../components/Customers";
 import React, { memo, useEffect, useRef, useState } from "react";
 import { customerAPI, paginationAPI } from "../../apis";
 import { Link } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
+import RoundedImage from "../../components/RoundedImage";
 
 const CustomerPage = () => {
   const [loading, setLoading] = useState(true);
@@ -49,6 +51,9 @@ const CustomerPage = () => {
   };
 
   const columns = [
+    {
+      render: (_, row) => <RoundedImage image={row?.image} size={40} />,
+    },
     {
       title: "Нэр",
       render: (_, row) => (
@@ -118,8 +123,8 @@ const CustomerPage = () => {
       <Space direction="vertical" style={{ width: "100%" }}>
         <PageHeader
           title={
-              <div className="search__container">
-            <Row align="middle" justify="center" gutter={[30,30]}>
+            <div className="search__container">
+              <Row align="middle" justify="center" gutter={[30, 30]}>
                 <Col xl={7} lg={8}>
                   <Input
                     ref={nameRef}
@@ -182,8 +187,8 @@ const CustomerPage = () => {
                     </Select>
                   </div>
                 </Col>
-            </Row>
-              </div>
+              </Row>
+            </div>
           }
           extra={
             <Link to="create">

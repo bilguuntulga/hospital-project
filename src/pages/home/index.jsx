@@ -96,7 +96,15 @@ function HomePage() {
     {
       title: "Үнэлгээ",
       render: (_, row) => (
-        <div className={row.rate == "GOOD" ? "good" : "bad"} style={{ borderRadius: "50%",width:"30px" ,height:"30px",border:"none" }} />
+        <div
+          className={row.rate == "GOOD" ? "good" : "bad"}
+          style={{
+            borderRadius: "50%",
+            width: "30px",
+            height: "30px",
+            border: "none",
+          }}
+        />
       ),
     },
     {
@@ -223,6 +231,7 @@ function HomePage() {
             </div>
           </Col>
           <Col lg={24} xl={24} xxl={8}>
+            <br />
             <Row justify="space-between">
               <Col>
                 <p>Үйлчлүүлэгч</p>
@@ -333,13 +342,8 @@ function HomePage() {
                 </Col>
               </Row>
             </div>
-            <p
-              style={{
-                marginTop: "1rem",
-              }}
-            >
-              Хүйс
-            </p>
+            <br />
+            <p>Хүйс</p>
             <div
               style={{
                 height: "410px",
@@ -355,13 +359,14 @@ function HomePage() {
           <Col lg={24} xl={24} xxl={8}>
             <Row gutter={55}>
               <Col lg={24} xl={24} xxl={24}>
+                <br />
                 <p>Өнөөдөр</p>
                 <div
                   style={{
                     backgroundColor: "white",
                     padding: "20px",
                     width: "100%",
-                    height: "300px",
+                    height: "320px",
                     borderRadius: "15px",
                   }}
                 >
