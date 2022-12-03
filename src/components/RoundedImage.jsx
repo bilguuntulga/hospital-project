@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 function RoundedImage({ image, size = 50 }) {
   return (
@@ -11,4 +11,4 @@ function RoundedImage({ image, size = 50 }) {
   );
 }
 
-export default RoundedImage;
+export default memo(RoundedImage);

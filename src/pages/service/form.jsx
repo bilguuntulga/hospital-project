@@ -1,4 +1,13 @@
-import { Button, Card, Col, message, Modal, PageHeader, Row } from "antd";
+import {
+  Button,
+  Card,
+  Col,
+  message,
+  Modal,
+  PageHeader,
+  Row,
+  Space,
+} from "antd";
 import { Formik } from "formik";
 import { Form, Input, Select, SubmitButton } from "formik-antd";
 import React, { memo, useEffect, useState } from "react";
@@ -164,26 +173,20 @@ function ServiceForm({ create = true }) {
             <Card
               title="Үйлчилгээ"
               extra={
-                <Row gutter={30}>
-                  <Col>
-                    {pathname == "/services/create" ? (
-                      ""
-                    ) : (
-                      <Button
-                        icon={<DeleteOutlined />}
-                        className="delete__button"
-                        onClick={() => confirm()}
-                      >
-                        Устгах
-                      </Button>
-                    )}
-                  </Col>
-                  <Col>
-                    <SubmitButton icon={<SaveOutlined />}>
-                      Хадаглаж
-                    </SubmitButton>
-                  </Col>
-                </Row>
+                <Space>
+                  {pathname == "/services/create" ? (
+                    ""
+                  ) : (
+                    <Button
+                      icon={<DeleteOutlined />}
+                      className="delete__button"
+                      onClick={() => confirm()}
+                    >
+                      Устгах
+                    </Button>
+                  )}
+                  <SubmitButton icon={<SaveOutlined />}>Хадаглаж</SubmitButton>
+                </Space>
               }
             >
               <Row gutter={50} align="middle">

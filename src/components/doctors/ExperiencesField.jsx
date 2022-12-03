@@ -3,7 +3,7 @@ import {
   CloseOutlined,
   FolderAddOutlined,
 } from "@ant-design/icons";
-import { Button, PageHeader } from "antd";
+import { Button, Input, PageHeader } from "antd";
 import { Field, FieldArray } from "formik";
 import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
@@ -26,8 +26,8 @@ function ExperiencesField({ name, values }) {
                             form: { setFieldValue },
                           }) => (
                             <div className="inputs_wrapper">
-                              <input
-                              style={{width:"100%"}}
+                              <Input
+                                style={{ width: "100%" }}
                                 defaultValue={field_value.date}
                                 placeholder="Он"
                                 onChange={(e) => {
@@ -35,8 +35,8 @@ function ExperiencesField({ name, values }) {
                                   setFieldValue(field_name, field_value);
                                 }}
                               />
-                              <input
-                              style={{width:"100%"}}
+                              <Input
+                                style={{ width: "100%" }}
                                 defaultValue={field_value.desc}
                                 placeholder="Хаана"
                                 onChange={(e) => {
@@ -44,11 +44,12 @@ function ExperiencesField({ name, values }) {
                                   setFieldValue(field_name, field_value);
                                 }}
                               />
-                              <input
-                              style={{width:"100%"}}
+                              <Input
+                                style={{ width: "100%" }}
                                 defaultValue={field_value.role}
                                 placeholder="Мэргэжил"
                                 onChange={(e) => {
+                                  console.log(e);
                                   field_value.role = e.target.value;
                                   setFieldValue(field_name, field_value);
                                 }}
@@ -56,7 +57,10 @@ function ExperiencesField({ name, values }) {
                             </div>
                           )}
                         </Field>
-                        <Button onClick={() => arrayHelpers.remove(index)}>
+                        <Button
+                          onClick={() => arrayHelpers.remove(index)}
+                          color="danger"
+                        >
                           <CloseOutlined />
                         </Button>
                       </div>

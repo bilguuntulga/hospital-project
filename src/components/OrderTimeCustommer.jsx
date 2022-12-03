@@ -2,30 +2,13 @@ import { Button, Col, Row } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment/moment";
+import RoundedImage from "./RoundedImage";
 
 const OrderTimeCustomer = ({ image, name, bool, time, link }) => {
   return (
     <div>
       <Row justify="space-between" align="middle">
-        <Col>
-          <div
-            style={{
-              backgroundColor: "#E9E9E9",
-              display: "grid",
-              placeItems: "center",
-              width: "50px",
-              height: "50px",
-              borderRadius: "50% ",
-            }}
-          >
-            <img
-              className="image"
-              style={{ borderRadius: "50%" }}
-              src={image}
-              alt=""
-            />
-          </div>
-        </Col>
+        <RoundedImage image={image} size={50} />
         <Col span={12}>
           <b>{name}</b>
           <p>{moment(time).format("YYYY/MM/DD HH:mm")}</p>

@@ -25,6 +25,7 @@ import {
 import { bonusAPI } from "../../apis";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import RoundedImage from "../../components/RoundedImage";
 const { confirm } = Modal;
 
 const model = {
@@ -98,7 +99,7 @@ const BonusPage = () => {
   const customersColumns = [
     {
       title: "Зураг",
-      render: (_, row) => <Image src={row?.image} height={50} />,
+      render: (_, row) => <RoundedImage image={row?.image} size={50} />,
     },
     {
       title: "Нэр",
@@ -230,6 +231,9 @@ const BonusPage = () => {
               onSubmit={onSubmit}
             >
               <Form layout="vertical">
+                <Form.Item name="condition" label="Нөхцөл">
+                  <Input type="number" name="condition" />
+                </Form.Item>
                 <Form.Item name="type" label="Төрөл">
                   <Select name="type" loading={formLoading}>
                     <Select.Option value="PRICE">Мөнгөөр</Select.Option>
@@ -238,9 +242,6 @@ const BonusPage = () => {
                 </Form.Item>
                 <Form.Item name="discount" label="Хямдрал">
                   <Input type="number" name="discount" />
-                </Form.Item>
-                <Form.Item name="condition" label="Үнэ">
-                  <Input type="number" name="condition" />
                 </Form.Item>
                 <SubmitButton icon={<SaveOutlined />} block>
                   Хадаглаж

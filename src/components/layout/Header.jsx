@@ -115,7 +115,7 @@ function Header() {
               user?.last_name ?? "Нэр"
             }`}</div>
             <div className="user_role">{`${
-              user?.role === "ADMIN" ? "Админ" : "Ажилчин"
+              user?.role === "ADMIN" ? "Админ" : "Ажилтан"
             }`}</div>
           </div>
           <Dropdown

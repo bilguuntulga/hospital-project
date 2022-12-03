@@ -50,7 +50,7 @@ const EmployeeDetail = () => {
     first_name: yup.string().required("Заавал бөглөнө үү."),
     last_name: yup.string().required("Заавал бөглөнө үү."),
     role: yup.string().required("Заавал бөглөнө үү."),
-    salary: yup.string().required("Заавал бөглөнө үү."),
+    salary: yup.number().min(1).required("Заавал бөглөнө үү."),
     color: yup.string().required("Заавал бөглөнө үү."),
     desc: yup.string().required("Заавал бөглөнө үү."),
   });
@@ -68,6 +68,9 @@ const EmployeeDetail = () => {
         success: "Амжилттай",
       }
     );
+
+    const res = await doctorAPI.detail(id);
+    setDetailData(res);
   };
 
   const onDelete = async () => {

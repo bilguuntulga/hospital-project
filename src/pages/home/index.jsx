@@ -256,7 +256,7 @@ function HomePage() {
                 borderRadius: "15px",
               }}
             >
-              <Row gutter={30} align="middle">
+              <Row gutter={[30, 30]} align="middle">
                 <Col>
                   <div
                     style={{
@@ -274,34 +274,37 @@ function HomePage() {
                   </div>
                 </Col>
                 <Col>
-                  <b>
-                    <CountUp end={customerGrowth?.new ?? 0} duration={0.5} />
-                  </b>
-                  <p>Шинэ үйлчлүүлэгч</p>
+                  <div>
+                    <b>
+                      <CountUp end={customerGrowth?.new ?? 0} duration={0.5} />
+                    </b>
+                    &nbsp; Шинэ үйлчлүүлэгч
+                  </div>
                 </Col>
                 <Col>
-                  <Row>
+                  <Row gutter={5}>
                     <Col>
-                      <img
-                        src="/chart.png"
-                        width="15.34px"
-                        height="4.76px"
-                        alt=""
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ color: "#8C85F0" }}>
+                      <div style={{ color: "#8C85F0" }}>
                         <CountUp
                           end={customerGrowth?.percent ?? 0}
                           duration={0.5}
                         />
                         %
-                      </p>
+                      </div>
+                    </Col>
+                    <Col>
+                      <img
+                        src="/chart.png"
+                        width="15px"
+                        height="10px"
+                        alt="char"
+                      />
                     </Col>
                   </Row>
                 </Col>
               </Row>
-              <Row gutter={30} align="middle">
+              <br />
+              <Row gutter={[30, 30]} align="middle">
                 <Col>
                   <div
                     style={{
@@ -319,28 +322,30 @@ function HomePage() {
                   </div>
                 </Col>
                 <Col>
-                  <b>
-                    <CountUp end={customerGrowth?.old ?? 0} duration={0.5} />
-                  </b>
-                  <p>Хуучин үйлчлүүлэгч</p>
+                  <div>
+                    <b>
+                      <CountUp end={customerGrowth?.old ?? 0} duration={0.5} />
+                    </b>
+                    &nbsp; Хуучин үйлчлүүлэгч
+                  </div>
                 </Col>
                 <Col>
-                  <Row>
+                  <Row gutter={5}>
                     <Col>
-                      <img
-                        src="/chart.png"
-                        width="15.34px"
-                        height="4.76px"
-                        alt=""
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ color: "#8C85F0" }}>
+                      <div style={{ color: "#8C85F0" }}>
                         <CountUp
                           end={customerGrowth?.distance ?? 0}
                           duration={0.5}
                         />
-                      </p>
+                      </div>
+                    </Col>
+                    <Col>
+                      <img
+                        src="/chart.png"
+                        width="15px"
+                        height="10px"
+                        alt="char"
+                      />
                     </Col>
                   </Row>
                 </Col>

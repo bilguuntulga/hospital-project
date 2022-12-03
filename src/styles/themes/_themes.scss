@@ -37,7 +37,7 @@
   background: #555;
 }
 .delete__button {
-  background:red!important;
+  background: red !important;
 
   color: white;
   border: none;
@@ -46,7 +46,7 @@
   &:hover,
   &:focus {
     color: whitesmoke !important;
-    background:red!important;
+    background: red !important;
   }
 }
 .ant-btn {
@@ -112,7 +112,6 @@
     rgba(0, 0, 0, 0) 106.82%,
     rgba(96, 2, 224, 0.9) 106.82%
   );
-  width: 100%;
 }
 
 .ant-popover {
@@ -147,6 +146,7 @@
 .ant-tabs-tab:hover {
   color: #5976ed;
 }
+
 .ant-radio-button {
   background: linear-gradient(
     180deg,
@@ -158,6 +158,7 @@
   color: white;
   border: none;
 }
+
 .ant-radio-group-solid
   .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
   background: linear-gradient(
@@ -171,6 +172,12 @@
   border: none;
 }
 
-.ant-select-selector{
+.ant-select-selector,
+.ant-input {
   border-radius: 0.5rem !important;
+}
+
+.ant-table-wrapper {
+  overflow: hidden;
+  border-radius: 1rem;
 }
