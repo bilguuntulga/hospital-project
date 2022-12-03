@@ -545,7 +545,7 @@ function Question1({ id }) {
                     </Row>
                   </Col>
                 </Row>
-                <Row>
+                <Row gutter={30}>
                   <Col span={8}>
                     <Item
                       name="q13"
@@ -561,8 +561,7 @@ function Question1({ id }) {
                   <Col span={8}>
                     <Item
                       name="q14"
-                      label="Асуулт.14 Тамхи болон бусад электрон тамхи хэрэглэдэг эсэх"
-                    >
+                      label="Асуулт.14 Тамхи болон бусад электрон тамхи хэрэглэдэг эсэх">
                       <Radio.Group name="q14">
                         <Radio value="YES">Тийм</Radio>
                         <Radio value="NO">Үгүй</Radio>
@@ -581,8 +580,8 @@ function Question1({ id }) {
                     </Item>
                   </Col>
                 </Row>
-                <Row gutter={220}>
-                  <Col>
+                <Row gutter={30}>
+                  <Col span={8}>
                     <Item
                       name="q16"
                       label="Асуулт.16 Харшилтай бол юуны харшилтай бэ ? "
@@ -590,7 +589,7 @@ function Question1({ id }) {
                       <Input name="q16" />
                     </Item>
                   </Col>
-                  <Col>
+                  <Col span={8}>
                     <Item
                       name="q17"
                       label="Асуулт.17 Харшилдаг эм тариа бий юу"
@@ -607,7 +606,13 @@ function Question1({ id }) {
                       </Row>
                     </Item>
                   </Col>
-                  <Col></Col>
+                  <Col span={8}>
+                    <Item
+                      name="q19"
+                      label="Асуулт.19 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?">
+                      <Input name="q19" />
+                    </Item>
+                  </Col>
                 </Row>
                 <Row>
                   <Col span={12}>
@@ -622,12 +627,7 @@ function Question1({ id }) {
                     </Item>
                   </Col>
                   <Col span={12}>
-                    <Item
-                      name="q19"
-                      label="Асуулт.19 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?"
-                    >
-                      <Input name="q19" />
-                    </Item>
+
                   </Col>
                 </Row>
                 <Row>
