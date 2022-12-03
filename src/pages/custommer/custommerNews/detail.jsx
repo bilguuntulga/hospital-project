@@ -299,8 +299,7 @@ const CustomerDetail = () => {
       <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
       <div className="customer_detail_container">
         <div>
-          <p style={{ fontSize: "24px", marginBottom: "0" }}>
-          </p>
+          <p style={{ fontSize: "24px", marginBottom: "0" }}></p>
           <Row justify="end">
             <Col>
               <Space>
@@ -563,7 +562,7 @@ const CustomerDetail = () => {
               <Question1 id={id} />
             </Collapse.Panel>
             <Collapse.Panel header="2-р Асуултууд" key="2">
-              <Question2 />
+              <Question2 id={id} />
             </Collapse.Panel>
           </Collapse>
         </div>

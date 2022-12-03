@@ -38,11 +38,13 @@
 }
 
 .ant-btn {
-  background: linear-gradient(180deg,
-      rgba(0, 105, 205, 0.9) 0%,
-      rgba(150, 110, 206, 0.9) 97.36%,
-      rgba(0, 0, 0, 0) 106.82%,
-      rgba(96, 2, 224, 0.9) 106.82%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 105, 205, 0.9) 0%,
+    rgba(150, 110, 206, 0.9) 97.36%,
+    rgba(0, 0, 0, 0) 106.82%,
+    rgba(96, 2, 224, 0.9) 106.82%
+  );
   color: white;
   border: none;
   border-radius: 5px;
@@ -50,11 +52,13 @@
   &:hover,
   &:focus {
     color: whitesmoke !important;
-    background: linear-gradient(180deg,
-        rgba(0, 105, 205, 0.9) 0%,
-        rgba(150, 110, 206, 0.9) 97.36%,
-        rgba(0, 0, 0, 0) 106.82%,
-        rgba(96, 2, 224, 0.9) 106.82%) !important;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 105, 205, 0.9) 0%,
+      rgba(150, 110, 206, 0.9) 97.36%,
+      rgba(0, 0, 0, 0) 106.82%,
+      rgba(96, 2, 224, 0.9) 106.82%
+    ) !important;
   }
 }
 
@@ -89,11 +93,13 @@
 }
 
 .ant-switch {
-  background: linear-gradient(180deg,
-      rgba(0, 105, 205, 0.9) 0%,
-      rgba(150, 110, 206, 0.9) 97.36%,
-      rgba(0, 0, 0, 0) 106.82%,
-      rgba(96, 2, 224, 0.9) 106.82%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 105, 205, 0.9) 0%,
+    rgba(150, 110, 206, 0.9) 97.36%,
+    rgba(0, 0, 0, 0) 106.82%,
+    rgba(96, 2, 224, 0.9) 106.82%
+  );
   width: 100%;
 }
 
@@ -112,11 +118,13 @@
 }
 
 .ant-tabs-ink-bar {
-  background: linear-gradient(180deg,
-      rgba(0, 105, 205, 0.9) 0%,
-      rgba(150, 110, 206, 0.9) 97.36%,
-      rgba(0, 0, 0, 0) 106.82%,
-      rgba(96, 2, 224, 0.9) 106.82%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 105, 205, 0.9) 0%,
+    rgba(150, 110, 206, 0.9) 97.36%,
+    rgba(0, 0, 0, 0) 106.82%,
+    rgba(96, 2, 224, 0.9) 106.82%
+  );
 }
 
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
@@ -126,4 +134,27 @@
 
 .ant-tabs-tab:hover {
   color: #5976ed;
+}
+.ant-radio-button {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 105, 205, 0.9) 0%,
+    rgba(150, 110, 206, 0.9) 97.36%,
+    rgba(0, 0, 0, 0) 106.82%,
+    rgba(96, 2, 224, 0.9) 106.82%
+  );
+  color: white;
+  border: none;
+}
+.ant-radio-group-solid
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 105, 205, 0.9) 0%,
+    rgba(150, 110, 206, 0.9) 97.36%,
+    rgba(0, 0, 0, 0) 106.82%,
+    rgba(96, 2, 224, 0.9) 106.82%
+  );
+  color: white;
+  border: none;
 }
