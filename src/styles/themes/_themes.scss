@@ -36,7 +36,19 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.delete__button {
+  background:red!important;
 
+  color: white;
+  border: none;
+  border-radius: 5px;
+
+  &:hover,
+  &:focus {
+    color: whitesmoke !important;
+    background:red!important;
+  }
+}
 .ant-btn {
   background: linear-gradient(
     180deg,
@@ -58,7 +70,7 @@
       rgba(150, 110, 206, 0.9) 97.36%,
       rgba(0, 0, 0, 0) 106.82%,
       rgba(96, 2, 224, 0.9) 106.82%
-    ) !important;
+    );
   }
 }
 

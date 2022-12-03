@@ -81,8 +81,8 @@ function HomePage() {
 
   return (
     <div className="dashboard__container" style={{ width: "100%" }}>
-      <Row justify="space-between" style={{ width: "100%" }}>
-        <Col span={5}>
+      <Row justify="space-between" style={{ width: "100%" }} gutter={[30, 30]}>
+        <Col lg={12} xl={12} xxl={5}>
           <div className="columns">
             <Row style={{ width: "100%", paddingTop: "10px" }}>
               <Col span={10}>
@@ -99,7 +99,7 @@ function HomePage() {
             </Row>
           </div>
         </Col>
-        <Col span={5}>
+        <Col lg={12} xl={12} xxl={5}>
           <div className="columns">
             <Row style={{ width: "100%", paddingTop: "10px" }}>
               <Col span={10}>
@@ -116,7 +116,7 @@ function HomePage() {
             </Row>
           </div>
         </Col>
-        <Col span={5}>
+        <Col lg={12} xl={12} xxl={5}>
           <div className="columns">
             <Row style={{ width: "100%", paddingTop: "10px" }}>
               <Col span={10}>
@@ -133,7 +133,7 @@ function HomePage() {
             </Row>
           </div>
         </Col>
-        <Col span={5}>
+        <Col lg={12} xl={12} xxl={5}>
           <div className="columns">
             <Row style={{ width: "100%", paddingTop: "10px" }}>
               <Col span={10}>
@@ -155,7 +155,7 @@ function HomePage() {
       <br />
       <div className="ordersCardContaienr">
         <Row justify="space-between" gutter={55}>
-          <Col span={8}>
+          <Col lg={24} xl={24} xxl={8}>
             <p>Цаг захиалсан үйлчлүүлэгч</p>
             <div
               className="order__time__customer"
@@ -188,7 +188,7 @@ function HomePage() {
               </div>
             </div>
           </Col>
-          <Col span={8}>
+          <Col lg={24} xl={24} xxl={8}>
             <Row justify="space-between">
               <Col>
                 <p>Үйлчлүүлэгч</p>
@@ -318,65 +318,70 @@ function HomePage() {
               <PieChart />
             </div>
           </Col>
-          <Col span={8}>
-            <p>Өнөөдөр</p>
-            <div
-              style={{
-                backgroundColor: "white",
-                padding: "20px",
-                width: "100%",
-                height: "300px",
-                borderRadius: "15px",
-              }}
-            >
-              <div
-                style={{
-                  overflowY: "auto",
-                  overflowX: "hidden",
-                  height: "200px",
-                  padding: "10px",
-                }}
-              >
-                {weeklyTimes[selectedDay]?.times?.length > 0 ? (
-                  weeklyTimes[selectedDay]?.times?.map((e) => (
-                    <TOdayOrderList
-                      image={e?.image}
-                      name={`${e?.name}`}
-                      start_time={e?.start_time}
-                      end_time={e?.end_time}
-                      doctorName={e?.phone}
-                    />
-                  ))
-                ) : (
-                  <Empty />
-                )}
-              </div>
-              <div className="button_container">
-                {weeklyTimes.map((e, i) => (
-                  <Button
-                    key={e + i}
-                    onClick={() => setSlecetedDay(i)}
-                    className="button"
+          <Col lg={24} xl={24} xxl={8}>
+            <Row gutter={55}>
+              <Col lg={24} xl={24} xxl={24}>
+                <p>Өнөөдөр</p>
+                <div
+                  style={{
+                    backgroundColor: "white",
+                    padding: "20px",
+                    width: "100%",
+                    height: "300px",
+                    borderRadius: "15px",
+                  }}
+                >
+                  <div
+                    style={{
+                      overflowY: "auto",
+                      overflowX: "hidden",
+                      height: "200px",
+                      padding: "10px",
+                    }}
                   >
-                    {daytranslate(e.day)} <br />
-                    {new Date(e.date).getDate()}
-                  </Button>
-                ))}
-              </div>
-              <br />
-            </div>
-            <br />
-            <p>Эмчилгээ</p>
-            <div
-              style={{
-                backgroundColor: "white",
-                width: "100%",
-                borderRadius: "15px",
-                padding: "10px",
-              }}
-            >
-              <ServicesChart />
-            </div>
+                    {weeklyTimes[selectedDay]?.times?.length > 0 ? (
+                      weeklyTimes[selectedDay]?.times?.map((e) => (
+                        <TOdayOrderList
+                          image={e?.image}
+                          name={`${e?.name}`}
+                          start_time={e?.start_time}
+                          end_time={e?.end_time}
+                          doctorName={e?.phone}
+                        />
+                      ))
+                    ) : (
+                      <Empty />
+                    )}
+                  </div>
+                  <div className="button_container">
+                    {weeklyTimes.map((e, i) => (
+                      <Button
+                        key={e + i}
+                        onClick={() => setSlecetedDay(i)}
+                        className="button"
+                      >
+                        {daytranslate(e.day)} <br />
+                        {new Date(e.date).getDate()}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              </Col>
+              <Col lg={24} xl={24} xxl={24}>
+                <br />
+                <p>Эмчилгээ</p>
+                <div
+                  style={{
+                    backgroundColor: "white",
+                    width: "100%",
+                    borderRadius: "15px",
+                    padding: "10px",
+                  }}
+                >
+                  <ServicesChart />
+                </div>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </div>

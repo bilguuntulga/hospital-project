@@ -153,7 +153,7 @@ const ResourcePage = () => {
         </Formik>
         <br />
         {
-          oneresourceData?.id ? <Button icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(oneresourceData.id)} style={{ width: "100%" }}>Устгах</Button> : ""
+          oneresourceData?.id ? <Button icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(oneresourceData.id)} style={{width:"100%"}} className='delete__button'>Устгах</Button> : ""
         }
       </Modal>
     </div>

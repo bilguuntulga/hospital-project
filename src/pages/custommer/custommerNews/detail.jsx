@@ -319,6 +319,7 @@ const CustomerDetail = () => {
                   color="danger"
                   onClick={() => customerDelete()}
                   icon={<DeleteOutlined />}
+                  className="delete__button"
                 >
                   Устгах
                 </Button>
