@@ -204,7 +204,7 @@ function Question1({ id }) {
             </Col>
           </Row>
           <Row gutter={30}>
-            <Col span={12}>
+            <Col xl={12} lg={24}>
               <Item label="3. Арьсны төрөл " name="q3">
                 <Input placeholder="text" name="q3" />
               </Item>
@@ -223,95 +223,6 @@ function Question1({ id }) {
               <Item label="3.5. Онцлог " name="q3_5">
                 <Input placeholder="text" name="q3_5" />
               </Item>
-            </Col>
-            <Col span={12}>
-              <div>4. Нойр: Сүүлийн 7 хоног</div>
-              <Row gutter={10}>
-                <Col>
-                  <Col>
-                    <Item label="1-дх Утсан цаг" name="q4_day1_start">
-                      <TimePicker name="q4_day1_end" />
-                    </Item>
-                  </Col>
-                  <Col>
-                    <Item label="1-дх Өглөө сэрсэн цаг" name="q4_day1_end">
-                      <TimePicker name="q4_day2_end" />
-                    </Item>
-                  </Col>
-                </Col>
-                <Col>
-                  <Col>
-                    <Item label="2-дх Утсан цаг" name="q4_day2_start">
-                      <TimePicker name="q4_day2_start" />
-                    </Item>
-                  </Col>
-                  <Col>
-                    <Item label="2-дх Өглөө сэрсэн цаг" name="q4_day2_end">
-                      <TimePicker name="q4_day2_end" />
-                    </Item>
-                  </Col>
-                </Col>
-                <Col>
-                  <Col>
-                    <Item label="3-дх Утсан цаг" name="q4_day3_start">
-                      <TimePicker name="q4_day3_start" />
-                    </Item>
-                  </Col>
-                  <Col>
-                    <Item label="3-дх Өглөө сэрсэн цаг" name="q4_day3_end">
-                      <TimePicker name="q4_day3_end" />
-                    </Item>
-                  </Col>
-                </Col>
-                <Col>
-                  <Col>
-                    <Item label="4-дх Утсан цаг" name="q4_day4_start">
-                      <TimePicker name="q4_day4_start" />
-                    </Item>
-                  </Col>
-                  <Col>
-                    <Item label="4-дх Өглөө сэрсэн цагг" name="q4_day4_end">
-                      <TimePicker name="q4_day4_end" />
-                    </Item>
-                  </Col>
-                </Col>
-                <Col>
-                  <Col>
-                    <Item label="5-дх Утсан цаг" name="q4_day5_start">
-                      <TimePicker name="q4_day5_start" />
-                    </Item>
-                  </Col>
-                  <Col>
-                    <Item label="5-дх Өглөө сэрсэн цаг" name="q4_day5_end">
-                      <TimePicker name="q4_day5_end" />
-                    </Item>
-                  </Col>
-                </Col>
-                <Col>
-                  <Col>
-                    <Item label="6-дх Утсан цаг" name="q4_day6_start">
-                      <TimePicker name="q4_day6_start" />
-                    </Item>
-                  </Col>
-                  <Col>
-                    <Item label="6-дх Өглөө сэрсэн цаг" name="q4_day6_end">
-                      <TimePicker name="q4_day6_end" />
-                    </Item>
-                  </Col>
-                </Col>
-                <Col>
-                  <Col>
-                    <Item label="7-дх Утсан цагv" name="q4_day7_start">
-                      <TimePicker name="q4_day7_start" />
-                    </Item>
-                  </Col>
-                  <Col>
-                    <Item label="7-дх Өглөө сэрсэн цаг" name="q4_day7_end">
-                      <TimePicker name="q4_day7_end" />
-                    </Item>
-                  </Col>
-                </Col>
-              </Row>
               <Row>
                 <Col span={24}>
                   <Item label="5. Усны хэрэглээ" name="q5">
@@ -334,9 +245,154 @@ function Question1({ id }) {
                 </Col>
               </Row>
             </Col>
+            <Col xl={12} lg={24}>
+              <div>4. Нойр: Сүүлийн 7 хоног</div>
+              <Row gutter={10}>
+                <Col span={24}>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Item label="1-дх Утсан цаг" name="q4_day1_start">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day1_end"
+                        />
+                      </Item>
+                    </Col>
+                    <Col span={12}>
+                      <Item label="1-дх сэрсэн цаг" name="q4_day1_end">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day2_end"
+                        />
+                      </Item>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col span={24}>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Item label="2-дх Утсан цаг" name="q4_day2_start">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day2_start"
+                        />
+                      </Item>
+                    </Col>
+                    <Col span={12}>
+                      <Item label="2-дх сэрсэн цаг" name="q4_day2_end">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day2_end"
+                        />
+                      </Item>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col span={24}>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Item label="3-дх Утсан цаг" name="q4_day3_start">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day3_start"
+                        />
+                      </Item>
+                    </Col>
+                    <Col span={12}>
+                      <Item label="3-дх сэрсэн цаг" name="q4_day3_end">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day3_end"
+                        />
+                      </Item>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col span={24}>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Item label="4-дх Утсан цаг" name="q4_day4_start">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day4_start"
+                        />
+                      </Item>
+                    </Col>
+                    <Col span={12}>
+                      <Item label="4-дх сэрсэн цагг" name="q4_day4_end">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day4_end"
+                        />
+                      </Item>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col span={24}>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Item label="5-дх Утсан цаг" name="q4_day5_start">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day5_start"
+                        />
+                      </Item>
+                    </Col>
+                    <Col span={12}>
+                      <Item label="5-дх сэрсэн цаг" name="q4_day5_end">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day5_end"
+                        />
+                      </Item>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col span={24}>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Item label="6-дх Утсан цаг" name="q4_day6_start">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day6_start"
+                        />
+                      </Item>
+                    </Col>
+                    <Col span={12}>
+                      <Item label="6-дх сэрсэн цаг" name="q4_day6_end">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day6_end"
+                        />
+                      </Item>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col span={24}>
+                  <Row gutter={30}>
+                    <Col span={12}>
+                      <Item label="7-дх Утсан цагv" name="q4_day7_start">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day7_start"
+                        />
+                      </Item>
+                    </Col>
+                    <Col span={12}>
+                      <Item label="7-дх сэрсэн цаг" name="q4_day7_end">
+                        <TimePicker
+                          style={{ width: "100%" }}
+                          name="q4_day7_end"
+                        />
+                      </Item>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
           </Row>
           <Row gutter={30}>
-            <Col span={5}>
+            <Col xl={12} xxl={5} lg={12}>
               <Item label="7. Хооллолт: Дэглэм бариж байгаа эсэх" name="q6">
                 <Radio.Group name="q6">
                   <Radio value="YES">Тийм</Radio>
@@ -344,7 +400,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={4}>
+            <Col xl={12} lg={12} xxl={5}>
               <Item label="8. Цагаан идээний хэрэглээ: " name="q7">
                 <Radio.Group name="q7">
                   <Radio value="MUTCH">Их</Radio>
@@ -353,7 +409,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={5}>
+            <Col xl={12} xxl={5} lg={12}>
               <Item label="9. Ислэг ихтэй хүнсний хэрэглээ:" name="q8">
                 <Radio.Group name="q8">
                   <Radio value="MUTCH">Их</Radio>
@@ -362,7 +418,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={4}>
+            <Col xl={12} xxl={5} lg={12}>
               <Item label="10. Цагаан идээний хэрэглээ: " name="q9">
                 <Radio.Group name="q9">
                   <Radio value="MUTCH">Их</Radio>
@@ -371,7 +427,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={5}>
+            <Col xl={12} xxl={4} lg={24}>
               <Item label="11. Арьс арчилгаа:" name="q10">
                 <Radio.Group name="q10">
                   <Radio value="LITTLE">Бага</Radio>
@@ -383,11 +439,11 @@ function Question1({ id }) {
             </Col>
           </Row>
           <p>Асуулт.12 Сүүлийн 72 цагт идсэн хоол хүнсээ хэлнэ үү ?</p>
-          <Row>
-            <Col span={8}>
-              <Row>
+          <Row gutter={30}>
+            <Col xl={8} lg={24}>
+              <Row gutter={10}>
                 <Col span={12}>
-                  <Item label="1. Өглөө" name="q12day1_morning">
+                  <Item label="1.Өглөө" name="q12day1_morning">
                     <Input name="q12day1_morning" />
                   </Item>
                 </Col>
@@ -398,8 +454,8 @@ function Question1({ id }) {
                 </Col>
               </Row>
             </Col>
-            <Col span={8}>
-              <Row>
+            <Col xl={8} lg={24}>
+              <Row gutter={10}>
                 <Col span={12}>
                   <Item label="1. Өдөр" name="q12day1_day">
                     <Input name="q12day1_day_time" />
@@ -412,8 +468,8 @@ function Question1({ id }) {
                 </Col>
               </Row>
             </Col>
-            <Col span={8}>
-              <Row>
+            <Col xl={8} lg={24}>
+              <Row gutter={10}>
                 <Col span={12}>
                   <Item label="1. Орой" name="q12day1_evening">
                     <Input name="q12day1_evening" />
@@ -427,11 +483,11 @@ function Question1({ id }) {
               </Row>
             </Col>
           </Row>
-          <Row>
-            <Col span={8}>
-              <Row>
+          <Row gutter={30}>
+            <Col xl={8} lg={24}>
+              <Row gutter={10}>
                 <Col span={12}>
-                  <Item label="2. Өглөө" name="q12day2_morning">
+                  <Item label="2.Өглөө" name="q12day2_morning">
                     <Input name="q12day2_morning" />
                   </Item>
                 </Col>
@@ -442,8 +498,8 @@ function Question1({ id }) {
                 </Col>
               </Row>
             </Col>
-            <Col span={8}>
-              <Row>
+            <Col xl={8} lg={24}>
+              <Row gutter={10}>
                 <Col span={12}>
                   <Item label="2. Өдөр" name="q12day2_day">
                     <Input name="q12day2_day" />
@@ -456,8 +512,8 @@ function Question1({ id }) {
                 </Col>
               </Row>
             </Col>
-            <Col span={8}>
-              <Row>
+            <Col xl={8} lg={24}>
+              <Row gutter={10}>
                 <Col span={12}>
                   <Item label="2. Орой" name="q12day2_evening">
                     <Input name="q12day2_evening" />
@@ -471,11 +527,11 @@ function Question1({ id }) {
               </Row>
             </Col>
           </Row>
-          <Row>
-            <Col span={8}>
-              <Row>
+          <Row gutter={30}>
+            <Col xl={8} lg={24}>
+              <Row gutter={10}>
                 <Col span={12}>
-                  <Item label="3. Өглөө" name="q12day3_morning">
+                  <Item label="3.Өглөө" name="q12day3_morning">
                     <Input name="q12day3_morning" />
                   </Item>
                 </Col>
@@ -486,8 +542,8 @@ function Question1({ id }) {
                 </Col>
               </Row>
             </Col>
-            <Col span={8}>
-              <Row>
+            <Col xl={8} lg={24}>
+              <Row gutter={10}>
                 <Col span={12}>
                   <Item label="3. Өдөр" name="q12day3_day">
                     <Input name="q12day3_day" />
@@ -500,8 +556,8 @@ function Question1({ id }) {
                 </Col>
               </Row>
             </Col>
-            <Col span={8}>
-              <Row>
+            <Col xl={8} lg={24}>
+              <Row gutter={10}>
                 <Col span={12}>
                   <Item label="3. Орой" name="q12day3_evening">
                     <Input name="q12day3_evening" />
@@ -516,7 +572,7 @@ function Question1({ id }) {
             </Col>
           </Row>
           <Row gutter={30}>
-            <Col span={9}>
+            <Col xl={9}>
               <Item
                 name="q13"
                 label="Асуулт.13 Согтууруулах ундааны хэрэглээ (Архи, Пиво, Виски , Коньякь)"
@@ -528,7 +584,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={8}>
+            <Col xl={8}>
               <Item
                 name="q14"
                 label="Асуулт.14 Тамхи болон бусад электрон тамхи хэрэглэдэг эсэх"
@@ -539,7 +595,7 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={7}>
+            <Col xl={7}>
               <Item name="q15" label="Асуулт.15 Ямар нэгэн харшилтай юу ?">
                 <Radio.Group name="q15">
                   <Radio value="YES">Тийм</Radio>
@@ -549,7 +605,7 @@ function Question1({ id }) {
             </Col>
           </Row>
           <Row gutter={30}>
-            <Col span={8}>
+            <Col xl={8} lg={24}>
               <Item
                 name="q16"
                 label="Асуулт.16 Харшилтай бол юуны харшилтай бэ ? "
@@ -557,23 +613,25 @@ function Question1({ id }) {
                 <Input name="q16" />
               </Item>
             </Col>
-            <Col span={8}>
-              <Col>
-                <Item name="q17" label="Асуулт.17 Харшилдаг эм тариа бий юу">
-                  <Row gutter={20}>
-                    <Col>
-                      <Input name="q17" />
-                    </Col>
-                    <Col>
-                      <Radio.Group name="q17">
-                        <Radio value="NO">Үгүй</Radio>
-                      </Radio.Group>
-                    </Col>
-                  </Row>
-                </Item>
-              </Col>
+            <Col xl={8} lg={24}>
+              <Row>
+                <Col span={24}>
+                  <Item name="q17" label="Асуулт.17 Харшилдаг эм тариа бий юу">
+                    <Row gutter={20}>
+                      <Col span={16}>
+                        <Input name="q17" />
+                      </Col>
+                      <Col span={8}>
+                        <Radio.Group name="q17">
+                          <Radio value="NO">Үгүй</Radio>
+                        </Radio.Group>
+                      </Col>
+                    </Row>
+                  </Item>
+                </Col>
+              </Row>
             </Col>
-            <Col span={8}>
+            <Col xl={8} lg={24}>
               <Item
                 name="q18"
                 label="Асуулт.18 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?"
@@ -582,8 +640,8 @@ function Question1({ id }) {
               </Item>
             </Col>
           </Row>
-          <Row>
-            <Col span={10}>
+          <Row gutter={30}>
+            <Col xl={10} lg={24}>
               <Item
                 name="q19"
                 label="Асуулт.19 Сүүлийн 24 сард ямар нэгэн хагалгаа болон мэс ажилбарт орсон уу ?"
@@ -594,15 +652,15 @@ function Question1({ id }) {
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={7}>
-              <Item name="q20" label="Асуулт.19 B,C вирус байгаа юу ?">
+            <Col xl={7} lg={12}>
+              <Item name="q20" label="Асуулт.20 B,C вирус байгаа юу ?">
                 <Radio.Group name="q20">
                   <Radio value="YES">Тийм</Radio>
                   <Radio value="NO">Үгүй</Radio>
                 </Radio.Group>
               </Item>
             </Col>
-            <Col span={7}>
+            <Col xl={7} lg={12}>
               <Item name="q21" label="Асуулт.20 Ужиг хууч өвчинтэй юу ?">
                 <Radio.Group name="q21">
                   <Radio value="YES">Тийм</Radio>
