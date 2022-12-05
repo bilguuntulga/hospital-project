@@ -63,14 +63,15 @@ class Donut extends Component {
   async fetchData() {
     const result = await customerAPI.getGenderDonut();
 
-    if (result?.labels && result?.series)
-      this.setState((prev) => ({
-        ...prev,
-        options: {
-          labels: result.labels,
-        },
-        series: result.series,
-      }));
+    if (!result?.series[0]) return;
+
+    this.setState((prev) => ({
+      ...prev,
+      options: {
+        labels: result?.labels ?? ["Эрэгтэй", "Эмэгтэй"],
+      },
+      series: result?.series ?? [50, 50],
+    }));
   }
 
   componentDidMount() {

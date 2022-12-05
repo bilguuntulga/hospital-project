@@ -10,15 +10,15 @@ class ServicesChart extends Component {
       data: {},
       series: [
         {
-          name: "PRODUCT A",
+          name: "Үйлчилгээ 1",
           data: [44, 55, 41, 67, 22, 21, 22],
         },
         {
-          name: "PRODUCT B",
+          name: "Үйлчилгээ 2",
           data: [13, 23, 20, 8, 13, 17, 22],
         },
         {
-          name: "PRODUCT C",
+          name: "Үйлчилгээ 3",
           data: [11, 17, 15, 15, 21, 37, 22],
         },
       ],
@@ -59,11 +59,12 @@ class ServicesChart extends Component {
 
   componentDidMount() {
     treatmentsAPI.servicesChart().then((res) => {
-      if (res?.series)
-        this.setState((preState) => ({
-          ...preState,
-          data: res,
-        }));
+      if (!res?.series[0]) return;
+
+      this.setState((preState) => ({
+        ...preState,
+        data: res,
+      }));
     });
   }
 
@@ -86,7 +87,22 @@ class ServicesChart extends Component {
               ],
             },
           }}
-          series={this.state?.data?.series ?? this.state.series}
+          series={
+            this.state?.data?.series ?? [
+              {
+                name: "Үйлчилгээ 1",
+                data: [44, 55, 41, 67, 22, 21, 22],
+              },
+              {
+                name: "Үйлчилгээ 2",
+                data: [13, 23, 20, 8, 13, 17, 22],
+              },
+              {
+                name: "Үйлчилгээ 3",
+                data: [11, 17, 15, 15, 21, 37, 22],
+              },
+            ]
+          }
           type="bar"
           height={235}
         />
