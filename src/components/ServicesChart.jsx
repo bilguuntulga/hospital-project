@@ -59,10 +59,11 @@ class ServicesChart extends Component {
 
   componentDidMount() {
     treatmentsAPI.servicesChart().then((res) => {
-      this.setState((preState) => ({
-        ...preState,
-        data: res,
-      }));
+      if (res?.series)
+        this.setState((preState) => ({
+          ...preState,
+          data: res,
+        }));
     });
   }
 

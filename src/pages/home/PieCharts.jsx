@@ -14,11 +14,11 @@ class Donut extends Component {
           showForSingleSeries: false,
           showForNullSeries: true,
           showForZeroSeries: true,
-          position: 'bottom',
-          horizontalAlign: 'center',
+          position: "bottom",
+          horizontalAlign: "center",
           floating: false,
-          fontSize: '14px',
-          fontFamily: 'Helvetica, Arial',
+          fontSize: "14px",
+          fontFamily: "Helvetica, Arial",
           fontWeight: 400,
           formatter: undefined,
           inverseOrder: false,
@@ -30,31 +30,31 @@ class Donut extends Component {
           offsetY: 0,
           labels: {
             colors: undefined,
-            useSeriesColors: false
+            useSeriesColors: false,
           },
           markers: {
             width: 12,
             height: 12,
             strokeWidth: 0,
-            strokeColor: '#fff',
+            strokeColor: "#fff",
             fillColors: undefined,
             radius: 12,
             customHTML: undefined,
             onClick: undefined,
             offsetX: 0,
-            offsetY: 0
+            offsetY: 0,
           },
           itemMargin: {
             horizontal: 5,
-            vertical: 0
+            vertical: 0,
           },
           onItemClick: {
-            toggleDataSeries: true
+            toggleDataSeries: true,
           },
           onItemHover: {
-            highlightDataSeries: true
+            highlightDataSeries: true,
           },
-        }
+        },
       },
       series: [50, 50],
     };
@@ -62,13 +62,15 @@ class Donut extends Component {
 
   async fetchData() {
     const result = await customerAPI.getGenderDonut();
-    this.setState((prev) => ({
-      ...prev,
-      options: {
-        labels: result.labels,
-      },
-      series: result.series,
-    }));
+
+    if (result?.labels && result?.series)
+      this.setState((prev) => ({
+        ...prev,
+        options: {
+          labels: result.labels,
+        },
+        series: result.series,
+      }));
   }
 
   componentDidMount() {
