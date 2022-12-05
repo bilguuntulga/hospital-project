@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/layout/SideMenu";
 import "react-toastify/dist/ReactToastify.css";
