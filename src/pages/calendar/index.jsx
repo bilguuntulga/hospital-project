@@ -97,7 +97,7 @@ const CalendarApp = () => {
 
   return (
     <div className="calendar_page">
-      <Card title="Календар">
+      <Card title="Календарь">
         <Calendar />
         <ToastContainer />
       </Card>

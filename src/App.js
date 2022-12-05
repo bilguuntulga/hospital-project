@@ -13,20 +13,19 @@ import Work_users from "./pages/work_users";
 import ServiceDetail from "./pages/service/ServiceDetail";
 import EmployeeDetail from "./pages/employee/EmployeeDetail";
 import CustomerDetail from "./pages/custommer/custommerNews/detail";
-const Home = lazy(() => import("./pages/home"));
-const Login = lazy(() => import("./pages/login"));
-const Customer = lazy(() => import("./pages/custommer"));
-const Employee = lazy(() => import("./pages/employee"));
-const Order_time = lazy(() => import("./pages/calendar"));
-const Custommer_News = lazy(() => import("./pages/custommer"));
-const Custommer_Add = lazy(() => import("./pages/custommer/custommerAdd"));
-const Test = lazy(() => import("./pages/test"));
-const Profile = lazy(() => import("./pages/profile"));
-const ServicePage = lazy(() => import("./pages/service"));
-const Resource = lazy(() => import("./pages/resource"));
-const Bonus = lazy(() => import("./pages/bonus"));
-const ServiceForm = lazy(() => import("./pages/service/form"));
-const DoctorCreate = lazy(() => import("./pages/employee/create"));
+import Home from "./pages/home";
+import Login from "./pages/login";
+import Customer from "./pages/custommer";
+import Employee from "./pages/employee";
+import Order_time from "./pages/calendar";
+import Custommer_News from "./pages/custommer";
+import Custommer_Add from "./pages/custommer/custommerAdd";
+import Profile from "./pages/profile";
+import ServicePage from "./pages/service";
+import Resource from "./pages/resource";
+import Bonus from "./pages/bonus";
+import ServiceForm from "./pages/service/form";
+import DoctorCreate from "./pages/employee/create";
 
 function App() {
   const location = useLocation();
@@ -72,7 +71,6 @@ function App() {
                     path="/customer/create"
                     element={<Custommer_Add />}
                   />
-                  <Route exact path="/test" element={<Test />} />
                   <Route exact path="/profile" element={<Profile />} />
                   <Route
                     exact
