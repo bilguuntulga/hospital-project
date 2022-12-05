@@ -110,7 +110,7 @@ const CustomerPage = () => {
       })
       .then((res) => {
         setTotal(res?.meta?.total);
-        setCustomers(res.data);
+        setCustomers(res?.data);
         setLoading(false);
       })
       .catch((err) => {

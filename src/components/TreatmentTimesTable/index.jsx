@@ -26,7 +26,7 @@ function TreatmentTimesTable({ refreshRef }) {
       page: 1,
       page_size: 25,
     });
-    setTimes(res.data);
+    setTimes(res?.data);
     setLoading(false);
   };
 
