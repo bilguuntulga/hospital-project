@@ -106,13 +106,13 @@ function Question2({ id }) {
       onSubmit={onSubmit}
       enableReinitialize
     >
-      <Form>
+      <Form layout="vertical">
         {id ? null : (
           <Row justify="center">
             <Col span={12}>
               <Card>
                 <Form.Item name="phone" label="Утас">
-                  <Input name="phone" />
+                  <Input name="phone" placeholder="Утас"/>
                 </Form.Item>
               </Card>
             </Col>
