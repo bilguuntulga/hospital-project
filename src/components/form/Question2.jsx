@@ -2,12 +2,14 @@ import { Formik, validateYupSchema } from "formik";
 import { Form, Radio, SubmitButton } from "formik-antd";
 import React, { memo, useEffect, useState } from "react";
 import * as yup from "yup";
-import { Row, Col, message } from "antd";
+import { Row, Col, message, Card } from "antd";
+import { Input } from "formik-antd";
 import QuestionCard from "./QuestionCard";
 import { anythingAPI } from "../../apis";
-import { SaveOutlined } from "@ant-design/icons";
+import { ImportOutlined, SaveOutlined } from "@ant-design/icons";
 
 const model = {
+  phone: "",
   q1: "",
   q2: "",
   q3: "",
@@ -20,6 +22,20 @@ const model = {
 };
 
 const validationSchema = yup.object().shape({
+  phone: yup.string().optional(),
+  q1: yup.string().optional(),
+  q2: yup.string().optional(),
+  q3: yup.string().optional(),
+  q4: yup.string().optional(),
+  q5: yup.string().optional(),
+  q6: yup.string().optional(),
+  q7: yup.string().optional(),
+  q8: yup.string().optional(),
+  q9: yup.string().optional(),
+  q10: yup.string().optional(),
+});
+const validationSchema_phone = yup.object().shape({
+  phone: yup.string().required("Заавал бөглөнө үү"),
   q1: yup.string().optional(),
   q2: yup.string().optional(),
   q3: yup.string().optional(),
@@ -39,13 +55,23 @@ function Question2({ id }) {
   const onSubmit = async (values) => {
     try {
       if (!questiontwo) {
-        await anythingAPI.create({
-          any: {
-            customer_id: id,
-            type: "q2",
-            ...values,
-          },
-        });
+        if (id) {
+          await anythingAPI.create({
+            any: {
+              customer_id: id,
+              type: "q2",
+              ...values,
+            },
+          });
+        } else {
+          await anythingAPI.create({
+            any: {
+              customer_phone: values?.phone,
+              type: "q2",
+              ...values,
+            },
+          });
+        }
       } else {
         await anythingAPI.update({
           id: questiontwo?.id,
@@ -76,11 +102,23 @@ function Question2({ id }) {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={id ? validationSchema : validationSchema_phone}
       onSubmit={onSubmit}
       enableReinitialize
     >
       <Form>
+        {id ? null : (
+          <Row justify="center">
+            <Col span={12}>
+              <Card>
+                <Form.Item name="phone" label="Утас">
+                  <Input name="phone" />
+                </Form.Item>
+              </Card>
+            </Col>
+          </Row>
+        )}
+        <br />
         <Row gutter={100} justify="center">
           <Col>
             <QuestionCard

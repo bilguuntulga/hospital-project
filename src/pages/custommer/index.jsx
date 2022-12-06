@@ -191,9 +191,14 @@ const CustomerPage = () => {
             </div>
           }
           extra={
-            <Link to="create">
-              <Button icon={<PlusOutlined />}>Нэмэх</Button>
-            </Link>
+            <>
+              <Link to="advice">
+                <Button>Зөвлөгөө</Button>
+              </Link>
+              <Link to="create">
+                <Button icon={<PlusOutlined />}>Нэмэх</Button>
+              </Link>
+            </>
           }
         />
         {/* <div

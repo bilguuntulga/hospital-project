@@ -8,6 +8,7 @@ import * as yup from "yup";
 const { Item } = Form;
 
 const model = {
+  phone: "",
   q1: "",
   q2: "",
   q3: "",
@@ -70,6 +71,70 @@ const model = {
 };
 
 const validationSchema = yup.object().shape({
+  phone: yup.string().optional(),
+  q1: yup.string().optional(),
+  q2: yup.string().optional(),
+  q3: yup.string().optional(),
+  q3_1: yup.string().optional(),
+  q3_2: yup.string().optional(),
+  q3_3: yup.string().optional(),
+  q3_4: yup.string().optional(),
+  q3_5: yup.string().optional(),
+  q4: yup.string().optional(),
+  q4_day1_start: yup.string().optional(),
+  q4_day2_start: yup.string().optional(),
+  q4_day3_start: yup.string().optional(),
+  q4_day4_start: yup.string().optional(),
+  q4_day5_start: yup.string().optional(),
+  q4_day6_start: yup.string().optional(),
+  q4_day7_start: yup.string().optional(),
+  q4_day1_end: yup.string().optional(),
+  q4_day2_end: yup.string().optional(),
+  q4_day3_end: yup.string().optional(),
+  q4_day4_end: yup.string().optional(),
+  q4_day5_end: yup.string().optional(),
+  q4_day6_end: yup.string().optional(),
+  q4_day7_end: yup.string().optional(),
+  q5: yup.string().optional(),
+  q6: yup.string().optional(),
+  q7: yup.string().optional(),
+  q8: yup.string().optional(),
+  q12day1_morning: yup.string().optional(),
+  q12day1_day: yup.string().optional(),
+  q12day1_evening: yup.string().optional(),
+  q12day1_morning_time: yup.string().optional(),
+  q12day1_day_time: yup.string().optional(),
+  q12day1_evening_time: yup.string().optional(),
+  q12day2_morning: yup.string().optional(),
+  q12day2_day: yup.string().optional(),
+  q12day2_evening: yup.string().optional(),
+  q12day2_morning_time: yup.string().optional(),
+  q12day2_day_time: yup.string().optional(),
+  q12day2_evening_time: yup.string().optional(),
+  q12day3_morning: yup.string().optional(),
+  q12day3_day: yup.string().optional(),
+  q12day3_evening: yup.string().optional(),
+  q12day3_morning_time: yup.string().optional(),
+  q12day3_day_time: yup.string().optional(),
+  q12day3_evening_time: yup.string().optional(),
+
+  q9: yup.string().optional(),
+  q10: yup.string().optional(),
+  q11: yup.string().optional(),
+  q12: yup.string().optional(),
+  q13: yup.string().optional(),
+  q14: yup.string().optional(),
+  q15: yup.string().optional(),
+  q16: yup.string().optional(),
+  q17: yup.string().optional(),
+  q18: yup.string().optional(),
+  q19: yup.string().optional(),
+  q20: yup.string().optional(),
+  q21: yup.string().optional(),
+  q22: yup.string().optional(),
+});
+const validationSchemaPhone = yup.object().shape({
+  phone: yup.string().required("Заавал бөглөнө үү"),
   q1: yup.string().optional(),
   q2: yup.string().optional(),
   q3: yup.string().optional(),
@@ -139,13 +204,23 @@ function Question1({ id }) {
   const onSubmit = async (values) => {
     try {
       if (!advice) {
-        await anythingAPI.create({
-          any: {
-            customer_id: id,
-            type: "q1",
-            ...values,
-          },
-        });
+        if (id) {
+          await anythingAPI.create({
+            any: {
+              customer_id: id,
+              type: "q1",
+              ...values,
+            },
+          });
+        } else {
+          await anythingAPI.create({
+            any: {
+              customer_phone: values?.phone,
+              type: "q1",
+              ...values,
+            },
+          });
+        }
       } else {
         await anythingAPI.update({
           id: advice?.id,
@@ -162,7 +237,8 @@ function Question1({ id }) {
   };
 
   const fetchData = async () => {
-    const res = await anythingAPI.getQ1(id);
+    if (id) var res = await anythingAPI.getQ1(id);
+
     if (res) {
       setAdvice(res);
       setInitialValues(res.any);
@@ -174,18 +250,27 @@ function Question1({ id }) {
   }, []);
 
   return (
-    <Card title="Асуулт" bordered={false}>
+    <Card title="Асуулт.1" bordered={false}>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={id ? validationSchema : validationSchemaPhone}
         onSubmit={onSubmit}
         enableReinitialize
       >
         <Form layout="vertical">
+          {id ? null : (
+            <Row>
+              <Col span={12}>
+                <Item name="phone" label="Утас:">
+                  <Input name="phone" placeholder="Утас" />
+                </Item>
+              </Col>
+            </Row>
+          )}
           <Row gutter={30}>
             <Col span={12}>
               <Item
-                label="1. Өмнө нь ижил төрлийн эмчилгээд орж байсан эсэх ??"
+                label="1. Өмнө нь ижил төрлийн эмчилгээд орж байсан эсэх ?"
                 name="q1"
               >
                 <Radio.Group name="q1">
