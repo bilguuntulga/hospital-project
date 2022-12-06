@@ -12,11 +12,11 @@ function AdvicePage() {
     <>
       <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
       <Tabs>
-        <Tabs.TabPane tab="Асуулт.1" key={1}>
+        <Tabs.TabPane tab="Асуулт 1" key={1}>
           <Question1 />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Асуулт.2" key={2}>
-          <Card title="Асуулт.2">
+        <Tabs.TabPane tab="Асуулт 2" key={2}>
+          <Card title="Асуулт 2">
             <Question2 />
           </Card>
         </Tabs.TabPane>

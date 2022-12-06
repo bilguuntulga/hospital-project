@@ -250,7 +250,7 @@ function Question1({ id }) {
   }, []);
 
   return (
-    <Card title="Асуулт.1" bordered={false}>
+    <Card title="Асуулт 1" bordered={false}>
       <Formik
         initialValues={initialValues}
         validationSchema={id ? validationSchema : validationSchemaPhone}
@@ -526,7 +526,7 @@ function Question1({ id }) {
               </Item>
             </Col>
           </Row>
-          <p>Асуулт.12 Сүүлийн 72 цагт идсэн хоол хүнсээ хэлнэ үү ?</p>
+          <p>Асуулт 12 Сүүлийн 72 цагт идсэн хоол хүнсээ хэлнэ үү ?</p>
           <Row gutter={30}>
             <Col xl={8} lg={24}>
               <Row gutter={10}>
@@ -663,7 +663,7 @@ function Question1({ id }) {
             <Col xl={9}>
               <Item
                 name="q13"
-                label="Асуулт.13 Согтууруулах ундааны хэрэглээ (Архи, Пиво, Виски , Коньякь)"
+                label="Асуулт 13 Согтууруулах ундааны хэрэглээ (Архи, Пиво, Виски , Коньякь)"
               >
                 <Radio.Group name="q13">
                   <Radio value="SEVENDAY1-2">7 хоногт 1-2 удаа</Radio>
@@ -675,7 +675,7 @@ function Question1({ id }) {
             <Col xl={8}>
               <Item
                 name="q14"
-                label="Асуулт.14 Тамхи болон бусад электрон тамхи хэрэглэдэг эсэх"
+                label="Асуулт 14 Тамхи болон бусад электрон тамхи хэрэглэдэг эсэх"
               >
                 <Radio.Group name="q14">
                   <Radio value="YES">Тийм</Radio>
@@ -684,7 +684,7 @@ function Question1({ id }) {
               </Item>
             </Col>
             <Col xl={7}>
-              <Item name="q15" label="Асуулт.15 Ямар нэгэн харшилтай юу ?">
+              <Item name="q15" label="Асуулт 15 Ямар нэгэн харшилтай юу ?">
                 <Radio.Group name="q15">
                   <Radio value="YES">Тийм</Radio>
                   <Radio value="NO">Үгүй</Radio>
@@ -696,7 +696,7 @@ function Question1({ id }) {
             <Col xl={8} lg={24}>
               <Item
                 name="q16"
-                label="Асуулт.16 Харшилтай бол юуны харшилтай бэ ? "
+                label="Асуулт 16 Харшилтай бол юуны харшилтай бэ ? "
               >
                 <Input name="q16" />
               </Item>
@@ -704,7 +704,7 @@ function Question1({ id }) {
             <Col xl={8} lg={24}>
               <Row>
                 <Col span={24}>
-                  <Item name="q17" label="Асуулт.17 Харшилдаг эм тариа бий юу">
+                  <Item name="q17" label="Асуулт 17 Харшилдаг эм тариа бий юу">
                     <Row gutter={20}>
                       <Col span={16}>
                         <Input name="q17" />
@@ -722,7 +722,7 @@ function Question1({ id }) {
             <Col xl={8} lg={24}>
               <Item
                 name="q18"
-                label="Асуулт.18 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?"
+                label="Асуулт 18 Мэс ажилбарт орсон бол юуны мэс ажилбарт орц байсан бэ ?"
               >
                 <Input name="q19" />
               </Item>
@@ -732,7 +732,7 @@ function Question1({ id }) {
             <Col xl={10} lg={24}>
               <Item
                 name="q19"
-                label="Асуулт.19 Сүүлийн 24 сард ямар нэгэн хагалгаа болон мэс ажилбарт орсон уу ?"
+                label="Асуулт 19 Сүүлийн 24 сард ямар нэгэн хагалгаа болон мэс ажилбарт орсон уу ?"
               >
                 <Radio.Group name="q18">
                   <Radio value="YES">Тийм</Radio>
@@ -741,7 +741,7 @@ function Question1({ id }) {
               </Item>
             </Col>
             <Col xl={7} lg={12}>
-              <Item name="q20" label="Асуулт.20 B,C вирус байгаа юу ?">
+              <Item name="q20" label="Асуулт 20 B,C вирус байгаа юу ?">
                 <Radio.Group name="q20">
                   <Radio value="YES">Тийм</Radio>
                   <Radio value="NO">Үгүй</Radio>
@@ -749,7 +749,7 @@ function Question1({ id }) {
               </Item>
             </Col>
             <Col xl={7} lg={12}>
-              <Item name="q21" label="Асуулт.20 Ужиг хууч өвчинтэй юу ?">
+              <Item name="q21" label="Асуулт 20 Ужиг хууч өвчинтэй юу ?">
                 <Radio.Group name="q21">
                   <Radio value="YES">Тийм</Radio>
                   <Radio value="NO">Үгүй</Radio>
