@@ -261,12 +261,15 @@ function Question1({ id }) {
           {id ? null : (
             <Row>
               <Col span={12}>
-                <Item name="phone" label="Утас:">
-                  <Input name="phone" placeholder="Утас" />
-                </Item>
+                <Card>
+                  <Item name="phone" label="Утас:">
+                    <Input name="phone" placeholder="Утас" />
+                  </Item>
+                </Card>
               </Col>
             </Row>
           )}
+          <br />
           <Row gutter={30}>
             <Col span={12}>
               <Item
