@@ -24,7 +24,7 @@ const RegistrationPage = () => {
     birthday: "",
     address: "",
     image: "",
-    desc: ""
+    desc: "",
   };
   const validationSchema = yup.object().shape({
     first_name: yup.string().required("Заавал бөглөнө үү"),
@@ -36,29 +36,34 @@ const RegistrationPage = () => {
     blood_type: yup.string().required("Заавал бөглөнө үү"),
     birthday: yup.string().required("Заавал бөглөнө үү"),
     address: yup.string().required("Заавал бөглөнө үү"),
-    image: yup.string().required("Заавал бөглөнө үү"),
+    image: yup.string().optional(),
     desc: yup.string().optional(),
   });
 
   const onFinish = async (values) => {
     try {
-      await customerAPI.create(values)
+      await customerAPI.create(values);
       navigate(-1);
-    } catch (error) {
-
-    }
-  }
-
+    } catch (error) {}
+  };
 
   return (
     <div>
       <PageHeader title={<ArrowLeftOutlined onClick={() => navigate(-1)} />} />
       <div className="custommer_news">
-        <Formik initialValues={model} validationSchema={validationSchema} onSubmit={onFinish}>
+        <Formik
+          initialValues={model}
+          validationSchema={validationSchema}
+          onSubmit={onFinish}
+        >
           <Form layout="vertical">
-            <Card title="Хэрэглэгч нэмэх" bordered={false} extra={<SubmitButton >Хадгалах</SubmitButton>}>
+            <Card
+              title="Хэрэглэгч нэмэх"
+              bordered={false}
+              extra={<SubmitButton>Хадгалах</SubmitButton>}
+            >
               <Row justify="center">
-                <Col span={6} style={{display:"grid",placeItems:"center"}}>
+                <Col span={6} style={{ display: "grid", placeItems: "center" }}>
                   <Form.Item name="image">
                     <ProfileImageUpload name="image" />
                     <br />
@@ -68,9 +73,13 @@ const RegistrationPage = () => {
                 <Col span={18}>
                   <Row gutter={30} justify="space-between">
                     <Col span={12}>
-                          <Form.Item name="first_name" label="Овог">
-                            <Input className="input" placeholder="Овог" name="first_name" />
-                          </Form.Item>
+                      <Form.Item name="first_name" label="Овог">
+                        <Input
+                          className="input"
+                          placeholder="Овог"
+                          name="first_name"
+                        />
+                      </Form.Item>
                     </Col>
                     <Col span={12}>
                       <Form.Item name="last_name" label="Нэр">
@@ -85,7 +94,11 @@ const RegistrationPage = () => {
                   <Row gutter={30}>
                     <Col span={12}>
                       <Form.Item name="email" label="И-мэйл">
-                        <Input className="input" placeholder="И-мэйл" name="email" />
+                        <Input
+                          className="input"
+                          placeholder="И-мэйл"
+                          name="email"
+                        />
                       </Form.Item>
                     </Col>
                     <Col span={12}>
@@ -103,15 +116,31 @@ const RegistrationPage = () => {
                       <Row gutter={20}>
                         <Col span={12}>
                           <Form.Item name="gender" label="Хүйс">
-                            <Select name="gender" className="input" bordered={false} showSearch>
-                              <Select.Option value="MALE" >Эрэгтэй</Select.Option>
-                              <Select.Option value="FEMALE">Эмэгтэй</Select.Option>
+                            <Select
+                              name="gender"
+                              className="input"
+                              bordered={false}
+                              showSearch
+                            >
+                              <Select.Option value="MALE">
+                                Эрэгтэй
+                              </Select.Option>
+                              <Select.Option value="FEMALE">
+                                Эмэгтэй
+                              </Select.Option>
                             </Select>
                           </Form.Item>
                         </Col>
                         <Col span={12}>
-                          <Form.Item name="family_status" label="Гэр бүлийн байдал">
-                            <Select className="input" name="family_status" bordered={false}>
+                          <Form.Item
+                            name="family_status"
+                            label="Гэр бүлийн байдал"
+                          >
+                            <Select
+                              className="input"
+                              name="family_status"
+                              bordered={false}
+                            >
                               <Select.Option value="MARRIED">
                                 Гэрлэсэн
                               </Select.Option>
@@ -127,19 +156,15 @@ const RegistrationPage = () => {
                       <Row gutter={20}>
                         <Col span={12}>
                           <Form.Item name="blood_type" label="Цусны бүлэг">
-                            <Select name="blood_type" className="input" bordered={false}>
-                              <Select.Option value="1-O">
-                                1-O
-                              </Select.Option>
-                              <Select.Option value="2-A">
-                                2-A
-                              </Select.Option>
-                              <Select.Option value="3-B">
-                                3-B
-                              </Select.Option>
-                              <Select.Option value="4-AB">
-                                4-AB
-                              </Select.Option>
+                            <Select
+                              name="blood_type"
+                              className="input"
+                              bordered={false}
+                            >
+                              <Select.Option value="1-O">1-O</Select.Option>
+                              <Select.Option value="2-A">2-A</Select.Option>
+                              <Select.Option value="3-B">3-B</Select.Option>
+                              <Select.Option value="4-AB">4-AB</Select.Option>
                             </Select>
                           </Form.Item>
                         </Col>
@@ -167,15 +192,16 @@ const RegistrationPage = () => {
                     </Col>
                     <Col span={12}>
                       <Form.Item name="desc" label="Тайлбар">
-                        <Input className="input" name="desc" placeholder="Бусад" />
+                        <Input
+                          className="input"
+                          name="desc"
+                          placeholder="Бусад"
+                        />
                       </Form.Item>
                     </Col>
                   </Row>
                 </Col>
               </Row>
-
-
-
             </Card>
           </Form>
         </Formik>
