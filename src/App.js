@@ -26,6 +26,7 @@ import Resource from "./pages/resource";
 import Bonus from "./pages/bonus";
 import ServiceForm from "./pages/service/form";
 import DoctorCreate from "./pages/employee/create";
+import Advice from "./pages/advice";
 
 function App() {
   const location = useLocation();
@@ -50,6 +51,7 @@ function App() {
                   <Route exact path="/" element={<Home />} />
                   <Route exact path="/calendar" element={<Order_time />} />
                   <Route exact path="/customer" element={<Customer />} />
+                  <Route exact path="/customer/advice" element={<Advice />} />
                   <Route exact path="/employee" element={<Employee />} />
                   <Route
                     exact
