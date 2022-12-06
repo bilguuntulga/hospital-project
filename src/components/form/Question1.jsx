@@ -339,8 +339,9 @@ function Question1({ id }) {
                 <Col span={24}>
                   <Row gutter={30}>
                     <Col span={12}>
-                      <Item label="1-дх Утсан цаг" name="q4_day1_start">
+                      <Item label="1-дх Унтсан  цаг" name="q4_day1_start">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day1_end"
                         />
@@ -349,6 +350,7 @@ function Question1({ id }) {
                     <Col span={12}>
                       <Item label="1-дх сэрсэн цаг" name="q4_day1_end">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day2_end"
                         />
@@ -359,8 +361,9 @@ function Question1({ id }) {
                 <Col span={24}>
                   <Row gutter={30}>
                     <Col span={12}>
-                      <Item label="2-дх Утсан цаг" name="q4_day2_start">
+                      <Item label="2-дх Унтсан  цаг" name="q4_day2_start">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day2_start"
                         />
@@ -369,6 +372,7 @@ function Question1({ id }) {
                     <Col span={12}>
                       <Item label="2-дх сэрсэн цаг" name="q4_day2_end">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day2_end"
                         />
@@ -379,8 +383,9 @@ function Question1({ id }) {
                 <Col span={24}>
                   <Row gutter={30}>
                     <Col span={12}>
-                      <Item label="3-дх Утсан цаг" name="q4_day3_start">
+                      <Item label="3-дх Унтсан  цаг" name="q4_day3_start">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day3_start"
                         />
@@ -389,6 +394,7 @@ function Question1({ id }) {
                     <Col span={12}>
                       <Item label="3-дх сэрсэн цаг" name="q4_day3_end">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day3_end"
                         />
@@ -399,8 +405,9 @@ function Question1({ id }) {
                 <Col span={24}>
                   <Row gutter={30}>
                     <Col span={12}>
-                      <Item label="4-дх Утсан цаг" name="q4_day4_start">
+                      <Item label="4-дх Унтсан  цаг" name="q4_day4_start">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day4_start"
                         />
@@ -409,6 +416,7 @@ function Question1({ id }) {
                     <Col span={12}>
                       <Item label="4-дх сэрсэн цагг" name="q4_day4_end">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day4_end"
                         />
@@ -419,8 +427,9 @@ function Question1({ id }) {
                 <Col span={24}>
                   <Row gutter={30}>
                     <Col span={12}>
-                      <Item label="5-дх Утсан цаг" name="q4_day5_start">
+                      <Item label="5-дх Унтсан  цаг" name="q4_day5_start">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day5_start"
                         />
@@ -429,6 +438,7 @@ function Question1({ id }) {
                     <Col span={12}>
                       <Item label="5-дх сэрсэн цаг" name="q4_day5_end">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day5_end"
                         />
@@ -439,8 +449,9 @@ function Question1({ id }) {
                 <Col span={24}>
                   <Row gutter={30}>
                     <Col span={12}>
-                      <Item label="6-дх Утсан цаг" name="q4_day6_start">
+                      <Item label="6-дх Унтсан  цаг" name="q4_day6_start">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day6_start"
                         />
@@ -449,6 +460,7 @@ function Question1({ id }) {
                     <Col span={12}>
                       <Item label="6-дх сэрсэн цаг" name="q4_day6_end">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day6_end"
                         />
@@ -459,8 +471,9 @@ function Question1({ id }) {
                 <Col span={24}>
                   <Row gutter={30}>
                     <Col span={12}>
-                      <Item label="7-дх Утсан цагv" name="q4_day7_start">
+                      <Item label="7-дх Унтсан  цагv" name="q4_day7_start">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day7_start"
                         />
@@ -469,6 +482,7 @@ function Question1({ id }) {
                     <Col span={12}>
                       <Item label="7-дх сэрсэн цаг" name="q4_day7_end">
                         <TimePicker
+                        format="HH"
                           style={{ width: "100%" }}
                           name="q4_day7_end"
                         />
@@ -537,7 +551,7 @@ function Question1({ id }) {
                 </Col>
                 <Col span={12}>
                   <Item label="Цаг" name="q12day1_morning_time">
-                    <TimePicker name="q12day1_morning_time" />
+                    <TimePicker format="HH" name="q12day1_morning_time" />
                   </Item>
                 </Col>
               </Row>
@@ -551,7 +565,7 @@ function Question1({ id }) {
                 </Col>
                 <Col span={12}>
                   <Item label="Цаг" name="q12day1_day_time">
-                    <TimePicker name="q12day1_day_time" />
+                    <TimePicker format="HH" name="q12day1_day_time" />
                   </Item>
                 </Col>
               </Row>
@@ -565,7 +579,7 @@ function Question1({ id }) {
                 </Col>
                 <Col span={12}>
                   <Item label="Цаг" name="q12day1_evening_time">
-                    <TimePicker name="q12day1_evening_time" />
+                    <TimePicker format="HH" name="q12day1_evening_time" />
                   </Item>
                 </Col>
               </Row>
@@ -581,7 +595,7 @@ function Question1({ id }) {
                 </Col>
                 <Col span={12}>
                   <Item label="Цаг" name="q12day2_morning_time">
-                    <TimePicker name="q12day2_morning_time" />
+                    <TimePicker format="HH" name="q12day2_morning_time" />
                   </Item>
                 </Col>
               </Row>
@@ -595,7 +609,7 @@ function Question1({ id }) {
                 </Col>
                 <Col span={12}>
                   <Item label="Цаг" name="q12day2_day_time">
-                    <TimePicker name="q12day2_day_time" />
+                    <TimePicker format="HH" name="q12day2_day_time" />
                   </Item>
                 </Col>
               </Row>
@@ -609,7 +623,7 @@ function Question1({ id }) {
                 </Col>
                 <Col span={12}>
                   <Item label="Цаг" name="q12day1_evening_time">
-                    <TimePicker name="q12day1_evening_time" />
+                    <TimePicker format="HH" name="q12day1_evening_time" />
                   </Item>
                 </Col>
               </Row>
@@ -625,7 +639,7 @@ function Question1({ id }) {
                 </Col>
                 <Col span={12}>
                   <Item label="Цаг" name="q12day3_morning_time">
-                    <TimePicker name="q12day3_morning_time" />
+                    <TimePicker format="HH" name="q12day3_morning_time" />
                   </Item>
                 </Col>
               </Row>
@@ -639,7 +653,7 @@ function Question1({ id }) {
                 </Col>
                 <Col span={12}>
                   <Item label="Цаг" name="q12day3_day_time">
-                    <TimePicker name="q12day3_day_time" />
+                    <TimePicker format="HH" name="q12day3_day_time" />
                   </Item>
                 </Col>
               </Row>
@@ -653,7 +667,7 @@ function Question1({ id }) {
                 </Col>
                 <Col span={12}>
                   <Item label="Цаг" name="q12day3_evening_time">
-                    <TimePicker name="q12day3_evening_time" />
+                    <TimePicker format="HH" name="q12day3_evening_time" />
                   </Item>
                 </Col>
               </Row>
