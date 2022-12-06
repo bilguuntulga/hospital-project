@@ -259,7 +259,7 @@ function Question1({ id }) {
       >
         <Form layout="vertical">
           {id ? null : (
-            <Row>
+            <Row justify="center">
               <Col span={12}>
                 <Card>
                   <Item name="phone" label="Утас:">
