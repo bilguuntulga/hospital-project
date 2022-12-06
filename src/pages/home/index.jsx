@@ -188,7 +188,7 @@ function HomePage() {
                 </div>
               </Col>
               <Col span={14}>
-                <p style={{ margin: "0", fontSize: "20px" }}>Нийт зөвөлгөө</p>
+                <p style={{ margin: "0", fontSize: "20px" }}>Нийт зөвлөгөө</p>
                 <p style={{ margin: "0", fontSize: "20px" }}>
                   <CountUp end={adviceCount} duration={0.5} />
                 </p>
