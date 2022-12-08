@@ -27,6 +27,9 @@ import Bonus from "./pages/bonus";
 import ServiceForm from "./pages/service/form";
 import DoctorCreate from "./pages/employee/create";
 import Advice from "./pages/advice";
+import QuestionsPage from "./pages/questions";
+import CreateQuestions from "./pages/questions/create";
+import UpdateQuestions from "./pages/questions/update";
 
 function App() {
   const location = useLocation();
@@ -84,6 +87,12 @@ function App() {
                     path="/employee/create"
                     element={<DoctorCreate />}
                   />
+                  <Route path="/questions" element={<QuestionsPage />} />
+                  <Route
+                    path="/questions/create"
+                    element={<CreateQuestions />}
+                  />
+                  <Route path="/questions/:id" element={<UpdateQuestions />} />
                 </Routes>
               </Suspense>
             </div>

@@ -22,10 +22,20 @@ function Header() {
   const items = [
     user?.role == "ADMIN"
       ? {
-          key: "2",
+          key: "1",
           label: (
             <Link to="work_users">
               <div>Ажилчид</div>
+            </Link>
+          ),
+        }
+      : null,
+    user?.role == "ADMIN"
+      ? {
+          key: "2",
+          label: (
+            <Link to="questions">
+              <div>Асуулт</div>
             </Link>
           ),
         }
