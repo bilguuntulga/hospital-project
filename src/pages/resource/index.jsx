@@ -30,12 +30,15 @@ const validationSchema = yup.object().shape({
 });
 
 const ResourcePage = () => {
+  const [user, setUser] = useState({});
   const [resources, setResources] = useState([]);
   const [oneresourceData, setOneResourceData] = useState(model);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    setUser(user);
     setLoading(true);
     const res = await resourceAPI.list();
     setResources(res);
@@ -115,15 +118,20 @@ const ResourcePage = () => {
     <div className="resource">
       <PageHeader
         extra={
-          <Button onClick={onCreate} icon={<PlusOutlined />}>
-            Нэмэх
-          </Button>
+          user?.role == "ADMIN" ? (
+            <Button onClick={onCreate} icon={<PlusOutlined />}>
+              Нэмэх
+            </Button>
+          ) : null
         }
       />
       <div className="resource_wrapper">
         {resources.length > 0 ? (
           resources.map((e) => (
-            <div key={e?.id} onClick={() => showModal(e.id)}>
+            <div
+              key={e?.id}
+              onClick={() => (user?.role == "ADMIN" ? showModal(e.id) : null)}
+            >
               <Badge.Ribbon
                 text={`${e?.quantity} ширхэг`}
                 color={quantityColor(e?.quantity)}

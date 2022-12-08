@@ -40,19 +40,19 @@ import { toast } from "react-toastify";
 import Question1 from "../../../components/form/Question1";
 import Question2 from "../../../components/form/Question2";
 import PageLoading from "../../../components/PageLoading";
+import ListImages from "../../../components/customers/ListImages";
+import UploadImage from "../../../components/form/UploadImage";
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
 const customerModel = {
-  email: "",
   phone: "",
-  address: "",
   image: "",
   first_name: "",
   last_name: "",
   gender: "",
   blood_type: "",
-  family_status: "",
+  employment: "",
   desc: "",
   rate: "",
 };
@@ -70,15 +70,13 @@ const treatmentValidationSchema = yup.object().shape({
 });
 
 const customerValidationSchema = yup.object().shape({
-  email: yup.string().email().required("Заавал бөгдөнө үү"),
   phone: yup.string().required("Заавал бөгдөнө үү"),
-  address: yup.string().required("Заавал бөгдөнө үү"),
-  first_name: yup.string().required("Заавал бөгдөнө үү"),
-  last_name: yup.string().required("Заавал бөгдөнө үү"),
-  image: yup.string().required("Заавал бөгдөнө үү"),
+  first_name: yup.string().optional(),
+  last_name: yup.string().optional(),
+  image: yup.string().optional(),
   gender: yup.string().required("Заавал бөгдөнө үү"),
-  blood_type: yup.string().required("Заавал бөгдөнө үү"),
-  family_status: yup.string().required("Заавал бөгдөнө үү"),
+  blood_type: yup.string().optional(),
+  employment: yup.string().optional(),
   desc: yup.string().optional(),
   rate: yup.string().optional(),
 });
@@ -387,21 +385,8 @@ const CustomerDetail = () => {
                       <Col span={24}>
                         <Row gutter={30}>
                           <Col span={12}>
-                            <Form.Item
-                              name="family_status"
-                              label="Гэр бүлийн байдал"
-                            >
-                              <Select name="family_status">
-                                <Select.Option value="UNDIFINED">
-                                  -
-                                </Select.Option>
-                                <Select.Option value="MARRIED">
-                                  Гэрлэсэн
-                                </Select.Option>
-                                <Select.Option value="NOT_MARRIED">
-                                  Гэрлээгүй
-                                </Select.Option>
-                              </Select>
+                            <Form.Item name="employment" label="Ажил эрхлэлт">
+                              <Input name="employment" />
                             </Form.Item>
                           </Col>
                           <Col span={6}>
@@ -451,29 +436,18 @@ const CustomerDetail = () => {
                   {customerDetail?.desc}
                 </p>
                 <br />
-                <Row gutter={10}
+                <Row
+                  gutter={10}
                   justify="space-between"
                   style={{ textAlign: "center" }}
                   wrap={true}
                 >
                   <Col>
                     <p>Нэр</p>
-                      {`${customerDetail?.first_name} ${customerDetail?.last_name}` ===
-                      "Овог Нэр"
-                        ? "-"
-                        : `${customerDetail?.first_name} ${customerDetail?.last_name}`}
-                  </Col>
-                  <Col>
-                      <p>Утас</p>
-                    {customerDetail?.phone ?? "-"}
-                  </Col>
-                  <Col>
-                    <p>И-мэйл</p>
-                    {customerDetail?.email ?? "-"}
-                  </Col>
-                  <Col>
-                    <p>Хаяг</p>
-                    {customerDetail?.address ?? "-"}
+                    {`${customerDetail?.first_name} ${customerDetail?.last_name}` ===
+                    "Овог Нэр"
+                      ? "-"
+                      : `${customerDetail?.first_name} ${customerDetail?.last_name}`}
                   </Col>
                   <Col>
                     <p>Хүйс</p>
@@ -490,12 +464,10 @@ const CustomerDetail = () => {
                       : customerDetail?.blood_type}
                   </Col>
                   <Col>
-                    <p>Гэр бүлийн байдал</p>
-                    {customerDetail?.family_status == "UNDIFINED"
+                    <p>Ажил эрхлэлт </p>
+                    {customerDetail?.employment == "UNDIFINED"
                       ? "-"
-                      : customerDetail?.family_status == "MERRIED"
-                      ? "Гэрлэсэн"
-                      : "Гэрлээгүй"}
+                      : customerDetail?.employment}
                   </Col>
                 </Row>
               </div>
@@ -560,6 +532,15 @@ const CustomerDetail = () => {
           </div>
         </div>
         <br />
+        <Formik initialValues={{
+          images: []
+        }}>
+          <Form>
+            <Form.Item name={"images"}>
+              <UploadImage name={"images"} mode="multi" />
+            </Form.Item>
+          </Form>
+        </Formik>
         <div className="customer_detail_table">
           <PageHeader title="Асуулт" />
           <Collapse>

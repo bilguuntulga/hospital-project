@@ -1,7 +1,19 @@
 import React, { memo } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import NavButton from "./NavButton";
 
 function SideMenu() {
+  const [user, setUser] = useState({});
+
+  const fetchData = async () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    setUser(user);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="side_menu_wrapper">
       <div className="logo_wrapper">
@@ -17,7 +29,10 @@ function SideMenu() {
           icon={"/calendar.png"}
           text={"Календарь"}
         />
-        <NavButton path={"/employee"} icon={"/employee.png"} text={"Ажилтан"} />
+        {
+          user?.role=="ADMIN"?<NavButton path={"/employee"} icon={"/employee.png"} text={"Ажилтан"} />:null
+        }
+        
         <NavButton
           path={"/customer"}
           icon={"/custommer.png"}

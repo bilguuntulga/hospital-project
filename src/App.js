@@ -59,26 +59,17 @@ function App() {
                     element={<Custommer_News />}
                   />
                   <Route
-                    exact
                     path="/employee/detail/:id"
                     element={<EmployeeDetail />}
                   />
-                  <Route
-                    exact
-                    path="/customer/:id"
-                    element={<CustomerDetail />}
-                  />
+                  <Route path="/customer/:id" element={<CustomerDetail />} />
                   <Route
                     exact
                     path="/customer/create"
                     element={<Custommer_Add />}
                   />
                   <Route exact path="/profile" element={<Profile />} />
-                  <Route
-                    exact
-                    path="/services/:id"
-                    element={<ServiceDetail />}
-                  />
+                  <Route path="/services/:id" element={<ServiceDetail />} />
                   <Route
                     exact
                     path="/services/create"

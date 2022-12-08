@@ -196,7 +196,7 @@ class Calendar extends Component {
       const end = new Date(time?.end_time);
       end.setHours(end.getHours() + 8);
 
-      const text = `${time?.doctor?.first_name} ${time?.doctor?.last_name} \n ${time?.customer?.phone}`;
+      const text = `${time?.customer?.phone}`;
       events.push(new Event(time?.id, start, end, text, time?.doctor?.color));
     });
 

@@ -46,7 +46,7 @@ const ServicePage = () => {
             <DoctorCard
               image={e?.images[0]}
               name={e?.name}
-              url={e.id}
+              url={user?.role == "ADMIN" ? e.id : null}
               role={e.price}
             />
           ))
