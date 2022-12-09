@@ -12,7 +12,7 @@ import {
 } from "antd";
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { customerAPI, treatmentsAPI } from "../../../apis";
+import { customerAPI, questionsAPI, treatmentsAPI } from "../../../apis";
 import "./style.css";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -41,7 +41,8 @@ import Question1 from "../../../components/form/Question1";
 import Question2 from "../../../components/form/Question2";
 import PageLoading from "../../../components/PageLoading";
 import ListImages from "../../../components/customers/ListImages";
-import UploadImage from "../../../components/form/UploadImage";
+import FormObserver from "../../../components/FormObserver";
+import QuestionsBuilder from "../../../components/questions/QuestionsBuilder";
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
@@ -83,9 +84,10 @@ const customerValidationSchema = yup.object().shape({
 
 const CustomerDetail = () => {
   const [loading, setLoading] = useState(true);
-  const [customerDetail, setCustomerDetail] = useState({});
+  const [customer, setCustomer] = useState({});
   const [treadment, setTreadMent] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [questions, setQuestions] = useState([]);
   const [isShowTreatmentModal, setIsShowTreatmentModal] = useState(false);
   const [customerInitialValues, setCustomerInitialValues] =
     useState(customerModel);
@@ -97,12 +99,14 @@ const CustomerDetail = () => {
   const fetchData = async () => {
     setLoading(true);
     const customer = await customerAPI.get(id);
+    const questionsRes = await questionsAPI.list();
+    setQuestions(questionsRes);
 
     if (customer.rate == "GOOD") customer.rate = true;
     else customer.rate = false;
 
     const treatments = await treatmentsAPI.list(id);
-    setCustomerDetail(customer);
+    setCustomer(customer);
     setCustomerInitialValues(customer);
     setTreadMent(treatments);
     setLoading(false);
@@ -204,9 +208,10 @@ const CustomerDetail = () => {
       },
     });
   };
+
   const customerDelete = async () => {
     confirm({
-      title: `${customerDetail?.first_name} ${customerDetail?.last_name} хэрэглэгчийг устгахдаа итгэлтэй байна уу?`,
+      title: `${customer?.first_name} ${customer?.last_name} хэрэглэгчийг устгахдаа итгэлтэй байна уу?`,
       icon: <ExclamationCircleFilled />,
       okText: "Тийм",
       okType: "danger",
@@ -250,6 +255,15 @@ const CustomerDetail = () => {
         success: "Амжилттай",
       }
     );
+  };
+
+  const onChangeImages = async (values) => {
+    if (!values) return;
+
+    await customerAPI.update({
+      id,
+      ...values,
+    });
   };
 
   const columns = [
@@ -426,14 +440,14 @@ const CustomerDetail = () => {
           <Row style={{ width: "100%" }} gutter={[30, 30]} justify="center">
             <Col xl={8} xxl={4} lg={10}>
               <div className="custommer_detail_image">
-                <img className="image" src={customerDetail?.image} alt="" />
+                <img className="image" src={customer?.image} alt="" />
               </div>
             </Col>
             <Col xl={24} xxl={20} lg={24}>
               <div className="customer_detail_hystory">
                 <p>Тайлбар</p>
                 <p style={{ color: "rgba(39, 30, 74, 0.8);" }}>
-                  {customerDetail?.desc}
+                  {customer?.desc}
                 </p>
                 <br />
                 <Row
@@ -444,42 +458,55 @@ const CustomerDetail = () => {
                 >
                   <Col>
                     <p>Нэр</p>
-                    {`${customerDetail?.first_name} ${customerDetail?.last_name}` ===
+                    {`${customer?.first_name} ${customer?.last_name}` ===
                     "Овог Нэр"
                       ? "-"
-                      : `${customerDetail?.first_name} ${customerDetail?.last_name}`}
+                      : `${customer?.first_name} ${customer?.last_name}`}
                   </Col>
                   <Col>
                     <p>Хүйс</p>
-                    {customerDetail?.family_status == "UNDIFINED"
+                    {customer?.family_status == "UNDIFINED"
                       ? "-"
-                      : customerDetail?.family_status == "MALE"
+                      : customer?.family_status == "MALE"
                       ? "Эрэгтэй"
                       : "Эмэгтэй"}
                   </Col>
                   <Col>
                     <p>Цусны бүлэг</p>
-                    {customerDetail?.family_status == "UNDIFINED"
+                    {customer?.family_status == "UNDIFINED"
                       ? "-"
-                      : customerDetail?.blood_type}
+                      : customer?.blood_type}
                   </Col>
                   <Col>
                     <p>Ажил эрхлэлт </p>
-                    {customerDetail?.employment == "UNDIFINED"
+                    {customer?.employment == "UNDIFINED"
                       ? "-"
-                      : customerDetail?.employment}
+                      : customer?.employment}
                   </Col>
                 </Row>
               </div>
             </Col>
           </Row>
+          <PageHeader title="Зургууд" />
+          <Formik
+            initialValues={{
+              images: customer?.images ?? [],
+            }}
+          >
+            <Form>
+              <Form.Item name="images">
+                <ListImages name="images" />
+              </Form.Item>
+              <FormObserver onChange={onChangeImages} />
+            </Form>
+          </Formik>
           <br />
           <div className="customer_detail_table">
             <PageHeader
               title={`Эмчилгээ ${
-                customerDetail?.bonus
-                  ? `${customerDetail?.bonus?.discount}${
-                      customerDetail?.bonus?.type == "PERCENT" ? "%" : "₮"
+                customer?.bonus
+                  ? `${customer?.bonus?.discount}${
+                      customer?.bonus?.type == "PERCENT" ? "%" : "₮"
                     } хямдрал`
                   : ""
               }`}
@@ -532,15 +559,6 @@ const CustomerDetail = () => {
           </div>
         </div>
         <br />
-        <Formik initialValues={{
-          images: []
-        }}>
-          <Form>
-            <Form.Item name={"images"}>
-              <UploadImage name={"images"} mode="multi" />
-            </Form.Item>
-          </Form>
-        </Formik>
         <div className="customer_detail_table">
           <PageHeader title="Асуулт" />
           <Collapse>
@@ -550,11 +568,42 @@ const CustomerDetail = () => {
             <Collapse.Panel header="2-р Асуултууд" key="2">
               <Question2 id={id} />
             </Collapse.Panel>
+            {questions?.map((question) => (
+              <Collapse.Panel header={question?.title} key={question?.id}>
+                <QuestionsBuilder id={question?.id} customer_id={id} />
+              </Collapse.Panel>
+            ))}
           </Collapse>
+          <PageHeader title="Хоолны зөвлөгөө" />
+          <Formik
+            initialValues={{
+              food_advice_images: customer?.food_advice_images ?? [],
+            }}
+          >
+            <Form>
+              <Form.Item name="food_advice_images">
+                <ListImages name="food_advice_images" />
+              </Form.Item>
+              <FormObserver onChange={onChangeImages} />
+            </Form>
+          </Formik>
+          <PageHeader title="Арьс арчилгааны зөвлөгөө" />
+          <Formik
+            initialValues={{
+              skin_care_images: customer?.skin_care_images ?? [],
+            }}
+          >
+            <Form>
+              <Form.Item name="skin_care_images">
+                <ListImages name="skin_care_images" />
+              </Form.Item>
+              <FormObserver onChange={onChangeImages} />
+            </Form>
+          </Formik>
         </div>
       </div>
     </>
   );
 };
 
-export default CustomerDetail;
+export default memo(CustomerDetail);

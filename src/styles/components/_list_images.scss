@@ -1,0 +1,20 @@
+.list_images_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  &_upload_button {
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1 / 1;
+    background-color: rgb(237, 237, 237);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      font-size: 1.3rem;
+    }
+  }
+}

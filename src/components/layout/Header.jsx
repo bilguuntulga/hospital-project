@@ -1,5 +1,5 @@
 import { DownOutlined } from "@ant-design/icons";
-import { Badge, Dropdown, Popover } from "antd";
+import { Badge, Dropdown, Empty, Popover } from "antd";
 import React, { memo, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
@@ -22,10 +22,20 @@ function Header() {
   const items = [
     user?.role == "ADMIN"
       ? {
-          key: "2",
+          key: "1",
           label: (
             <Link to="work_users">
               <div>Ажилчид</div>
+            </Link>
+          ),
+        }
+      : null,
+    user?.role == "ADMIN"
+      ? {
+          key: "2",
+          label: (
+            <Link to="questions">
+              <div>Асуулт</div>
             </Link>
           ),
         }
@@ -73,20 +83,24 @@ function Header() {
 
   const notifiContent = (
     <div>
-      {notifications.map((e) => (
-        <NotiItem
-          key={e?.id}
-          id={e?.id}
-          image={e?.customer?.image ?? "/images/profile_img.jpg"}
-          name={`${e?.customer?.first_name ?? "Овог"} ${
-            e?.customer?.last_name ?? "Нэр"
-          }`}
-          phone={e?.customer?.phone}
-          startTime={e?.start_time}
-          seen={e?.seen}
-          refreshNotis={fetchNotifications}
-        />
-      ))}
+      {notifications.length > 0 ? (
+        notifications.map((e) => (
+          <NotiItem
+            key={e?.id}
+            id={e?.id}
+            image={e?.customer?.image ?? "/images/profile_img.jpg"}
+            name={`${e?.customer?.first_name ?? "Овог"} ${
+              e?.customer?.last_name ?? "Нэр"
+            }`}
+            phone={e?.customer?.phone}
+            startTime={e?.start_time}
+            seen={e?.seen}
+            refreshNotis={fetchNotifications}
+          />
+        ))
+      ) : (
+        <Empty />
+      )}
     </div>
   );
 
