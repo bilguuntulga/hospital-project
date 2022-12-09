@@ -22,7 +22,7 @@ const { confirm } = Modal;
 
 const styles = {
   wrap: {
-    display: "flex",
+    display: "full",
   },
   left: {
     marginRight: "10px",
@@ -60,6 +60,8 @@ class Calendar extends Component {
         timeRangeSelectedHandling: "Enabled",
         timeFormat: "Clock24Hours",
         locale: "en-us",
+        heightSpec: "Full",
+        columnWidthMin :25,
         onTimeRangeSelected: async (args) => {
           const dp = this.calendar;
           dp.clearSelection();
@@ -169,7 +171,7 @@ class Calendar extends Component {
         title: "Устгах",
         content: "Та устгах даа итгэлтэй байна уу?",
         okText: "Тийм",
-        okType:"danger",
+        okType: "danger",
         cancelText: "Үгүй",
         onOk: async () => {
           await treatmentTimesAPI.remove(id);
@@ -201,7 +203,7 @@ class Calendar extends Component {
     });
 
     const startDate = new Date();
-    this.calendar.height = 600;
+    this.calendar.height = 900;
 
     this.calendar.update({ startDate, events });
   }
