@@ -34,6 +34,7 @@ import {
   ExclamationCircleFilled,
   PlusOutlined,
   SaveOutlined,
+  ThunderboltTwoTone,
 } from "@ant-design/icons";
 import ProfileImageUpload from "../../../components/form/ProfileImageUpload";
 import { toast } from "react-toastify";
@@ -46,6 +47,37 @@ import QuestionsBuilder from "../../../components/questions/QuestionsBuilder";
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
+const columns = [
+  {
+    title: "",
+    dataIndex: "",
+    key: "",
+  },
+  {
+    title: "",
+    dataIndex: "",
+    key: "",
+  },
+  {
+    title: "",
+    dataIndex: "",
+    key: "",
+  },
+  {
+    title: "",
+    dataIndex: "",
+    key: "",
+  },
+  {
+    title: "",
+    render: (_, row) => (
+      <>
+        <Button icon={<EditOutlined />} /> <Button icon={<DeleteOutlined />} />
+      </>
+    ),
+  },
+];
+
 const customerModel = {
   phone: "",
   image: "",
@@ -56,6 +88,13 @@ const customerModel = {
   employment: "",
   desc: "",
   rate: "",
+};
+
+const platTreatmentModel = {
+  basic_treatment: "",
+  additional_treatment: "",
+  basic_input: "",
+  additional_input: "",
 };
 
 const treatmentModel = {
@@ -89,6 +128,8 @@ const CustomerDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [isShowTreatmentModal, setIsShowTreatmentModal] = useState(false);
+  const [isShowPlattratmentModal, setIsShowPlatTreatmentModal] =
+    useState(false);
   const [customerInitialValues, setCustomerInitialValues] =
     useState(customerModel);
   const [treatmentInitialValues, setTreatmentInitialValues] =
@@ -110,6 +151,10 @@ const CustomerDetail = () => {
     setCustomerInitialValues(customer);
     setTreadMent(treatments);
     setLoading(false);
+  };
+
+  const showPlatTreatmentModal = async () => {
+    setIsShowPlatTreatmentModal(true);
   };
 
   const showTreatmentModal = async (id) => {
@@ -145,13 +190,14 @@ const CustomerDetail = () => {
   const showModal = () => {
     setIsModalOpen(true);
   };
-
   const handleOk = () => {
     setIsModalOpen(false);
+    setIsShowPlatTreatmentModal(false);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setIsShowPlatTreatmentModal(false);
   };
 
   useEffect(() => {
@@ -334,6 +380,51 @@ const CustomerDetail = () => {
                 </Button>
               </Space>
               <Modal
+                open={isShowPlattratmentModal}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                footer={false}
+                title="Төлөвлөгөөт эмчилгээ нэмэх"
+              >
+                <Formik initialValues={platTreatmentModel}>
+                  <Form layout="vertical">
+                    <Row gutter={12}>
+                      <Col span={12}>
+                        <Form.Item
+                          label="Үндсэг эмчилгээ"
+                          name="basic_treatment"
+                        >
+                          <Input name="basic_treatment" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          name="additional_treatment"
+                          label="Нэмэлт эмчилгээ"
+                        >
+                          <Input name="additional_treatment" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row gutter={12}>
+                      <Col span={12}>
+                        <Form.Item name="basic_input" label="Үндсэн оролт">
+                          <Input name="basic_input" type="number" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item label="Нэмэлт оролт" name="additional_input">
+                          <Input type="number" name="additional_input" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <SubmitButton block icon={<SaveOutlined />}>
+                      Хадаглах
+                    </SubmitButton>
+                  </Form>
+                </Formik>
+              </Modal>
+              <Modal
                 footer={false}
                 title={`${customerInitialValues?.first_name} ${customerInitialValues?.last_name}`}
                 open={isModalOpen}
@@ -500,6 +591,20 @@ const CustomerDetail = () => {
               <FormObserver onChange={onChangeImages} />
             </Form>
           </Formik>
+          <br />
+          <div className="customer_detail_table">
+            <PageHeader
+              title="Төлөвлөгөөт эмчилгээ"
+              extra={
+                <Button
+                  onClick={() => showPlatTreatmentModal()}
+                  icon={<PlusOutlined />}
+                >
+                  Нэмэх
+                </Button>
+              }
+            />
+          </div>
           <br />
           <div className="customer_detail_table">
             <PageHeader
