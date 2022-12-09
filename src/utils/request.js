@@ -21,19 +21,12 @@ const errorHandler = async (error) => {
     };
   }
 
-  if (error.response) {
-    try {
-      const json = await error.response.json();
+  try {
+    const json = await error?.response?.json();
 
-      return json.error ? json.error : json;
-    } catch (jsonParseError) {
-      return jsonParseError;
-    }
-  } else {
-    return {
-      type: "Error",
-      payload: "Error to connect server",
-    };
+    return json?.error ? json?.error : json;
+  } catch (error) {
+    return error;
   }
 };
 

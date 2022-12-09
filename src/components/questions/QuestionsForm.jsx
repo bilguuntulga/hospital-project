@@ -14,7 +14,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
 import { questionsAPI } from "../../apis";
 
 const model = {
@@ -53,7 +52,15 @@ function QuestionsForm({ id }) {
 
   const onSubmit = async (values) => {
     try {
-      await questionsAPI.create(values);
+      if (id) {
+        await questionsAPI.update({
+          id,
+          ...values,
+        });
+      } else {
+        await questionsAPI.create(values);
+      }
+
       message.success("Амжилттай");
       navigate(-1);
     } catch (error) {
@@ -64,7 +71,7 @@ function QuestionsForm({ id }) {
   if (loading) return <Skeleton />;
 
   return (
-    <div>
+    <div className="questions_from_wrapper">
       <Formik
         onSubmit={onSubmit}
         initialValues={initialValues}
@@ -78,7 +85,7 @@ function QuestionsForm({ id }) {
             <Form.Item name="questions" label="Асуултууд">
               <FieldArray name="questions">
                 {(arrayHelpers) => (
-                  <div>
+                  <div className="questions_list_wrapper">
                     {values?.questions?.map((question, index) => (
                       <div>
                         <Field name={`questions.${index}`}>

@@ -4,14 +4,11 @@ import {
   Input,
   Pagination,
   Row,
-  Skeleton,
   Space,
   Select,
   Table,
   PageHeader,
-  Image,
 } from "antd";
-import Customers from "../../components/Customers";
 import React, { memo, useEffect, useRef, useState } from "react";
 import { customerAPI, paginationAPI } from "../../apis";
 import { Link } from "react-router-dom";
@@ -64,7 +61,12 @@ const CustomerPage = () => {
     },
     {
       title: "Хүйс",
-      render: (_, row) => (row.gender == "MALE" ? "Эрэгтэй" : "Эмэгтэй"),
+      render: (_, row) =>
+        row?.gender == "MALE"
+          ? "Эрэгтэй"
+          : row?.gender == "FEMALE"
+          ? "Эмэгтэй"
+          : "-",
     },
     {
       title: "Утасны дугаар",

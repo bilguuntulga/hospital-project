@@ -12,7 +12,7 @@ import {
 } from "antd";
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { customerAPI, treatmentsAPI } from "../../../apis";
+import { customerAPI, questionsAPI, treatmentsAPI } from "../../../apis";
 import "./style.css";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -42,6 +42,7 @@ import Question2 from "../../../components/form/Question2";
 import PageLoading from "../../../components/PageLoading";
 import ListImages from "../../../components/customers/ListImages";
 import FormObserver from "../../../components/FormObserver";
+import QuestionsBuilder from "../../../components/questions/QuestionsBuilder";
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
@@ -86,6 +87,7 @@ const CustomerDetail = () => {
   const [customer, setCustomer] = useState({});
   const [treadment, setTreadMent] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [questions, setQuestions] = useState([]);
   const [isShowTreatmentModal, setIsShowTreatmentModal] = useState(false);
   const [customerInitialValues, setCustomerInitialValues] =
     useState(customerModel);
@@ -97,6 +99,8 @@ const CustomerDetail = () => {
   const fetchData = async () => {
     setLoading(true);
     const customer = await customerAPI.get(id);
+    const questionsRes = await questionsAPI.list();
+    setQuestions(questionsRes);
 
     if (customer.rate == "GOOD") customer.rate = true;
     else customer.rate = false;
@@ -564,6 +568,11 @@ const CustomerDetail = () => {
             <Collapse.Panel header="2-р Асуултууд" key="2">
               <Question2 id={id} />
             </Collapse.Panel>
+            {questions?.map((question) => (
+              <Collapse.Panel header={question?.title} key={question?.id}>
+                <QuestionsBuilder id={question?.id} customer_id={id} />
+              </Collapse.Panel>
+            ))}
           </Collapse>
           <PageHeader title="Хоолны зөвлөгөө" />
           <Formik
