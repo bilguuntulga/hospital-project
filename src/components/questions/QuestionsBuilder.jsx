@@ -14,6 +14,7 @@ export function QuestionTypeConverter(question) {
     case QuestionType.Text:
       return (
         <Form.Item
+          key={question}
           label={question?.label}
           name={`q${convertToHex(question?.label)}`}
         >
@@ -23,25 +24,30 @@ export function QuestionTypeConverter(question) {
     case QuestionType.Radio:
       return (
         <Form.Item
+          key={question}
           label={question?.label}
           name={`q${convertToHex(question?.label)}`}
         >
           <Radio.Group name={`q${convertToHex(question?.label)}`}>
-            {question?.options?.map((option) => (
-              <Radio value={`o${convertToHex(option)}`}>{option}</Radio>
+            {question?.options?.map((option, i) => (
+              <Radio key={option + i} value={`o${convertToHex(option)}`}>
+                {option}
+              </Radio>
             ))}
           </Radio.Group>
         </Form.Item>
       );
     case QuestionType.Image:
       return (
-        <div>
+        <div key={question}>
           <p>{question?.label}</p>
           <Image src={question?.data} height={200} />
           <Form.Item name={`q${convertToHex(question?.label)}`}>
             <Radio.Group name={`q${convertToHex(question?.label)}`}>
-              {question?.options?.map((option) => (
-                <Radio value={`o${convertToHex(option)}`}>{option}</Radio>
+              {question?.options?.map((option, i) => (
+                <Radio key={option + i} value={`o${convertToHex(option)}`}>
+                  {option}
+                </Radio>
               ))}
             </Radio.Group>
           </Form.Item>

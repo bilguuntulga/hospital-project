@@ -107,8 +107,9 @@ function CustommerNewsPage() {
             marginTop: "10px",
           }}
         >
-          {customers.map((e) => (
+          {customers.map((e, i) => (
             <CunstommerNews
+              key={e + i}
               image={e?.image}
               name={e?.last_name}
               birthday={e?.birthday}

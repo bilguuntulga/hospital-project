@@ -39,8 +39,9 @@ const DoctorPage = () => {
       </Row>
       <div className="employee_list_wrapper">
         {doctors?.length > 0 ? (
-          doctors?.map((e) => (
+          doctors?.map((e, i) => (
             <DoctorCard
+              key={e + i}
               image={e?.profile_img}
               name={`${e?.first_name} ${e?.last_name}`}
               role={e?.role}

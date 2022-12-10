@@ -96,7 +96,7 @@ function UploadImage({ name, mode = "single", width = 500, height = "auto" }) {
                 <Carousel responsive={responsive} arrows={true}>
                   {(value || [])?.map((e, i) => (
                     <Image
-                      key={i}
+                      key={e + i}
                       src={e}
                       preview={{
                         visible: false,

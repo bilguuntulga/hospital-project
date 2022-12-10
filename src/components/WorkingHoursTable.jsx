@@ -64,14 +64,13 @@ function WorkingHoursTable({ id, workingHours }) {
           </Button>
         }
       >
-        {workingHours.map((e) => (
-          <>
-            <DoctorWorkingHours
-              day={dayTranslater(e?.day)}
-              endDate={e?.end_time}
-              startDate={e?.start_time}
-            />
-          </>
+        {workingHours.map((e, i) => (
+          <DoctorWorkingHours
+            key={e + i}
+            day={dayTranslater(e?.day)}
+            endDate={e?.end_time}
+            startDate={e?.start_time}
+          />
         ))}
         <ToastContainer />
         <Modal
@@ -88,7 +87,7 @@ function WorkingHoursTable({ id, workingHours }) {
             >
               <Select mode="multiple">
                 {workingHours?.map((e, i) => (
-                  <Select.Option key={i} value={e.id}>
+                  <Select.Option key={e + i} value={e.id}>
                     {dayTranslater(e.day)}
                   </Select.Option>
                 ))}

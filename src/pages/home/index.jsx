@@ -219,8 +219,9 @@ function HomePage() {
                 }
               >
                 {orderTimeCustomer?.length > 0 ? (
-                  orderTimeCustomer.map((e) => (
+                  orderTimeCustomer.map((e, i) => (
                     <OrderTimeCustommer
+                      key={e + i}
                       name={`${e?.customer?.first_name} ${e?.customer?.last_name}`}
                       image={e?.customer?.image}
                       time={e?.start_time}
@@ -388,8 +389,9 @@ function HomePage() {
                     }}
                   >
                     {weeklyTimes[selectedDay]?.times?.length > 0 ? (
-                      weeklyTimes[selectedDay]?.times?.map((e) => (
+                      weeklyTimes[selectedDay]?.times?.map((e, i) => (
                         <TOdayOrderList
+                          key={e + i}
                           image={e?.image}
                           name={`${e?.name}`}
                           start_time={e?.start_time}

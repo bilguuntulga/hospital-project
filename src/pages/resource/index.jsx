@@ -127,7 +127,7 @@ const ResourcePage = () => {
       />
       <div className="resource_wrapper">
         {resources.length > 0 ? (
-          resources.map((e) => (
+          resources?.map((e) => (
             <div
               key={e?.id}
               onClick={() => (user?.role == "ADMIN" ? showModal(e.id) : null)}

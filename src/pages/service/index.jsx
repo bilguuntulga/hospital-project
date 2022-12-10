@@ -53,8 +53,9 @@ const ServicePage = () => {
         <Tabs.TabPane tab="Бүгд" key={1}>
           <div className="services_wrapper">
             {services.length > 0 ? (
-              services.map((e) => (
+              services?.map((e, i) => (
                 <DoctorCard
+                  key={e + i}
                   image={e?.images[0]}
                   name={e?.name}
                   url={user?.role == "ADMIN" ? e.id : null}
@@ -69,8 +70,9 @@ const ServicePage = () => {
         <Tabs.TabPane tab="Үндсэн" key={2}>
           <div className="services_wrapper">
             {basicservice.length > 0 ? (
-              basicservice.map((e) => (
+              basicservice?.map((e, i) => (
                 <DoctorCard
+                  key={e + i}
                   image={e?.images[0]}
                   name={e?.name}
                   url={user?.role == "ADMIN" ? e.id : null}
@@ -85,8 +87,9 @@ const ServicePage = () => {
         <Tabs.TabPane tab="Нэмэлт" key={3}>
           <div className="services_wrapper">
             {additionalservice.length > 0 ? (
-              additionalservice.map((e) => (
+              additionalservice?.map((e, i) => (
                 <DoctorCard
+                  key={e + i}
                   image={e?.images[0]}
                   name={e?.name}
                   url={user?.role == "ADMIN" ? e.id : null}
@@ -101,8 +104,9 @@ const ServicePage = () => {
         <Tabs.TabPane tab="Багц" key={4}>
           <div className="services_wrapper">
             {packageservice.length > 0 ? (
-              packageservice.map((e) => (
+              packageservice?.map((e, i) => (
                 <DoctorCard
+                  key={e + i}
                   image={e?.images[0]}
                   name={e?.name}
                   url={user?.role == "ADMIN" ? e.id : null}

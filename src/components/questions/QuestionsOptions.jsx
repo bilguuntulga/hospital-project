@@ -1,4 +1,4 @@
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Input, Skeleton, Space } from "antd";
 import React from "react";
 import { useEffect } from "react";
@@ -71,9 +71,10 @@ function QuestionsOptions({ name, value, setFieldValue }) {
             onChange={(e) => onInputChange(i, e?.target?.value)}
           />
         ))}
-        <Button onClick={() => setOptions([...options, ""])}>
-          Сонгол нэмэх
-        </Button>
+        <Button
+          onClick={() => setOptions([...options, ""])}
+          icon={<PlusOutlined />}
+        />
       </Space>
     </div>
   );

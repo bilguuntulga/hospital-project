@@ -148,8 +148,9 @@ function TreatmentTimeForm({ id = "", refreshTable }) {
                 <Skeleton paragraph={{ rows: 0 }} />
               ) : (
                 <Select name="doctor">
-                  {doctors.map((doctor) => (
+                  {doctors?.map((doctor, i) => (
                     <Select.Option
+                      key={doctor + i}
                       value={doctor?.id}
                     >{`${doctor?.first_name} ${doctor?.last_name}`}</Select.Option>
                   ))}

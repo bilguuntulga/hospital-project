@@ -17,7 +17,7 @@ function ExperiencesField({ name, values }) {
           render={(arrayHelpers) => (
             <div className="space_elements">
               {values[name] && values[name].length > 0
-                ? values[name].map((e, index) => {
+                ? values[name]?.map((e, index) => {
                     return (
                       <div key={index} className="experience_wrapper">
                         <Field name={`${name}.${index}`}>

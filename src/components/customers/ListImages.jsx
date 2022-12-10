@@ -33,8 +33,9 @@ const ListImages = ({ name, height = 100, onChange }) => {
             multiple
           />
           <Image.PreviewGroup>
-            {value.map((image) => (
+            {value?.map((image, i) => (
               <Image
+                key={e + i}
                 src={image}
                 alt={image}
                 height={height}

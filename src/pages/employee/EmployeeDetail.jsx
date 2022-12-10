@@ -103,8 +103,8 @@ const EmployeeDetail = () => {
           <div>
             <p> {parse(detailData?.desc ?? "")}</p>
             <b className="role">Мэргэжил:</b>
-            {detailData?.experiences?.map((e) => (
-              <Row gutter={20}>
+            {detailData?.experiences?.map((e, i) => (
+              <Row gutter={20} key={e + i}>
                 <Col>
                   <ArrowRightOutlined
                     style={{ color: "#7B80FF", width: "17px", height: "13px" }}
@@ -121,8 +121,8 @@ const EmployeeDetail = () => {
           <div className="space_elements">
             {parse(detailData?.experiences_desc ?? "")}
             <Timeline>
-              {detailData.experiences.map((e) => (
-                <Timeline.Item color="#7B80FF">
+              {detailData.experiences.map((e, i) => (
+                <Timeline.Item color="#7B80FF" key={e + i}>
                   <div className="experience_card">
                     <p style={{ color: "gray" }}>{e?.date}</p>
                     <p>{e?.desc}</p>
@@ -146,15 +146,15 @@ const EmployeeDetail = () => {
                   padding: "2rem",
                 }}
               >
-                {detailData.working_hours.map((e) => (
-                  <>
+                {detailData.working_hours.map((e, i) => (
+                  <div key={e + i}>
                     <DoctorWorkingHours
                       day={dayTranslater(e?.day)}
                       endDate={e?.end_time}
                       startDate={e?.start_time}
                     />
                     <br />
-                  </>
+                  </div>
                 ))}
               </div>
             </Col>

@@ -53,7 +53,7 @@ function ResourcesSelect({ values, name }) {
         <>
           {values[name] && values[name]?.length > 0
             ? values[name]?.map((resource, i) => (
-                <Field name={`${name}.${i}`}>
+                <Field key={resource + i} name={`${name}.${i}`}>
                   {({ field: { value, name }, form: { setFieldValue } }) => (
                     <>
                       <Row gutter={20} style={{ marginBottom: "1rem" }}>
@@ -69,8 +69,8 @@ function ResourcesSelect({ values, name }) {
                             }
                             defaultValue={value?.resource}
                           >
-                            {resources.map((e, i) => (
-                              <Select.Option key={i} value={e?.id}>
+                            {resources?.map((e, i) => (
+                              <Select.Option key={e + i} value={e?.id}>
                                 {e?.name}
                               </Select.Option>
                             ))}

@@ -84,7 +84,7 @@ function Header() {
   const notifiContent = (
     <div>
       {notifications.length > 0 ? (
-        notifications.map((e) => (
+        notifications?.map((e) => (
           <NotiItem
             key={e?.id}
             id={e?.id}

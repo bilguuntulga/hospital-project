@@ -22,8 +22,8 @@ function SelectDoctor({ name, multi = false }) {
 
     return (
         <Select name={name} mode={multi ? "multiple" : ""} showSearch={true}>
-            {data.map((e, i) => (
-                <Select.Option key={i} value={e?.id}>
+            {data?.map((e, i) => (
+                <Select.Option key={e + i} value={e?.id}>
                     {`${e?.first_name} ${e?.last_name}`}
                 </Select.Option>
             ))}

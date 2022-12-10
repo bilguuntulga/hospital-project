@@ -36,8 +36,8 @@ function SelectService({ name, multi = false, type }) {
 
   return (
     <Select name={name} mode={multi ? "multiple" : ""} showSearch>
-      {data.map((e, i) => (
-        <Select.Option key={i} value={e?.id}>
+      {data?.map((e, i) => (
+        <Select.Option key={e + i} value={e?.id}>
           {e?.name}
         </Select.Option>
       ))}

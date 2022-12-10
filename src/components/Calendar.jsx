@@ -61,7 +61,7 @@ class Calendar extends Component {
         timeFormat: "Clock24Hours",
         locale: "en-us",
         heightSpec: "Full",
-        columnWidthMin :25,
+        columnWidthMin: 25,
         onTimeRangeSelected: async (args) => {
           const dp = this.calendar;
           dp.clearSelection();
@@ -375,6 +375,7 @@ class Calendar extends Component {
                 <Select name="doctor">
                   {this.state.doctors.map((doctor) => (
                     <Select.Option
+                      key={doctor?.id}
                       value={doctor?.id}
                     >{`${doctor?.first_name} ${doctor?.last_name}`}</Select.Option>
                   ))}
@@ -413,6 +414,7 @@ class Calendar extends Component {
                 <Select name="doctor">
                   {this.state.doctors.map((doctor) => (
                     <Select.Option
+                      key={doctor?.id}
                       value={doctor?.id}
                     >{`${doctor?.first_name} ${doctor?.last_name}`}</Select.Option>
                   ))}
