@@ -12,7 +12,12 @@ import {
 } from "antd";
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { customerAPI, questionsAPI, treatmentsAPI } from "../../../apis";
+import {
+  customerAPI,
+  questionsAPI,
+  treatmentsAPI,
+  plannedtreadmentAPI,
+} from "../../../apis";
 import "./style.css";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -47,37 +52,6 @@ import QuestionsBuilder from "../../../components/questions/QuestionsBuilder";
 const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
-const columns = [
-  {
-    title: "",
-    dataIndex: "",
-    key: "",
-  },
-  {
-    title: "",
-    dataIndex: "",
-    key: "",
-  },
-  {
-    title: "",
-    dataIndex: "",
-    key: "",
-  },
-  {
-    title: "",
-    dataIndex: "",
-    key: "",
-  },
-  {
-    title: "",
-    render: (_, row) => (
-      <>
-        <Button icon={<EditOutlined />} /> <Button icon={<DeleteOutlined />} />
-      </>
-    ),
-  },
-];
-
 const customerModel = {
   phone: "",
   image: "",
@@ -90,11 +64,12 @@ const customerModel = {
   rate: "",
 };
 
-const platTreatmentModel = {
-  basic_treatment: "",
-  additional_treatment: "",
+const pladTreatmentModel = {
+  basic_service: "",
+  additional_service: "",
   basic_input: "",
   additional_input: "",
+  date: "",
 };
 
 const treatmentModel = {
@@ -128,6 +103,9 @@ const CustomerDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [isShowTreatmentModal, setIsShowTreatmentModal] = useState(false);
+  const [oneplannedtreadment, setOnePlannedTreadment] =
+    useState(pladTreatmentModel);
+  const [plannedtreatmentData, setPlannedTreatmentData] = useState([]);
   const [isShowPlattratmentModal, setIsShowPlatTreatmentModal] =
     useState(false);
   const [customerInitialValues, setCustomerInitialValues] =
@@ -151,9 +129,11 @@ const CustomerDetail = () => {
     setCustomerInitialValues(customer);
     setTreadMent(treatments);
     setLoading(false);
+    const plannedatas = await plannedtreadmentAPI.list(id);
+    setPlannedTreatmentData(plannedatas);
   };
 
-  const showPlatTreatmentModal = async () => {
+  const showPlannedTreatmentModal = () => {
     setIsShowPlatTreatmentModal(true);
   };
 
@@ -240,6 +220,20 @@ const CustomerDetail = () => {
     setTreatmentInitialValues(treatmentModel);
     setIsShowTreatmentModal(true);
   };
+  const plannedshowDeleteConfirm = (id) => {
+    confirm({
+      title: `Устгах даа итгэлтэй байэа уу`,
+      icon: <ExclamationCircleFilled />,
+      okText: "Тийм",
+      okType: "danger",
+      cancelText: "Үгүй",
+      async onOk() {
+        await plannedtreadmentAPI.remove(id);
+        message.success("Амжилттай устгагдлаа");
+        fetchData();
+      },
+    });
+  };
 
   const showDeleteConfirm = (id) => {
     confirm({
@@ -250,6 +244,7 @@ const CustomerDetail = () => {
       cancelText: "Үгүй",
       async onOk() {
         await treatmentsAPI.remove(id);
+        message.success("Амжилттай устгагдлаа");
         fetchData();
       },
     });
@@ -280,6 +275,56 @@ const CustomerDetail = () => {
       },
     });
   };
+  const plannedTreadmentColumns = [
+    {
+      title: "Үндсэн эмчилгээ",
+      render: (_, row) => row?.basic_service?.name,
+    },
+    {
+      title: "Нэмэлт эмчтилгээ",
+      render: (_, row) => row?.additional_service?.name,
+    },
+    {
+      title: "Үндсэн оролт",
+      dataIndex: "basic_input",
+    },
+    {
+      title: "Нэмэлт оролт",
+      dataIndex: "additional_input",
+    },
+    {
+      title: "Огноо",
+      dataIndex: "date",
+    },
+    {
+      title: "",
+      render: (_, row) => (
+        <>
+          <Button
+            icon={
+              <EditOutlined onClick={() => plannedTreadmentUpdate(row.id)} />
+            }
+          />{" "}
+          <Button
+            icon={
+              <DeleteOutlined
+                onClick={() => plannedshowDeleteConfirm(row.id)}
+              />
+            }
+          />
+        </>
+      ),
+    },
+  ];
+
+  const plannedTreadmentUpdate = async (rowId) => {
+    const res = await plannedtreadmentAPI.get(rowId);
+    res.customer = res.customer.id;
+    res.basic_service = res.basic_service.id;
+    res.additional_service = res.additional_service.id;
+    setOnePlannedTreadment(res);
+    setIsShowPlatTreatmentModal(true);
+  };
 
   const customerUpdate = async (values) => {
     delete values.created_by;
@@ -301,6 +346,30 @@ const CustomerDetail = () => {
         success: "Амжилттай",
       }
     );
+  };
+
+  const plannetTreadmentOnSubmit = async (values) => {
+    try {
+      if (values?.id) {
+        delete values?.created_by;
+        delete values?.updated_by;
+        await plannedtreadmentAPI.update(values);
+      } else {
+        values.customer = id;
+        await plannedtreadmentAPI.create(values);
+      }
+
+      message.success("Амжилттай");
+    } catch (error) {
+      message.error("Амжилтгүй");
+    }
+    fetchData();
+    setIsShowPlatTreatmentModal(false);
+  };
+
+  const plannetTreadmentCreate = () => {
+    setOnePlannedTreadment(pladTreatmentModel);
+    setIsShowPlatTreatmentModal(true);
   };
 
   const onChangeImages = async (values) => {
@@ -386,23 +455,27 @@ const CustomerDetail = () => {
                 footer={false}
                 title="Төлөвлөгөөт эмчилгээ нэмэх"
               >
-                <Formik initialValues={platTreatmentModel}>
+                <Formik
+                  initialValues={oneplannedtreadment}
+                  onSubmit={plannetTreadmentOnSubmit}
+                  enableReinitialize
+                >
                   <Form layout="vertical">
                     <Row gutter={12}>
                       <Col span={12}>
-                        <Form.Item
-                          label="Үндсэг эмчилгээ"
-                          name="basic_treatment"
-                        >
-                          <Input name="basic_treatment" />
+                        <Form.Item label="Үндсэг эмчилгээ" name="basic_service">
+                          <SelectService name="basic_service" type="basic" />
                         </Form.Item>
                       </Col>
                       <Col span={12}>
                         <Form.Item
-                          name="additional_treatment"
+                          name="additional_service"
                           label="Нэмэлт эмчилгээ"
                         >
-                          <Input name="additional_treatment" />
+                          <SelectService
+                            name="additional_service"
+                            type="additional"
+                          />
                         </Form.Item>
                       </Col>
                     </Row>
@@ -418,6 +491,9 @@ const CustomerDetail = () => {
                         </Form.Item>
                       </Col>
                     </Row>
+                    <Form.Item name="date">
+                      <DatePicker style={{ width: "100%" }} name="date" />
+                    </Form.Item>
                     <SubmitButton block icon={<SaveOutlined />}>
                       Хадаглах
                     </SubmitButton>
@@ -597,12 +673,16 @@ const CustomerDetail = () => {
               title="Төлөвлөгөөт эмчилгээ"
               extra={
                 <Button
-                  onClick={() => showPlatTreatmentModal()}
+                  onClick={() => plannetTreadmentCreate()}
                   icon={<PlusOutlined />}
                 >
                   Нэмэх
                 </Button>
               }
+            />
+            <Table
+              columns={plannedTreadmentColumns}
+              dataSource={plannedtreatmentData}
             />
           </div>
           <br />

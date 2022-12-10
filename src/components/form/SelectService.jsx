@@ -3,13 +3,27 @@ import { Select } from "formik-antd";
 import React, { memo, useEffect, useState } from "react";
 import { servicesAPI } from "../../apis";
 
-function SelectService({ name, multi = false }) {
+function SelectService({ name, multi = false, type }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     setLoading(true);
-    const res = await servicesAPI.list();
+
+    var res;
+
+    switch (type?.toLowerCase()) {
+      case "basic":
+        res = await servicesAPI.getBasics();
+        break;
+      case "additional":
+        res = await servicesAPI.getAdditional();
+        break;
+      default:
+        res = await servicesAPI.list();
+        break;
+    }
+
     setData(res);
     setLoading(false);
   };
@@ -18,7 +32,7 @@ function SelectService({ name, multi = false }) {
     fetchData();
   }, []);
 
-  if (loading) return <Skeleton paragraph={{rows: 0}} />
+  if (loading) return <Skeleton paragraph={{ rows: 0 }} />;
 
   return (
     <Select name={name} mode={multi ? "multiple" : ""} showSearch>
