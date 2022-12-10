@@ -1,4 +1,4 @@
-import { Card, Col, PageHeader, Row } from "antd";
+import { Card, Col, message, PageHeader, Row } from "antd";
 import { DatePicker, Form, Input, SubmitButton, Select } from "formik-antd";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -16,33 +16,30 @@ const RegistrationPage = () => {
   const model = {
     first_name: "",
     last_name: "",
-    email: "",
     phone: "",
+    employment: "",
     gender: "",
-    family_status: "",
     blood_type: "",
     birthday: "",
-    address: "",
     image: "",
     desc: "",
   };
   const validationSchema = yup.object().shape({
-    first_name: yup.string().required("Заавал бөглөнө үү"),
-    last_name: yup.string().required("Заавал бөглөнө үү"),
-    email: yup.string().email().required("Заавал бөглөнө үү"),
+    first_name: yup.string().optional(),
+    last_name: yup.string().optional(),
     phone: yup.string().min(8).required("Заавал бөглөнө үү"),
     gender: yup.string().required("Заавал бөглөнө үү"),
-    family_status: yup.string().required("Заавал бөглөнө үү"),
-    blood_type: yup.string().required("Заавал бөглөнө үү"),
-    birthday: yup.string().required("Заавал бөглөнө үү"),
-    address: yup.string().required("Заавал бөглөнө үү"),
+    blood_type: yup.string().optional(),
+    birthday: yup.string().optional(),
     image: yup.string().optional(),
     desc: yup.string().optional(),
+    employment: yup.string().optional(),
   });
 
   const onFinish = async (values) => {
     try {
       await customerAPI.create(values);
+      message.success("Амжилттай")
       navigate(-1);
     } catch (error) {}
   };
@@ -91,26 +88,7 @@ const RegistrationPage = () => {
                       </Form.Item>
                     </Col>
                   </Row>
-                  <Row gutter={30}>
-                    <Col span={12}>
-                      <Form.Item name="email" label="И-мэйл">
-                        <Input
-                          className="input"
-                          placeholder="И-мэйл"
-                          name="email"
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                      <Form.Item name="phone" label="Утас">
-                        <Input
-                          className="input"
-                          name="phone"
-                          placeholder="Утас"
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
+
                   <Row gutter={30}>
                     <Col span={12}>
                       <Row gutter={20}>
@@ -132,22 +110,8 @@ const RegistrationPage = () => {
                           </Form.Item>
                         </Col>
                         <Col span={12}>
-                          <Form.Item
-                            name="family_status"
-                            label="Гэр бүлийн байдал"
-                          >
-                            <Select
-                              className="input"
-                              name="family_status"
-                              bordered={false}
-                            >
-                              <Select.Option value="MARRIED">
-                                Гэрлэсэн
-                              </Select.Option>
-                              <Select.Option value="NOT_MARRIED">
-                                Гэрлээгүй
-                              </Select.Option>
-                            </Select>
+                          <Form.Item name="employment" label="Ажил эрхлэлт">
+                            <Input name="employment" className="input" />
                           </Form.Item>
                         </Col>
                       </Row>
@@ -182,20 +146,20 @@ const RegistrationPage = () => {
                   </Row>
                   <Row gutter={30}>
                     <Col span={12}>
-                      <Form.Item name="address" label="Гэрийн хаяг">
-                        <Input
-                          className="input"
-                          name="address"
-                          placeholder="Гэрийн хаяг"
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}>
                       <Form.Item name="desc" label="Тайлбар">
                         <Input
                           className="input"
                           name="desc"
                           placeholder="Бусад"
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item name="phone" label="Утас">
+                        <Input
+                          className="input"
+                          name="phone"
+                          placeholder="Утас"
                         />
                       </Form.Item>
                     </Col>

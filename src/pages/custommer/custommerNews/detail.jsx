@@ -517,24 +517,24 @@ const CustomerDetail = () => {
                       </Form.Item>
                     </Row>
                     <Row gutter={30}>
-                      <Col>
+                      <Col span={12}>
                         <Form.Item name="first_name" label="Овог">
-                          <Input className="input" name="first_name" />
+                          <Input  name="first_name" />
                         </Form.Item>
                       </Col>
-                      <Col>
+                      <Col span={12}>
                         <Form.Item name="last_name" label="Нэр">
-                          <Input className="input" name="last_name" />
+                          <Input  name="last_name" />
                         </Form.Item>
                       </Col>
-                      <Col>
-                        <Form.Item name="email" label="И-Мэйл">
-                          <Input className="input" name="email" />
-                        </Form.Item>
-                      </Col>
-                      <Col>
+                      <Col span={12}>
                         <Form.Item name="phone" label="Утасны дугаар">
-                          <Input className="input" name="phone" />
+                          <Input  name="phone" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item name="employment" label="Ажил эрхлэлт">
+                          <Input name="employment" />
                         </Form.Item>
                       </Col>
                       <Col span={12}>
@@ -561,11 +561,6 @@ const CustomerDetail = () => {
                       </Col>
                       <Col span={24}>
                         <Row gutter={30}>
-                          <Col span={12}>
-                            <Form.Item name="employment" label="Ажил эрхлэлт">
-                              <Input name="employment" />
-                            </Form.Item>
-                          </Col>
                           <Col span={6}>
                             <Form.Item label="Байдал" name="rate">
                               <Switch
@@ -576,11 +571,6 @@ const CustomerDetail = () => {
                             </Form.Item>
                           </Col>
                         </Row>
-                      </Col>
-                      <Col span={24}>
-                        <Form.Item name="address" label="Гэрийн хайг">
-                          <Input.TextArea name="address" />
-                        </Form.Item>
                       </Col>
                       <Col span={24}>
                         <Form.Item name="desc" label="Тайлбар">
