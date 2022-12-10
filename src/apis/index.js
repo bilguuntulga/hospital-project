@@ -12,6 +12,7 @@ import * as selectedDatAPI from "./selectedday";
 import * as bonusAPI from "./bonus";
 import * as anythingAPI from "./anything";
 import * as questionsAPI from "./questions";
+import * as plannedtreadmentAPI from "./plannedTreadment";
 
 export {
   authAPI,
@@ -28,4 +29,5 @@ export {
   bonusAPI,
   anythingAPI,
   questionsAPI,
+  plannedtreadmentAPI,
 };
