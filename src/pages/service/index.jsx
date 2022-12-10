@@ -17,16 +17,15 @@ const ServicePage = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    const packageservice = await servicesAPI.getPackage();
+    servicesAPI.getPackage().then((res) => setPackageSservice(res));
+    servicesAPI.getBasics().then((res) => setBasicService(res));
+    servicesAPI.getAdditional().then((res) => setAdditionalService(res));
+
     const res = await servicesAPI.list();
-    const basic = await servicesAPI.getBasics();
-    const addditional = await servicesAPI.getAdditional();
-    setPackageSservice(packageservice);
-    setBasicService(basic);
-    setAdditionalService(addditional);
+    setServices(res);
+
     const user_res = JSON.parse(localStorage.getItem("user"));
     setUser(user_res);
-    setServices(res);
     setLoading(false);
   };
   useEffect(() => {
@@ -67,6 +66,23 @@ const ServicePage = () => {
             )}
           </div>
         </Tabs.TabPane>
+        <Tabs.TabPane tab="Багц" key={4}>
+          <div className="services_wrapper">
+            {packageservice.length > 0 ? (
+              packageservice?.map((e, i) => (
+                <DoctorCard
+                  key={e + i}
+                  image={e?.images[0]}
+                  name={e?.name}
+                  url={user?.role == "ADMIN" ? e.id : null}
+                  role={e.price}
+                />
+              ))
+            ) : (
+              <Empty style={{ margin: "auto" }} />
+            )}
+          </div>
+        </Tabs.TabPane>
         <Tabs.TabPane tab="Үндсэн" key={2}>
           <div className="services_wrapper">
             {basicservice.length > 0 ? (
@@ -88,23 +104,6 @@ const ServicePage = () => {
           <div className="services_wrapper">
             {additionalservice.length > 0 ? (
               additionalservice?.map((e, i) => (
-                <DoctorCard
-                  key={e + i}
-                  image={e?.images[0]}
-                  name={e?.name}
-                  url={user?.role == "ADMIN" ? e.id : null}
-                  role={e.price}
-                />
-              ))
-            ) : (
-              <Empty style={{ margin: "auto" }} />
-            )}
-          </div>
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="Багц" key={4}>
-          <div className="services_wrapper">
-            {packageservice.length > 0 ? (
-              packageservice?.map((e, i) => (
                 <DoctorCard
                   key={e + i}
                   image={e?.images[0]}

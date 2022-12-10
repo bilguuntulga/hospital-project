@@ -1,9 +1,11 @@
 {
   "name": "hospital",
+  "description": "hospital time system",
+  "author": {
+    "name": "XSoft"
+  },
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://192.168.0.122",
-  "homepage": "./",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ckeditor/ckeditor5-build-classic": "ckeditor/ckeditor5-build-classic",
@@ -41,6 +43,7 @@
     "yup": "^0.32.11"
   },
   "main": "public/electron.js",
+  "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -48,7 +51,8 @@
     "eject": "react-scripts eject",
     "start:prod": "serve -s build",
     "electron:serve": "concurrently -k \"BROWSER=none npm start\" \"npm:electron:start\"",
-    "electron:build": "yarn build && electron-builder build -c.extraMetadata.main=build/electron.js",
+    "electron:build:linux": "yarn build && electron-builder build --linux -c.extraMetadata.main=build/electron.js",
+    "electron:build:windows": "yarn build && electron-builder build --win -c.extraMetadata.main=build/electron.js",
     "electron:start": "wait-on tcp:3000 && electron ."
   },
   "build": {
