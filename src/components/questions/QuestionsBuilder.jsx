@@ -38,9 +38,7 @@ export function QuestionTypeConverter(question) {
         <div>
           <p>{question?.label}</p>
           <Image src={question?.data} height={200} />
-          <Form.Item
-            name={`q${convertToHex(question?.label)}`}
-          >
+          <Form.Item name={`q${convertToHex(question?.label)}`}>
             <Radio.Group name={`q${convertToHex(question?.label)}`}>
               {question?.options?.map((option) => (
                 <Radio value={`o${convertToHex(option)}`}>{option}</Radio>
@@ -130,21 +128,23 @@ function QuestionsBuilder({ id, customer_id }) {
   if (loading) return <Skeleton />;
 
   return (
-    <div>
+    <div className="questions_builder_wrapper">
       <Formik
         onSubmit={onSubmit}
         initialValues={initialValues}
         enableReinitialize
       >
         <Form layout="vertical">
-          {customer_id ? null : (
-            <Form.Item label="Утас" name="customer_phone">
-              <Input name="customer_phone" />
-            </Form.Item>
-          )}
-          {questions?.questions?.map((question) =>
-            QuestionTypeConverter(question)
-          )}
+          <div className="questions_builder_wrapper_questions">
+            {customer_id ? null : (
+              <Form.Item label="Утас" name="customer_phone">
+                <Input name="customer_phone" />
+              </Form.Item>
+            )}
+            {questions?.questions?.map((question) =>
+              QuestionTypeConverter(question)
+            )}
+          </div>
           <SubmitButton icon={<SaveOutlined />}>Хадаглаж</SubmitButton>
         </Form>
       </Formik>

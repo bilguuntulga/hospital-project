@@ -1,4 +1,9 @@
-import { PlusOutlined, SaveOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  PlusOutlined,
+  SaveOutlined,
+  UpOutlined,
+} from "@ant-design/icons";
 import {
   Button,
   Divider,
@@ -140,6 +145,10 @@ function QuestionsForm({ id }) {
                                   setFieldValue={setFieldValue}
                                 />
                               ) : null}
+                              <Space>
+                                <Button icon={<UpOutlined />} />
+                                <Button icon={<DownOutlined />} />
+                              </Space>
                             </div>
                           )}
                         </Field>
