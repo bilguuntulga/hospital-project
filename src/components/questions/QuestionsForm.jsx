@@ -1,6 +1,7 @@
 import { PlusOutlined, SaveOutlined } from "@ant-design/icons";
 import {
   Button,
+  Divider,
   Input as AntInput,
   message,
   Select as AntSelect,
@@ -15,6 +16,8 @@ import { useState } from "react";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { questionsAPI } from "../../apis";
+import QuestionsImage from "./QuestionsImage";
+import QuestionsOptions from "./QuestionsOptions";
 
 const model = {
   title: "",
@@ -24,6 +27,7 @@ const model = {
 export const QuestionType = {
   Text: "TEXT",
   Radio: "RADIO",
+  Image: "IMAGE",
 };
 
 function QuestionsForm({ id }) {
@@ -91,6 +95,7 @@ function QuestionsForm({ id }) {
                         <Field name={`questions.${index}`}>
                           {({ field: { value }, form: { setFieldValue } }) => (
                             <div>
+                              {index != 0 ? <Divider /> : null}
                               <Space>
                                 <AntInput
                                   defaultValue={value?.label}
@@ -103,10 +108,10 @@ function QuestionsForm({ id }) {
                                 />
                                 <AntSelect
                                   defaultValue={value?.type}
-                                  onChange={(e) =>
+                                  onChange={(selectedValue) =>
                                     setFieldValue(`questions.${index}`, {
                                       ...value,
-                                      type: e,
+                                      type: selectedValue,
                                     })
                                   }
                                 >
@@ -116,8 +121,25 @@ function QuestionsForm({ id }) {
                                   <AntSelect.Option value={QuestionType.Radio}>
                                     Сонголт
                                   </AntSelect.Option>
+                                  <AntSelect.Option value={QuestionType.Image}>
+                                    Зураг
+                                  </AntSelect.Option>
                                 </AntSelect>
                               </Space>
+                              {value?.type == QuestionType.Image ? (
+                                <QuestionsImage
+                                  name={`questions.${index}`}
+                                  value={value}
+                                  setFieldValue={setFieldValue}
+                                />
+                              ) : null}
+                              {value?.type != QuestionType.Text ? (
+                                <QuestionsOptions
+                                  name={`questions.${index}`}
+                                  value={value}
+                                  setFieldValue={setFieldValue}
+                                />
+                              ) : null}
                             </div>
                           )}
                         </Field>
