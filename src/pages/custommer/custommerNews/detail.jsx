@@ -395,10 +395,6 @@ const CustomerDetail = () => {
       render: (_, row) => row?.services?.map((ee) => ee?.name)?.join(", "),
     },
     {
-      title: "Үнэ",
-      render: (_, row) => <>{row.price}₮</>,
-    },
-    {
       title: "Огноо",
       render: (_, row) => moment(row?.created_at).format("YYYY/MM/DD "),
     },
@@ -468,6 +464,13 @@ const CustomerDetail = () => {
                         </Form.Item>
                       </Col>
                       <Col span={12}>
+                        <Form.Item name="basic_input" label="Үндсэн оролт">
+                          <Input name="basic_input" type="number" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row gutter={12}>
+                      <Col span={12}>
                         <Form.Item
                           name="additional_service"
                           label="Нэмэлт эмчилгээ"
@@ -476,13 +479,6 @@ const CustomerDetail = () => {
                             name="additional_service"
                             type="additional"
                           />
-                        </Form.Item>
-                      </Col>
-                    </Row>
-                    <Row gutter={12}>
-                      <Col span={12}>
-                        <Form.Item name="basic_input" label="Үндсэн оролт">
-                          <Input name="basic_input" type="number" />
                         </Form.Item>
                       </Col>
                       <Col span={12}>
