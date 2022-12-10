@@ -1,12 +1,58 @@
 import { SaveOutlined } from "@ant-design/icons";
-import { message, Skeleton } from "antd";
+import { Image, message, Skeleton } from "antd";
 import { Formik } from "formik";
-import { Form, Input, SubmitButton } from "formik-antd";
+import { Form, Input, Radio, SubmitButton } from "formik-antd";
 import React, { memo } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { anythingAPI, questionsAPI } from "../../apis";
 import { convertToHex } from "../../utils/functions";
+import { QuestionType } from "./QuestionsForm";
+
+export function QuestionTypeConverter(question) {
+  switch (question?.type) {
+    case QuestionType.Text:
+      return (
+        <Form.Item
+          label={question?.label}
+          name={`q${convertToHex(question?.label)}`}
+        >
+          <Input name={`q${convertToHex(question?.label)}`} />
+        </Form.Item>
+      );
+    case QuestionType.Radio:
+      return (
+        <Form.Item
+          label={question?.label}
+          name={`q${convertToHex(question?.label)}`}
+        >
+          <Radio.Group name={`q${convertToHex(question?.label)}`}>
+            {question?.options?.map((option) => (
+              <Radio value={`o${convertToHex(option)}`}>{option}</Radio>
+            ))}
+          </Radio.Group>
+        </Form.Item>
+      );
+    case QuestionType.Image:
+      return (
+        <div>
+          <p>{question?.label}</p>
+          <Image src={question?.data} height={200} />
+          <Form.Item
+            name={`q${convertToHex(question?.label)}`}
+          >
+            <Radio.Group name={`q${convertToHex(question?.label)}`}>
+              {question?.options?.map((option) => (
+                <Radio value={`o${convertToHex(option)}`}>{option}</Radio>
+              ))}
+            </Radio.Group>
+          </Form.Item>
+        </div>
+      );
+    default:
+      return null;
+  }
+}
 
 function QuestionsBuilder({ id, customer_id }) {
   const [questions, setQuestions] = useState();
@@ -96,14 +142,9 @@ function QuestionsBuilder({ id, customer_id }) {
               <Input name="customer_phone" />
             </Form.Item>
           )}
-          {questions?.questions?.map((question) => (
-            <Form.Item
-              label={question?.label}
-              name={`q${convertToHex(question?.label)}`}
-            >
-              <Input name={`q${convertToHex(question?.label)}`} />
-            </Form.Item>
-          ))}
+          {questions?.questions?.map((question) =>
+            QuestionTypeConverter(question)
+          )}
           <SubmitButton icon={<SaveOutlined />}>Хадаглаж</SubmitButton>
         </Form>
       </Formik>

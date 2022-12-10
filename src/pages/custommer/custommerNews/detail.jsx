@@ -743,12 +743,6 @@ const CustomerDetail = () => {
         <div className="customer_detail_table">
           <PageHeader title="Асуулт" />
           <Collapse>
-            <Collapse.Panel header="1-р Асуултууд" key="1">
-              <Question1 id={id} />
-            </Collapse.Panel>
-            <Collapse.Panel header="2-р Асуултууд" key="2">
-              <Question2 id={id} />
-            </Collapse.Panel>
             {questions?.map((question) => (
               <Collapse.Panel header={question?.title} key={question?.id}>
                 <QuestionsBuilder id={question?.id} customer_id={id} />
