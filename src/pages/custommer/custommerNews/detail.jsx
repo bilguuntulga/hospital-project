@@ -372,7 +372,7 @@ export default function CustomerDetail() {
       title: "Эмч",
       render: (_, row) => (
         <>
-          {row?.doctor?.first_name} {row.doctor.last_name}
+          {row?.doctor?.first_name} {row.doctor?.last_name}
         </>
       ),
     },
