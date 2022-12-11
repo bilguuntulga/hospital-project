@@ -1,13 +1,10 @@
-import React, { memo } from 'react'
+import React from "react";
 import ServiceForm from "./form";
 
-function ServiceDetail() {
+export default function ServiceDetail() {
   return (
     <div>
       <ServiceForm create={false} />
     </div>
-
-  )
+  );
 }
-
-export default memo(ServiceDetail)

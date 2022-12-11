@@ -95,7 +95,7 @@ const customerValidationSchema = yup.object().shape({
   rate: yup.string().optional(),
 });
 
-const CustomerDetail = () => {
+export default function CustomerDetail() {
   const [loading, setLoading] = useState(true);
   const [customer, setCustomer] = useState({});
   const [treadment, setTreadMent] = useState([]);
@@ -771,6 +771,4 @@ const CustomerDetail = () => {
       </div>
     </>
   );
-};
-
-export default memo(CustomerDetail);
+}

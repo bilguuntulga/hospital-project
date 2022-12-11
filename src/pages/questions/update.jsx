@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import QuestionsForm from "../../components/questions/QuestionsForm";
 
-function UpdateQuestions() {
+export default function UpdateQuestions() {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -18,5 +18,3 @@ function UpdateQuestions() {
     </div>
   );
 }
-
-export default UpdateQuestions;
