@@ -13,7 +13,7 @@ const statusHandler = async (response) => {
 };
 
 const errorHandler = async (error) => {
-  if (error.response && error.response.status === 401) {
+  if (error.response.status === 401 || error.response.status === 403) {
     window.location = "/login";
     return {
       type: "Error",
@@ -55,7 +55,10 @@ const request = async (url, data, options) => {
   }
 
   try {
-    const res = await fetch(`${process.env.REACT_APP_API_HOST + url}${queryString}`, defaultOptions);
+    const res = await fetch(
+      `${process.env.REACT_APP_API_HOST + url}${queryString}`,
+      defaultOptions
+    );
 
     await statusHandler(res);
 

@@ -81,7 +81,6 @@ const treatmentModel = {
 const treatmentValidationSchema = yup.object().shape({
   doctor: yup.string().required("Заавал бөглөнө үү"),
   services: yup.array().required("Заавал бөглөнө үү"),
-  date: yup.array().required("Заавал бөглөнө үү"),
 });
 
 const customerValidationSchema = yup.object().shape({
@@ -150,11 +149,6 @@ const CustomerDetail = () => {
     }
     res.services = serviceIds;
 
-    const startTime = moment(res?.start_time);
-    const endTime = moment(res?.end_time);
-
-    res.date = [startTime, endTime];
-
     setTreatmentInitialValues(res);
     setIsShowTreatmentModal(true);
   };
@@ -185,10 +179,6 @@ const CustomerDetail = () => {
   }, []);
 
   const treatmentOnSubmit = async (values) => {
-    const start_time = values.date[0];
-    const end_time = values.date[1];
-    delete values.date;
-
     try {
       if (values.id) {
         delete values.customer;
@@ -197,15 +187,11 @@ const CustomerDetail = () => {
         await treatmentsAPI.update({
           ...values,
           customer: id,
-          start_time,
-          end_time,
         });
       } else {
         await treatmentsAPI.create({
           ...values,
           customer: id,
-          start_time,
-          end_time,
         });
       }
       message.success("Амжилттай");
@@ -275,7 +261,7 @@ const CustomerDetail = () => {
       },
     });
   };
-  const plannedTreadmentColumns = [
+  const plannedTreatmentColumns = [
     {
       title: "Үндсэн эмчилгээ",
       render: (_, row) => row?.basic_service?.name,
@@ -391,12 +377,12 @@ const CustomerDetail = () => {
       ),
     },
     {
-      title: "Авсан үйлчилгээ",
+      title: "Авсан эмчилгээ",
       render: (_, row) => row?.services?.map((ee) => ee?.name)?.join(", "),
     },
     {
       title: "Огноо",
-      render: (_, row) => moment(row?.created_at).format("YYYY/MM/DD "),
+      render: (_, row) => moment(row?.date).format("YYYY/MM/DD"),
     },
     {
       title: "Үйлдэл",
@@ -519,17 +505,25 @@ const CustomerDetail = () => {
                     <Row gutter={30}>
                       <Col span={12}>
                         <Form.Item name="first_name" label="Овог">
-                          <Input  name="first_name" />
+                          <Input name="first_name" />
                         </Form.Item>
                       </Col>
                       <Col span={12}>
                         <Form.Item name="last_name" label="Нэр">
-                          <Input  name="last_name" />
+                          <Input name="last_name" />
                         </Form.Item>
                       </Col>
                       <Col span={12}>
                         <Form.Item name="phone" label="Утасны дугаар">
-                          <Input  name="phone" />
+                          <Input name="phone" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          label="Регистрийн дугаар"
+                          name="registration_number"
+                        >
+                          <Input name="registration_number" />
                         </Form.Item>
                       </Col>
                       <Col span={12}>
@@ -538,7 +532,7 @@ const CustomerDetail = () => {
                         </Form.Item>
                       </Col>
                       <Col span={12}>
-                        <Form.Item label="gender" name="gender">
+                        <Form.Item label="Хүйс" name="gender">
                           <Select name="gender">
                             <Select.Option value="UNDIFINED">-</Select.Option>
                             <Select.Option value="MALE">Эрэгтэй</Select.Option>
@@ -559,10 +553,10 @@ const CustomerDetail = () => {
                           </Select>
                         </Form.Item>
                       </Col>
-                      <Col span={24}>
+                      <Col span={12}>
                         <Row gutter={30}>
                           <Col span={6}>
-                            <Form.Item label="Байдал" name="rate">
+                            <Form.Item label="Үнэлгээ" name="rate">
                               <Switch
                                 name="rate"
                                 checkedChildren="Сайн"
@@ -617,6 +611,14 @@ const CustomerDetail = () => {
                       : `${customer?.first_name} ${customer?.last_name}`}
                   </Col>
                   <Col>
+                    <p>Утас</p>
+                    {customer?.phone}
+                  </Col>
+                  <Col>
+                    <p>Регистрийн дугаар</p>
+                    {customer?.registration_number ?? "-"}
+                  </Col>
+                  <Col>
                     <p>Хүйс</p>
                     {customer?.family_status == "UNDIFINED"
                       ? "-"
@@ -667,7 +669,7 @@ const CustomerDetail = () => {
               }
             />
             <Table
-              columns={plannedTreadmentColumns}
+              columns={plannedTreatmentColumns}
               dataSource={plannedtreatmentData}
             />
           </div>
@@ -717,8 +719,8 @@ const CustomerDetail = () => {
                     <Form.Item name="services" label="Үйлчилгээ">
                       <SelectService name="services" multi={true} />
                     </Form.Item>
-                    <Form.Item name="date" label="Үйлчилгээ авах хугацаа">
-                      <RangePicker name="date" style={{ width: "100%" }} />
+                    <Form.Item name="date" label="Огноо">
+                      <DatePicker name="date" />
                     </Form.Item>
                     <SubmitButton icon={<SaveOutlined />} block>
                       Хадаглах
