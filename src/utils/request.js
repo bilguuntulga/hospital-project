@@ -1,7 +1,5 @@
 import qs from "qs";
 
-const API_HOST = "https://hospital-time-system-backend.herokuapp.com";
-
 const statusHandler = async (response) => {
   if (response.status >= 200 && response.status < 400) {
     return response;
@@ -57,7 +55,7 @@ const request = async (url, data, options) => {
   }
 
   try {
-    const res = await fetch(`${API_HOST + url}${queryString}`, defaultOptions);
+    const res = await fetch(`${process.env.REACT_APP_API_HOST + url}${queryString}`, defaultOptions);
 
     await statusHandler(res);
 

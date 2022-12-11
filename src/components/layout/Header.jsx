@@ -69,7 +69,7 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    const newSocket = io("http://172.104.185.229:64536");
+    const newSocket = io(process.env.REACT_APP_API_HOST);
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
