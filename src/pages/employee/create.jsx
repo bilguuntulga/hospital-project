@@ -31,17 +31,17 @@ const model = {
 };
 
 const validationSchema = yup.object().shape({
-  profile_img: yup.string().required("Заавал бөглөнө үү"),
-  first_name: yup.string().required("Заавал бөглөнө үү"),
-  last_name: yup.string().required("Заавал бөглөнө үү"),
-  email: yup.string().email().required("Заавал бөглөнө үү"),
-  phone: yup.string().required("Заавал бөглөнө үү"),
-  role: yup.string().required("Заавал бөглөнө үү"),
-  salary: yup.number().required("Заавал бөглөнө үү"),
-  desc: yup.string().required("Заавал бөглөнө үү"),
-  experiences_desc: yup.string().required("Заавал бөглөнө үү"),
-  color: yup.string().required("Заавал бөглөнө үү"),
-  experiences: yup.array().required("Заавал бөглөнө үү"),
+  profile_img: yup.string().optional(),
+  first_name: yup.string().optional(),
+  last_name: yup.string().optional(),
+  email: yup.string().email().optional(),
+  phone: yup.string().optional(),
+  role: yup.string().optional(),
+  salary: yup.number().optional(),
+  desc: yup.string().optional(),
+  experiences_desc: yup.string().optional(),
+  color: yup.string().optional(),
+  experiences: yup.array().optional(),
 });
 
 function DoctorCreate() {

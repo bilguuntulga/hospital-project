@@ -69,7 +69,6 @@ const pladTreatmentModel = {
   additional_service: "",
   basic_input: "",
   additional_input: "",
-  date: "",
 };
 
 const treatmentModel = {
@@ -473,9 +472,6 @@ export default function CustomerDetail() {
                         </Form.Item>
                       </Col>
                     </Row>
-                    <Form.Item name="date">
-                      <DatePicker style={{ width: "100%" }} name="date" />
-                    </Form.Item>
                     <SubmitButton block icon={<SaveOutlined />}>
                       Хадаглах
                     </SubmitButton>
@@ -720,7 +716,7 @@ export default function CustomerDetail() {
                       <SelectService name="services" multi={true} />
                     </Form.Item>
                     <Form.Item name="date" label="Огноо">
-                      <DatePicker name="date" />
+                      <DatePicker name="date" style={{width:"100%"}}/>
                     </Form.Item>
                     <SubmitButton icon={<SaveOutlined />} block>
                       Хадаглах
