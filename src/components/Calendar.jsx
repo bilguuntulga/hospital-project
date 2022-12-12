@@ -267,10 +267,8 @@ class Calendar extends Component {
 
     try {
       await treatmentTimesAPI.create(values);
-      await this.fetchData();
       message.success("Амжилттай");
     } catch (error) {
-      console.log(error);
       message.error("Амжилтгүй");
     }
 
@@ -292,13 +290,8 @@ class Calendar extends Component {
       message.error(
         TreatmentTimesErrorConverter(error?.message) ?? "Амжилтгүй"
       );
+      this.fetchData();
     }
-
-    await this.fetchData();
-    this.setState((prevState) => ({
-      ...prevState,
-      showUpdateModal: false,
-    }));
   }
 
   render() {
