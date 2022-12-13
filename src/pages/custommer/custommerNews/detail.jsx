@@ -434,7 +434,7 @@ export default function CustomerDetail() {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 footer={false}
-                title="Төлөвлөгөөт эмчилгээ нэмэх"
+                title="Төлөвлөгөөт эмчилгээ"
               >
                 <Formik
                   initialValues={oneplannedtreadment}
