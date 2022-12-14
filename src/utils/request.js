@@ -30,7 +30,7 @@ const errorHandler = async (error) => {
   }
 };
 
-const request = async (url, data, options) => {
+const _request = async (url, data, options) => {
   const defaultOptions = {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -74,26 +74,26 @@ const httpMethod = (signal) => ({
   get: (url, data, options) => {
     if (signal) options.signal = signal;
 
-    return request(url, data, { ...options, method: "GET" });
+    return _request(url, data, { ...options, method: "GET" });
   },
   post: (url, data, options) => {
     if (signal) options.signal = signal;
 
-    return request(url, data, { ...options, method: "POST" });
+    return _request(url, data, { ...options, method: "POST" });
   },
   put: (url, data, options) => {
     if (signal) options.signal = signal;
 
-    return request(url, data, { ...options, method: "PUT" });
+    return _request(url, data, { ...options, method: "PUT" });
   },
   del: (url, data, options) => {
     if (signal) options.signal = signal;
 
-    return request(url, data, { ...options, method: "DELETE" });
+    return _request(url, data, { ...options, method: "DELETE" });
   },
 });
-
-export default {
+const request = {
   ...httpMethod(),
   signal: (signal) => httpMethod(signal),
-};
+}
+export default request;
