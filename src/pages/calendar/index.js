@@ -83,7 +83,7 @@ const CalendarApp = () => {
               <Col xs={24} lg={12} xl={6}>
                 <Form.Item label="Эмч" name="doctor_id">
                   <SelectDoctorForm value={form.getFieldValue("doctor_id")} onChange={e => {
-                    form.setFieldValue("doctor_id");
+                    form.setFieldValue("doctor_id",e);
                   }} name="doctor_id" />
                 </Form.Item>
               </Col>
