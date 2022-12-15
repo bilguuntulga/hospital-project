@@ -2,12 +2,13 @@ import React, { memo } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import NavButton from "./NavButton";
+import { authAPI } from "../../../apis";
 
 function SideMenu() {
   const [user, setUser] = useState({});
 
   const fetchData = async () => {
-    let user = JSON.parse(localStorage.getItem("user"));
+    let user = await authAPI.profile();
     setUser(user);
   };
   useEffect(() => {
@@ -29,10 +30,14 @@ function SideMenu() {
           icon={"/calendar.png"}
           text={"Календарь"}
         />
-        {
-          user?.role=="ADMIN"?<NavButton path={"/employee"} icon={"/employee.png"} text={"Ажилтан"} />:null
-        }
-        
+        {user?.role == "ADMIN" ? (
+          <NavButton
+            path={"/employee"}
+            icon={"/employee.png"}
+            text={"Ажилтан"}
+          />
+        ) : null}
+
         <NavButton
           path={"/customer"}
           icon={"/custommer.png"}
