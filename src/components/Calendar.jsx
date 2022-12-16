@@ -62,6 +62,7 @@ class Calendar extends Component {
         locale: "en-us",
         heightSpec: "Full",
         columnWidthMin: 25,
+        rowMinHeight:120,
         onTimeRangeSelected: async (args) => {
           const dp = this.calendar;
           dp.clearSelection();
@@ -336,6 +337,8 @@ class Calendar extends Component {
           <DayPilotCalendar
             {...this.state.calendarProps}
             ref={this.calendarRef}
+            height={2500}
+
           />
         </div>
         <Modal
