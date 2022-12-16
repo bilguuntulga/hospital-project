@@ -1,3 +1,5 @@
+import { message } from "antd";
+
 export const genderTranslator = (gender) => {
   switch (gender) {
     case "MALE":
@@ -15,4 +17,14 @@ export function convertToHex(str) {
     hex += "" + str.charCodeAt(i).toString(16);
   }
   return hex;
+}
+
+export const getAPIErrors = (err) => {
+
+  let errors = {
+    DOCTOR_IS_RESTING:"Эмч амарч байна",
+    PAST_TENSE:"Өнгөрсөн цаг учир үйлдэл хийх боломжгүй",
+    DOCTOR_NOTFOUND:"Эмч байхгүй байна",
+  }
+  return message.error(errors[err?.message || err] || "Алдаа гарлаа");
 }

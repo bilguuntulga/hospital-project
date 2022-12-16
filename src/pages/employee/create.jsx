@@ -17,7 +17,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const model = {
-  profile_img: "",
+  profile_img:
+    "https://d1pspl52z5rk07.cloudfront.net/assets/production/app/default/avatar-13e49413d14d7528c1dba3d70cb39957e4aa4b997dff5cf4cd6c89992da9aaa5.png",
   first_name: "",
   last_name: "",
   email: "",

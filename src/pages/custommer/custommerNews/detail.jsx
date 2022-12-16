@@ -39,12 +39,9 @@ import {
   ExclamationCircleFilled,
   PlusOutlined,
   SaveOutlined,
-  ThunderboltTwoTone,
 } from "@ant-design/icons";
 import ProfileImageUpload from "../../../components/form/ProfileImageUpload";
 import { toast } from "react-toastify";
-import Question1 from "../../../components/form/Question1";
-import Question2 from "../../../components/form/Question2";
 import PageLoading from "../../../components/PageLoading";
 import ListImages from "../../../components/customers/ListImages";
 import FormObserver from "../../../components/FormObserver";
@@ -66,9 +63,9 @@ const customerModel = {
 
 const pladTreatmentModel = {
   basic_service: "",
+  basic_input: 0,
   additional_service: "",
-  basic_input: "",
-  additional_input: "",
+  additional_input: 0,
 };
 
 const treatmentModel = {
@@ -434,7 +431,7 @@ export default function CustomerDetail() {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 footer={false}
-                title="Төлөвлөгөөт эмчилгээ нэмэх"
+                title="Төлөвлөгөөт эмчилгээ"
               >
                 <Formik
                   initialValues={oneplannedtreadment}
@@ -716,7 +713,7 @@ export default function CustomerDetail() {
                       <SelectService name="services" multi={true} />
                     </Form.Item>
                     <Form.Item name="date" label="Огноо">
-                      <DatePicker name="date" style={{width:"100%"}}/>
+                      <DatePicker name="date" style={{ width: "100%" }} />
                     </Form.Item>
                     <SubmitButton icon={<SaveOutlined />} block>
                       Хадаглах
